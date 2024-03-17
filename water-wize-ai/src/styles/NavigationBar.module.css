@@ -1,0 +1,65 @@
+body {
+  padding: 80px 0 0; 
+}
+
+.navbar {
+  background: linear-gradient(to bottom left, var(--primary-color) 0%, var(--dark-green) 100%);
+  border-bottom-left-radius: 50px; 
+  overflow: hidden; 
+  width: 85%; 
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000; 
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar img {
+  width: 220px;
+  height: auto;
+  padding-top: 4px; ;
+}
+
+.list {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  padding: 15px;
+  padding-left: 40px;
+  color: var(--dark-green);
+  text-align: center;
+}
+
+.active {
+  color: var(--dark-orange);
+  background-color: var(--extra-white);
+  border-radius: 20px;
+  text-decoration: none;
+  display: inline-block;
+  width: 130px;
+
+}
+
+.inactive {
+  color: var(--extra-white);
+  text-decoration: none;
+  width: 130px;
+}
+
+.list li {
+  
+  border-radius: 20px;
+  padding: 8px; /* Padding for normal state */
+  display: inline-block;
+}
+
+.list li:hover {
+  color: var(--dark-orange);
+  background-color: var(--extra-white-transparent);
+  text-decoration: none;
+  padding: 8  px; /* Padding for hover state */
+  width: 130px;
+  transition: background-color 0.6s ease; 
+}
