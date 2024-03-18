@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageContainer from "../components/PageContainer";
 
 function WaterCalculator() {
@@ -11,10 +11,52 @@ function WaterCalculator() {
   });
   const [weatherData, setWeatherData] = useState({});
   const [waterRecommendation, setWaterRecommendation] = useState('');
+  const [currentDateTime, setCurrentDateTime] = useState('');
+  const [selectedArea, setSelectedArea] = useState('');
+  const [areas, setAreas] = useState([
+    'Ashalim',
+    'Arad',
+    'Ashqelon Port',
+    'Avdat',
+    'Beer Sheva University',
+    'Besor Farm',
+    'Dorot',
+    'Elat',
+    'En Gedi',
+    'Ezuz',
+    'Gat',
+    'Hazeva',
+    'Lahav',
+    'Metzoke Dragot',
+    'Mizpe Ramon',
+    'Negba',
+    'Neot Smadar',
+    'Nevatim',
+    'Paran',
+    'Sede Boqer',
+    'Sedom',
+    'Shani',
+    'Yotvata',
+    'Zomet Hanegev'
+  ]);
+  
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const currentTime = new Date().toLocaleString('en-IL', { timeZone: 'Asia/Jerusalem' });
+      setCurrentDateTime(currentTime);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAgriculturalData({ ...agriculturalData, [name]: value });
+  };
+
+  const handleAreaChange = (e) => {
+    setSelectedArea(e.target.value);
   };
 
   const handleClick = async () => {
@@ -24,13 +66,13 @@ function WaterCalculator() {
       const weatherData = await weatherResponse.json();
       setWeatherData(weatherData);
 
-      // Send agricultural data to server for calculation
+      // Send agricultural data and selected area to server for calculation
       const calculationResponse = await fetch('/api/calculate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(agriculturalData)
+        body: JSON.stringify({ ...agriculturalData, selectedArea })
       });
       const recommendation = await calculationResponse.json();
       setWaterRecommendation(recommendation);
@@ -63,6 +105,14 @@ function WaterCalculator() {
           <label>Data 5:</label>
           <input type="text" name="data5" value={agriculturalData.data5} onChange={handleChange} />
         </div>
+        <div>
+          <label>Select Geographic Area:</label>
+          <select value={selectedArea} onChange={handleAreaChange}>
+            {areas.map((area, index) => (
+              <option key={index} value={area}>{area}</option>
+            ))}
+          </select>
+        </div>
         <button onClick={handleClick}>Calculate</button>
         <div>
           <h2>Weather Data:</h2>
@@ -71,6 +121,10 @@ function WaterCalculator() {
         <div>
           <h2>Water Recommendation:</h2>
           <p>{waterRecommendation}</p>
+        </div>
+        <div>
+          <h2>Date and Time in Israel:</h2>
+          <p>{currentDateTime}</p>
         </div>
       </div>
     </PageContainer>
