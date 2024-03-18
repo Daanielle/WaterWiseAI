@@ -3,7 +3,7 @@ import PageContainer from "../components/PageContainer";
 
 function WaterCalculator() {
   const [agriculturalData, setAgriculturalData] = useState({
-    data1: '',
+    גודל_החלקה: '', // Size of Plot
     data2: '',
     data3: '',
     data4: '',
@@ -39,7 +39,6 @@ function WaterCalculator() {
     'Yotvata',
     'Zomet Hanegev'
   ]);
-  
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -61,21 +60,29 @@ function WaterCalculator() {
 
   const handleClick = async () => {
     try {
-      // Fetch weather data from Express backend
-      const weatherResponse = await fetch('/api/weather');
-      const weatherData = await weatherResponse.json();
-      setWeatherData(weatherData);
+      // Check if Size of Plot is provided
+      if (!agriculturalData['גודל_החלקה']) {
+        alert('Please enter the Size of Plot.');
+        return;
+      }
 
-      // Send agricultural data and selected area to server for calculation
+      // Check if Size of Plot is a valid number
+      const sizeOfPlot = parseFloat(agriculturalData['גודל_החלקה']);
+      if (isNaN(sizeOfPlot) || sizeOfPlot <= 0) {
+        alert('Please enter a valid positive number for Size of Plot.');
+        return;
+      }
+
+      // Send agricultural data to server for calculation
       const calculationResponse = await fetch('/api/calculate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ ...agriculturalData, selectedArea })
+        body: JSON.stringify(agriculturalData)
       });
-      const recommendation = await calculationResponse.json();
-      setWaterRecommendation(recommendation);
+      const recommendationData = await calculationResponse.json();
+      setWaterRecommendation(recommendationData.recommendation);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -86,8 +93,8 @@ function WaterCalculator() {
       <div>
         <h1>מחשבון מים</h1>
         <div>
-          <label>Data 1:</label>
-          <input type="text" name="data1" value={agriculturalData.data1} onChange={handleChange} />
+          <label>גודל החלקה:</label> {/* Size of Plot */}
+          <input type="text" name="גודל_החלקה" value={agriculturalData['גודל_החלקה']} onChange={handleChange} />
         </div>
         <div>
           <label>Data 2:</label>
