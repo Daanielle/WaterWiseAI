@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Form, FormControl } from 'react-bootstrap'; // Assuming you're using Bootstrap for styling
-import * as XLSX from 'xlsx'; // Import the XLSX library for Excel export
-import "../TasksList.css"; // Import the CSS file
+import { Button, Form, FormControl } from 'react-bootstrap';
+import * as XLSX from 'xlsx';
+import "../TasksList.css";
 
 function TaskManagement() {
   const [tasks, setTasks] = useState([]);
@@ -32,6 +32,12 @@ function TaskManagement() {
   const handleTaskStatusChange = (index) => {
     const updatedTasks = [...tasks];
     updatedTasks[index].status = 'בוצעה';
+    setTasks(updatedTasks);
+  };
+
+  const handleDeleteTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(index, 1);
     setTasks(updatedTasks);
   };
 
@@ -66,9 +72,9 @@ function TaskManagement() {
             <thead>
               <tr>
                 <th>סטטוס</th>
-                                <th>תאריך יעד</th>
+                <th>תאריך יעד</th>
                 <th>שם המשימה</th>
-                <th></th>
+                <th>פעולות</th>
               </tr>
             </thead>
             <tbody>
@@ -82,6 +88,9 @@ function TaskManagement() {
                     {task.status !== 'בוצעה' && (
                       <Button variant="success" onClick={() => handleTaskStatusChange(index)}>סמן כבוצעה</Button>
                     )}
+                  </td>
+                  <td>
+                    <Button variant="danger" onClick={() => handleDeleteTask(index)}>מחק</Button>
                   </td>
                 </tr>
               ))}
