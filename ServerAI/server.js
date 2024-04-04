@@ -1,74 +1,53 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
+const axios = require('axios'); // Import Axios for making HTTP requests
 const app = express();
 
 app.use(bodyParser.json());
 
-// Define a function to calculate the average of an array of numbers
-function calculateAverage(dataArray) {
-  const sum = dataArray.reduce((acc, currentValue) => acc + parseFloat(currentValue), 0);
-  return sum / dataArray.length;
-}
-
-// Define a function to calculate the water recommendation based on the average data
-function calculateWaterRecommendation(averageData) {
-  // This is just a dummy logic, replace with your actual calculation
-  if (averageData < 10) {
-      return averageData + ' Increase water intake';
-  } else if (averageData >= 10 && averageData < 20) {
-      return averageData+ ' Maintain water intake';
-  } else {
-      return averageData + ' Decrease water intake';
-  }
-}
-
 // Route to handle the POST request for calculating water recommendation
-app.post("/api/calculate", (req, res) => {
-  // Extract agricultural data from request body
-  const { גודל_החלקה, data2, data3, data4, data5 } = req.body;
+app.post("/api/calculate", async (req, res) => {
+  try {
+    // Extract agricultural data and selected area number from request body
+    const { data1, data2, data3, data4, data5, selectedArea } = req.body;
 
-  // Calculate average of the received data
-  const dataArray = [גודל_החלקה, data2, data3, data4, data5];
-  const averageData = calculateAverage(dataArray);
+    // Make the API call to IMS based on the selected area number and the provided date
+    const imsUrl = `https://api.ims.gov.il/v1/envista/stations/${selectedArea}/data?from=2023/08/01&to=2023/08/10`;
+    const imsResponse = await axios.get(imsUrl, {
+      headers: {
+        Authorization: 'ApiToken f058958a-d8bd-47cc-95d7-7ecf98610e47' // Add your IMS API token here
+      }
+    });
 
-  // Calculate water recommendation based on average data
-  const recommendation = calculateWaterRecommendation(averageData);
+    // Check if the API call was successful
+    if (imsResponse.status >= 200 && imsResponse.status < 300) {
+      // Process the IMS API response to calculate the water recommendation
+      const imsData = imsResponse.data;
 
-  // Send the recommendation as response
-  res.json({ recommendation });
-});
+      // Define a function to calculate the average temperature
+      // (Your existing calculation logic)
+      
+      // Calculate the average temperature, relative humidity, and wind speed
+      // (Your existing calculation logic)
+      
+      // Perform further calculations based on the averages
+      // (Your existing calculation logic)
 
-// Configure nodemailer transporter
-const transporter = nodemailer.createTransport({
-  host: 'smtp.example.com',
-  port: 587,
-  secure: false, // true for 465, false for other ports
-});
-
-// Route to handle contact form submissions
-app.post("/api/contact", (req, res) => {
-  // Extract data from request body
-  const { name, email, message } = req.body;
-
-  // Send email
-  const mailOptions = {
-    from: 'ShacharAdam123@gmail.com',
-    to: 'ShacharAdam123@gmail.com', // Replace with developer's email
-    subject: 'New Contact Form Submission',
-    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending email:', error);
-      res.status(500).json({ error: 'Failed to send message' });
+      // Send the recommendation as response
+      console.log(imsData)
+      res.json({ recommendation });
     } else {
-      console.log('Message sent:', info.response);
-      res.status(200).json({ message: 'Message sent successfully' });
+      // Handle the case where the API call was not successful
+      console.error('IMS API request failed with status:', imsResponse.status);
+      res.status(500).json({ error: 'IMS API request failed' });
     }
-  });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'An error occurred while processing the request.' });
+  }
 });
+
+// Your existing code...
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

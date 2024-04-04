@@ -15,30 +15,30 @@ function WaterCalculator() {
   const [currentDateTime, setCurrentDateTime] = useState('');
   const [selectedArea, setSelectedArea] = useState('');
   const [areas, setAreas] = useState([
-    'Ashalim',
-    'Arad',
-    'Ashqelon Port',
-    'Avdat',
-    'Beer Sheva University',
-    'Besor Farm',
-    'Dorot',
-    'Elat',
-    'En Gedi',
-    'Ezuz',
-    'Gat',
-    'Hazeva',
-    'Lahav',
-    'Metzoke Dragot',
-    'Mizpe Ramon',
-    'Negba',
-    'Neot Smadar',
-    'Nevatim',
-    'Paran',
-    'Sede Boqer',
-    'Sedom',
-    'Shani',
-    'Yotvata',
-    'Zomet Hanegev'
+    { name: 'Ashalim', number: 74 },
+    { name: 'Arad', number: 70 },
+    { name: 'Ashqelon Port', number: 61 },
+    { name: 'Avdat', number: 77 },
+    { name: 'Beer Sheva University', number: 69 },
+    { name: 'Besor Farm', number: 68 },
+    { name: 'Dorot', number: 64 },
+    { name: 'Elat', number: 83 },
+    { name: 'En Gedi', number: 65 },
+    { name: 'Ezuz', number: 76 },
+    { name: 'Gat', number: 62 },
+    { name: 'Hazeva', number: 78 },
+    { name: 'Lahav', number: 66 },
+    { name: 'Metzoke Dragot', number: 63 },
+    { name: 'Mizpe Ramon', number: 79 },
+    { name: 'Negba', number: 60 },
+    { name: 'Neot Smadar', number: 81 },
+    { name: 'Nevatim', number: 71 },
+    { name: 'Paran', number: 80 },
+    { name: 'Sede Boqer', number: 75 },
+    { name: 'Sedom', number: 73 },
+    { name: 'Shani', number: 67 },
+    { name: 'Yotvata', number: 82 },
+    { name: 'Zomet Hanegev', number: 72 }
   ]);
 
   useEffect(() => {
@@ -56,7 +56,8 @@ function WaterCalculator() {
   };
 
   const handleAreaChange = (e) => {
-    setSelectedArea(e.target.value);
+    const selectedNumber = parseInt(e.target.value);
+    setSelectedArea(selectedNumber);
   };
 
   const handleClick = async () => {
@@ -90,52 +91,50 @@ function WaterCalculator() {
   };
 
   return (
-    // <PageContainer>
-      <div className={classes.WaterCalculator}>
-        <h1 className={classes.h1}>מחשבון מים</h1>
-        <div className={classes.Inser_data}>
-          <label>data1:</label> {/* Size of Plot */}
-          <input type="text" name="data1" value={agriculturalData['data1']} onChange={handleChange} />
-        </div>
-        <div className={classes.Inser_data}>
-          <label>Data 2:</label>
-          <input type="text" name="data2" value={agriculturalData.data2} onChange={handleChange} />
-        </div>
-        <div className={classes.Inser_data}>
-          <label>Data 3:</label>
-          <input type="text" name="data3" value={agriculturalData.data3} onChange={handleChange} />
-        </div>
-        <div className={classes.Inser_data}>
-          <label>Data 4:</label>
-          <input type="text" name="data4" value={agriculturalData.data4} onChange={handleChange} />
-        </div>
-        <div className={classes.Inser_data}>
-          <label>Data 5:</label>
-          <input type="text" name="data5" value={agriculturalData.data5} onChange={handleChange} />
-        </div>
-        <div className={classes.Inser_data}>
-          <label>Select Geographic Area:</label>
-          <select value={selectedArea} onChange={handleAreaChange}>
-            {areas.map((area, index) => (
-              <option key={index} value={area}>{area}</option>
-            ))}
-          </select>
-        </div >
-        <button className={classes.Inser_data} onClick={handleClick}>Calculate</button>
-        <div className={classes.Our_Data}>
-          <h2>Weather Data:</h2>
-          <pre>{JSON.stringify(weatherData, null, 2)}</pre>
-        </div>
-        <div className={classes.Recommendation}>
-          <h2>Water Recommendation:</h2>
-          <p>{waterRecommendation}</p>
-        </div>
-        <div className={classes.Our_Data}>
-          <h2>Date and Time in Israel:</h2>
-          <p>{currentDateTime}</p>
-        </div>
+    <div className={classes.WaterCalculator}>
+      <h1 className={classes.h1}>מחשבון מים</h1>
+      <div className={classes.Inser_data}>
+        <label>data1:</label> {/* Size of Plot */}
+        <input type="text" name="data1" value={agriculturalData['data1']} onChange={handleChange} />
       </div>
-    // {/* </PageContainer> */}
+      <div className={classes.Inser_data}>
+        <label>Data 2:</label>
+        <input type="text" name="data2" value={agriculturalData.data2} onChange={handleChange} />
+      </div>
+      <div className={classes.Inser_data}>
+        <label>Data 3:</label>
+        <input type="text" name="data3" value={agriculturalData.data3} onChange={handleChange} />
+      </div>
+      <div className={classes.Inser_data}>
+        <label>Data 4:</label>
+        <input type="text" name="data4" value={agriculturalData.data4} onChange={handleChange} />
+      </div>
+      <div className={classes.Inser_data}>
+        <label>Data 5:</label>
+        <input type="text" name="data5" value={agriculturalData.data5} onChange={handleChange} />
+      </div>
+      <div className={classes.Inser_data}>
+        <label>Select Geographic Area:</label>
+        <select value={selectedArea} onChange={handleAreaChange}>
+          {areas.map((area, index) => (
+            <option key={index} value={area.number}>{area.name}</option>
+          ))}
+        </select>
+      </div >
+      <button className={classes.Inser_data} onClick={handleClick}>Calculate</button>
+      <div className={classes.Our_Data}>
+        <h2>Weather Data:</h2>
+        <pre>{JSON.stringify(weatherData, null, 2)}</pre>
+      </div>
+      <div className={classes.Recommendation}>
+        <h2>Water Recommendation:</h2>
+        <p>{waterRecommendation}</p>
+      </div>
+      <div className={classes.Our_Data}>
+        <h2>Date and Time in Israel:</h2>
+        <p>{currentDateTime}</p>
+      </div>
+    </div>
   );
 }
 
