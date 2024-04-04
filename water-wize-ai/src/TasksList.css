@@ -1,0 +1,59 @@
+.task-management-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff5e1;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: right;
+  }
+  
+  .task-form {
+    margin-bottom: 20px;
+  }
+  
+  .task-form label,
+  .task-list th {
+    text-align: center;
+  }
+  
+  .task-list {
+    margin-top: 20px;
+  }
+  
+  .task-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .task-list th,
+  .task-list td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  .task-list th {
+    background-color: #89ce00;
+    color: white;
+    text-align: center;
+  }
+  
+  .task-list td:last-child {
+    text-align: center;
+  }
+  
+  .task-list button {
+    background-color: #d86018;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .task-list button:hover {
+    background-color: #ff8c00;
+  }
+  
+  

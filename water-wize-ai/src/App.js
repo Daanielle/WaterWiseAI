@@ -8,6 +8,7 @@ import ContactUs from './pages/ContactUs';
 import Guide from './pages/Guide';
 import WaterCalculator from './pages/WaterCalculator';
 import Demo from './pages/Demo';
+import TasksList from './pages/TasksList';
 // import React, { useEffect, useState } from 'react';
 
 const router = createBrowserRouter([
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       { path: '/Guide', element: <Guide /> },
       { path: '/Forum', element: <Forum /> },
       { path: '/WaterCalculator', element: <WaterCalculator /> },
+      { path: '/TasksList', element: <TasksList /> },
       { path: '/Demo', element: <Demo /> },
     ]
   },

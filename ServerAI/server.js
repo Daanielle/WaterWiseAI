@@ -1,17 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
 const app = express();
 
 app.use(bodyParser.json());
 
-// // Route to handle the POST request for calculating water recommendation
-// app.post("/api/calculate", (req, res) => {
-//     // Assuming you perform some calculations here based on the received data
-//     const agriculturalData = req.body;
-//     // Dummy calculation for water recommendation
-//     const recommendation = 'Dummy water recommendation'; // Replace with actual calculation
-//     res.json({ recommendation });
-// });
 // Define a function to calculate the average of an array of numbers
 function calculateAverage(dataArray) {
   const sum = dataArray.reduce((acc, currentValue) => acc + parseFloat(currentValue), 0);
@@ -46,16 +39,38 @@ app.post("/api/calculate", (req, res) => {
   res.json({ recommendation });
 });
 
+// Configure nodemailer transporter
+const transporter = nodemailer.createTransport({
+  host: 'smtp.example.com',
+  port: 587,
+  secure: false, // true for 465, false for other ports
+});
 
-// // Serve static files from the 'build' folder
-// app.use(express.static('build'));
+// Route to handle contact form submissions
+app.post("/api/contact", (req, res) => {
+  // Extract data from request body
+  const { name, email, message } = req.body;
 
-// // Catch-all route to serve the React app
-// app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-// });
+  // Send email
+  const mailOptions = {
+    from: 'ShacharAdam123@gmail.com',
+    to: 'ShacharAdam123@gmail.com', // Replace with developer's email
+    subject: 'New Contact Form Submission',
+    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email:', error);
+      res.status(500).json({ error: 'Failed to send message' });
+    } else {
+      console.log('Message sent:', info.response);
+      res.status(200).json({ message: 'Message sent successfully' });
+    }
+  });
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log("Server started on port ${PORT}");
+    console.log(`Server started on port ${PORT}`);
 });
