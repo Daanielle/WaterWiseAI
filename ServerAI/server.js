@@ -33,10 +33,10 @@ function calculateWaterRecommendation(averageData) {
 // Route to handle the POST request for calculating water recommendation
 app.post("/api/calculate", (req, res) => {
   // Extract agricultural data from request body
-  const { data1, data2, data3, data4, data5 } = req.body;
+  const { גודל_החלקה, data2, data3, data4, data5 } = req.body;
 
   // Calculate average of the received data
-  const dataArray = [data1, data2, data3, data4, data5];
+  const dataArray = [גודל_החלקה, data2, data3, data4, data5];
   const averageData = calculateAverage(dataArray);
 
   // Calculate water recommendation based on average data
