@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PageContainer from "../components/PageContainer";
+import classes from "../styles/WaterCalculator.module.css";
 
 function WaterCalculator() {
   const [agriculturalData, setAgriculturalData] = useState({
-    גודל_החלקה: '', // Size of Plot
+    data1: '', // Size of Plot
     data2: '',
     data3: '',
     data4: '',
@@ -61,13 +62,13 @@ function WaterCalculator() {
   const handleClick = async () => {
     try {
       // Check if Size of Plot is provided
-      if (!agriculturalData['גודל_החלקה']) {
+      if (!agriculturalData['data1']) {
         alert('Please enter the Size of Plot.');
         return;
       }
 
       // Check if Size of Plot is a valid number
-      const sizeOfPlot = parseFloat(agriculturalData['גודל_החלקה']);
+      const sizeOfPlot = parseFloat(agriculturalData['data1']);
       if (isNaN(sizeOfPlot) || sizeOfPlot <= 0) {
         alert('Please enter a valid positive number for Size of Plot.');
         return;
@@ -89,52 +90,52 @@ function WaterCalculator() {
   };
 
   return (
-    <PageContainer>
-      <div>
-        <h1>מחשבון מים</h1>
-        <div>
-          <label>גודל החלקה:</label> {/* Size of Plot */}
-          <input type="text" name="גודל_החלקה" value={agriculturalData['גודל_החלקה']} onChange={handleChange} />
+    // <PageContainer>
+      <div className={classes.WaterCalculator}>
+        <h1 className={classes.h1}>מחשבון מים</h1>
+        <div className={classes.Inser_data}>
+          <label>data1:</label> {/* Size of Plot */}
+          <input type="text" name="data1" value={agriculturalData['data1']} onChange={handleChange} />
         </div>
-        <div>
+        <div className={classes.Inser_data}>
           <label>Data 2:</label>
           <input type="text" name="data2" value={agriculturalData.data2} onChange={handleChange} />
         </div>
-        <div>
+        <div className={classes.Inser_data}>
           <label>Data 3:</label>
           <input type="text" name="data3" value={agriculturalData.data3} onChange={handleChange} />
         </div>
-        <div>
+        <div className={classes.Inser_data}>
           <label>Data 4:</label>
           <input type="text" name="data4" value={agriculturalData.data4} onChange={handleChange} />
         </div>
-        <div>
+        <div className={classes.Inser_data}>
           <label>Data 5:</label>
           <input type="text" name="data5" value={agriculturalData.data5} onChange={handleChange} />
         </div>
-        <div>
+        <div className={classes.Inser_data}>
           <label>Select Geographic Area:</label>
           <select value={selectedArea} onChange={handleAreaChange}>
             {areas.map((area, index) => (
               <option key={index} value={area}>{area}</option>
             ))}
           </select>
-        </div>
-        <button onClick={handleClick}>Calculate</button>
-        <div>
+        </div >
+        <button className={classes.Inser_data} onClick={handleClick}>Calculate</button>
+        <div className={classes.Our_Data}>
           <h2>Weather Data:</h2>
           <pre>{JSON.stringify(weatherData, null, 2)}</pre>
         </div>
-        <div>
+        <div className={classes.Recommendation}>
           <h2>Water Recommendation:</h2>
           <p>{waterRecommendation}</p>
         </div>
-        <div>
+        <div className={classes.Our_Data}>
           <h2>Date and Time in Israel:</h2>
           <p>{currentDateTime}</p>
         </div>
       </div>
-    </PageContainer>
+    // {/* </PageContainer> */}
   );
 }
 

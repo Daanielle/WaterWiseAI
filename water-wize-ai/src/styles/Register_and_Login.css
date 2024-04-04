@@ -1,0 +1,84 @@
+.Login_Form {
+    display: flex;
+    flex-direction: column;
+}
+
+.Register_Form{
+    display: flex;
+    flex-direction: column;
+}
+
+.my_input{
+    margin: 20px 0;
+    /* border: none; */
+    border-radius: 10px;
+    position: relative;
+    width: 70%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #bef5dc;
+    border-radius: 40px;
+}
+
+.my_input::placeholder{
+    color: #bef5dc;
+    
+}
+
+
+.my_button{
+    color: #4c784f;
+    width: 70%;
+    height: 45px;
+    background: #bef5dc;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px #4c784f;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    
+}
+
+.register_and_login{
+    padding: 2rem;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin-top: 8%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 10%;
+    /* width: 420px; */
+    /* border-radius: 10px; */
+    /* padding: 30px 40px; */
+    /* border: 2px solid white; */
+    backdrop-filter: blur(3px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.my_h1{
+    font-style: italic;
+    /* font-size: larger; */
+    color: #bef5dc;
+   
+}
+
+
+.login_link{
+    font-style: italic;
+    color: #162d23;
+}
+
+.Register_link{
+    font-style: italic;
+    color: #162d23;
+}
+
+.Forgot_link{
+    margin-bottom: 20px;
+    font-style: italic;
+
+}

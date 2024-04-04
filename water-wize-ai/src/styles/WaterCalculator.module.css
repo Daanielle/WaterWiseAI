@@ -1,0 +1,46 @@
+.WaterCalculator{
+    background-image: url('../resources/images/irrigation.jpg');
+    position:absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    
+}
+
+.h1{
+    margin-top: 8%;
+    font-style: italic;
+    font-size: 60px;
+    margin-left: 40%;
+}
+
+.Inser_data{
+    margin-left: 3%;
+    font-style: italic;
+    margin-bottom: 1%;
+}
+
+.Our_Data{
+    margin-left: 70%;
+    margin-top: -12%;
+    margin-bottom: 1%;
+    font-size: 20px;
+    font-style: italic;
+    color: #022e22;
+    font-weight: bold;
+}
+
+.Recommendation{
+    margin-left: 40%;
+    margin-top: 10%;
+    margin-bottom: 1%;
+    font-size: 20px;
+    font-style: italic;
+    color: #022e22;
+    font-weight: bold;
+}
