@@ -12,18 +12,31 @@
     
 }
 
+
+
 .h1{
     margin-top: 8%;
     font-style: italic;
     font-size: 60px;
     margin-left: 40%;
+    color: #FFFFFF; /* White color for heading */
 }
 
 .Inser_data{
     margin-left: 3%;
     font-style: italic;
     margin-bottom: 1%;
+    color: #FFFFFF; /* White color for input labels */
 }
+
+.Calculate_Button{
+    margin-left: 3%;
+    font-style: italic;
+    margin-bottom: 1%;
+    color: #040000b6; /* White color for input labels */
+}
+
+
 
 .Our_Data{
     margin-left: 70%;
@@ -31,7 +44,7 @@
     margin-bottom: 1%;
     font-size: 20px;
     font-style: italic;
-    color: #022e22;
+    color: #FFFFFF; /* White color for weather data */
     font-weight: bold;
 }
 
@@ -41,6 +54,6 @@
     margin-bottom: 1%;
     font-size: 20px;
     font-style: italic;
-    color: #022e22;
+    color: #FFFFFF; /* White color for water recommendation */
     font-weight: bold;
 }

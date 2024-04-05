@@ -132,7 +132,7 @@ function WaterCalculator() {
           ))}
         </select>
       </div >
-      <button className={classes.Inser_data} onClick={handleClick}>Calculate</button>
+      <button className={classes.Calculate_Button} onClick={handleClick}>Calculate</button>
       <div className={classes.Our_Data}>
         <h2>Weather Data:</h2>
         <pre>{JSON.stringify(weatherData, null, 2)}</pre>
