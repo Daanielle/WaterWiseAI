@@ -67,28 +67,39 @@ function WaterCalculator() {
         alert('Please enter the Size of Plot.');
         return;
       }
-
+  
       // Check if Size of Plot is a valid number
       const sizeOfPlot = parseFloat(agriculturalData['data1']);
       if (isNaN(sizeOfPlot) || sizeOfPlot <= 0) {
         alert('Please enter a valid positive number for Size of Plot.');
         return;
       }
-
-      // Send agricultural data to server for calculation
+  
+      // Check if selectedArea is provided
+      if (!selectedArea) {
+        alert('Please select a geographic area.');
+        return;
+      }
+  
+      // Send agricultural data and selected area to server for calculation
       const calculationResponse = await fetch('/api/calculate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(agriculturalData)
+        body: JSON.stringify({
+          ...agriculturalData,
+          selectedArea: selectedArea // Include selectedArea in the request payload
+        })
       });
+  
       const recommendationData = await calculationResponse.json();
       setWaterRecommendation(recommendationData.recommendation);
     } catch (error) {
       console.error('Error:', error);
     }
   };
+  
 
   return (
     <div className={classes.WaterCalculator}>

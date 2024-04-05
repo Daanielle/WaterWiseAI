@@ -50,7 +50,7 @@ function AboutUs() {
                     image_link={shacharsImage}
                     my_Name={"Shachar Adam"}
                     about_me={about_me}
-                    linkedinUrl={"www.linkedin.com/in/shachar-adam-836a94277"}
+                    linkedinUrl={"https://www.linkedin.com/in/shachar-adam-836a94277"}
                     emailUrl={"mailto:adamsha@bgu.post.ac.il"}
                     facebookUrl={facebookUrl}
                     className={classes.childTeam}
