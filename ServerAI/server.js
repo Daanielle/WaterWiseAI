@@ -48,14 +48,14 @@ app.post("/api/calculate", async (req, res) => {
         const lastBatch = decodedData.data[decodedData.data.length - 1];
         console.log('Last Batch:', lastBatch);
       
-        // Calculate the mean value of the channels in the last batch
+        // Calculate the maximum value of the channels in the last batch
         const channels = lastBatch.channels;
         const values = channels.map(channel => channel.value);
-        const meanValue = values.reduce((total, value) => total + value, 0) / values.length;
-        console.log('Mean Value:', meanValue);
+        const maxValue = Math.max(...values);
+        console.log('Max Value:', maxValue);
       
-        // Send the mean value as response
-        res.json({ recommendation: meanValue });
+        // Send the maximum value as response
+        res.json({ recommendation: maxValue });
       });
     } else {
       // Handle the case where the API call was not successful
