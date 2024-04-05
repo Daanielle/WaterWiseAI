@@ -17,7 +17,7 @@ app.post("/api/calculate", async (req, res) => {
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() - 1); // Get the date of the previous day
     const formattedDate = currentDate.toISOString().slice(0, 10); // Format the date as "YYYY-MM-DD"
-    const imsUrl = `https://api.ims.gov.il/v1/envista/stations/${selectedArea}/data/from=${formattedDate}&to=${formattedDate}`;
+    const imsUrl = `https://api.ims.gov.il/v1/envista/stations/${selectedArea}/data/daily`;
 
 
     // Make the API call to IMS
