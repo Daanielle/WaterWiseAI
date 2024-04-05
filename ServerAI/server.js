@@ -19,7 +19,6 @@ app.post("/api/calculate", async (req, res) => {
     const formattedDate = currentDate.toISOString().slice(0, 10); // Format the date as "YYYY-MM-DD"
     const imsUrl = `https://api.ims.gov.il/v1/envista/stations/${selectedArea}/data/daily`;
 
-
     // Make the API call to IMS
     const imsResponse = await axios.get(imsUrl, {
       headers: {
@@ -31,15 +30,33 @@ app.post("/api/calculate", async (req, res) => {
     if (imsResponse.status >= 200 && imsResponse.status < 300) {
       // Process the IMS API response to calculate the water recommendation
       const imsData = imsResponse.data;
-      // Write IMS data to a JSON file
-      fs.writeFile('ims_data.json', JSON.stringify(imsData), (err) => {
-        if (err) throw err;
-        console.log('IMS data has been saved to ims_data.json');
-      });
-      // Further processing and calculations...
+
+      // Encode the IMS data
+      const encodedData = JSON.stringify(imsData);
+
+      // Write encoded IMS data to a JSON file
+      fs.writeFile('encoded_ims_data.json', encodedData, (err) => {
+        if (err) {
+          console.error('Error writing encoded IMS data:', err);
+          res.status(500).json({ error: 'An error occurred while processing the request.' });
+          return;
+        }
+        console.log('Encoded IMS data has been saved to encoded_ims_data.json');
       
-      // Send the recommendation as response
-      res.json({ recommendation });
+        // Decode the IMS data to retrieve the last batch
+        const decodedData = JSON.parse(encodedData);
+        const lastBatch = decodedData.data[decodedData.data.length - 1];
+        console.log('Last Batch:', lastBatch);
+      
+        // Calculate the mean value of the channels in the last batch
+        const channels = lastBatch.channels;
+        const values = channels.map(channel => channel.value);
+        const meanValue = values.reduce((total, value) => total + value, 0) / values.length;
+        console.log('Mean Value:', meanValue);
+      
+        // Send the mean value as response
+        res.json({ recommendation: meanValue });
+      });
     } else {
       // Handle the case where the API call was not successful
       console.error('IMS API request failed with status:', imsResponse.status);

@@ -139,7 +139,10 @@ function WaterCalculator() {
       </div>
       <div className={classes.Recommendation}>
         <h2>Water Recommendation:</h2>
+        {waterRecommendation ? (
         <p>{waterRecommendation}</p>
+        ) : (
+        <p>No water recommendation available</p> )}
       </div>
       <div className={classes.Our_Data}>
         <h2>Date and Time in Israel:</h2>
