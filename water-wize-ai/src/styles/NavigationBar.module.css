@@ -4,17 +4,18 @@ body {
 
 .navbar {
   background: linear-gradient(to bottom left, var(--primary-color) 0%, var(--dark-green) 100%);
-  border-bottom-left-radius: 50px; 
-  overflow: hidden; 
-  width: 85%; 
+  border-bottom-left-radius: 50px;
+  overflow: hidden;
+  width: 100%; /* Adjusted width to 100% */
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 1000; 
+  z-index: 1000;
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   justify-content: space-between;
 }
+
 
 .navbar img {
   width: 220px;
