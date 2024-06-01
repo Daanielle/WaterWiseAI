@@ -130,7 +130,7 @@ app.post("/api/calculate", async (req, res) => {
         const lastBatch = decodedData.data[decodedData.data.length - 1];
         console.log('Last Batch:', lastBatch);
 
-        if (stationId == 1 || stationId == 2){
+        if (stationId == 381 || stationId == 29 || stationId == 58 || stationId == 79 || stationId || stationId == 33 || stationId == 82 || stationId == 28 || stationId == 36){
           // Computations for stations with all categories
           console.log("Categories: Grad, WS, WSmax, TD, RH");
           // Add computations for this category
@@ -162,7 +162,7 @@ app.post("/api/calculate", async (req, res) => {
           console.log(`Relative Humidity: ${relativeHumidity}`);
         }
 
-        if (stationId == 3 || stationId == 4){
+        if (stationId == 208 || stationId == 271 || stationId == 338 || stationId == 210 || stationId == 379 || stationId == 232 || stationId == 207 || stationId == 98 || stationId == 112){
           // Computations for stations missing Grad only
           console.log("Categories: WS, WSmax, TD, RH");
           // Add computations for this category
@@ -189,7 +189,7 @@ app.post("/api/calculate", async (req, res) => {
           console.log(`Relative Humidity: ${relativeHumidity}`);
         }
 
-        if (stationId == 5 || stationId == 6){
+        if (stationId == 60){
           // Computations for stations that only have Grad and TD
           console.log("Categories: Grad, TD");
           // Add computations for this category
@@ -206,7 +206,7 @@ app.post("/api/calculate", async (req, res) => {
           console.log(`Temperature: ${temperature}`);
         }
 
-        if (stationId == 7 || stationId == 8){
+        if (stationId == 236 || stationId == 350){
           // Computations for stations that only have TD and RH
           console.log("Categories: TD, RH");
           // Add computations for this category
