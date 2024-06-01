@@ -5,13 +5,14 @@ import DatePickerComponent from "../components/water-calculator/DatePickerCompon
 import AreaPicker from "../components/water-calculator/AreaPicker";
 import { FormControl } from "@mui/material";
 import AreaSizeInput from "../components/water-calculator/AreaSizeInput";
-import CustomButton from "../components/CustomButton"
+import CustomButton from "../components/CustomButton";
 
 function WaterCalculator() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
-  
+  const [waterRecommendation, setWaterRecommendation] = useState('');
+
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
   };
@@ -24,23 +25,45 @@ function WaterCalculator() {
     setSelectedAreaSize(newSize);
   };
 
-  const calculate = () => {
-    console.log(selectedArea,selectedDate, selectedAreaSize)
-  } 
+  const calculate = async () => {
+    try {
+      const calculationResponse = await fetch("/api/calculate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          //...agriculturalData,
+          selectedArea: selectedArea,
+          areaSize: selectedAreaSize,
+        }),
+      });
+      console.log(selectedArea, selectedDate, selectedAreaSize);
+
+      const recommendationData = await calculationResponse.json();
+      setWaterRecommendation(recommendationData.recommendation);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   return (
     <PageContainer>
       <h1>מחשבון מים</h1>
       <p>Selected Date: {selectedDate ? selectedDate.toString() : "None"}</p>
-      <p>
-        Selected Area:{" "}
-        {selectedArea ? selectedArea.toString() : "None"}
-      </p>
-      <FormControl> 
-        <AreaPicker onAreaChange={handleAreaChange} area={selectedArea}/>
-        <DatePickerComponent onDateChange={handleDateChange} date={selectedDate}/>
-        <AreaSizeInput onAreaSizeChange={handleAreaSizeChange} areaSize={selectedAreaSize}/>
-        <CustomButton onClick={calculate} label="Calculate" type="button"/>
+      <p>Selected Area: {selectedArea ? selectedArea.toString() : "None"}</p>
+      <p>Water Recommendation: {waterRecommendation ? waterRecommendation.toString() : "None"}</p>
+      <FormControl>
+        <AreaPicker onAreaChange={handleAreaChange} area={selectedArea} />
+        <DatePickerComponent
+          onDateChange={handleDateChange}
+          date={selectedDate}
+        />
+        <AreaSizeInput
+          onAreaSizeChange={handleAreaSizeChange}
+          areaSize={selectedAreaSize}
+        />
+        <CustomButton onClick={calculate} label="Calculate" type="button" />
       </FormControl>
     </PageContainer>
   );
