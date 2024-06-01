@@ -49,7 +49,6 @@ function getKc() {
   return kcTable[currentMonth];
 }
 
-
 function computeE0(temperature) {
   const T = temperature;
   const e0 = 6.2 * Math.exp((17.26 * T) / (T - 35.8 + 273.16));
@@ -82,15 +81,12 @@ function computeI(E, Kc, totalArea) {
   return I;
 }
 
-
-
 // Route to handle the POST request for calculating water recommendation
 app.post("/api/calculate", async (req, res) => {
   try {
     // Extract agricultural data and selected area number from request body
-    const { data1, data2, data3, data4, data5, selectedArea } = req.body;
-    console.log(selectedArea)
-    // Construct the API URL with the selected area number and the current date range
+    const { selectedArea, areaSize } = req.body;
+
     // Construct the API URL with the selected area number and the previous day's date
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() - 1); // Get the date of the previous day
@@ -120,134 +116,136 @@ app.post("/api/calculate", async (req, res) => {
           return;
         }
         console.log('Encoded IMS data has been saved to encoded_ims_data.json');
-      
+
         // Decode the IMS data to retrieve the last batch
         const decodedData = JSON.parse(encodedData);
         // Access the stationId property
         const stationId = decodedData.stationId;
-        console.log("Statio Id is:")
-        console.log(stationId);
+        console.log("Station Id is:", stationId);
         const lastBatch = decodedData.data[decodedData.data.length - 1];
         console.log('Last Batch:', lastBatch);
 
-        if (stationId == 381 || stationId == 29 || stationId == 58 || stationId == 79 || stationId || stationId == 33 || stationId == 82 || stationId == 28 || stationId == 36){
-          // Computations for stations with all categories
-          console.log("Categories: Grad, WS, WSmax, TD, RH");
-          // Add computations for this category
-          console.log("Computations for stations with all categories");
-          
+        let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
+
+        if (stationId == 381 || stationId == 29 || stationId == 58 || stationId == 79 || stationId == 33 || stationId == 82 || stationId == 28 || stationId == 36) {
           // Find the channel with the name 'Grad'
           const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
-          const gradValue = gradChannel.value;
+          gradValue = gradChannel.value;
           console.log(`Grad: ${gradValue}`);
 
           // Find the channel with the name 'WS1mm' (Wind Speed at 1mm)
           const ws1mmChannel = lastBatch.channels.find(channel => channel.name === 'WS1mm');
-          const ws1mmValue = ws1mmChannel.value;
+          ws1mmValue = ws1mmChannel.value;
           console.log(`Wind Speed at 1mm: ${ws1mmValue}`);
 
           // Find the channel with the name 'WSmax' (Maximum Wind Speed)
           const wsMaxChannel = lastBatch.channels.find(channel => channel.name === 'WSmax');
-          const wsMaxValue = wsMaxChannel.value;
+          wsMaxValue = wsMaxChannel.value;
           console.log(`Maximum Wind Speed: ${wsMaxValue}`);
 
           // Find the channel with name 'TD'
           const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
-          const temperature = tempChannel.value;
+          temperature = tempChannel.value;
           console.log(`Temperature: ${temperature}`);
 
           // Find the channel with the name 'RH' (Relative Humidity)
           const rhChannel = lastBatch.channels.find(channel => channel.name === 'RH');
-          const relativeHumidity = rhChannel.value;
+          relativeHumidity = rhChannel.value;
           console.log(`Relative Humidity: ${relativeHumidity}`);
         }
 
-        if (stationId == 208 || stationId == 271 || stationId == 338 || stationId == 210 || stationId == 379 || stationId == 232 || stationId == 207 || stationId == 98 || stationId == 112){
-          // Computations for stations missing Grad only
-          console.log("Categories: WS, WSmax, TD, RH");
-          // Add computations for this category
-          console.log("Computations for stations missing grad");
-
+        if (stationId == 208 || stationId == 271 || stationId == 338 || stationId == 210 || stationId == 379 || stationId == 232 || stationId == 207 || stationId == 98 || stationId == 112) {
           // Find the channel with the name 'WS1mm' (Wind Speed at 1mm)
           const ws1mmChannel = lastBatch.channels.find(channel => channel.name === 'WS1mm');
-          const ws1mmValue = ws1mmChannel.value;
+          ws1mmValue = ws1mmChannel.value;
           console.log(`Wind Speed at 1mm: ${ws1mmValue}`);
 
           // Find the channel with the name 'WSmax' (Maximum Wind Speed)
           const wsMaxChannel = lastBatch.channels.find(channel => channel.name === 'WSmax');
-          const wsMaxValue = wsMaxChannel.value;
+          wsMaxValue = wsMaxChannel.value;
           console.log(`Maximum Wind Speed: ${wsMaxValue}`);
 
           // Find the channel with name 'TD'
           const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
-          const temperature = tempChannel.value;
+          temperature = tempChannel.value;
           console.log(`Temperature: ${temperature}`);
 
           // Find the channel with the name 'RH' (Relative Humidity)
           const rhChannel = lastBatch.channels.find(channel => channel.name === 'RH');
-          const relativeHumidity = rhChannel.value;
+          relativeHumidity = rhChannel.value;
           console.log(`Relative Humidity: ${relativeHumidity}`);
         }
 
-        if (stationId == 60){
-          // Computations for stations that only have Grad and TD
-          console.log("Categories: Grad, TD");
-          // Add computations for this category
-          console.log("Computations for stations that only have grad and TD");
-
+        if (stationId == 60) {
           // Find the channel with the name 'Grad'
           const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
-          const gradValue = gradChannel.value;
+          gradValue = gradChannel.value;
           console.log(`Grad: ${gradValue}`);
 
           // Find the channel with name 'TD'
           const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
-          const temperature = tempChannel.value;
+          temperature = tempChannel.value;
           console.log(`Temperature: ${temperature}`);
         }
 
-        if (stationId == 236 || stationId == 350){
-          // Computations for stations that only have TD and RH
-          console.log("Categories: TD, RH");
-          // Add computations for this category
-          console.log("Computations for stations that only have TD and RH");
-
+        if (stationId == 236 || stationId == 350) {
           // Find the channel with name 'TD'
           const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
-          const temperature = tempChannel.value;
+          temperature = tempChannel.value;
           console.log(`Temperature: ${temperature}`);
 
           // Find the channel with the name 'RH' (Relative Humidity)
           const rhChannel = lastBatch.channels.find(channel => channel.name === 'RH');
-          const relativeHumidity = rhChannel.value;
+          relativeHumidity = rhChannel.value;
           console.log(`Relative Humidity: ${relativeHumidity}`);
         }
 
+        if (stationId == 386) {
+          // Find the channel with the name 'Grad'
+          const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
+          gradValue = gradChannel.value;
+          console.log(`Grad: ${gradValue}`);
+        }
 
-      
-        // Calculate the maximum value of the channels in the last batch
-        const channels = lastBatch.channels;
-        const values = channels.map(channel => channel.value);
-        const maxValue = Math.max(...values);
-        console.log('Max Value:', maxValue);
-      
-        // Send the maximum value as response
-        res.json({ recommendation: maxValue });
+        // Perform calculations to determine the water recommendation
+        const deltaY = computeDeltaY(temperature);
+        const Kc = getKc();
+        const e0 = computeE0(temperature);
+        const ea = computesmallea(relativeHumidity, e0);
+        const Ea = computeBigEa(e0, ea, wsMaxValue);
+        const E = computeE(deltaY, gradValue, wsMaxValue, Ea);
+        const I = computeI(E, Kc, areaSize); // Use areaSize for totalArea
+        console.log('I:', I);
+
+        // Send the water recommendation (I) and other calculated values as the response
+        res.json({
+          grad: gradValue,
+          windSpeed1mm: ws1mmValue,
+          maxWindSpeed: wsMaxValue,
+          temperature: temperature,
+          relativeHumidity: relativeHumidity,
+          deltaY: deltaY,
+          e0: e0,
+          ea: ea,
+          Ea: Ea,
+          E: E,
+          Kc: Kc,
+          recommendation: I // Final calculation
+        });
       });
     } else {
-      // Handle the case where the API call was not successful
-      console.error('IMS API request failed with status:', imsResponse.status);
-      res.status(500).json({ error: 'IMS API request failed' });
+      // Handle error response from the IMS API
+      console.error('Error response from IMS API:', imsResponse.status, imsResponse.statusText);
+      res.status(imsResponse.status).json({ error: 'An error occurred while fetching data from the IMS API.' });
     }
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error during calculation:', error);
     res.status(500).json({ error: 'An error occurred while processing the request.' });
   }
 });
 
-// Your existing code...
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
+// Start the server
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
