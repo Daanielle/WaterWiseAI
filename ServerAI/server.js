@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const axios = require('axios'); // Import Axios for making HTTP requests
+const axios = require('axios');
 const app = express();
-const fs = require('fs'); // Import the file system module
+const fs = require('fs');
 
 app.use(bodyParser.json());
 
@@ -19,7 +19,6 @@ function computeDeltaY(temperature) {
     { temp: 40, deltaY: 0.1707 }
   ];
 
-  // Find the closest temperature in the table
   const closest = deltaYTable.reduce((prev, curr) => {
     return Math.abs(curr.temp - temperature) < Math.abs(prev.temp - temperature) ? curr : prev;
   });
@@ -27,7 +26,6 @@ function computeDeltaY(temperature) {
   return closest.deltaY;
 }
 
-// Function to get the irrigation coefficient (Kc) based on the current month
 function getKc() {
   const kcTable = {
     January: 0.62,
@@ -44,7 +42,6 @@ function getKc() {
     December: 0.65
   };
 
-  // Get the current month as a string
   const currentMonth = new Date().toLocaleString('default', { month: 'long' });
   return kcTable[currentMonth];
 }
@@ -55,196 +52,190 @@ function computeE0(temperature) {
   return e0;
 }
 
-// Function to compute ea, now taking e0 as a parameter
 function computesmallea(relativeHumidity, e0) {
   const ea = (relativeHumidity / 100) * e0;
   return ea;
 }
 
-// Function to compute Ea
 function computeBigEa(e0, ea, WS) {
-  const C = 1 / (24 * 3600 * 1000); // constant C
+  const C = 1 / (24 * 3600 * 1000);
   const Ea = 0.35 * (e0 - ea) * (0.5 + 0.54 * WS) * C;
   return Ea;
 }
 
-// Function to compute E
 function computeE(deltaY, Grad, WSmax, Ea) {
-  const L = 2.45 * Math.pow(10, 9); // constant L
+  const L = 2.45 * Math.pow(10, 9);
   const E = ((deltaY * (Grad - WSmax) + Ea * L) / (deltaY + 1)) / L;
   return E;
 }
 
-// Function to compute I
 function computeI(E, Kc, totalArea) {
   const I = E * Kc * totalArea;
   return I;
 }
 
-// Route to handle the POST request for calculating water recommendation
+async function fetchDataFromStation(stationId) {
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() - 1);
+  const formattedDate = currentDate.toISOString().slice(0, 10);
+  const imsUrl = `https://api.ims.gov.il/v1/envista/stations/${stationId}/data/daily`;
+
+  const response = await axios.get(imsUrl, {
+    headers: {
+      Authorization: 'ApiToken f058958a-d8bd-47cc-95d7-7ecf98610e47'
+    }
+  });
+
+  if (response.status >= 200 && response.status < 300) {
+    const data = response.data;
+    const lastBatch = data.data[data.data.length - 1];
+    return lastBatch;
+  } else {
+    throw new Error(`Error fetching data from station ${stationId}`);
+  }
+}
+
 app.post("/api/calculate", async (req, res) => {
   try {
-    // Extract agricultural data and selected area number from request body
     const { selectedArea, areaSize } = req.body;
+    const lastBatch = await fetchDataFromStation(selectedArea);
 
-    // Construct the API URL with the selected area number and the previous day's date
-    const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() - 1); // Get the date of the previous day
-    const formattedDate = currentDate.toISOString().slice(0, 10); // Format the date as "YYYY-MM-DD"
-    const imsUrl = `https://api.ims.gov.il/v1/envista/stations/${selectedArea}/data/daily`;
+    let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
 
-    // Make the API call to IMS
-    const imsResponse = await axios.get(imsUrl, {
-      headers: {
-        Authorization: 'ApiToken f058958a-d8bd-47cc-95d7-7ecf98610e47' // Add your IMS API token here
+    // Ashalim, Arad, Besor Farm, Dorot, Hazeva, Negba, Neot smadar, Shani, Yotvata
+    if ([381, 29, 58, 79, 33, 82, 28, 36].includes(selectedArea)) {
+      const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
+      gradValue = gradChannel ? gradChannel.value : null;
+
+      const ws1mmChannel = lastBatch.channels.find(channel => channel.name === 'WS1mm');
+      ws1mmValue = ws1mmChannel ? ws1mmChannel.value : null;
+
+      const wsMaxChannel = lastBatch.channels.find(channel => channel.name === 'WSmax');
+      wsMaxValue = wsMaxChannel ? wsMaxChannel.value : null;
+
+      const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
+      temperature = tempChannel ? tempChannel.value : null;
+
+      const rhChannel = lastBatch.channels.find(channel => channel.name === 'RH');
+      relativeHumidity = rhChannel ? rhChannel.value : null;
+    }
+
+    // Ashqelon Port, Avdat, Ezuz, Metzoke Dragot, Mizpe Ramon, Neot Smadar, Paran, Sede Boqer, Zomet Hanegev
+    if ([208, 271, 338, 210, 379, 232, 207, 98, 112].includes(selectedArea)) {
+      const ws1mmChannel = lastBatch.channels.find(channel => channel.name === 'WS1mm');
+      ws1mmValue = ws1mmChannel ? ws1mmChannel.value : null;
+
+      const wsMaxChannel = lastBatch.channels.find(channel => channel.name === 'WSmax');
+      wsMaxValue = wsMaxChannel ? wsMaxChannel.value : null;
+
+      const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
+      temperature = tempChannel ? tempChannel.value : null;
+
+      const rhChannel = lastBatch.channels.find(channel => channel.name === 'RH');
+      relativeHumidity = rhChannel ? rhChannel.value : null;
+    }
+
+    // Beer Sheva University 
+    if (selectedArea == 60) {
+      const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
+      gradValue = gradChannel ? gradChannel.value : null;
+
+      const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
+      temperature = tempChannel ? tempChannel.value : null;
+    }
+
+    // Gat, Lahav
+    if (selectedArea == 236 || selectedArea == 350) {
+      const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
+      temperature = tempChannel ? tempChannel.value : null;
+
+      const rhChannel = lastBatch.channels.find(channel => channel.name === 'RH');
+      relativeHumidity = rhChannel ? rhChannel.value : null;
+    }
+
+    if (selectedArea == 386) {
+      const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
+      gradValue = gradChannel ? gradChannel.value : null;
+    }
+
+    if (!gradValue || !ws1mmValue || !wsMaxValue || !temperature || !relativeHumidity) {
+      let nearbyStationId = null;
+
+      if (selectedArea == 208) { // Ashqelon Port
+        nearbyStationId = 82; // Negba
+      } else if ([271, 98, 112, 338, 379].includes(selectedArea)) { // Avdat, Sede Boqer, Zomet Hanegev, Ezuz, Mizpe Ramon
+        nearbyStationId = 381; // Ashalim
+      } else if ([207, 232].includes(selectedArea)) { // Paran, Neot Smadar
+        nearbyStationId = 36; // Yotvata
+      } else if (selectedArea == 210) { // Metzoke Dragot
+        nearbyStationId = 28; // Shani
+      } else if (selectedArea == 236) { // Gat
+        nearbyStationId = 79; // Dorot
+      } else if (selectedArea == 350) { // Lahav
+        nearbyStationId = 28; // Shani
+      } else if (selectedArea == 60) { // Beer Sheva University
+        nearbyStationId = 28; // Shani
       }
-    });
 
-    // Check if the API call was successful
-    if (imsResponse.status >= 200 && imsResponse.status < 300) {
-      // Process the IMS API response to calculate the water recommendation
-      const imsData = imsResponse.data;
+      if (nearbyStationId) {
+        try {
+          const nearbyLastBatch = await fetchDataFromStation(nearbyStationId);
 
-      // Encode the IMS data
-      const encodedData = JSON.stringify(imsData);
+          if (!gradValue) {
+            const gradChannel = nearbyLastBatch.channels.find(channel => channel.name === 'Grad');
+            gradValue = gradChannel ? gradChannel.value : null;
+          }
 
-      // Write encoded IMS data to a JSON file
-      fs.writeFile('encoded_ims_data.json', encodedData, (err) => {
-        if (err) {
-          console.error('Error writing encoded IMS data:', err);
-          res.status(500).json({ error: 'An error occurred while processing the request.' });
+          if (!ws1mmValue) {
+            const ws1mmChannel = nearbyLastBatch.channels.find(channel => channel.name === 'WS1mm');
+            ws1mmValue = ws1mmChannel ? ws1mmChannel.value : null;
+          }
+
+          if (!wsMaxValue) {
+            const wsMaxChannel = nearbyLastBatch.channels.find(channel => channel.name === 'WSmax');
+            wsMaxValue = wsMaxChannel ? wsMaxChannel.value : null;
+          }
+
+          if (!relativeHumidity) {
+            const rhChannel = nearbyLastBatch.channels.find(channel => channel.name === 'RH');
+            relativeHumidity = rhChannel ? rhChannel.value : null;
+          }
+        } catch (error) {
+          console.error('Error fetching data from nearby station:', error);
+          res.status(500).json({ error: 'An error occurred while fetching data from a nearby station.' });
           return;
         }
-        console.log('Encoded IMS data has been saved to encoded_ims_data.json');
-
-        // Decode the IMS data to retrieve the last batch
-        const decodedData = JSON.parse(encodedData);
-        // Access the stationId property
-        const stationId = decodedData.stationId;
-        console.log("Station Id is:", stationId);
-        const lastBatch = decodedData.data[decodedData.data.length - 1];
-        console.log('Last Batch:', lastBatch);
-
-        let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
-
-        if (stationId == 381 || stationId == 29 || stationId == 58 || stationId == 79 || stationId == 33 || stationId == 82 || stationId == 28 || stationId == 36) {
-          // Find the channel with the name 'Grad'
-          const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
-          gradValue = gradChannel.value;
-          console.log(`Grad: ${gradValue}`);
-
-          // Find the channel with the name 'WS1mm' (Wind Speed at 1mm)
-          const ws1mmChannel = lastBatch.channels.find(channel => channel.name === 'WS1mm');
-          ws1mmValue = ws1mmChannel.value;
-          console.log(`Wind Speed at 1mm: ${ws1mmValue}`);
-
-          // Find the channel with the name 'WSmax' (Maximum Wind Speed)
-          const wsMaxChannel = lastBatch.channels.find(channel => channel.name === 'WSmax');
-          wsMaxValue = wsMaxChannel.value;
-          console.log(`Maximum Wind Speed: ${wsMaxValue}`);
-
-          // Find the channel with name 'TD'
-          const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
-          temperature = tempChannel.value;
-          console.log(`Temperature: ${temperature}`);
-
-          // Find the channel with the name 'RH' (Relative Humidity)
-          const rhChannel = lastBatch.channels.find(channel => channel.name === 'RH');
-          relativeHumidity = rhChannel.value;
-          console.log(`Relative Humidity: ${relativeHumidity}`);
-        }
-
-        if (stationId == 208 || stationId == 271 || stationId == 338 || stationId == 210 || stationId == 379 || stationId == 232 || stationId == 207 || stationId == 98 || stationId == 112) {
-          // Find the channel with the name 'WS1mm' (Wind Speed at 1mm)
-          const ws1mmChannel = lastBatch.channels.find(channel => channel.name === 'WS1mm');
-          ws1mmValue = ws1mmChannel.value;
-          console.log(`Wind Speed at 1mm: ${ws1mmValue}`);
-
-          // Find the channel with the name 'WSmax' (Maximum Wind Speed)
-          const wsMaxChannel = lastBatch.channels.find(channel => channel.name === 'WSmax');
-          wsMaxValue = wsMaxChannel.value;
-          console.log(`Maximum Wind Speed: ${wsMaxValue}`);
-
-          // Find the channel with name 'TD'
-          const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
-          temperature = tempChannel.value;
-          console.log(`Temperature: ${temperature}`);
-
-          // Find the channel with the name 'RH' (Relative Humidity)
-          const rhChannel = lastBatch.channels.find(channel => channel.name === 'RH');
-          relativeHumidity = rhChannel.value;
-          console.log(`Relative Humidity: ${relativeHumidity}`);
-        }
-
-        if (stationId == 60) {
-          // Find the channel with the name 'Grad'
-          const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
-          gradValue = gradChannel.value;
-          console.log(`Grad: ${gradValue}`);
-
-          // Find the channel with name 'TD'
-          const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
-          temperature = tempChannel.value;
-          console.log(`Temperature: ${temperature}`);
-        }
-
-        if (stationId == 236 || stationId == 350) {
-          // Find the channel with name 'TD'
-          const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
-          temperature = tempChannel.value;
-          console.log(`Temperature: ${temperature}`);
-
-          // Find the channel with the name 'RH' (Relative Humidity)
-          const rhChannel = lastBatch.channels.find(channel => channel.name === 'RH');
-          relativeHumidity = rhChannel.value;
-          console.log(`Relative Humidity: ${relativeHumidity}`);
-        }
-
-        if (stationId == 386) {
-          // Find the channel with the name 'Grad'
-          const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
-          gradValue = gradChannel.value;
-          console.log(`Grad: ${gradValue}`);
-        }
-
-        // Perform calculations to determine the water recommendation
-        const deltaY = computeDeltaY(temperature);
-        const Kc = getKc();
-        const e0 = computeE0(temperature);
-        const ea = computesmallea(relativeHumidity, e0);
-        const Ea = computeBigEa(e0, ea, wsMaxValue);
-        const E = computeE(deltaY, gradValue, wsMaxValue, Ea);
-        const I = computeI(E, Kc, areaSize); // Use areaSize for totalArea
-        console.log('I:', I);
-
-        // Send the water recommendation (I) and other calculated values as the response
-        res.json({
-          grad: gradValue,
-          windSpeed1mm: ws1mmValue,
-          maxWindSpeed: wsMaxValue,
-          temperature: temperature,
-          relativeHumidity: relativeHumidity,
-          deltaY: deltaY,
-          e0: e0,
-          ea: ea,
-          Ea: Ea,
-          E: E,
-          Kc: Kc,
-          recommendation: I // Final calculation
-        });
-      });
-    } else {
-      // Handle error response from the IMS API
-      console.error('Error response from IMS API:', imsResponse.status, imsResponse.statusText);
-      res.status(imsResponse.status).json({ error: 'An error occurred while fetching data from the IMS API.' });
+      }
     }
+
+    const deltaY = computeDeltaY(temperature);
+    const Kc = getKc();
+    const e0 = computeE0(temperature);
+    const ea = computesmallea(relativeHumidity, e0);
+    const Ea = computeBigEa(e0, ea, wsMaxValue);
+    const E = computeE(deltaY, gradValue, wsMaxValue, Ea);
+    const I = computeI(E, Kc, areaSize);
+
+    res.json({
+      grad: gradValue,
+      windSpeed1mm: ws1mmValue,
+      maxWindSpeed: wsMaxValue,
+      temperature: temperature,
+      relativeHumidity: relativeHumidity,
+      deltaY: deltaY,
+      e0: e0,
+      ea: ea,
+      Ea: Ea,
+      E: E,
+      Kc: Kc,
+      recommendation: I
+    });
   } catch (error) {
     console.error('Error during calculation:', error);
     res.status(500).json({ error: 'An error occurred while processing the request.' });
   }
 });
 
-// Start the server
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
