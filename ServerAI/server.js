@@ -1,10 +1,27 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const axios = require('axios');
+const mongoose = require('mongoose');
+const UsersRouter = require('./routes/users');
+const axios = require('axios')
 const app = express();
-const fs = require('fs');
+const port = process.env.PORT || 443;
 
+// MongoDB connection
+mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('MongoDB connected successfully'))
+    .catch(err => console.error('MongoDB connection error:', err));
+
+// Middleware setup
 app.use(bodyParser.json());
+
+// Use the Users router
+app.use('/users', UsersRouter);
+
+// Example route
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
 
 function computeDeltaY(temperature) {
   const deltaYTable = [
@@ -236,7 +253,8 @@ app.post("/api/calculate", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 443;
+
+// Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
