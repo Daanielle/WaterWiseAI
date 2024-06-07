@@ -1,59 +1,75 @@
-.WaterCalculator{
-    background-image: url('../resources/images/irrigation.jpg');
-    position:absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    background-size: cover;
+.WaterCalculator {
+  background-image: url("../resources/images/irrigation.jpg");
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
-
-
-.h1{
-    margin-top: 8%;
-    font-style: italic;
-    font-size: 60px;
-    margin-left: 40%;
-    color: #FFFFFF; /* White color for heading */
-    color: #FFFFFF; /* White color for heading */
+.h1 {
+  margin-top: 8%;
+  font-style: italic;
+  font-size: 60px;
+  margin-left: 40%;
+  color: #ffffff; /* White color for heading */
+  color: #ffffff; /* White color for heading */
 }
 
-.Inser_data{
-    margin-left: 3%;
-    font-style: italic;
-    margin-bottom: 1%;
-    color: #FFFFFF; /* White color for input labels */
+.Inser_data {
+  margin-left: 3%;
+  font-style: italic;
+  margin-bottom: 1%;
+  color: #ffffff; /* White color for input labels */
 }
 
-.Calculate_Button{
-    margin-left: 3%;
-    font-style: italic;
-    margin-bottom: 1%;
-    color: #040000b6; /* White color for input labels */
+.Calculate_Button {
+  margin-left: 3%;
+  font-style: italic;
+  margin-bottom: 1%;
+  color: #040000b6; /* White color for input labels */
 }
 
-
-
-.Our_Data{
-    margin-left: 70%;
-    margin-top: -12%;
-    margin-bottom: 1%;
-    font-size: 20px;
-    font-style: italic;
-    color: #FFFFFF; /* White color for weather data */
-    font-weight: bold;
+.Our_Data {
+  margin-left: 70%;
+  margin-top: -12%;
+  margin-bottom: 1%;
+  font-size: 20px;
+  font-style: italic;
+  color: #ffffff; /* White color for weather data */
+  font-weight: bold;
 }
 
-.Recommendation{
-    margin-left: 40%;
-    margin-top: 10%;
-    margin-bottom: 1%;
-    font-size: 20px;
-    font-style: italic;
-    color: #FFFFFF; /* White color for water recommendation */
-    font-weight: bold;
+.Recommendation {
+  margin-left: 40%;
+  margin-top: 10%;
+  margin-bottom: 1%;
+  font-size: 20px;
+  font-style: italic;
+  color: #ffffff; /* White color for water recommendation */
+  font-weight: bold;
+}
+
+.formControl {
+  display: flex;
+  /* gap: 1rem; Optional: Adds space between the columns */
+}
+
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Optional: Adds space between the elements in the left column */
+  flex: 1; 
+  padding-left: 100px;
+}
+
+.rightCol {
+  flex: 3; /* Adjust the flex value to control the width ratio */
+  display: flex;
+  justify-content: center; /* Optional: Center the DetailCard horizontally */
+  align-items: flex-start; /* Optional: Align the DetailCard to the top */
 }
