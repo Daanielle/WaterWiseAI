@@ -6,7 +6,7 @@ body {
   background: linear-gradient(to bottom left, var(--primary-color) 0%, var(--dark-green) 100%);
   border-bottom-left-radius: 50px;
   overflow: hidden;
-  width: 80%; /* Adjusted width to 100% */
+  width: 80%;
   position: fixed;
   top: 0;
   right: 0;
@@ -14,6 +14,15 @@ body {
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   justify-content: space-between;
+}
+
+.userDetailsBar {
+  width: 23%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: var(--extra-white-transparent);
 }
 
 .navbar img {

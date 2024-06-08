@@ -15,18 +15,18 @@ function WaterCalculator() {
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
   const [waterRecommendation, setWaterRecommendation] = useState("");
   const [detailedData, setDetailedData] = useState({
-    grad: '--',
-    windSpeed1mm: '--',
-    maxWindSpeed: '--',
-    temperature: '--',
-    relativeHumidity: '--',
-    deltaY: '--',
-    e0: '--',
-    ea: '--',
-    Ea: '--',
-    E: '--',
-    Kc: '--',
-    recommendation: '--'
+    grad: "--",
+    windSpeed1mm: "--",
+    maxWindSpeed: "--",
+    temperature: "--",
+    relativeHumidity: "--",
+    deltaY: "--",
+    e0: "--",
+    ea: "--",
+    Ea: "--",
+    E: "--",
+    Kc: "--",
+    recommendation: "--",
   });
 
   const handleDateChange = (newDate) => {
@@ -63,28 +63,29 @@ function WaterCalculator() {
   };
 
   return (
-    <PageContainer>
-      <h1>{dict.waterCalculatorTitle}</h1>
-      <div className={classes.formControl}>
-        <div className={classes.leftCol}>
-          <AreaPicker onAreaChange={handleAreaChange} area={selectedArea} />
-          <DatePickerComponent
-            onDateChange={handleDateChange}
-            date={selectedDate}
-          />
-          <AreaSizeInput
-            onAreaSizeChange={handleAreaSizeChange}
-            areaSize={selectedAreaSize}
-          />
+    <div className={classes.WaterCalculator}>
+      <PageContainer>
+        <h1>{dict.waterCalculatorTitle}</h1>
+        <div className={classes.formControl}>
+          <div className={classes.leftCol}>
+            <AreaPicker onAreaChange={handleAreaChange} area={selectedArea} />
+            <DatePickerComponent
+              onDateChange={handleDateChange}
+              date={selectedDate}
+            />
+            <AreaSizeInput
+              onAreaSizeChange={handleAreaSizeChange}
+              areaSize={selectedAreaSize}
+            />
 
-          <CustomButton onClick={calculate} label="Calculate" type="button" />
+            <CustomButton onClick={calculate} label="Calculate" type="button" />
+          </div>
+          <div className={classes.rightCol}>
+            <DetailsPanel detailedData={detailedData} />
+          </div>
         </div>
-        <div className={classes.rightCol}>
-          <DetailsPanel detailedData={detailedData} />
-        </div>
-      </div>
-
-    </PageContainer>
+      </PageContainer>
+    </div>
   );
 }
 

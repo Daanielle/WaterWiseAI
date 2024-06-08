@@ -28,7 +28,8 @@
   --light-green: #b3e558; /* Lighter green */
   --medium-green: #72ab38; /* Medium green */
 
-  --accent-orange: #ff8c00; /* Brighter burnt orange */
+  --light-accent-gray: #f8dcb8f6; /* Brighter burnt orange */
+  --accent-orange: #c98736; /* Brighter burnt orange */
   --dark-orange: #a74e00; /* Darker burnt orange */
 
   --text-color: #333; /* Main text color */

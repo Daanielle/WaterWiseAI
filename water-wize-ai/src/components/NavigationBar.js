@@ -3,12 +3,16 @@ import classes from "../styles/NavigationBar.module.css";
 import WaterWizeAILogo from "../resources/images/WaterWizeAI-logo.png";
 import LanguageSwitch from "./LanguageSwitch";
 import useDictionary from "../resources/Dictionary/Dictionary";
+import UserDetailsBar from "./UserDetailsBar";
 
 function NavigationBar() {
   const dict = useDictionary();
 
   return (
-    <>
+    <div className={classes.container}>
+    <div className={classes.userDetailsBar}>
+      <UserDetailsBar />
+      </div>
       <header className={classes.navbar}>
         <nav>
           <ul className={classes.list}>
@@ -85,7 +89,7 @@ function NavigationBar() {
           </NavLink>
         </div>
       </header>
-    </>
+    </div>
   );
 }
 

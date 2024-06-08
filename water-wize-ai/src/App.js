@@ -10,6 +10,15 @@ import WaterCalculator from "./pages/WaterCalculator";
 import Demo from "./pages/Demo";
 import TasksList from "./pages/TasksList";
 import { LanguageProvider } from "./LanguageContext";
+import palm from "./resources/images/palm.jpg"
+
+// const style =  {
+//   backgroundImage: `url(${palm})`,
+//   backgroundSize: 'cover', // Cover the entire container
+//   backgroundRepeat: 'no-repeat', // Prevent repeating the background image
+//   backgroundPosition: 'center', // Center the background image
+//   height: '100vh',
+// };
 
 const router = createBrowserRouter([
   {

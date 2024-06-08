@@ -1,7 +1,7 @@
 import { useLanguage } from "../../LanguageContext";
 
 const hebDict = {
-  // navBar titles
+  // navBar
   forum: "פורום",
   tasksManagement: "ניהול משימות",
   support: "תמיכה והדרכה",
@@ -9,13 +9,14 @@ const hebDict = {
   aboutUs: "עלינו",
   home: "בית",
   waterCalculator: "מחשבון מים",
+  goodMorning: "בוקר טוב",
 
   // page titles
   waterCalculatorTitle: "מחשבון מים",
 };
 
 const engDict = {
-  // navBar titles
+  // navBar
   forum: "Forum",
   tasksManagement: "To Do List",
   support: "support",
@@ -23,6 +24,7 @@ const engDict = {
   aboutUs: "About Us",
   home: "Home",
   waterCalculator: "Water Calculator",
+  goodMorning: "Good morning",
 
   // page titles
   waterCalculatorTitle: "Water Calculator",
