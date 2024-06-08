@@ -3,53 +3,45 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import IconButton from '@mui/material/IconButton';
+import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-
-import Icon from "@mui/material/Icon"; // Import the Icon component from Material-UI
-import WavesIcon from "@mui/icons-material/Waves";
-import AirIcon from "@mui/icons-material/Air";
-import ThermostatIcon from '@mui/icons-material/Thermostat';
-import ChangeHistoryIcon from '@mui/icons-material/ChangeHistory';
-import WaterDropIcon from '@mui/icons-material/WaterDrop';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import NumbersIcon from '@mui/icons-material/Numbers';
-import RecommendIcon from '@mui/icons-material/Recommend';
-
-import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
-
-const iconsPaths = {
-  grad: WavesIcon,
-  windSpeed1mm: AirIcon,
-  maxWindSpeed: AirIcon,
-  temperature: ThermostatIcon,
-  relativeHumidity: AirIcon,
-  deltaY: ChangeHistoryIcon,
-  e0: WaterDropIcon,
-  ea: WaterDropIcon,
-  Ea: TrendingUpIcon,
-  E: TrendingUpIcon,
-  Kc: NumbersIcon,
-  recommendation: RecommendIcon,
-};
+import Modal from "@mui/material/Modal";
+import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
+import waterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
+import { Icon } from "@mui/material";
 
 // Function to get the icon component based on the title
 function getIcon(title) {
-  const IconComponent = iconsPaths[title];
+  const IconComponent = waterCalculatorVariablesDetails[title].icon;
   if (IconComponent) {
     return <Icon component={IconComponent} sx={{ color: "#72ab38" }} />; // Render Material-UI icon component
   } else {
-    return <Icon>{iconsPaths[title]}</Icon>; // Render a placeholder icon
+    return <Icon>{waterCalculatorVariablesDetails[title].icon}</Icon>; // Render a placeholder icon
   }
 }
 
+const modalStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function DetailCard({ title, value }) {
+  const [openDetailsModal, setOpenDetailsModal] = React.useState(false);
+  const handleOpenDetailsModal = () => setOpenDetailsModal(true);
+  const handleCloseDetailsModal = () => setOpenDetailsModal(false);
+
   const formattedValue = typeof value === "number" ? value.toFixed(3) : value;
 
   return (
     <Box sx={{ minWidth: 50, width: 130 }}>
-      <Card variant="outlined" >
+      <Card variant="outlined">
         <React.Fragment>
           <CardContent>
             {getIcon(title)}
@@ -58,19 +50,36 @@ export default function DetailCard({ title, value }) {
               color="text.secondary"
               gutterBottom
             >
-              {title}
+              {waterCalculatorVariablesDetails[title].title}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
               {formattedValue}
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-          <IconButton aria-label="more info">
-            <HelpOutlinedIcon sx={{ color: "#bcbcbc" }}/>
-          </IconButton>
-        </CardActions>
+            <IconButton aria-label="more info" onClick={handleOpenDetailsModal}>
+              <HelpOutlinedIcon sx={{ color: "#bcbcbc" }} />
+            </IconButton>
+          </CardActions>
         </React.Fragment>
       </Card>
+      <div>
+        <Modal
+          open={openDetailsModal}
+          onClose={handleCloseDetailsModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={modalStyle}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {waterCalculatorVariablesDetails[title].title}
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              {waterCalculatorVariablesDetails[title].description}
+            </Typography>
+          </Box>
+        </Modal>
+      </div>
     </Box>
   );
 }

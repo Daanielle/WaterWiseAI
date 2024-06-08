@@ -13,7 +13,6 @@ const DetailsPanel = ({ detailedData }) => {
             <DetailCard
               title={key}
               value={detailedData[key]}
-              // Pass other properties similarly
             />
           </div>
         ))}
@@ -24,7 +23,6 @@ const DetailsPanel = ({ detailedData }) => {
             <DetailCard
               title={key}
               value={detailedData[key]}
-              // Pass other properties similarly
             />
           </div>
         ))}
