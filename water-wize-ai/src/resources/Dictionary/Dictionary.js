@@ -19,8 +19,8 @@ const engDict = {
   // navBar
   forum: "Forum",
   tasksManagement: "To Do List",
-  support: "support",
-  contuctUs: "Contuct Us",
+  support: "Support",
+  contuctUs: "Contact Us",
   aboutUs: "About Us",
   home: "Home",
   waterCalculator: "Water Calculator",
