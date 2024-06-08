@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
 import classes from "../styles/NavigationBar.module.css";
 import WaterWizeAILogo from "../resources/images/WaterWizeAI-logo.png";
+import LanguageSwitch from "./LanguageSwitch";
+import useDictionary from "../resources/Dictionary/Dictionary";
 
 function NavigationBar() {
+  const dict = useDictionary();
+
   return (
     <>
       <header className={classes.navbar}>
@@ -15,7 +19,7 @@ function NavigationBar() {
               }
               end
             >
-              <li>בית</li>
+              <li>{dict.home}</li>
             </NavLink>
             <NavLink
               to="/AboutUs"
@@ -23,7 +27,7 @@ function NavigationBar() {
                 isActive ? classes.active : classes.inactive
               }
             >
-              <li>עלינו</li>
+              <li>{dict.aboutUs}</li>
             </NavLink>
 
             <NavLink
@@ -32,7 +36,7 @@ function NavigationBar() {
                 isActive ? classes.active : classes.inactive
               }
             >
-              <li>צרו קשר</li>
+              <li>{dict.contuctUs}</li>
             </NavLink>
 
             <NavLink
@@ -41,7 +45,7 @@ function NavigationBar() {
                 isActive ? classes.active : classes.inactive
               }
             >
-              <li>תמיכה והדרכה</li>
+              <li>{dict.support}</li>
             </NavLink>
 
             <NavLink
@@ -50,17 +54,17 @@ function NavigationBar() {
                 isActive ? classes.active : classes.inactive
               }
             >
-              <li>מחשבון מים</li>
+              <li>{dict.waterCalculator}</li>
             </NavLink>
 
             <NavLink
-            to="/TasksList"
-            className={({ isActive }) =>
-              isActive ? classes.active : classes.inactive
-            }
-          >
-            <li>ניהול משימות</li>
-          </NavLink>
+              to="/TasksList"
+              className={({ isActive }) =>
+                isActive ? classes.active : classes.inactive
+              }
+            >
+              <li>{dict.tasksManagement}</li>
+            </NavLink>
 
             <NavLink
               to="/Forum"
@@ -68,23 +72,18 @@ function NavigationBar() {
                 isActive ? classes.active : classes.inactive
               }
             >
-              <li>פורום</li>
+              <li>{dict.forum}</li>
             </NavLink>
-            <NavLink
-            to="/Demo"
-            className={({ isActive }) =>
-              isActive ? classes.active : classes.inactive
-            }
-          >
-            <li>דמו</li>
-          </NavLink>
           </ul>
-
         </nav>
-
-        <NavLink to="/">
-        <img src={WaterWizeAILogo} alt="WaterWizeAI logo" />
-      </NavLink>
+        <div className={classes.container}>
+          <div className={classes.langSwitch}>
+            <LanguageSwitch />
+          </div>
+          <NavLink to="/">
+            <img src={WaterWizeAILogo} alt="WaterWizeAI logo" />
+          </NavLink>
+        </div>
       </header>
     </>
   );
