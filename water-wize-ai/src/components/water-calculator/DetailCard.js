@@ -9,15 +9,11 @@ import Modal from "@mui/material/Modal";
 import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import waterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
 import { Icon } from "@mui/material";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
-// Function to get the icon component based on the title
-function getIcon(title) {
-  const IconComponent = waterCalculatorVariablesDetails[title].icon;
-  if (IconComponent) {
-    return <Icon component={IconComponent} sx={{ color: "#72ab38" }} />; // Render Material-UI icon component
-  } else {
-    return <Icon>{waterCalculatorVariablesDetails[title].icon}</Icon>; // Render a placeholder icon
-  }
+function getIcon(variableDetails) {
+  const IconComponent = variableDetails?.icon || HelpOutlineIcon;
+  return <Icon component={IconComponent} sx={{ color: "#72ab38" }} />;
 }
 
 const modalStyle = {
@@ -38,13 +34,14 @@ export default function DetailCard({ title, value }) {
   const handleCloseDetailsModal = () => setOpenDetailsModal(false);
 
   const formattedValue = typeof value === "number" ? value.toFixed(3) : value;
+  const variableDetails = waterCalculatorVariablesDetails[title];
 
   return (
     <Box sx={{ minWidth: 50, width: 130 }}>
       <Card variant="outlined">
         <React.Fragment>
           <CardContent>
-            {getIcon(title)}
+            {getIcon(variableDetails)}
             <Typography
               sx={{ fontSize: 14 }}
               color="text.secondary"
@@ -71,9 +68,12 @@ export default function DetailCard({ title, value }) {
           aria-describedby="modal-modal-description"
         >
           <Box sx={modalStyle}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              {waterCalculatorVariablesDetails[title].title}
-            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
+              {getIcon(variableDetails)}
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                {waterCalculatorVariablesDetails[title].title}
+              </Typography>
+            </Box>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               {waterCalculatorVariablesDetails[title].description}
             </Typography>

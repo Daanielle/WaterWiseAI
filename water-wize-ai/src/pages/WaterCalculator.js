@@ -3,30 +3,30 @@ import PageContainer from "../components/PageContainer";
 import classes from "../styles/WaterCalculator.module.css";
 import DatePickerComponent from "../components/water-calculator/DatePickerComponent";
 import AreaPicker from "../components/water-calculator/AreaPicker";
-import { FormControl } from "@mui/material";
 import AreaSizeInput from "../components/water-calculator/AreaSizeInput";
 import CustomButton from "../components/CustomButton";
-import DetailCard from "../components/water-calculator/DetailCard";
 import DetailsPanel from "../components/water-calculator/DetailsPanel";
+import useDictionary from "../resources/Dictionary/Dictionary";
 
 function WaterCalculator() {
+  const dict = useDictionary();
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
   const [waterRecommendation, setWaterRecommendation] = useState("");
   const [detailedData, setDetailedData] = useState({
-    grad: '--',
-    windSpeed1mm: '--',
-    maxWindSpeed: '--',
-    temperature: '--',
-    relativeHumidity: '--',
-    deltaY: '--',
-    e0: '--',
-    ea: '--',
-    Ea: '--',
-    E: '--',
-    Kc: '--',
-    recommendation: '--'
+    grad: "--",
+    windSpeed1mm: "--",
+    maxWindSpeed: "--",
+    temperature: "--",
+    relativeHumidity: "--",
+    deltaY: "--",
+    e0: "--",
+    ea: "--",
+    Ea: "--",
+    E: "--",
+    Kc: "--",
+    recommendation: "--",
   });
 
   const handleDateChange = (newDate) => {
@@ -63,28 +63,29 @@ function WaterCalculator() {
   };
 
   return (
-    <PageContainer>
-      <h1>Water Calculator</h1>
-      <div className={classes.formControl}>
-        <div className={classes.leftCol}>
-          <AreaPicker onAreaChange={handleAreaChange} area={selectedArea} />
-          <DatePickerComponent
-            onDateChange={handleDateChange}
-            date={selectedDate}
-          />
-          <AreaSizeInput
-            onAreaSizeChange={handleAreaSizeChange}
-            areaSize={selectedAreaSize}
-          />
+    <div className={classes.WaterCalculator}>
+      <PageContainer>
+        <h1>{dict.waterCalculatorTitle}</h1>
+        <div className={classes.formControl}>
+          <div className={classes.leftCol}>
+            <AreaPicker onAreaChange={handleAreaChange} area={selectedArea} />
+            <DatePickerComponent
+              onDateChange={handleDateChange}
+              date={selectedDate}
+            />
+            <AreaSizeInput
+              onAreaSizeChange={handleAreaSizeChange}
+              areaSize={selectedAreaSize}
+            />
 
-          <CustomButton onClick={calculate} label="Calculate" type="button" />
+            <CustomButton onClick={calculate} label="Calculate" type="button" />
+          </div>
+          <div className={classes.rightCol}>
+            <DetailsPanel detailedData={detailedData} />
+          </div>
         </div>
-        <div className={classes.rightCol}>
-          <DetailsPanel detailedData={detailedData} />
-        </div>
-      </div>
-
-    </PageContainer>
+      </PageContainer>
+    </div>
   );
 }
 

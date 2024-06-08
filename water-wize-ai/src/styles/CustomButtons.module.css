@@ -12,7 +12,8 @@
   font-size: large;
   padding: 8px;
   transition: background-color 0.3s, transform 0.3s;
-  margin-top: 10px; /* Add margin-top */
+  margin-top: 10px; 
+  background-color: var( --extra-white-transparent);
 }
 
 .button:hover {
