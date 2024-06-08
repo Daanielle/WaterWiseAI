@@ -75,7 +75,7 @@ function computesmallea(relativeHumidity, e0) {
 }
 
 function computeBigEa(e0, ea, WS) {
-  const C = 1 / (24 * 3600 * 1000);
+  const C = 1 / (3);
   const Ea = 0.35 * (e0 - ea) * (0.5 + 0.54 * WS) * C;
   return Ea;
 }
