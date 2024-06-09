@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-// const authenticateToken = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth');
 
 // Middleware function to get a user by ID
 async function getUser(req, res, next) {
@@ -34,6 +34,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', getUser, (req, res) => {
     res.json(res.user);
 });
+
 
 // Add a user (Tested and working)
 router.post('/', async (req, res) => {
@@ -117,5 +118,15 @@ router.post('/login', async (req, res) => {
     }
 });
 
-
+// GET route to check if the user is logged in
+router.get('/login/check', authenticateToken, (req, res) => {
+    // Check if req.user is null, indicating that the user is not logged in
+    if (!req.user) {
+        res.json({ loggedIn: false });
+    } else {
+        // User is logged in
+        // You can access user information from req.user if needed
+        res.json({ loggedIn: true });
+    }
+  });
 module.exports = router;

@@ -3,7 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 // const Recommendation = require('../models/Recommendation'); // Import the Recommendation model
 const Recommendation = require('../models/Recommendation');
-
+const authenticateToken = require('../middleware/auth'); // Assuming you have this middleware
 
 
 function computeDeltaY(temperature) {
@@ -96,7 +96,7 @@ function computeDeltaY(temperature) {
   }
   
 
-  router.post("/", async (req, res) => {
+  router.post("/", authenticateToken, async (req, res) => {
     try {
       const { selectedArea, areaSize } = req.body;
       const lastBatch = await fetchDataFromStation(selectedArea);
@@ -219,6 +219,7 @@ function computeDeltaY(temperature) {
 
       // Create a new recommendation document
       const recommendation = new Recommendation({
+        user: req.user ? req.user.userId : null, // Save the user ID if authenticated, otherwise null
         grad: gradValue,
         windSpeed1mm: ws1mmValue,
         maxWindSpeed: wsMaxValue,
@@ -268,6 +269,37 @@ router.get("/", async (req, res) => {
   } catch (error) {
       console.error('Error fetching recommendations:', error);
       res.status(500).json({ error: 'An error occurred while fetching recommendations.' });
+  }
+});
+
+
+// Route to get recommendations by user
+router.get('/user-recommendations', authenticateToken, async (req, res) => {
+  try {
+      // Ensure the user is authenticated
+      if (!req.user) {
+          return res.status(401).json({ message: 'Unauthorized' });
+      }
+
+      // Find recommendations for the authenticated user
+      const recommendations = await Recommendation.find({ user: req.user.userId });
+
+      res.json(recommendations);
+  } catch (err) {
+      res.status(500).json({ message: err.message });
+  }
+});
+
+
+// GET route to check if the user is logged in
+router.get('/check-login', authenticateToken, (req, res) => {
+  // Check if req.user is null, indicating that the user is not logged in
+  if (!req.user) {
+      res.json({ loggedIn: false });
+  } else {
+      // User is logged in
+      // You can access user information from req.user if needed
+      res.json({ loggedIn: true });
   }
 });
 
