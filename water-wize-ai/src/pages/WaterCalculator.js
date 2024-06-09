@@ -10,6 +10,7 @@ import useDictionary from "../resources/Dictionary/Dictionary";
 
 function WaterCalculator() {
   const dict = useDictionary();
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
@@ -78,7 +79,7 @@ function WaterCalculator() {
               areaSize={selectedAreaSize}
             />
 
-            <CustomButton onClick={calculate} label="Calculate" type="button" />
+            <CustomButton onClick={calculate} label={dict.calculate} type="button" />
           </div>
           <div className={classes.rightCol}>
             <DetailsPanel detailedData={detailedData} />

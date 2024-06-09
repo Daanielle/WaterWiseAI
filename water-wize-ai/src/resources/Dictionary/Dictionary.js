@@ -11,8 +11,9 @@ const hebDict = {
   waterCalculator: "מחשבון מים",
   goodMorning: "בוקר טוב",
 
-  // page titles
+  // Water Calculator
   waterCalculatorTitle: "מחשבון מים",
+  calculate: "חשב",
 };
 
 const engDict = {
@@ -26,8 +27,9 @@ const engDict = {
   waterCalculator: "Water Calculator",
   goodMorning: "Good morning",
 
-  // page titles
+  // Water Calculator
   waterCalculatorTitle: "Water Calculator",
+  calculate: "Calculate",
 };
 
 const useDictionary = () => {

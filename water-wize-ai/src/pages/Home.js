@@ -6,19 +6,21 @@ import RegisterForm from "../components/RegisterForm";
 // import classes from "../styles/Register_and_Login.css";
 import classes from "../styles/Home.module.css";
 
-
 function Home() {
-  const [ currentForm, setCurrentForm] = useState('login');
-  const toggleForm= (formName)=>
-  {
+  const [currentForm, setCurrentForm] = useState("login");
+  const toggleForm = (formName) => {
     setCurrentForm(formName);
-  }
+  };
   return (
     <PageContainer>
       <div className={classes.home_style}>
-        {currentForm === "login" ? <LogInForm onFormSwitch={toggleForm}/> : <RegisterForm onFormSwitch={toggleForm}/>}
+        {currentForm === "login" ? (
+          <LogInForm onFormSwitch={toggleForm} />
+        ) : (
+          <RegisterForm onFormSwitch={toggleForm} />
+        )}
       </div>
-     </PageContainer>
+    </PageContainer>
   );
 }
 
