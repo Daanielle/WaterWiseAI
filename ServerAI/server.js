@@ -3,9 +3,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const UsersRouter = require('./routes/users');
+
+const CalculatorRouter = require('./routes/calculator'); // Import the calculator router
+
 const axios = require('axios')
 const app = express();
 const port = process.env.PORT || 443;
+
+const cors = require('cors');
+app.use(cors())
 
 // MongoDB connection
 mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -17,6 +23,7 @@ app.use(bodyParser.json());
 
 // Use the Users router
 app.use('/users', UsersRouter);
+app.use('/calculator', CalculatorRouter); // Use the updated calculator router
 
 // Example route
 app.get('/', (req, res) => {
