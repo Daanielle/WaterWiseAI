@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import classes from "../styles/Register_and_Login.css";
+import { Link } from "react-router-dom";
 
 const Register = (props) => {
   const [username, setUsername] = useState('');
@@ -108,7 +109,9 @@ const Register = (props) => {
           <button className="my_button" type="submit">Register</button>
         </div>
         <div >
-          <p className="login_link">Already have an account? <a href="#" onClick={() => props.onFormSwitch('login')}> Login here.</a></p>
+          <Link to="/LogIn">
+            <p className="login_link">Already have an account? <a href="#" > Login here.</a></p>
+          </Link>
         </div>
       </form>
     </div>

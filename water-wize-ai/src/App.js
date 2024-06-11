@@ -9,8 +9,11 @@ import Guide from "./pages/Guide";
 import WaterCalculator from "./pages/WaterCalculator";
 import Demo from "./pages/Demo";
 import TasksList from "./pages/TasksList";
+import LogIn from "./pages/LogIn";
+import Register from "./pages/Register";
 import { LanguageProvider } from "./LanguageContext";
 import { AuthProvider } from './AuthContext';
+
 
 // const style =  {
 //   backgroundImage: `url(${palm})`,
@@ -33,6 +36,8 @@ const router = createBrowserRouter([
       { path: "/Forum", element: <Forum /> },
       { path: "/WaterCalculator", element: <WaterCalculator /> },
       { path: "/TasksList", element: <TasksList /> },
+      { path: "/LogIn", element: <LogIn /> },
+      { path: "/Register", element: <Register /> },
       { path: "/Demo", element: <Demo /> },
     ],
   },

@@ -1,10 +1,13 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from '../AuthContext';
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +28,7 @@ const LogIn = (props) => {
       }
       const data = await loginResponse.json(); // Parse the JSON response
       login(data);
+      navigate("/");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -47,7 +51,9 @@ const LogIn = (props) => {
           <button className="my_button" type="Submit">Log in</button>
         </div>
         <div>
-          <p className="Register_link">Dont have an account? <a href="#" onClick={() => props.onFormSwitch('register')}> Register</a></p>
+          <Link to="/Register">
+            <p className="Register_link">Dont have an account? <a href="#"> Register</a></p>
+          </Link>
         </div>
       </form>
     </div>

@@ -17,15 +17,6 @@ function NavigationBar() {
         <nav>
           <ul className={classes.list}>
             <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? classes.active : classes.inactive
-              }
-              end
-            >
-              <li>{dict.home}</li>
-            </NavLink>
-            <NavLink
               to="/AboutUs"
               className={({ isActive }) =>
                 isActive ? classes.active : classes.inactive

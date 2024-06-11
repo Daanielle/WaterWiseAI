@@ -5,11 +5,12 @@ import Typography from "@mui/material/Typography";
 import useDictionary from "../resources/Dictionary/Dictionary";
 import CustomButton from "../components/CustomButton";
 import { AuthContext } from "../AuthContext";
+import { Link } from "react-router-dom";
 
 
 function UserDetailsBar() {
   const dict = useDictionary();
-  const { user, logout } = useContext(AuthContext);
+  const { isAuth, user, logout } = useContext(AuthContext);
 
   const buttonsStyleRight = {
     fontSize: "12px",
@@ -23,6 +24,24 @@ function UserDetailsBar() {
     height: "30px",
     width: "70px",
   };
+
+  const LoggedInBtns = (
+    <div style={{ display: "flex" }}>
+      <CustomButton label="log out" type="button" onClick={logout} style={buttonsStyleLeft} />
+      <CustomButton label="user" type="button" style={buttonsStyleRight} />
+    </div>
+  )
+
+  const GuestBtns = (
+    <div style={{ display: "flex" }}>
+      <Link to="/LogIn">
+        <CustomButton label="log in" type="button" style={buttonsStyleLeft} />
+      </Link>
+      <Link to="/Register">
+      <CustomButton label="register" type="button" style={buttonsStyleRight} />
+      </Link>
+    </div>
+  )
 
   return (
     <div
@@ -40,10 +59,7 @@ function UserDetailsBar() {
         <Typography color="text.secondary">
           {dict.goodMorning}, {user ? user.name : 'Guest'}
         </Typography>
-        <div style={{ display: "flex" }}>
-          <CustomButton label="log out" type="button" onClick={logout} style={buttonsStyleLeft} />
-          <CustomButton label="test2" type="button" style={buttonsStyleRight} />
-        </div>
+        {user ? LoggedInBtns : GuestBtns}
       </div>
     </div>
   );

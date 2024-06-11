@@ -13,13 +13,14 @@ function Home() {
   };
   return (
     <PageContainer>
-      <div className={classes.home_style}>
+      <h1>Home</h1>
+      {/* <div className={classes.home_style}>
         {currentForm === "login" ? (
           <LogInForm onFormSwitch={toggleForm} />
         ) : (
           <RegisterForm onFormSwitch={toggleForm} />
         )}
-      </div>
+      </div> */}
     </PageContainer>
   );
 }
