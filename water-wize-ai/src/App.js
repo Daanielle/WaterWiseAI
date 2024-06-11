@@ -10,7 +10,7 @@ import WaterCalculator from "./pages/WaterCalculator";
 import Demo from "./pages/Demo";
 import TasksList from "./pages/TasksList";
 import { LanguageProvider } from "./LanguageContext";
-import palm from "./resources/images/palm.jpg"
+import { AuthProvider } from './AuthContext';
 
 // const style =  {
 //   backgroundImage: `url(${palm})`,
@@ -40,11 +40,13 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <LanguageProvider>
-      <div>
-        <RouterProvider router={router}></RouterProvider>
-      </div>
-    </LanguageProvider>
+    <AuthProvider>
+      <LanguageProvider>
+        <div>
+          <RouterProvider router={router}></RouterProvider>
+        </div>
+      </LanguageProvider>
+    </AuthProvider>
   );
 }
 

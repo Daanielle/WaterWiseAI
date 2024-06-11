@@ -95,7 +95,7 @@ router.delete('/:id', getUser, async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         // Find the user by email
-        const user = await User.findOne({ email: req.body.email });
+        const user = await User.findOne({ name: req.body.username });
         if (!user) {
             // If user not found, return error
             return res.status(400).json({ message: '1 Invalid email or password' });
@@ -111,12 +111,13 @@ router.post('/login', async (req, res) => {
 
         // If both email and password are valid, generate JWT token
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token });
+        res.json({ token, user });
     } catch (err) {
         console.error('Error during login:', err);
         res.status(500).json({ message: err.message });
     }
 });
+
 
 // GET route to check if the user is logged in
 router.get('/login/check', authenticateToken, (req, res) => {
@@ -128,5 +129,5 @@ router.get('/login/check', authenticateToken, (req, res) => {
         // You can access user information from req.user if needed
         res.json({ loggedIn: true });
     }
-  });
+});
 module.exports = router;

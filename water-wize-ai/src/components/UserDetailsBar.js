@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import palmImage from "../resources/images/palm.jpg";
 import Typography from "@mui/material/Typography";
 import useDictionary from "../resources/Dictionary/Dictionary";
 import CustomButton from "../components/CustomButton";
+import { AuthContext } from "../AuthContext";
+
 
 function UserDetailsBar() {
   const dict = useDictionary();
+  const { user, logout } = useContext(AuthContext);
 
-  const userName = "hadarsa";
+  const handleLogOut = () => {
+    console.log('log out')
+    logout()
+  }
 
   const buttonsStyleRight = {
     fontSize: "12px",
@@ -37,10 +43,10 @@ function UserDetailsBar() {
       <Avatar src={palmImage} sx={{ width: 56, height: 56 }} />
       <div>
         <Typography color="text.secondary">
-          {dict.goodMorning}, {userName}
+          {dict.goodMorning}, {user ? user.name : 'Guest'}
         </Typography>
-        <div style={{ display: "flex"}}>
-          <CustomButton label="test1" type="button" style={buttonsStyleLeft} />
+        <div style={{ display: "flex" }}>
+          <CustomButton label="log out" type="button" onClick={handleLogOut} style={buttonsStyleLeft} />
           <CustomButton label="test2" type="button" style={buttonsStyleRight} />
         </div>
       </div>

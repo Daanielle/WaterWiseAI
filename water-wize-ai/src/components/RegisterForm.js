@@ -67,8 +67,6 @@ const Register = (props) => {
       console.error("Error:", error);
     }
     console.log('Registering user:', name, email, username, password);
-    // Simulating an API request delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
   return (
