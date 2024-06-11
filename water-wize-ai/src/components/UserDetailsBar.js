@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
-import hadarsImage from "../resources/images/hadar.png";
+import palmImage from "../resources/images/palm.jpg";
 import Typography from "@mui/material/Typography";
 import useDictionary from "../resources/Dictionary/Dictionary";
 import CustomButton from "../components/CustomButton";
@@ -34,7 +34,7 @@ function UserDetailsBar() {
         paddingRight: "8px",
       }}
     >
-      <Avatar src={hadarsImage} sx={{ width: 56, height: 56 }} />
+      <Avatar src={palmImage} sx={{ width: 56, height: 56 }} />
       <div>
         <Typography color="text.secondary">
           {dict.goodMorning}, {userName}
