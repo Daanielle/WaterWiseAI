@@ -11,6 +11,7 @@ import Demo from "./pages/Demo";
 import TasksList from "./pages/TasksList";
 import LogIn from "./pages/LogIn";
 import Register from "./pages/Register";
+import UserDetails from "./pages/UserDetails"
 import { LanguageProvider } from "./LanguageContext";
 import { AuthProvider } from './AuthContext';
 
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
       { path: "/TasksList", element: <TasksList /> },
       { path: "/LogIn", element: <LogIn /> },
       { path: "/Register", element: <Register /> },
+      { path: "/UserDetails", element: <UserDetails /> },
       { path: "/Demo", element: <Demo /> },
     ],
   },
