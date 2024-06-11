@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const LogIn = (props) => {
   const [username, setUsername] = useState('');
-  const [pass, setPass] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (e)=>{
     // e.preventDefault();
@@ -18,7 +18,7 @@ const LogIn = (props) => {
             <input className="my_input" value={username} onChange={(e)=>setUsername(e.target.value)} type="text" placeholder="Username" id="username" name="username" required></input>
         </div>
         <div>
-            <input className="my_input" value={pass} onChange={(e)=>setPass(e.target.value)} type="password" placeholder="Password" id="password" name="password" required></input>
+            <input className="my_input" value={password} onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" id="password" name="password" required></input>
         </div>
         <div className="Forgot_link">
             <a href="#">Forgot password?</a>

@@ -1,9 +1,5 @@
-
-
-.home_style{
-    
-    background-image: url('../resources/images/palm.jpg');
-    position:absolute;
+.home_style {
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;

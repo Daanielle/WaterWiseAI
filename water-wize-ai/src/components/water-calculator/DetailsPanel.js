@@ -10,20 +10,22 @@ const DetailsPanel = ({ detailedData }) => {
       <div className={classes.row}>
         {keys.slice(0, 6).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
-            <DetailCard
-              title={key}
-              value={detailedData[key]}
-            />
+            {key && detailedData[key] &&
+              <DetailCard
+                title={key}
+                value={detailedData[key]}
+              />}
           </div>
         ))}
       </div>
       <div className={classes.row}>
         {keys.slice(6, 12).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
-            <DetailCard
-              title={key}
-              value={detailedData[key]}
-            />
+            {key && detailedData[key] &&
+              <DetailCard
+                title={key}
+                value={detailedData[key]}
+              />}
           </div>
         ))}
       </div>

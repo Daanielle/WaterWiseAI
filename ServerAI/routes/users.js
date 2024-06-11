@@ -37,7 +37,7 @@ router.get('/:id', getUser, (req, res) => {
 
 
 // Add a user (Tested and working)
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
     console.log('Received POST request:', req.body);
     try {
         const salt = await bcrypt.genSalt(10);

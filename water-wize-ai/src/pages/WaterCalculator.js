@@ -14,7 +14,7 @@ function WaterCalculator() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
-  const [waterRecommendation, setWaterRecommendation] = useState("");
+  //const [waterRecommendation, setWaterRecommendation] = useState("");
   const [detailedData, setDetailedData] = useState({
     grad: "--",
     windSpeed1mm: "--",
@@ -44,20 +44,23 @@ function WaterCalculator() {
 
   const calculate = async () => {
     try {
-      const calculationResponse = await fetch("/api/calculate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          selectedArea: selectedArea,
-          areaSize: selectedAreaSize,
-        }),
-      });
+      if (selectedArea && selectedAreaSize) {
+        const calculationResponse = await fetch("api/calculate", {
+        // const calculationResponse = await fetch('/calculator/calculate', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            selectedArea: selectedArea,
+            areaSize: selectedAreaSize,
+          }),
+        });
 
-      const recommendationData = await calculationResponse.json();
-      setWaterRecommendation(recommendationData.recommendation);
-      setDetailedData(recommendationData);
+        const recommendationData = await calculationResponse.json();
+        //setWaterRecommendation(recommendationData.recommendation);
+        setDetailedData(recommendationData);
+      }
     } catch (error) {
       console.error("Error:", error);
     }

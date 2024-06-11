@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "../styles/Guide.css"; // Import the CSS file for styling
 import { Container, Typography, Grid, Paper, Box, Accordion, AccordionSummary, AccordionDetails, Card, CardContent, CardMedia, Button } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import PageContainer from '../components/PageContainer'
 
 const faqData = [
   {
@@ -15,21 +16,21 @@ const faqData = [
 ];
 
 const resources = [
-  { 
-    title: "Understanding Your Plant's Water Needs", 
-    summary: "A comprehensive guide to understanding the water requirements of different plants.", 
-    imageUrl: "https://via.placeholder.com/150", 
+  {
+    title: "Understanding Your Plant's Water Needs",
+    summary: "A comprehensive guide to understanding the water requirements of different plants.",
+    imageUrl: "https://via.placeholder.com/150",
     link: "https://example.com/article1"
   },
-  { 
-    title: "Efficient Watering Techniques", 
-    summary: "Learn about efficient watering techniques to save water and promote plant health.", 
-    imageUrl: "https://via.placeholder.com/150", 
+  {
+    title: "Efficient Watering Techniques",
+    summary: "Learn about efficient watering techniques to save water and promote plant health.",
+    imageUrl: "https://via.placeholder.com/150",
     link: "https://example.com/article2"
   },
-  { 
-    title: "Israel Meteorological Service (IMS)", 
-    summary: "A unit of the Israeli Ministry of Transportation responsible for forecasting weather, meteorological data, and climate research in Israel.", 
+  {
+    title: "Israel Meteorological Service (IMS)",
+    summary: "A unit of the Israeli Ministry of Transportation responsible for forecasting weather, meteorological data, and climate research in Israel.",
     imageUrl: "../resources/images/IMS.jpg", // Adjust the image path as necessary
     link: "https://ims.gov.il/en"
   }
@@ -45,77 +46,79 @@ const screenExplanations = [
 
 const Guide = () => {
   return (
-    <Container sx={{ backgroundColor: '#e8f5e9', padding: '2rem' }}>
-      <Typography variant="h3" gutterBottom align="center" color="primary">Support and Guidance</Typography>
-      
-      {/* FAQ Section */}
-      <Box mb={4}>
-        <Typography variant="h4" gutterBottom>FAQ</Typography>
-        {faqData.map((faq, index) => (
-          <Accordion key={index}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>{faq.question}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>{faq.answer}</Typography>
-            </AccordionDetails>
-          </Accordion>
-        ))}
-      </Box>
+    <PageContainer>
+      <Container sx={{ backgroundColor: '#e8f5e9', padding: '2rem' }}>
+        <Typography variant="h3" gutterBottom align="center" color="primary">Support and Guidance</Typography>
 
-      {/* Resources & Tools Section */}
-      <Box mb={4}>
-        <Typography variant="h4" gutterBottom>Resources & Tools</Typography>
-        <Grid container spacing={2}>
-          {resources.map((resource, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={resource.imageUrl}
-                  alt={resource.title}
-                />
-                <CardContent>
-                  <Typography variant="h5" component="div">{resource.title}</Typography>
-                  <Typography variant="body2" color="text.secondary">{resource.summary}</Typography>
-                </CardContent>
-                <Button size="small" color="primary" href={resource.link}>
-                  Read More
-                </Button>
-              </Card>
-            </Grid>
+        {/* FAQ Section */}
+        <Box mb={4}>
+          <Typography variant="h4" gutterBottom>FAQ</Typography>
+          {faqData.map((faq, index) => (
+            <Accordion key={index}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>{faq.question}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>{faq.answer}</Typography>
+              </AccordionDetails>
+            </Accordion>
           ))}
-        </Grid>
-      </Box>
+        </Box>
 
-      {/* Screen Explanations Section */}
-      <Box mb={4}>
-        <Typography variant="h4" gutterBottom>Screen Explanations</Typography>
-        <Grid container spacing={2}>
-          {screenExplanations.map((screen, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h5" component="div">{screen.screen}</Typography>
-                  <Typography variant="body2" color="text.secondary">{screen.explanation}</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+        {/* Resources & Tools Section */}
+        <Box mb={4}>
+          <Typography variant="h4" gutterBottom>Resources & Tools</Typography>
+          <Grid container spacing={2}>
+            {resources.map((resource, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={resource.imageUrl}
+                    alt={resource.title}
+                  />
+                  <CardContent>
+                    <Typography variant="h5" component="div">{resource.title}</Typography>
+                    <Typography variant="body2" color="text.secondary">{resource.summary}</Typography>
+                  </CardContent>
+                  <Button size="small" color="primary" href={resource.link}>
+                    Read More
+                  </Button>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
 
-      {/* Video Section */}
-      <Box mb={4}>
-        <Typography variant="h4" gutterBottom>Water Calculator Demonstration</Typography>
-        <Paper>
-          <Box p={2}>
-            <iframe width="100%" height="400" src="https://www.youtube.com/embed/your-video-id" title="Water Calculator Demonstration" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-          </Box>
-        </Paper>
-      </Box>
-    </Container>
+        {/* Screen Explanations Section */}
+        <Box mb={4}>
+          <Typography variant="h4" gutterBottom>Screen Explanations</Typography>
+          <Grid container spacing={2}>
+            {screenExplanations.map((screen, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Card>
+                  <CardContent>
+                    <Typography variant="h5" component="div">{screen.screen}</Typography>
+                    <Typography variant="body2" color="text.secondary">{screen.explanation}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+
+        {/* Video Section */}
+        <Box mb={4}>
+          <Typography variant="h4" gutterBottom>Water Calculator Demonstration</Typography>
+          <Paper>
+            <Box p={2}>
+              <iframe width="100%" height="400" src="https://www.youtube.com/embed/your-video-id" title="Water Calculator Demonstration" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            </Box>
+          </Paper>
+        </Box>
+      </Container>
+    </PageContainer>
   );
 };
 

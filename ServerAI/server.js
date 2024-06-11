@@ -15,8 +15,8 @@ app.use(cors())
 
 // MongoDB connection
 mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected successfully'))
-    .catch(err => console.error('MongoDB connection error:', err));
+  .then(() => console.log('MongoDB connected successfully'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 // Middleware setup
 app.use(bodyParser.json());
@@ -27,7 +27,7 @@ app.use('/calculator', CalculatorRouter); // Use the updated calculator router
 
 // Example route
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+  res.send('Hello World!');
 });
 
 function computeDeltaY(temperature) {
