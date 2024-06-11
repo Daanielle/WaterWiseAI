@@ -14,10 +14,14 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    image: {
+        type: String,
+        required: false
     }
 });
 
 // Ensure the unique index is created
-userSchema.index({ email: 1 }, { unique: true });
+userSchema.index({ name: 1 }, { unique: true });
 
 module.exports = mongoose.model('User', userSchema);

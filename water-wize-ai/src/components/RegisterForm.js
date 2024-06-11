@@ -7,6 +7,7 @@ const Register = (props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const [image, setImage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +34,7 @@ const Register = (props) => {
     }
 
     // Register the user (you need to implement this logic)
-    await registerUser(name, email, username, password);
+    await registerUser(name, email, username, password, image);
     setError('Registration successful');
     // Optionally, you can redirect the user to another page after successful registration
   }
@@ -44,7 +45,20 @@ const Register = (props) => {
     return false; // Replace this with your actual logic
   }
 
-  const registerUser = async (name, email, username, password) => {
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // You can use FileReader to read the file as data URL
+      const reader = new FileReader();
+      reader.onload = () => {
+        // Here, reader.result will contain the data URL of the image
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const registerUser = async (name, email, username, password, image) => {
     try {
       const registerResponse = await fetch("/users/register", {
         method: "POST",
@@ -54,7 +68,8 @@ const Register = (props) => {
         body: JSON.stringify({
           "name": name,
           "email": email,
-          "password": password
+          "password": password,
+          "image": image,
         }),
       });
 
@@ -86,7 +101,9 @@ const Register = (props) => {
         <div>
           <input className="my_input" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" id="password" name="password" required></input>
         </div>
-
+        <input className="my_input" type="file"
+          onChange={(e) => handleImageChange(e)}
+          accept="image/*" name="image" id="imageInput" />
         <div>
           <button className="my_button" type="submit">Register</button>
         </div>

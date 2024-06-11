@@ -11,11 +11,6 @@ function UserDetailsBar() {
   const dict = useDictionary();
   const { user, logout } = useContext(AuthContext);
 
-  const handleLogOut = () => {
-    console.log('log out')
-    logout()
-  }
-
   const buttonsStyleRight = {
     fontSize: "12px",
     height: "30px",
@@ -40,13 +35,13 @@ function UserDetailsBar() {
         paddingRight: "8px",
       }}
     >
-      <Avatar src={palmImage} sx={{ width: 56, height: 56 }} />
+      <Avatar src={user ? user.image : null} sx={{ width: 56, height: 56 }} />
       <div>
         <Typography color="text.secondary">
           {dict.goodMorning}, {user ? user.name : 'Guest'}
         </Typography>
         <div style={{ display: "flex" }}>
-          <CustomButton label="log out" type="button" onClick={handleLogOut} style={buttonsStyleLeft} />
+          <CustomButton label="log out" type="button" onClick={logout} style={buttonsStyleLeft} />
           <CustomButton label="test2" type="button" style={buttonsStyleRight} />
         </div>
       </div>
