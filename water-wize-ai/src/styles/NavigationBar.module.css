@@ -2,7 +2,7 @@ body {
   padding: 80px 0 0;
 }
 
-/* .navbarenglish {
+.navbarenglish {
   background: linear-gradient(to bottom left, var(--primary-color) 0%, var(--dark-green) 100%);
   border-bottom-left-radius: 50px;
   overflow: hidden;
@@ -14,13 +14,13 @@ body {
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   justify-content: space-between;
-} */
+}
 
 .navbarhebrew {
   background: linear-gradient(to bottom left, var(--primary-color) 0%, var(--dark-green) 100%);
   border-bottom-right-radius: 50px;
   overflow: hidden;
-  width: 80%;
+  width: 83%;
   position: fixed;
   top: 0;
   left: 0;
@@ -31,22 +31,24 @@ body {
 }
 
 .userDetailsBarenglish {
-  width: 23%;
+  width: 20%;
   position: fixed;
   top: 0;
   left: 0;
+  border-bottom-right-radius: 20px;
+
   z-index: 1000;
   background-color: var(--extra-white-transparent);
 }
 
 .userDetailsBarhebrew {
-  height: 105px;
-  width: 20%;
+  /* height: 105px; */
+  width: 17%;
   position: fixed;
   top: 0;
   right: 0;
   border-bottom-left-radius: 20px;
-  /* z-index: 1000; */
+  z-index: 1000;
   background-color: var(--extra-white-transparent);
 }
 
@@ -134,15 +136,8 @@ body {
 .langSwitch, .logoContainer {
   /* order: 2; Default order for English
    */
-   /* display: flex; */
+   display: flex;
   /* align-items: center; */
 }
 
-.langSwitchHebrew {
-  order: 1; /* Order for Hebrew */
-}
-
-.logoContainerHebrew {
-  order: 2; /* Order for Hebrew */
-}
 

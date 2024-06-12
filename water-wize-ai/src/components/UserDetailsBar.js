@@ -47,26 +47,54 @@ function UserDetailsBar() {
     </div>
   )
 
-  return (
-    <div
-      style={{
-        height: "75px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "20px",
-        paddingRight: "8px",
-      }}
-    >
-      <Avatar src={user ? user.image : null} sx={{ width: 56, height: 56 }} />
-      <div>
-        <Typography color="text.secondary">
-          {dict.goodMorning}, {user ? user.firstName : 'Guest'}
-        </Typography>
-        {user ? LoggedInBtns : GuestBtns}
+  if (dict.stylePage === "left"){
+    return (
+      <div
+        style={{
+          height: "75px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "20px",
+          paddingRight: "8px",
+        }}
+      >
+        <Avatar src={user ? user.image : null} sx={{ width: 56, height: 56 }} />
+        <div>
+          <Typography color="text.secondary">
+            {dict.goodMorning} {user ? user.firstName : 'Guest'}
+          </Typography>
+          {user ? LoggedInBtns : GuestBtns}
+        </div>
       </div>
-    </div>
-  );
+    );
+  
+  }
+  else{
+    return (
+      <div
+        style={{
+          height: "75px",
+          display: "flex",
+          alignItems: "right",
+          justifyContent: "right",
+          gap: "20px",
+          paddingRight: "25px",
+          // right:0,
+        }}
+      >
+                <div>
+          <Typography color="text.secondary">
+          {user ? user.firstName : 'Guest'} {dict.goodMorning}
+          </Typography>
+          {user ? LoggedInBtns : GuestBtns}
+        </div>
+
+        <Avatar src={user ? user.image : null} sx={{ width: 56, height: 56 }} />
+      </div>
+    );
+
+  }
 }
 
 export default UserDetailsBar;
