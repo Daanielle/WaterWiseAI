@@ -44,7 +44,9 @@ router.post('/register', async (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
         const user = new User({
-            name: req.body.name,
+            // username: req.body.username,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             email: req.body.email,
             image: req.body.image,
             password: hashedPassword
@@ -57,44 +59,25 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// // Getting a specific user by name
-// async function getUserByName(req, res, next) {
-//     let user;
-//     try {
-//         console.log("%%")
-//         console.log(req.params)
-//         user = await User.findById(req.params.id);
-//         if (user == null) {
-//             return res.status(404).json({ message: 'Cannot find user!' });
-//         }
-//         console.log("@@@")
-//     } catch (err) {
-//         return res.status(500).json({ message: err.message });
-//     }
-//     res.user = user;
-//     next();
-// }
-
-
 // Update a user
 router.patch('/:id', getUser, async (req, res) => {
-    if (req.body.name != null) {
-        res.user.name = req.body.name;
-    }
+    // if (req.body.username != null) {
+    //     res.user.username = req.body.username;
+    // }
     if (req.body.email != null) {
         res.user.email = req.body.email;
     }
     if (req.body.image != null) {
         res.user.image = req.body.image;
     }
-    if (req.body.password != null) {
-        try {
-            const salt = await bcrypt.genSalt(10);
-            res.user.password = await bcrypt.hash(req.body.password, salt);
-        } catch (err) {
-            return res.status(400).json({ message: err.message });
-        }
-    }
+    // if (req.body.password != null) {
+    //     try {
+    //         const salt = await bcrypt.genSalt(10);
+    //         res.user.password = await bcrypt.hash(req.body.password, salt);
+    //     } catch (err) {
+    //         return res.status(400).json({ message: err.message });
+    //     }
+    // }
     try {
         const updatedUser = await res.user.save();
         res.json(updatedUser);
@@ -117,7 +100,7 @@ router.delete('/:id', getUser, async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         // Find the user by email
-        const user = await User.findOne({ name: req.body.email });
+        const user = await User.findOne({ email: req.body.email });
         if (!user) {
             // If user not found, return error
             return res.status(400).json({ message: '1 Invalid email or password' });

@@ -61,7 +61,7 @@ function UserDetailsBar() {
       <Avatar src={user ? user.image : null} sx={{ width: 56, height: 56 }} />
       <div>
         <Typography color="text.secondary">
-          {dict.goodMorning}, {user ? user.name : 'Guest'}
+          {dict.goodMorning}, {user ? user.firstName : 'Guest'}
         </Typography>
         {user ? LoggedInBtns : GuestBtns}
       </div>
