@@ -2,9 +2,10 @@ import * as React from "react";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import useDictionary from "../../resources/Dictionary/Dictionary";
 
-
-const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputProps }) => {
+const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputProps, type }) => {
+    const dict = useDictionary();
     const [isError, setIsError] = useState(false);
 
     const handleChange = (newValue) => {
@@ -32,9 +33,21 @@ const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputPro
         <Box
             component="form"
             sx={{
-                "& > :not(style)": { mt: 1, width: "100%" },
-                "& .MuiInputLabel-root": { color: "#4CAF50" }, // Change label color
-                "& .MuiInputLabel-shrink": { color: "#4CAF50 !important" }, // Change label color when shrink
+                "& > :not(style)": {
+                    mt: 1, width: "80%",
+                },
+                "& .MuiInputLabel-root": {
+                    width: "124%",
+                    color: "#4CAF50",
+                    textAlign: dict.stylePage
+                }, 
+
+                "& .MuiInputLabel-shrink": {
+                    width: "124%",
+                    color: "#4CAF50 !important",
+                    textAlign: dict.stylePage,
+                    // transformOrigin: 'center',
+                },
 
                 "& .MuiOutlinedInput-root": {
                     // Change input color and border color
@@ -49,6 +62,7 @@ const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputPro
                     "&.Mui-focused fieldset": {
                         // Change border color when focused
                         borderColor: "#4CAF50",
+                        textAlign: dict.stylePage
                     },
                     "&.Mui-focused .MuiInputLabel-root": {
                         // Change label color when focused
@@ -67,11 +81,13 @@ const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputPro
                 onChange={handleInputChange}
                 error={isError}
                 helperText={isError ? error : ""}
+                type={type}
                 InputProps={{
                     style: {
                         color: "#4CAF50",
+                        // textAlign: dict.stylePage,
+                        textAlign: "right",
                     },
-                    inputProps: inputProps
                     // {
                     //     // Allow only numeric input
                     //     pattern: "[0-9]*",

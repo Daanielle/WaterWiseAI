@@ -47,7 +47,7 @@ function WaterCalculator() {
     try {
       if (selectedArea && selectedAreaSize) {
         const calculationResponse = await fetch("api/calculate", {
-        // const calculationResponse = await fetch('/calculator/calculate', {
+          // const calculationResponse = await fetch('/calculator/calculate', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -70,7 +70,7 @@ function WaterCalculator() {
   return (
     <div className={classes.WaterCalculator}>
       <PageContainer>
-      <TitleButton label={dict.waterCalculatorTitle}></TitleButton>
+        <TitleButton label={dict.waterCalculatorTitle}></TitleButton>
         <div className={classes.formControl}>
           <div className={classes.leftCol}>
             <AreaPicker onAreaChange={handleAreaChange} area={selectedArea} />

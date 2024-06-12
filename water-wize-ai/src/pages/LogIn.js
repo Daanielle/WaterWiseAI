@@ -5,10 +5,19 @@ import { useNavigate } from "react-router-dom";
 import FieldInput from "../components/imputs/FieldInput";
 import PageContainer from "../components/PageContainer";
 import ContainerBox from '../components/ContainerBox';
-
 import CustomButton from "../components/CustomButton";
+import useDictionary from "../resources/Dictionary/Dictionary";
+import TitleButton from "../components/TitleButton"
+
+const titleButton = {
+  fontStyle: "italic",
+  /* font-size: larger; */
+  color: "#bef5dc"
+
+};
 
 function LogIn() {
+  const dict = useDictionary();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
@@ -41,30 +50,18 @@ function LogIn() {
 
   return (
     <PageContainer>
-      <ContainerBox >
-        <form onSubmit={handleSubmit}>
-          <h1>LogIn</h1>
-
-          <FieldInput label="Email" value={email} onValueChange={(e) => setEmail(e.target.value)} checkIfValid={() => true} error="" />
-          <div>
-            <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="email" id="email" name="email" required></input>
+      <form onSubmit={handleSubmit}>
+        <ContainerBox >
+          <TitleButton style={titleButton}>{dict.LogIn}</TitleButton>
+          <FieldInput label={dict.email} value={email} onValueChange={setEmail} checkIfValid={() => true} error="" />
+          <FieldInput label={dict.password} value={password} type="password" onValueChange={setPassword} checkIfValid={() => true} error="" />
+          <CustomButton type="Submit" label={dict.Login} />
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '10%' }}>
+            <CustomButton type="button" label={dict.forgetpassword} style={{ width: '35%' }} secondary />
+            <CustomButton type="button" label={dict.Register} to="/Register" style={{ width: '35%' }} secondary />
           </div>
-          <div>
-            <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" id="password" name="password" required></input>
-          </div>
-          <div>
-            <a href="#">Forgot password?</a>
-          </div>
-          <div>
-            <button type="Submit">Log in</button>
-          </div>
-          <div>
-            <Link to="/Register">
-              <p>Dont have an account? <a href="#"> Register</a></p>
-            </Link>
-          </div>
-        </form>
-      </ContainerBox>
+        </ContainerBox>
+      </form>
     </PageContainer>
   );
 }
