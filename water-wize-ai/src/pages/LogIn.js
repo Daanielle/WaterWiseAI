@@ -44,7 +44,6 @@ function LogIn() {
       <ContainerBox >
         <form onSubmit={handleSubmit}>
           <h1>LogIn</h1>
-
           <FieldInput label="Email" value={email} onValueChange={(e) => setEmail(e.target.value)} checkIfValid={() => true} error="" />
           <div>
             <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="email" id="email" name="email" required></input>

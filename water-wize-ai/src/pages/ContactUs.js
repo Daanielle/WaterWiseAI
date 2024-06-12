@@ -4,6 +4,7 @@ import "../ContactUs.css"; // Import the CSS file
 import CustomButton from "../components/CustomButton";
 import TitleButton from "../components/TitleButton";
 import useDictionary from "../resources/Dictionary/Dictionary";
+import ContainerBox from '../components/ContainerBox';
 
 
 function ContactUs() {
@@ -43,6 +44,9 @@ function ContactUs() {
 
   return (
     <PageContainer>
+
+    {/* </ContainerBox> */}
+     <ContainerBox>
       <div className="contact-form">
       <TitleButton label={dict.contuctUs}></TitleButton>
         <form onSubmit={handleSubmit}>
@@ -55,6 +59,7 @@ function ContactUs() {
           <CustomButton label={dict.sendMessage} type="submit" />
         </form>
       </div>
+      </ContainerBox>
     </PageContainer>
   );
 }

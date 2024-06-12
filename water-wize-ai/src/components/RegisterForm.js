@@ -3,6 +3,8 @@ import classes from "../styles/Register_and_Login.css";
 import { Link } from "react-router-dom";
 import TitleButton from "../components/TitleButton";
 import useDictionary from "../resources/Dictionary/Dictionary";
+import ContainerBox from '../components/ContainerBox';
+import PageContainer from "../components/PageContainer";
 
 const titleButton={
   fontStyle: "italic",
@@ -99,6 +101,8 @@ const Register = (props) => {
   }
 
   return (
+    <PageContainer>
+    <ContainerBox>
     <div className="register_and_login">
       <form className="Register_Form" onSubmit={handleSubmit}>
       <TitleButton label={dict.Register} style={titleButton}></TitleButton>
@@ -131,6 +135,8 @@ const Register = (props) => {
         </div>
       </form>
     </div>
+    </ContainerBox>
+    </PageContainer>
   );
 };
 

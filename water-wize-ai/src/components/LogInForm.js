@@ -63,6 +63,7 @@ const LogIn = (props) => {
   return (
     <div className="register_and_login">
       <form className="Login_Form" onSubmit={handleSubmit}>
+      <inputsComp></inputsComp>
       <TitleButton label={dict.LogIn} style={titleButton}></TitleButton>
         <div>
           <input className={dict.stylePage} value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="youremail@gmail.com" id="email" name="email" required></input>

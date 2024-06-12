@@ -53,6 +53,7 @@ const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputPro
                     "&.Mui-focused .MuiInputLabel-root": {
                         // Change label color when focused
                         color: "#4CAF50",
+                        textAlign:"right",
                     },
                 },
             }}
