@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import PageContainer from "../components/PageContainer";
 import "../ContactUs.css"; // Import the CSS file
+import CustomButton from "../components/CustomButton";
+import TitleButton from "../components/TitleButton";
+import useDictionary from "../resources/Dictionary/Dictionary";
+
 
 function ContactUs() {
+  const dict = useDictionary();
   const [formData, setFormData] = useState({
     name: '',
     position: '',
@@ -39,15 +44,15 @@ function ContactUs() {
   return (
     <PageContainer>
       <div className="contact-form">
-        <h1>צרו קשר</h1>
+      <TitleButton label={dict.contuctUs}></TitleButton>
         <form onSubmit={handleSubmit}>
-          <label>Name:</label>
+          <label>{dict.name}</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-          <label>Position:</label>
+          <label>{dict.position}</label>
           <input type="text" name="position" value={formData.position} onChange={handleChange} required />
-          <label>Message:</label>
+          <label>{dict.message}</label>
           <textarea name="message" value={formData.message} onChange={handleChange} required maxLength={500} />
-          <button type="submit">Send Message</button>
+          <CustomButton label={dict.sendMessage} type="submit" />
         </form>
       </div>
     </PageContainer>

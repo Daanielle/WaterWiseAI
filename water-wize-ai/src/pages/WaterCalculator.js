@@ -7,6 +7,7 @@ import AreaSizeInput from "../components/water-calculator/AreaSizeInput";
 import CustomButton from "../components/CustomButton";
 import DetailsPanel from "../components/water-calculator/DetailsPanel";
 import useDictionary from "../resources/Dictionary/Dictionary";
+import TitleButton from "../components/TitleButton"
 
 function WaterCalculator() {
   const dict = useDictionary();
@@ -69,7 +70,7 @@ function WaterCalculator() {
   return (
     <div className={classes.WaterCalculator}>
       <PageContainer>
-        <h1>{dict.waterCalculatorTitle}</h1>
+      <TitleButton label={dict.waterCalculatorTitle}></TitleButton>
         <div className={classes.formControl}>
           <div className={classes.leftCol}>
             <AreaPicker onAreaChange={handleAreaChange} area={selectedArea} />

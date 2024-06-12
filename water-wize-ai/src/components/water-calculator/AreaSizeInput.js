@@ -4,10 +4,11 @@ import { useState } from "react";
 //import classes from "../styles/DatePicker.module.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import useDictionary from "../../resources/Dictionary/Dictionary";
 
 const AreaSizeInput = ({ areaSize, onAreaSizeChange }) => {
   const [error, setError] = useState(false);
-
+  const dict = useDictionary();
   const handleAreaSizeChange = (newSize) => {
     // Call the parent's onAreaSizeChange callback with the new size
     onAreaSizeChange(newSize);
@@ -56,7 +57,7 @@ const AreaSizeInput = ({ areaSize, onAreaSizeChange }) => {
     >
       <TextField
         id="outlined-basic"
-        label="Area Size"
+        label={dict.areaSize}
         variant="outlined"
         value={areaSize}
         onChange={handleInputChange}

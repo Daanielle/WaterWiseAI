@@ -10,6 +10,7 @@ import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import waterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
 import { Icon } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import useDictionary from "../../resources/Dictionary/Dictionary";
 
 function getIcon(variableDetails) {
   const IconComponent = variableDetails?.icon || HelpOutlineIcon;
@@ -29,6 +30,7 @@ const modalStyle = {
 };
 
 export default function DetailCard({ title, value }) {
+  const dict = useDictionary();
   const [openDetailsModal, setOpenDetailsModal] = React.useState(false);
   const handleOpenDetailsModal = () => setOpenDetailsModal(true);
   const handleCloseDetailsModal = () => setOpenDetailsModal(false);
@@ -75,7 +77,8 @@ export default function DetailCard({ title, value }) {
               </Typography>
             </Box>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {waterCalculatorVariablesDetails[title].description}
+              {/* {waterCalculatorVariablesDetails[title].description} */}
+              {dict[title]}
             </Typography>
           </Box>
         </Modal>
