@@ -8,7 +8,7 @@
     flex-direction: column;
 }
 
-.my_input{
+input{
     margin: 20px 0;
     /* border: none; */
     border-radius: 10px;
@@ -18,17 +18,37 @@
     background: transparent;
     border: none;
     outline: none;
-    border: 2px solid #002916;
+    border: 2px solid #bef5dc;
     border-radius: 40px;
-}
-
-.my_input::placeholder{
-    color: #024225;
+    
     
 }
 
+input.left::placeholder{
+    color: #bef5dc;
+    text-align: left;
+    padding-left: 20px;
+    
+}
 
-.my_button{
+input.left{
+    direction: ltr;
+
+}
+input.right::placeholder{
+    color: #bef5dc;
+    text-align: right;
+    padding-right: 20px;
+    
+}
+
+input.right{
+    direction: rtl;
+
+}
+
+
+/* .my_button{
     color: #4c784f;
     width: 70%;
     height: 45px;
@@ -41,7 +61,7 @@
     font-size: 16px;
     font-weight: 700;
     
-}
+} */
 
 .register_and_login{
     padding: 2rem;

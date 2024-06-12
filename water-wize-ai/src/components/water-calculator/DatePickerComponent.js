@@ -7,8 +7,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Box } from "@mui/material";
+import useDictionary from "../../resources/Dictionary/Dictionary";
 
 const DatePickerComponent = ({ date, onDateChange }) => {
+  const dict = useDictionary();
   const handleDateChange = (newDate) => {
     // Call the parent's onDateChange callback with the new date
     onDateChange(newDate);
@@ -43,7 +45,7 @@ const DatePickerComponent = ({ date, onDateChange }) => {
       }}
     >
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker label="Date" value={date} onChange={handleDateChange} />
+          <DatePicker label={dict.date} value={date} onChange={handleDateChange} />
       </LocalizationProvider>
     </Box>
   );

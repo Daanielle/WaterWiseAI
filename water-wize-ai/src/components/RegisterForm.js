@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import classes from "../styles/Register_and_Login.css";
 import { Link } from "react-router-dom";
+import TitleButton from "../components/TitleButton";
+import useDictionary from "../resources/Dictionary/Dictionary";
+
+const titleButton={
+  fontStyle: "italic",
+  /* font-size: larger; */
+  color:"#bef5dc"
+ 
+};
 
 const Register = (props) => {
+  const dict = useDictionary();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -88,29 +98,29 @@ const Register = (props) => {
   return (
     <div className="register_and_login">
       <form className="Register_Form" onSubmit={handleSubmit}>
-        <h1 className="my_h1">Register</h1>
+      <TitleButton label={dict.Register} style={titleButton}></TitleButton>
         {error && <div className="error">{error}</div>}
         <div>
-          <input className="my_input" value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="name" id="name" name="name" required></input>
+          <input className={dict.stylePage} value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder={dict.nameR} id="name" name="name" required></input>
         </div>
         <div>
-          <input className="my_input" value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" required></input>
+          <input className={dict.stylePage} value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" required></input>
         </div>
         <div>
-          <input className="my_input" value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="username" id="username" name="username" required></input>
+          <input className={dict.stylePage} value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder={dict.username} id="username" name="username" required></input>
         </div>
         <div>
-          <input className="my_input" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" id="password" name="password" required></input>
+          <input className={dict.stylePage} value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder={dict.password} id="password" name="password" required></input>
         </div>
-        <input className="my_input" type="file"
+        <input className={dict.stylePage} type="file"
           onChange={(e) => handleImageChange(e)}
           accept="image/*" name="image" id="imageInput" />
         <div>
-          <button className="my_button" type="submit">Register</button>
+          <button className="my_button" type="submit">{dict.Register}</button>
         </div>
         <div >
           <Link to="/LogIn">
-            <p className="login_link">Already have an account? <a href="#" > Login here.</a></p>
+            <p className="login_link">{dict.alreadyhaveanaccount} <a href="#" > {dict.loginhere}</a></p>
           </Link>
         </div>
       </form>

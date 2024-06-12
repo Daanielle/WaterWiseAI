@@ -7,12 +7,14 @@ import shacharsImage from "../resources/images/shachar.png";
 import daniellesImage from "../resources/images/danielle.png";
 import classes from "../styles/AboutUs.module.css";
 import PageContainer from "../components/PageContainer";
+import useDictionary from "../resources/Dictionary/Dictionary";
 
 function AboutUs() {
+  const dict = useDictionary();
+
   const about_me = (
     <p className={classes.text}>
-      I am a fourth year software and information systems engineering student at
-      Ben Gurion University of the Negev.
+      {dict.aboutMe}
     </p>
   );
   const linkedinUrl = "https://www.linkedin.com/in/lana-aburaya-a78446224/";
@@ -23,18 +25,18 @@ function AboutUs() {
     <PageContainer>
       <div className={classes.back}>
         <div>
-          <p className={classes.WHO}>WHO</p>
+          <p className={classes.WHO}>{dict.who}</p>
         </div>
         <div>
-          <p className={classes.WE}>WE</p>
+          <p className={classes.WE}>{dict.we}</p>
         </div>
         <div>
-          <p className={classes.ARE}>ARE</p>
+          <p className={classes.ARE}>{dict.are}</p>
         </div>
         <div className={classes.team}>
           <TeamInfo
             image_link={daniellesImage}
-            my_Name={"Danielle Aspir"}
+            my_Name={dict.Danielle_Name}
             about_me={about_me}
             linkedinUrl={linkedinUrl}
             emailUrl={"mailto:aspirda@bgu.post.ac.il"}
@@ -43,7 +45,7 @@ function AboutUs() {
           />
           <TeamInfo
             image_link={hadarsImage}
-            my_Name={"Hadar Sabati Mor"}
+            my_Name={dict.Hadar_Name}
             about_me={about_me}
             linkedinUrl={linkedinUrl}
             emailUrl={"mailto:hasab@bgu.post.ac.il"}
@@ -52,7 +54,7 @@ function AboutUs() {
           />
           <TeamInfo
             image_link={lanasImage}
-            my_Name={"Lana AbuRaya"}
+            my_Name={dict.Lana_Name}
             about_me={about_me}
             linkedinUrl={"https://www.linkedin.com/in/lana-aburaya-a78446224/"}
             emailUrl={"mailto:lana.aburya@gmail.com"}
@@ -61,7 +63,7 @@ function AboutUs() {
           />
           <TeamInfo
             image_link={shacharsImage}
-            my_Name={"Shachar Adam"}
+            my_Name={dict.Shachar_Name}
             about_me={about_me}
             linkedinUrl={"https://www.linkedin.com/in/shachar-adam-836a94277"}
             emailUrl={"mailto:adamsha@bgu.post.ac.il"}

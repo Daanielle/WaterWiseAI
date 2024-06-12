@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 // const Recommendation = require('../models/Recommendation'); // Import the Recommendation model
-const Recommendation = require('../models/Recommendation');
+const Recommendation = require('../models/recommendation');
 const authenticateToken = require('../middleware/auth'); // Assuming you have this middleware
 
 
