@@ -21,19 +21,25 @@ export const AuthProvider = ({ children }) => {
     const login = (data) => {
         setIsAuth(false);
         localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
         setIsAuth(true);
-        setUser(data.user)
+        updateUserDetails(data.user)
+        // navigate("/");
     };
 
     const logout = () => {
         localStorage.removeItem('token');
         setIsAuth(false);
         setUser(null);
+
     };
 
+    const updateUserDetails = (user) => {
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user)
+    }
+
     return (
-        <AuthContext.Provider value={{ isAuth, login, logout, user, setUser }}>
+        <AuthContext.Provider value={{ isAuth, login, logout, updateUserDetails, user, setUser }}>
             {children}
         </AuthContext.Provider>
     );

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const LogIn = (props) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const LogIn = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "username": username,
+          "email": email,
           "password": password
         }),
       });
@@ -39,7 +39,7 @@ const LogIn = (props) => {
       <form className="Login_Form" onSubmit={handleSubmit}>
         <h1 className="my_h1">LogIn</h1>
         <div>
-          <input className="my_input" value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" id="username" name="username" required></input>
+          <input className="my_input" value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="email" id="email" name="email" required></input>
         </div>
         <div>
           <input className="my_input" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" id="password" name="password" required></input>

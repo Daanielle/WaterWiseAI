@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 function UserDetailsBar() {
   const dict = useDictionary();
-  const {user, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   const buttonsStyleRight = {
     fontSize: "12px",
@@ -27,7 +27,9 @@ function UserDetailsBar() {
 
   const LoggedInBtns = (
     <div style={{ display: "flex" }}>
-      <CustomButton label="log out" type="button" onClick={logout} style={buttonsStyleLeft} />
+      <Link to="/">
+        <CustomButton label="log out" type="button" onClick={logout} style={buttonsStyleLeft} />
+      </Link>
       <Link to="/UserDetails">
         <CustomButton label="user" type="button" style={buttonsStyleRight} />
       </Link>
@@ -40,7 +42,7 @@ function UserDetailsBar() {
         <CustomButton label="log in" type="button" style={buttonsStyleLeft} />
       </Link>
       <Link to="/Register">
-      <CustomButton label="register" type="button" style={buttonsStyleRight} />
+        <CustomButton label="register" type="button" style={buttonsStyleRight} />
       </Link>
     </div>
   )
