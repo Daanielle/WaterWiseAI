@@ -7,6 +7,14 @@ import CustomButton from "../components/CustomButton";
 import TitleButton from "../components/TitleButton"
 import useDictionary from "../resources/Dictionary/Dictionary";
 
+// Import image files
+import MOPCenterImg from '../resources/images/MOPCenter.png';
+import KarkaIMG from '../resources/images/Karka.jpg';
+import imsLogoImg from '../resources/images/IMS.jpg';
+import govmapIMG from "../resources/images/govmapIMG.jpeg";
+import SouthernIMG from "../resources/images/SouthernArava.png";
+import MappingIMG from "../resources/images/MappingSite.png"
+
 const faqData = [
   {
     question: "How do I use the water calculator?",
@@ -20,22 +28,40 @@ const faqData = [
 
 const resources = [
   {
-    title: "Understanding Your Plant's Water Needs",
-    summary: "A comprehensive guide to understanding the water requirements of different plants.",
-    imageUrl: "https://via.placeholder.com/150",
-    link: "https://example.com/article1"
+    title: "Central and Northern ARAVA R&D",
+    summary: "Research and Development in the Arava was established in 1986, as part of the Negev Arava R&D, with the aim of serving the development needs of the settlement in preferred areas along Israel's borders in the Negev and Arava.",
+    imageUrl: MOPCenterImg, // Use the imported image variable
+    link: "http://agri.arava.co.il/"
   },
   {
-    title: "Efficient Watering Techniques",
-    summary: "Learn about efficient watering techniques to save water and promote plant health.",
-    imageUrl: "https://via.placeholder.com/150",
-    link: "https://example.com/article2"
+    title: "Research and scientific articles about soil and water",
+    summary: "The goals of the Arava R&D agricultural are to develop and research irrigation interfaces that will ensure agricultural sustainability in the southern Arava, while preserving environmental resources, and to reach technological developments in the science of irrigation.",
+    imageUrl: KarkaIMG, // Use the imported image variable
+    link: "https://aravard.org.il/%D7%9E%D7%97%D7%A7%D7%A8%D7%99%D7%9D/"
   },
   {
     title: "Israel Meteorological Service (IMS)",
-    summary: "A unit of the Israeli Ministry of Transportation responsible for forecasting weather, meteorological data, and climate research in Israel.",
-    imageUrl: "../resources/images/IMS.jpg", // Adjust the image path as necessary
+    summary: "A unit of the Israeli Ministry of Transportation responsible for forecasting weather, meteorological data, and climate research in Israel. Provides accurate and reliable meteorological information.",
+    imageUrl: imsLogoImg, // Use the imported image variable
     link: "https://ims.gov.il/en"
+  },
+  {
+    title: "Govmap",
+    summary: "The official map site of the State of Israel. Enables: various searches such as address, block/plot, viewing information layers on a variety of topics, map sharing capabilities, creating personal information layers and more.",
+    imageUrl: govmapIMG, // Use the imported image variable
+    link: "https://www.govmap.gov.il/?c=176414.17,648081.48&z=0"
+  },
+  {
+    title: "Southern ARAVA R&D",
+    summary: "Southern Arava R&D is located near Kibbutz Yotvata in the Southern Arava and centers extensive agricultural research activities in a variety of fields such as: soil and water, post-harvest fruit handling, orchards, flowers and ornamental plants, vegetables, plant protection, animals and agrotechnics.",
+    imageUrl: SouthernIMG, // Use the imported image variable
+    link: "https://aravard.org.il/"
+  },
+  {
+    title: "Web Mapping Application Of Agricultural Plots",
+    summary: "This map shows the mapping of agricultural plots in the State of Israel. The map allows the identification of an agricultural plot according to its identification number.",
+    imageUrl: MappingIMG, // Use the imported image variable
+    link: "https://data1-moag.opendata.arcgis.com/apps/deb443ad1b1f44a2baa74a4880d0ec27/explore"
   }
 ];
 
@@ -69,24 +95,34 @@ const Guide = () => {
           ))}
         </Box>
 
-        {/* Resources & Tools Section */}
-        <Box mb={4}>
+         {/* Resources & Tools Section */}
+         <Box mb={4}>
           <Typography variant="h4" gutterBottom>Resources & Tools</Typography>
           <Grid container spacing={2}>
             {resources.map((resource, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
-                <Card>
+                <Card sx={{ height: 400 }}>
                   <CardMedia
                     component="img"
                     height="140"
                     image={resource.imageUrl}
                     alt={resource.title}
                   />
-                  <CardContent>
-                    <Typography variant="h5" component="div">{resource.title}</Typography>
-                    <Typography variant="body2" color="text.secondary">{resource.summary}</Typography>
+                  <CardContent sx={{ minHeight: 180 }}>
+                    <Typography variant="h5" component="div">
+                      {resource.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {resource.summary}
+                    </Typography>
                   </CardContent>
-                  <Button size="small" color="primary" href={resource.link}>
+                  <Button
+                    size="small"
+                    color="primary"
+                    href={resource.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Read More
                   </Button>
                 </Card>
@@ -101,7 +137,7 @@ const Guide = () => {
           <Grid container spacing={2}>
             {screenExplanations.map((screen, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
-                <Card>
+                <Card sx={{ height: 130 }}>
                   <CardContent>
                     <Typography variant="h5" component="div">{screen.screen}</Typography>
                     <Typography variant="body2" color="text.secondary">{screen.explanation}</Typography>

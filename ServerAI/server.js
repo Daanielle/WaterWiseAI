@@ -25,10 +25,10 @@ app.use(bodyParser.json());
 app.use('/users', UsersRouter);
 app.use('/calculator', CalculatorRouter); // Use the updated calculator router
 
-// Example route
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+// // Example route
+// app.get('/', (req, res) => {
+//   res.send('Hello World!');
+// });
 
 function computeDeltaY(temperature) {
   const deltaYTable = [
