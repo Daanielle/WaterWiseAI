@@ -39,15 +39,15 @@ function UserDetails() {
             <form onSubmit={handleuserDetailsChange}>
                 <div>
                     <input
-                        name="name"
-                        value={editedUser && editedUser.name}
+                        name="first name"
+                        value={editedUser && editedUser.firstName}
                         onChange={handleUserDetailsChange}
                     />
                 </div>
                 <div>
                     <input
-                        name="id"
-                        value={editedUser && editedUser._id}
+                        name="last name"
+                        value={editedUser && editedUser.lastName}
                         onChange={handleUserDetailsChange}
                     />
                 </div>

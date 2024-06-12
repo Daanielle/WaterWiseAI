@@ -3,9 +3,10 @@ import classes from "../styles/Register_and_Login.css";
 import { Link } from "react-router-dom";
 
 const Register = (props) => {
-  const [username, setUsername] = useState('');
+  // const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [image, setImage] = useState('');
@@ -35,7 +36,7 @@ const Register = (props) => {
     }
 
     // Register the user (you need to implement this logic)
-    await registerUser(name, email, username, password, image);
+    await registerUser(firstName, lastName, email, password, image);
     setError('Registration successful');
     // Optionally, you can redirect the user to another page after successful registration
   }
@@ -59,7 +60,7 @@ const Register = (props) => {
     }
   };
 
-  const registerUser = async (name, email, username, password, image) => {
+  const registerUser = async (firstName, lastName, email,  password, image) => {
     try {
       const registerResponse = await fetch("/users/register", {
         method: "POST",
@@ -67,7 +68,9 @@ const Register = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "name": name,
+          "firstName": firstName,
+          "lastName": lastName,
+          // "username": username,
           "email": email,
           "password": password,
           "image": image,
@@ -82,7 +85,7 @@ const Register = (props) => {
     } catch (error) {
       console.error("Error:", error);
     }
-    console.log('Registering user:', name, email, username, password);
+    console.log('Registering user:', firstName, lastName, email,  password);
   }
 
   return (
@@ -91,14 +94,17 @@ const Register = (props) => {
         <h1 className="my_h1">Register</h1>
         {error && <div className="error">{error}</div>}
         <div>
-          <input className="my_input" value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="name" id="name" name="name" required></input>
+          <input className="my_input" value={firstName} onChange={(e) => setFirstName(e.target.value)} type="text" placeholder="first name" id="firstName" name="firstName" required></input>
+        </div>
+        <div>
+          <input className="my_input" value={lastName} onChange={(e) => setLastName(e.target.value)} type="text" placeholder="last name" id="lastName" name="lastName" required></input>
         </div>
         <div>
           <input className="my_input" value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" required></input>
         </div>
-        <div>
+        {/* <div>
           <input className="my_input" value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="username" id="username" name="username" required></input>
-        </div>
+        </div> */}
         <div>
           <input className="my_input" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" id="password" name="password" required></input>
         </div>
