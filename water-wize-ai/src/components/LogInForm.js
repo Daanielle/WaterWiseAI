@@ -2,8 +2,34 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from '../AuthContext';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import CustomButton from "../components/CustomButton";
+import TitleButton from "../components/TitleButton";
+import useDictionary from "../resources/Dictionary/Dictionary";
+
+
+const LogInButton = {
+  color: "#4c784f",
+  width: "70%",
+  height: "45px",
+  background: "#bef5dc",
+  border: "none",
+  outline: "none",
+  borderRradius: "40px",
+  boxShadow: "0 0 10px #4c784f",
+  cursor: "pointer",
+  fontSize: '16px',
+  fontWeight: "700",
+};
+
+const titleButton={
+  fontStyle: "italic",
+  /* font-size: larger; */
+  color:"#bef5dc"
+ 
+};
 
 const LogIn = (props) => {
+  const dict = useDictionary();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
@@ -37,22 +63,23 @@ const LogIn = (props) => {
   return (
     <div className="register_and_login">
       <form className="Login_Form" onSubmit={handleSubmit}>
-        <h1 className="my_h1">LogIn</h1>
+      <TitleButton label={dict.LogIn} style={titleButton}></TitleButton>
         <div>
-          <input className="my_input" value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="email" id="email" name="email" required></input>
+          <input className={dict.stylePage} value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="youremail@gmail.com" id="email" name="email" required></input>
         </div>
         <div>
-          <input className="my_input" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" id="password" name="password" required></input>
+          <input className={dict.stylePage} value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder={dict.password} id="password" name="password" required></input>
         </div>
         <div className="Forgot_link">
-          <a href="#">Forgot password?</a>
+          <a href="#">{dict.forgetpassword}</a>
         </div>
         <div>
-          <button className="my_button" type="Submit">Log in</button>
+          {/* <button className="my_button" type="Submit">Log in</button> */}
+          <CustomButton label={dict.Login} type="Submit" style={LogInButton}/>
         </div>
         <div>
           <Link to="/Register">
-            <p className="Register_link">Dont have an account? <a href="#"> Register</a></p>
+            <p className="Register_link">{dict.Donthaveanaccount} <a href="#"> {dict.Register}</a></p>
           </Link>
         </div>
       </form>
@@ -61,3 +88,4 @@ const LogIn = (props) => {
 };
 
 export default LogIn;
+

@@ -3,6 +3,9 @@ import "../styles/Guide.css"; // Import the CSS file for styling
 import { Container, Typography, Grid, Paper, Box, Accordion, AccordionSummary, AccordionDetails, Card, CardContent, CardMedia, Button } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PageContainer from '../components/PageContainer'
+import CustomButton from "../components/CustomButton";
+import TitleButton from "../components/TitleButton"
+import useDictionary from "../resources/Dictionary/Dictionary";
 
 const faqData = [
   {
@@ -45,6 +48,7 @@ const screenExplanations = [
 ];
 
 const Guide = () => {
+  const dict = useDictionary();
   return (
     <PageContainer>
       <Container sx={{ backgroundColor: '#e8f5e9', padding: '2rem' }}>

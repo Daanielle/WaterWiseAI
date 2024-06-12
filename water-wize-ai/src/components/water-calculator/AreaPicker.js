@@ -4,8 +4,10 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import useDictionary from "../../resources/Dictionary/Dictionary";
 
 const AreaPicker = ({ area, onAreaChange }) => {
+  const dict = useDictionary();
   const handleAreaChange = (newArea) => {
     onAreaChange(newArea.target.value);
   };
@@ -38,12 +40,12 @@ const AreaPicker = ({ area, onAreaChange }) => {
       }}
     >
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Area</InputLabel>
+        <InputLabel id="demo-simple-select-label">{dict.area}</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={area}
-          label="Area"
+          label={dict.area}
           onChange={handleAreaChange}
         >
           <MenuItem value={381}>Ashalim</MenuItem>
