@@ -1,10 +1,10 @@
 import React from "react";
 import classes from "../styles/TitleButton.module.css";
 
-const H1 = ({label, style }) => {
+const H1 = ({children, style }) => {
   return (
       <h1 className={classes.h1} style={style}>
-        {label}
+        {children}
       </h1>
   );
 };

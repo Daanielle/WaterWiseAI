@@ -6,25 +6,31 @@ const ContainerBox = ({ children, sx, ...props }) => {
     return (
         <Box
             sx={{
-                p: 2, 
+                p: 2,
                 backgroundColor: '#f5f5f5',
-                // border: '1px solid #4CAF50', 
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                borderRadius: '20px', 
+                borderRadius: '20px',
                 width: { xs: '90%', sm: '70%', md: '50%', lg: '30%' },
+                minWidth: '800px',
                 maxWidth: '100%', // responsive max width
-                ...sx, 
+                display: 'flex', // Make it a flex container
+                flexDirection: 'column', // Stack children vertically
+                ...sx,
             }}
             {...props}
         >
-            {children}
+            {React.Children.map(children, (child, index) => (
+                <Box key={index} mb="1rem"> {/* Apply margin between children */}
+                    {child}
+                </Box>
+            ))}
         </Box>
     );
 };
 
 ContainerBox.propTypes = {
     children: PropTypes.node.isRequired,
-    sx: PropTypes.object, 
+    sx: PropTypes.object,
 };
 
 export default ContainerBox;

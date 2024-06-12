@@ -13,15 +13,12 @@
   padding: 8px;
   transition: background-color 0.3s, transform 0.3s;
   margin-top: 10px; 
-  background-color: var( --extra-white-transparent);
+  background-color: var( --light-green);
+  /* color: var(--dark-gray); */
 }
 
 .button:hover {
   background-color: var(--medium-green);
-}
-
-.button:active {
-  transform: scale(0.95);
 }
 
 .ripple {
@@ -37,4 +34,30 @@
     transform: scale(4);
     opacity: 0;
   }
+}
+
+.secondary-button {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  height: 40px;
+  font-size: large;
+  padding: 8px;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 10px;
+  background-color: var(--light-gray); /* Set secondary button background color */
+  color: var(--dark-gray); /* Set secondary button text color */
+}
+
+.secondary-button:hover {
+  background-color: var(--accent-orange); /* Change background color on hover */
+}
+
+.secondary-button:hover .ripple {
+  background-color: rgba(0, 0, 0, 0.3); /* Change ripple color on hover */
+}
+
+.secondary-button .ripple {
+  /* Ripple animation styles */
+  background: rgba(0, 0, 0, 0.2); /* Set initial ripple color */
 }

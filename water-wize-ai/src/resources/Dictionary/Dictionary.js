@@ -16,10 +16,10 @@ const hebDict = {
   LogIn: "התחברות",
   Register: "הרשמה",
 
-  //Home page content
+  //Register & Log in page content
   username: "שם משתמש",
   password: "סיסמה",
-  forgetpassword: " ?שכחתה סיסמה",
+  forgetpassword: " ?שכחת סיסמה",
   Login: "התחברות",
   Donthaveanaccount: " ?איך לך חשבון" ,
   alreadyhaveanaccount:"  ?יש לך כבר חשבון",
@@ -27,6 +27,7 @@ const hebDict = {
   nameR:"שם",
   firstName:"שם",
   lastName:"שם משפחה",
+  email:"אימייל",
 
   //contactUs page content
   name:":שם",
@@ -104,10 +105,10 @@ const engDict = {
 
   // page titles
   waterCalculatorTitle: "Water Calculator",
-  LogIn: "LogIn",
+  LogIn: "Log In",
   Register: "Register",
 
-  //Home page content
+  //Register & Log in page content
   username: "Username",
   password: "Password",
   forgetpassword: "Forgot Pssword?",
@@ -118,6 +119,7 @@ const engDict = {
   nameR:"Name",
   firstName:"first name",
   lastName:"last name",
+  email:"Email",
 
   //contactUs page content
   name:"Name:",
