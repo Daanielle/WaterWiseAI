@@ -25,6 +25,9 @@ const hebDict = {
   alreadyhaveanaccount:"  ?יש לך כבר חשבון",
   loginhere: "התחבר כאן",
   nameR:"שם",
+  firstName:"שם",
+  lastName:"שם משפחה",
+
   //contactUs page content
   name:":שם",
   position: ":תפקיד",
@@ -113,6 +116,9 @@ const engDict = {
   alreadyhaveanaccount:"Already have an account?",
   loginhere: "Login here",
   nameR:"Name",
+  firstName:"first name",
+  lastName:"last name",
+
   //contactUs page content
   name:"Name:",
   position: "Position:",

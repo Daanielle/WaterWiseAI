@@ -104,10 +104,10 @@ const Register = (props) => {
       <TitleButton label={dict.Register} style={titleButton}></TitleButton>
         {error && <div className="error">{error}</div>}
         <div>
-          <input className={dict.stylePage} value={firstName} onChange={(e) => setFirstName(e.target.value)} type="text" placeholder="first name" id="firstName" name="firstName" required></input>
+          <input className={dict.stylePage} value={firstName} onChange={(e) => setFirstName(e.target.value)} type="text" placeholder={dict.firstName} id="firstName" name="firstName" required></input>
         </div>
         <div>
-          <input className={dict.stylePage} value={lastName} onChange={(e) => setLastName(e.target.value)} type="text" placeholder="last name" id="lastName" name="lastName" required></input>
+          <input className={dict.stylePage} value={lastName} onChange={(e) => setLastName(e.target.value)} type="text" placeholder={dict.lastName} id="lastName" name="lastName" required></input>
         </div>
         <div>
           <input className={dict.stylePage} value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" required></input>
