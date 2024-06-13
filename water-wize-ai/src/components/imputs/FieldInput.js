@@ -17,6 +17,7 @@ const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputPro
         const newValue = event.target.value;
         if (checkIfValid(newValue)) {
             setIsError(false);
+            // if type
             handleChange(newValue);
         } else {
             setIsError(true);
@@ -37,13 +38,13 @@ const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputPro
                     mt: 1, width: "80%",
                 },
                 "& .MuiInputLabel-root": {
-                    width: "124%",
+                    width: "127%",
                     color: "#4CAF50",
                     textAlign: dict.stylePage
                 }, 
 
                 "& .MuiInputLabel-shrink": {
-                    width: "124%",
+                    width: "127%",
                     color: "#4CAF50 !important",
                     textAlign: dict.stylePage,
                     // transformOrigin: 'center',

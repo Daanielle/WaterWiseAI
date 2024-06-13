@@ -25,9 +25,10 @@ const hebDict = {
   alreadyhaveanaccount:"  ?יש לך כבר חשבון",
   loginhere: "התחבר כאן",
   nameR:"שם",
-  firstName:"שם",
+  firstName:"שם פרטי",
   lastName:"שם משפחה",
   email:"אימייל",
+  image:"תמונה",
 
   //contactUs page content
   name:":שם",
@@ -120,6 +121,7 @@ const engDict = {
   firstName:"first name",
   lastName:"last name",
   email:"Email",
+  image:"Image",
 
   //contactUs page content
   name:"Name:",
@@ -179,6 +181,9 @@ stylePage:"left",
 whostyle:"leftwho",
 westyle:"leftwe",
 arestyle:"leftare",
+
+// //errors
+// invalitTextInput: "Invalid input"
 
 };
 

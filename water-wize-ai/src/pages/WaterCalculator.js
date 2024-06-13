@@ -46,7 +46,7 @@ function WaterCalculator() {
   const calculate = async () => {
     try {
       if (selectedArea && selectedAreaSize) {
-        const calculationResponse = await fetch("calculator/calculate", {
+        const calculationResponse = await fetch("api/calculate", {
         // const calculationResponse = await fetch('/calculator/calculate', {
           method: "POST",
           headers: {
