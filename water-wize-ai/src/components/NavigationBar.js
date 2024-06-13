@@ -20,92 +20,83 @@ function NavigationBar() {
   ];
   const rearrangedNavItems = lang === 'heb' ? navItems.reverse() : navItems;
   return (
-
     <div className={classes.container}>
-    {/* <UserDetailsBar className={classes.userDetailsBarhebrew} /> */}
-    {/* <div> */}
-  {lang === 'heb' ? (
-    <>
-    <div className={classes.userDetailsBarhebrew}>
-      <UserDetailsBar />
-    </div>
-
-
-      
-    <header className={classes.navbarhebrew}>
-    <div className={classes.logoContainer}>
+      {/* <UserDetailsBar className={classes.userDetailsBarhebrew} /> */}
+      {/* <div> */}
+      {lang === 'heb' ? (
+        <>
+          <div className={classes.userDetailsBarhebrew}>
+            <UserDetailsBar />
+          </div>
+          <header className={classes.navbarhebrew}>
+            <div className={classes.container}>
               <NavLink to="/">
                 <img src={WaterWizeAILogo} alt="WaterWizeAI logo" />
               </NavLink>
-    </div>
-    <div className={classes.langSwitch}>
-              <LanguageSwitch setLang={setLang} />
-      </div>
-      <nav>
-        <ul className={classes.list}>
-          {rearrangedNavItems.map(item => (
-              <NavLink
-                  key={item.key}
-                  to={item.path}
-                  className={({ isActive }) =>
-                  isActive ? classes.active : classes.inactive
-                }
-                >
-                <li>{dict[item.key]}</li>
-              </NavLink>
-          ))}
-        </ul>
-      </nav>
+              <div className={classes.langSwitch}>
+                <LanguageSwitch setLang={setLang} />
+              </div>
+            </div>
+            <nav>
+              <ul className={classes.list}>
+                {rearrangedNavItems.map(item => (
+                  <NavLink
+                    key={item.key}
+                    to={item.path}
+                    className={({ isActive }) =>
+                      isActive ? classes.active : classes.inactive
+                    }
+                  >
+                    <li>{dict[item.key]}</li>
+                  </NavLink>
+                ))}
+              </ul>
+            </nav>
 
-    </header>
-    
+          </header>
+        </>
+      ) : (
+        <>
+          <div className={classes.userDetailsBarenglish}>
+            <UserDetailsBar />
+          </div>
+          <header className={classes.navbarenglish}>
+            <nav>
+              <ul className={classes.list}>
+                {rearrangedNavItems.map(item => (
+                  <NavLink
+                    key={item.key}
+                    to={item.path}
+                    className={({ isActive }) =>
+                      isActive ? classes.active : classes.inactive
+                    }
+                  >
+                    <li>{dict[item.key]}</li>
+                  </NavLink>
+                ))}
+              </ul>
+            </nav>
+            <div className={classes.container}>
 
-    </>
-
-
-
-
-
-  ) : (
-    <>
-    <div className={classes.userDetailsBarenglish}>
-      <UserDetailsBar />
-    </div>
-    <header className={classes.navbarenglish}>
-      <nav>
-        <ul className={classes.list}>
-          {rearrangedNavItems.map(item => (
-            <NavLink
-              key={item.key}
-              to={item.path}
-              className={({ isActive }) =>
-                isActive ? classes.active : classes.inactive
-              }
-            >
-              <li>{dict[item.key]}</li>
-            </NavLink>
-          ))}
-        </ul>
-      </nav><div className={classes.langSwitch}>
-              <LanguageSwitch setLang={setLang} />
-    </div>
-      <div className={classes.logoContainer}>
+              <div className={classes.langSwitch}>
+                <LanguageSwitch setLang={setLang} />
+              </div>
               <NavLink to="/">
                 <img src={WaterWizeAILogo} alt="WaterWizeAI logo" />
               </NavLink>
-    </div>
-    
-    </header>
-    
-    </>
-    
-  )}
-{/* </div>     */}
+            </div>
+
+          </header>
+
+        </>
+
+      )}
+      {/* </div>     */}
 
 
 
 
-    {/* <header className={classes.navbarhebrew}>
+      {/* <header className={classes.navbarhebrew}>
       {lang === 'heb' ? (
           <>
           <nav>
@@ -156,7 +147,7 @@ function NavigationBar() {
           </>
         )}
     </header> */}
-  </div>
+    </div>
 
   );
 }

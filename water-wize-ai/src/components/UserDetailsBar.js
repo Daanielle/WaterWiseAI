@@ -28,10 +28,10 @@ function UserDetailsBar() {
   const LoggedInBtns = (
     <div style={{ display: "flex" }}>
       <Link to="/">
-        <CustomButton label="log out" type="button" onClick={logout} style={buttonsStyleLeft} />
+        <CustomButton label={dict.logOut} type="button" onClick={logout} style={buttonsStyleLeft} />
       </Link>
       <Link to="/UserDetails">
-        <CustomButton label="user" type="button" style={buttonsStyleRight} />
+        <CustomButton label={dict.userPage} type="button" style={buttonsStyleRight} />
       </Link>
     </div>
   )
@@ -39,15 +39,15 @@ function UserDetailsBar() {
   const GuestBtns = (
     <div style={{ display: "flex" }}>
       <Link to="/LogIn">
-        <CustomButton label="log in" type="button" style={buttonsStyleLeft} />
+        <CustomButton label={dict.Login} type="button" style={buttonsStyleLeft} />
       </Link>
       <Link to="/Register">
-        <CustomButton label="register" type="button" style={buttonsStyleRight} />
+        <CustomButton label={dict.Register} type="button" style={buttonsStyleRight} />
       </Link>
     </div>
   )
 
-  if (dict.stylePage === "left"){
+  if (dict.stylePage === "left") {
     return (
       <div
         style={{
@@ -68,9 +68,9 @@ function UserDetailsBar() {
         </div>
       </div>
     );
-  
+
   }
-  else{
+  else {
     return (
       <div
         style={{
@@ -83,9 +83,9 @@ function UserDetailsBar() {
           // right:0,
         }}
       >
-                <div>
+        <div>
           <Typography color="text.secondary">
-          {user ? user.firstName : 'Guest'} {dict.goodMorning}
+            {user ? user.firstName : 'Guest'} {dict.goodMorning}
           </Typography>
           {user ? LoggedInBtns : GuestBtns}
         </div>

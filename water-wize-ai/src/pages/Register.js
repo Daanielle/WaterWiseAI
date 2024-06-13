@@ -110,13 +110,11 @@ function Register() {
           <input className={dict.stylePage} type="file"
             onChange={(e) => handleImageChange(e)}
             accept="image/*" name="image" id="imageInput" />
-          <div>
-            <button className="my_button" type="submit">{dict.Register}</button>
-          </div>
-          <div >
-            <Link to="/LogIn">
-              <p className="login_link">{dict.alreadyhaveanaccount} <a href="#" > {dict.loginhere}</a></p>
-            </Link>
+
+
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '10%' }}>
+            <CustomButton type="submit" label={dict.Register} style={{ width: '35%' }} />
+            <CustomButton type="button" label={dict.alreadyhaveanaccount} to="/LogIn" style={{ width: '35%' }} secondary />
           </div>
 
         </ContainerBox>
