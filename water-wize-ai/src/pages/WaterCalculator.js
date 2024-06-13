@@ -8,6 +8,7 @@ import CustomButton from "../components/CustomButton";
 import DetailsPanel from "../components/water-calculator/DetailsPanel";
 import useDictionary from "../resources/Dictionary/Dictionary";
 import TitleButton from "../components/TitleButton"
+import Converters from "../geo";
 
 function WaterCalculator() {
   const dict = useDictionary();
@@ -67,6 +68,60 @@ function WaterCalculator() {
     }
   };
 
+  const findMyCoordinates = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, handleError);
+    } else {
+      console.log("Geolocation is not supported by this browser."); // error handling
+    }
+  }
+
+  const showPosition = (position) => {
+    // const latitude = position.coords.latitude;
+    // const longitude = position.coords.longitude;
+
+    const latitude = 31.253107;
+    const longitude = 34.786712;
+
+
+    // Use the latitude and longitude variables as needed
+    console.log("Latitude: " + latitude);
+    console.log("Longitude: " + longitude);
+
+
+    // Initialize the Converters class
+    Converters.init();
+
+    // Convert from WGS84 to ITM
+    let itmCoordinates = Converters.wgs842itm(latitude, longitude);
+
+    // Extract Northing and Easting from the result
+    let northing = itmCoordinates.N;
+    let easting = itmCoordinates.E;
+
+    // Output the result
+    console.log(`Northing (ITM): ${northing}, Easting (ITM): ${easting}`);
+  }
+
+  const handleError = (error) => {
+    // Handle different types of errors
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        console.log("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        console.log("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        console.log("The request to get user location timed out.");
+        break;
+      case error.UNKNOWN_ERROR:
+        console.log("An unknown error occurred.");
+        break;
+    }
+  }
+
+
   return (
     <div className={classes.WaterCalculator}>
       <PageContainer>
@@ -84,6 +139,7 @@ function WaterCalculator() {
             />
 
             <CustomButton onClick={calculate} label={dict.calculate} type="button" />
+            <CustomButton onClick={findMyCoordinates} label="find my coordinates" type="button" />
           </div>
           <div className={classes.rightCol}>
             <DetailsPanel detailedData={detailedData} />
