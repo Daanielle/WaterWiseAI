@@ -12,10 +12,6 @@ import { Icon } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import useDictionary from "../../resources/Dictionary/Dictionary";
 
-function getIcon(variableDetails) {
-  const IconComponent = variableDetails?.icon || HelpOutlineIcon;
-  return <Icon component={IconComponent} sx={{ color: "#72ab38" }} />;
-}
 
 const modalStyle = {
   position: "absolute",
@@ -37,6 +33,12 @@ export default function DetailCard({ title, value }) {
 
   const formattedValue = typeof value === "number" ? value.toFixed(3) : value;
   const variableDetails = waterCalculatorVariablesDetails[title];
+
+
+  function getIcon(variableDetails) {
+    const IconComponent = variableDetails?.icon || HelpOutlineIcon;
+    return <Icon component={IconComponent} sx={{ color: "#72ab38" }} />;
+  }
 
   return (
     <Box sx={{ minWidth: 50, width: 130 }}>

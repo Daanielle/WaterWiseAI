@@ -8,7 +8,7 @@ import CustomButton from "../components/CustomButton";
 import DetailsPanel from "../components/water-calculator/DetailsPanel";
 import useDictionary from "../resources/Dictionary/Dictionary";
 import TitleButton from "../components/TitleButton"
-// import {ITMtoWGS84, WGS84toITM} from "../geo";
+// import hadarImage from '../resources/images/hadar.png'
 
 function WaterCalculator() {
   const dict = useDictionary();
@@ -101,7 +101,7 @@ function WaterCalculator() {
 
     const wgs84Lat = 29.5526;
     const wgs84Long = 34.9520;
-    
+
     // Convert WGS84 to ITM
     //const itmCoords = WGS84toITM(wgs84Lat, wgs84Long);
     //console.log(`WGS84 (${wgs84Lat}, ${wgs84Long}) to ITM: X: ${itmCoords.x}, Y: ${itmCoords.y}`);
