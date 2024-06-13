@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from '../AuthContext';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import FieldInput from "../components/imputs/FieldInput";
+import FieldInput from "../components/inputs/FieldInput";
 import PageContainer from "../components/PageContainer";
 import ContainerBox from '../components/ContainerBox';
 import CustomButton from "../components/CustomButton";

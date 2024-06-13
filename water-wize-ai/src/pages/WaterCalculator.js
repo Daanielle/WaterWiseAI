@@ -8,7 +8,7 @@ import CustomButton from "../components/CustomButton";
 import DetailsPanel from "../components/water-calculator/DetailsPanel";
 import useDictionary from "../resources/Dictionary/Dictionary";
 import TitleButton from "../components/TitleButton"
-import Converters from "../geo";
+// import {ITMtoWGS84, WGS84toITM} from "../geo";
 
 function WaterCalculator() {
   const dict = useDictionary();
@@ -76,33 +76,6 @@ function WaterCalculator() {
     }
   }
 
-  const showPosition = (position) => {
-    // const latitude = position.coords.latitude;
-    // const longitude = position.coords.longitude;
-
-    const latitude = 31.253107;
-    const longitude = 34.786712;
-
-
-    // Use the latitude and longitude variables as needed
-    console.log("Latitude: " + latitude);
-    console.log("Longitude: " + longitude);
-
-
-    // Initialize the Converters class
-    Converters.init();
-
-    // Convert from WGS84 to ITM
-    let itmCoordinates = Converters.wgs842itm(latitude, longitude);
-
-    // Extract Northing and Easting from the result
-    let northing = itmCoordinates.N;
-    let easting = itmCoordinates.E;
-
-    // Output the result
-    console.log(`Northing (ITM): ${northing}, Easting (ITM): ${easting}`);
-  }
-
   const handleError = (error) => {
     // Handle different types of errors
     switch (error.code) {
@@ -121,6 +94,18 @@ function WaterCalculator() {
     }
   }
 
+
+  const showPosition = (position) => {
+    // const latitude = position.coords.latitude;
+    // const longitude = position.coords.longitude;
+
+    const wgs84Lat = 29.5526;
+    const wgs84Long = 34.9520;
+    
+    // Convert WGS84 to ITM
+    //const itmCoords = WGS84toITM(wgs84Lat, wgs84Long);
+    //console.log(`WGS84 (${wgs84Lat}, ${wgs84Long}) to ITM: X: ${itmCoords.x}, Y: ${itmCoords.y}`);
+  }
 
   return (
     <div className={classes.WaterCalculator}>

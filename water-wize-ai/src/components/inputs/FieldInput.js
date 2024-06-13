@@ -13,12 +13,19 @@ const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputPro
         onValueChange(newValue);
     };
 
+    const handleFileChange = (event) => {
+        onValueChange(event);
+    }
+
     const handleInputChange = (event) => {
         const newValue = event.target.value;
         if (checkIfValid(newValue)) {
             setIsError(false);
-            // if type
-            handleChange(newValue);
+            if (type == "file") {
+                handleFileChange(event)
+            } else {
+                handleChange(newValue);
+            }
         } else {
             setIsError(true);
         }
@@ -41,7 +48,7 @@ const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputPro
                     width: "127%",
                     color: "#4CAF50",
                     textAlign: dict.stylePage
-                }, 
+                },
 
                 "& .MuiInputLabel-shrink": {
                     width: "127%",
@@ -55,6 +62,7 @@ const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputPro
                     color: "#4CAF50",
                     "& fieldset": {
                         borderColor: "#4CAF50",
+                        textAlign: dict.stylePage
                     },
                     "&:hover fieldset": {
                         // Change border color on hover
@@ -63,12 +71,13 @@ const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputPro
                     "&.Mui-focused fieldset": {
                         // Change border color when focused
                         borderColor: "#4CAF50",
-                        textAlign: dict.stylePage
+                        textAlign: dict.stylePage,
                     },
                     "&.Mui-focused .MuiInputLabel-root": {
                         // Change label color when focused
                         color: "#4CAF50",
-                        textAlign:"right",
+                        // textAlign: "right",
+                        textAlign: dict.stylePage
                     },
                 },
             }}
@@ -87,8 +96,9 @@ const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputPro
                 InputProps={{
                     style: {
                         color: "#4CAF50",
-                        // textAlign: dict.stylePage,
-                        textAlign: "right",
+                        // color: "red",
+                        paddingLeft: (type === "file" && dict.stylePage === "left") ? '60px' : '',
+                        //textAlign: (dict.stylePage === "right") ? "right" : "left"
                     },
                     // {
                     //     // Allow only numeric input

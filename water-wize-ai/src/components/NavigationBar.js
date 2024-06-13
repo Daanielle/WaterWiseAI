@@ -15,7 +15,7 @@ function NavigationBar() {
     { path: "/ContactUs", key: "contuctUs" },
     { path: "/Guide", key: "support" },
     { path: "/WaterCalculator", key: "waterCalculator" },
-    { path: "/TasksList", key: "tasksManagement" },
+    // { path: "/TasksList", key: "tasksManagement" },
     { path: "/Forum", key: "forum" },
   ];
   const rearrangedNavItems = lang === 'heb' ? navItems.reverse() : navItems;
