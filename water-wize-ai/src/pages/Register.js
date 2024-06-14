@@ -1,7 +1,7 @@
 import PageContainer from "../components/PageContainer";
 import CustomButton from "../components/CustomButton";
 import ContainerBox from "../components/ContainerBox";
-import FieldInput from "../components/inputs/FieldInput";
+import InputField from "../components/inputs/InputField";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TitleButton from "../components/TitleButton";
@@ -100,13 +100,13 @@ function Register() {
   return (
     <PageContainer>
       <form onSubmit={handleSubmit}>
-        <ContainerBox>
+        <ContainerBox width="700px">
           <TitleButton style={titleButton}>{dict.Register}</TitleButton>
-          <FieldInput label={dict.firstName} value={firstName} onValueChange={setFirstName} checkIfValid={() => true} error="" />
-          <FieldInput label={dict.lastName} value={lastName} onValueChange={setLastName} checkIfValid={() => true} error="" />
-          <FieldInput label={dict.email} value={email} onValueChange={setEmail} checkIfValid={() => true} error="" />
-          <FieldInput label={dict.password} value={password} onValueChange={setPassword} checkIfValid={() => true} error="" type="password" />
-          <FieldInput label={dict.image} onValueChange={handleImageChange} checkIfValid={() => true} error="" type="file" accept="image/*" name="image" id="imageInput" />
+          <InputField label={dict.firstName} value={firstName} onValueChange={setFirstName} checkIfValid={() => true} error="" />
+          <InputField label={dict.lastName} value={lastName} onValueChange={setLastName} checkIfValid={() => true} error="" />
+          <InputField label={dict.email} value={email} onValueChange={setEmail} checkIfValid={() => true} error="" />
+          <InputField label={dict.password} value={password} onValueChange={setPassword} checkIfValid={() => true} error="" type="password" />
+          <InputField label={dict.image} onValueChange={handleImageChange} checkIfValid={() => true} error="" type="file" accept="image/*" name="image" id="imageInput" />
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '10%' }}>
             <CustomButton type="submit" label={dict.Register} style={{ width: '35%' }} />
             <CustomButton type="button" label={dict.alreadyhaveanaccount} to="/LogIn" style={{ width: '35%' }} secondary />
