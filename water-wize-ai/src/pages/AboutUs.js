@@ -1,30 +1,24 @@
 // AboutUs.js
 import React from "react";
-import TeamInfo from "../components/TeamInfo";
-import lanasImage from "../resources/images/lana.png";
-import hadarsImage from "../resources/images/hadar.png";
-import shacharsImage from "../resources/images/shachar.png";
-import daniellesImage from "../resources/images/danielle.png";
 import classes from "../styles/AboutUs.module.css";
 import PageContainer from "../components/PageContainer";
 import useDictionary from "../resources/Dictionary/Dictionary";
+import CustomCard from "../components/CustomCard";
+import GrouDetails from "../resources/mapping/GrouDetails";
+import TeamInfo from "../components/TeamInfo"
+
+
+
 
 function AboutUs() {
   const dict = useDictionary();
+  const teamDetails = GrouDetails();
 
-  const about_me = (
-    <p className={classes.text}>
-      {dict.aboutMe}
-    </p>
-  );
-  const linkedinUrl = "https://www.linkedin.com/in/lana-aburaya-a78446224/";
-  const emailUrl = "mailto:example@example.com"; // Change this to your email
-  const facebookUrl = "https://www.facebook.com/yourfacebookprofile"; // Change this to your Facebook profile URL
 
   return (
-    <PageContainer>
+    <div>
+      <PageContainer>
       <div className={classes.back}>
-        <div>
           <p className={classes.WHO}>{dict.who}</p>
         </div>
         <div>
@@ -34,45 +28,55 @@ function AboutUs() {
           <p className={classes.ARE}>{dict.are}</p>
         </div>
         <div className={classes.team}>
-          <TeamInfo
-            image_link={daniellesImage}
-            my_Name={dict.Danielle_Name}
-            about_me={about_me}
-            linkedinUrl={linkedinUrl}
-            emailUrl={"mailto:aspirda@bgu.post.ac.il"}
-            facebookUrl={facebookUrl}
-            className={classes.childTeam}
-          />
-          <TeamInfo
-            image_link={hadarsImage}
-            my_Name={dict.Hadar_Name}
-            about_me={about_me}
-            linkedinUrl={linkedinUrl}
-            emailUrl={"mailto:hasab@bgu.post.ac.il"}
-            facebookUrl={facebookUrl}
-            className={classes.childTeam}
-          />
-          <TeamInfo
-            image_link={lanasImage}
-            my_Name={dict.Lana_Name}
-            about_me={about_me}
-            linkedinUrl={"https://www.linkedin.com/in/lana-aburaya-a78446224/"}
-            emailUrl={"mailto:lana.aburya@gmail.com"}
-            facebookUrl={facebookUrl}
-            className={classes.childTeam}
-          />
-          <TeamInfo
-            image_link={shacharsImage}
-            my_Name={dict.Shachar_Name}
-            about_me={about_me}
-            linkedinUrl={"https://www.linkedin.com/in/shachar-adam-836a94277"}
-            emailUrl={"mailto:adamsha@bgu.post.ac.il"}
-            facebookUrl={facebookUrl}
-            className={classes.childTeam}
-          />
-        </div>
-      </div>
-    </PageContainer>
+          <CustomCard
+           title={teamDetails.Danielle.my_Name}
+           description={teamDetails.Danielle.about_me}
+           image={teamDetails.Danielle.image_link}
+           bottomIcons={<TeamInfo 
+            linkedinUrl={teamDetails.Danielle.linkedinUrl} 
+            emailUrl={teamDetails.Danielle.emailUrl}  
+            facebookUrl={teamDetails.Danielle.facebookUrl} 
+        />}
+
+           />
+           <CustomCard
+           title={teamDetails.Hadar.my_Name}
+           description={teamDetails.Hadar.about_me}
+           image={teamDetails.Hadar.image_link}
+           bottomIcons={<TeamInfo 
+            linkedinUrl={teamDetails.Hadar.linkedinUrl} 
+            emailUrl={teamDetails.Hadar.emailUrl}  
+            facebookUrl={teamDetails.Hadar.facebookUrl} 
+        />}
+
+           />
+           <CustomCard
+           title={teamDetails.Lana.my_Name}
+           description={teamDetails.Lana.about_me}
+           image={teamDetails.Lana.image_link}
+           bottomIcons={<TeamInfo 
+            linkedinUrl={teamDetails.Lana.linkedinUrl} 
+            emailUrl={teamDetails.Lana.emailUrl}  
+            facebookUrl={teamDetails.Lana.facebookUrl} 
+        />}
+
+
+           />
+           <CustomCard
+           title={teamDetails.Shachar.my_Name}
+           description={teamDetails.Shachar.about_me}
+           image={teamDetails.Shachar.image_link}
+           bottomIcons={<TeamInfo 
+            linkedinUrl={teamDetails.Shachar.linkedinUrl} 
+            emailUrl={teamDetails.Shachar.emailUrl}  
+            facebookUrl={teamDetails.Shachar.facebookUrl} 
+        />}
+        
+           />
+           </div>
+      </PageContainer>
+
+    </div> 
   );
 }
 

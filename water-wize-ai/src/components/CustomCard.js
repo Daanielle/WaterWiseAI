@@ -52,13 +52,14 @@ const CustomCard = ({ title, description, image, topIcon, bottomIcons, openModal
                         {description}
                     </Typography>
                 </CardContent>
-                <CardActions>
+                {bottomIcons && <CardActions>
                     {bottomIcons}
                 </CardActions>
+}
             </Card>
             <div>
 
-                <Modal
+            {openModal&&  <Modal
                     open={openModal}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
@@ -77,6 +78,7 @@ const CustomCard = ({ title, description, image, topIcon, bottomIcons, openModal
                         <Button onClick={handleClose}>Close Child Modal</Button>
                     </Box>
                 </Modal>
+                }
             </div>
         </div>
     );

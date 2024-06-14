@@ -4,15 +4,10 @@ import { IconButton } from '@mui/material';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import classes from "../styles/TeamInfo.module.css";
 
-function TeamInfo({ image_link, my_Name, about_me, linkedinUrl, emailUrl, facebookUrl }) {
+function TeamInfo({ linkedinUrl, emailUrl, facebookUrl }) {
     return (
-        <div className={classes.child}>
-            <img src={image_link} alt="my_image" />
-            <div className={classes.name}>{my_Name}</div>
-            <div>{about_me}</div>
-            <div className={classes.icons}>
+            <div >
                 <IconButton onClick={() => window.open(emailUrl, '_blank')}>
                     <EmailOutlinedIcon />
                 </IconButton>
@@ -23,7 +18,6 @@ function TeamInfo({ image_link, my_Name, about_me, linkedinUrl, emailUrl, facebo
                     <FacebookIcon />
                 </IconButton>
             </div>
-        </div>
     );
 }
 
