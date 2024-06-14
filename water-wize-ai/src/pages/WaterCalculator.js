@@ -99,14 +99,16 @@ function WaterCalculator() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            selectedArea: selectedArea,
+            selectedArea: selectedArea.value,
             areaSize: selectedAreaSize,
           }),
         });
-
+        console.log(selectedArea.value )
+        console.log(selectedAreaSize)
         const recommendationData = await calculationResponse.json();
         //setWaterRecommendation(recommendationData.recommendation);
         setDetailedData(recommendationData);
+        console.log(recommendationData)
       }
     } catch (error) {
       console.error("Error:", error);
