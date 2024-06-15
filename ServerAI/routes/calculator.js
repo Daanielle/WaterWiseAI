@@ -4,7 +4,7 @@ const axios = require('axios');
 // const Recommendation = require('../models/Recommendation'); // Import the Recommendation model
 const Recommendation = require('../models/recommendation');
 const authenticateToken = require('../middleware/auth'); // Assuming you have this middleware
-
+const mongoose = require('mongoose');
 
 function computeDeltaY(temperature) {
   const deltaYTable = [
@@ -261,6 +261,9 @@ router.post('/calculate', async (req, res) => {
 });
 
 
+
+
+
 // Endpoint to retrieve saved recommendations
 router.get("/", async (req, res) => {
   try {
@@ -275,23 +278,163 @@ router.get("/", async (req, res) => {
 });
 
 
-// Route to get recommendations by user
-router.get('/user-recommendations', authenticateToken, async (req, res) => {
+// // Route to get recommendations by user
+// router.get('/user-recommendations', authenticateToken, async (req, res) => {
+//   try {
+//     // Ensure the user is authenticated
+//     if (!req.user) {
+//       return res.status(401).json({ message: 'Unauthorized' });
+//     }
+
+//     // Find recommendations for the authenticated user
+//     const recommendations = await Recommendation.find({ user: req.user.userId });
+
+//     res.json(recommendations);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// });
+
+
+router.post('/recommendations', async (req, res) => {
+    try {
+        const {
+            userId,
+            grad,
+            windSpeed1mm,
+            maxWindSpeed,
+            temperature,
+            relativeHumidity,
+            deltaY,
+            e0,
+            ea,
+            Ea,
+            E,
+            Kc,
+            recommendation
+        } = req.body;
+
+        // Validate userId format
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({ error: 'Invalid userId format' });
+        }
+
+        // Create a new recommendation document
+        const newRecommendation = new Recommendation({
+            user: userId, // Save the user ID as a string
+            grad: grad,
+            windSpeed1mm: windSpeed1mm,
+            maxWindSpeed: maxWindSpeed,
+            temperature: temperature,
+            relativeHumidity: relativeHumidity,
+            deltaY: deltaY,
+            e0: e0,
+            ea: ea,
+            Ea: Ea,
+            E: E,
+            Kc: Kc,
+            recommendation: recommendation
+        });
+
+        // Save the document to the database
+        const savedRecommendation = await newRecommendation.save();
+
+        // Send a response to the client
+        res.status(201).json(savedRecommendation);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+
+// Route to retrieve recommendations for a specific user
+router.get('/recommendations', async (req, res) => {
+  const userId = req.query.userId;
+
   try {
-    // Ensure the user is authenticated
-    if (!req.user) {
-      return res.status(401).json({ message: 'Unauthorized' });
+    if (!userId) {
+      // If userId parameter is missing, return 400 Bad Request
+      return res.status(400).json({ error: 'userId parameter is required' });
     }
 
-    // Find recommendations for the authenticated user
-    const recommendations = await Recommendation.find({ user: req.user.userId });
+    // Find recommendations by userId in the database
+    const recommendations = await Recommendation.find({ user: userId });
 
-    res.json(recommendations);
+    // Send the recommendations as JSON response
+    res.status(200).json(recommendations);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    // Handle errors if any occur
+    console.error(err);
+    res.status(500).json({ error: err.message });
   }
 });
 
+// // Route to retrieve all recommendations
+// router.get('/recommendations', async (req, res) => {
+//   try {
+//     // Retrieve all recommendations from the database
+//     const recommendations = await Recommendation.find();
+
+//     // Send a response with the recommendations array
+//     res.status(200).json(recommendations);
+//   } catch (err) {
+//     // Handle errors if any occur
+//     console.error(err);
+//     res.status(500).json({ error: err.message });
+//   }
+// });
+
+// // GET route to fetch recommendations by user
+// router.get('/user-recommendations', authenticateToken, async (req, res) => {
+//   try {
+//       // Ensure the user is authenticated
+//       if (!req.user) {
+//           return res.status(401).json({ message: 'Unauthorized' });
+//       }
+
+//       // Find recommendations for the authenticated user
+//       const recommendations = await Recommendation.find({ user: req.user.userId });
+
+//       res.json(recommendations);
+//   } catch (err) {
+//       console.error(err);
+//       res.status(500).json({ error: err.message });
+//   }
+// });
+
+
+// // // POST endpoint to create a new recommendation
+// app.post('/useree', async (req, res) => {
+//   try {
+//     const { userId, grad, windSpeed1mm, maxWindSpeed, temperature, relativeHumidity, deltaY, e0, ea, Ea, E, Kc, recommendation } = req.body;
+
+//     // Create a new recommendation document
+//     const newRecommendation = new Recommendation({
+//       user: userId, // Save the user ID from the request body
+//       grad: grad,
+//       windSpeed1mm: windSpeed1mm,
+//       maxWindSpeed: maxWindSpeed,
+//       temperature: temperature,
+//       relativeHumidity: relativeHumidity,
+//       deltaY: deltaY,
+//       e0: e0,
+//       ea: ea,
+//       Ea: Ea,
+//       E: E,
+//       Kc: Kc,
+//       recommendation: recommendation
+//     });
+
+    // Save the document to the database
+    // const savedRecommendation = await newRecommendation.save();
+
+//     // Send a response to the client
+//     res.status(201).json(savedRecommendation);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
 
 // GET route to check if the user is logged in
 router.get('/check-login', authenticateToken, (req, res) => {
@@ -304,6 +447,8 @@ router.get('/check-login', authenticateToken, (req, res) => {
     res.json({ loggedIn: true });
   }
 });
+
+
 
 
 module.exports = router;

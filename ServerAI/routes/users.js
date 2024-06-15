@@ -61,9 +61,6 @@ router.post('/register', async (req, res) => {
 
 // Update a user
 router.patch('/:id', getUser, async (req, res) => {
-    // if (req.body.username != null) {
-    //     res.user.username = req.body.username;
-    // }
     if (req.body.email != null) {
         res.user.email = req.body.email;
     }
@@ -71,18 +68,41 @@ router.patch('/:id', getUser, async (req, res) => {
         res.user.image = req.body.image;
     }
     // if (req.body.password != null) {
-    //     try {
-    //         const salt = await bcrypt.genSalt(10);
-    //         res.user.password = await bcrypt.hash(req.body.password, salt);
-    //     } catch (err) {
-    //         return res.status(400).json({ message: err.message });
-    //     }
-    // }
     try {
         const updatedUser = await res.user.save();
         res.json(updatedUser);
     } catch (err) {
         res.status(400).json({ message: err.message });
+    }
+});
+
+
+
+// @route    PATCH /users/:id/password
+// @desc     Update user password
+// @access   Public (assuming it's accessible to the user updating their own password)
+router.patch('/:id/password', getUser, async (req, res) => {
+    if (req.body.password != null) {
+        try {
+            // Generate a salt
+            const salt = await bcrypt.genSalt(10);
+            // Hash the new password
+            const hashedPassword = await bcrypt.hash(req.body.password, salt);
+            console.log('Password hashed:', hashedPassword); // Debugging line
+
+            // Update the user's password
+            res.user.password = hashedPassword;
+            
+            // Save the updated user with the new hashed password
+            const updatedUser = await res.user.save();
+            console.log('User updated:', updatedUser); // Debugging line
+            
+            res.json(updatedUser);
+        } catch (err) {
+            res.status(400).json({ message: err.message });
+        }
+    } else {
+        res.status(400).json({ message: 'Password is required' });
     }
 });
 
@@ -135,4 +155,36 @@ router.get('/login/check', authenticateToken, (req, res) => {
         res.json({ loggedIn: true });
     }
 });
+
+router.patch('/:id/password2/', getUser, async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+
+    if (!oldPassword || !newPassword) {
+        return res.status(400).json({ message: 'Old password and new password are required' });
+    }
+
+    try {
+        // Check if the old password matches
+        const isMatch = await bcrypt.compare(oldPassword, res.user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: 'Old password is incorrect' });
+        }
+
+        // Generate a salt and hash the new password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+        console.log('Password hashed:', hashedPassword); // Add this line for debugging
+
+        // Update the user's password
+        res.user.password = hashedPassword;
+
+        // Save the updated user with the new hashed password
+        const updatedUser = await res.user.save();
+        console.log('User updated:', updatedUser); // Add this line for debugging
+        res.json(updatedUser);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
 module.exports = router;
