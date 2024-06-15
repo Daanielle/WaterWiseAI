@@ -10,6 +10,7 @@ import TitleButton from "../components/TitleButton";
 import ContainerBox from "../components/ContainerBox";
 import InputField from "../components/inputs/InputField";
 import InputPicker from "../components/inputs/PickInput";
+import Recommendation from "../components/recommendation/Recomendation"; //TODO: remove after creating user recs page
 
 const locations = { //TODO: add to json file
   381: 'Ashalim',
@@ -175,6 +176,7 @@ function WaterCalculator() {
             <DetailsPanel detailedData={detailedData} />
           </div>
         </div>
+        <Recommendation recommendationDataRows={[detailedData]}/>
       </PageContainer >
     </div >
   );

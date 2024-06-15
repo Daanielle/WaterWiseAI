@@ -5,12 +5,9 @@ import CustomCard from "../CustomCard";
 import waterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
 import Fab from '@mui/material/Fab';
 import Box from "@mui/material/Box";
-import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { IconButton } from "@mui/material";
-import Modal from "@mui/material/Modal";
 import useDictionary from "../../resources/Dictionary/Dictionary";
-import Typography from '@mui/material/Typography';
 
 const modalStyle = {
   position: "absolute",
