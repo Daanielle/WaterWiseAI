@@ -9,9 +9,9 @@ import useDictionary from "../resources/Dictionary/Dictionary";
 import TitleButton from "../components/TitleButton";
 import ContainerBox from "../components/ContainerBox";
 import InputField from "../components/inputs/InputField";
-import InputPicker from "../components/inputs/InputPicker";
+import InputPicker from "../components/inputs/PickInput";
 
-const locations = { //TODO: add to json filr
+const locations = { //TODO: add to json file
   381: 'Ashalim',
   29: 'Arad',
   208: 'Ashkelon', // Adjusted from Ashqelon

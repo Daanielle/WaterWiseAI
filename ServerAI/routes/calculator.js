@@ -99,16 +99,15 @@ async function fetchDataFromStation(stationId) {
 // router.post("/calculate", authenticateToken, async (req, res) => {
 router.post('/calculate', async (req, res) => {
   try {
-    console.log('hi')
     const { selectedArea, areaSize } = req.body;
     const lastBatch = await fetchDataFromStation(selectedArea);
 
     let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
-
     // Ashalim, Arad, Besor Farm, Dorot, Hazeva, Negba, Neot smadar, Shani, Yotvata
-    if ([381, 29, 58, 79, 33, 82, 28, 36].includes(selectedArea)) {
+    if (['381', '29', '58', '79', '33', '82', '28', '36'].includes(selectedArea)) {
       const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
       gradValue = gradChannel ? gradChannel.value : null;
+      console.log(gradValue)
 
       const ws1mmChannel = lastBatch.channels.find(channel => channel.name === 'WS1mm');
       ws1mmValue = ws1mmChannel ? ws1mmChannel.value : null;
@@ -124,7 +123,7 @@ router.post('/calculate', async (req, res) => {
     }
 
     // Ashqelon Port, Avdat, Ezuz, Metzoke Dragot, Mizpe Ramon, Neot Smadar, Paran, Sede Boqer, Zomet Hanegev
-    if ([208, 271, 338, 210, 379, 232, 207, 98, 112].includes(selectedArea)) {
+    if (['208', '271', '338', '210', '379', '232', '207', '98', '112'].includes(selectedArea)) {
       const ws1mmChannel = lastBatch.channels.find(channel => channel.name === 'WS1mm');
       ws1mmValue = ws1mmChannel ? ws1mmChannel.value : null;
 
@@ -139,7 +138,7 @@ router.post('/calculate', async (req, res) => {
     }
 
     // Beer Sheva University 
-    if (selectedArea == 60) {
+    if (selectedArea == '60') {
       const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
       gradValue = gradChannel ? gradChannel.value : null;
 
@@ -148,7 +147,7 @@ router.post('/calculate', async (req, res) => {
     }
 
     // Gat, Lahav
-    if (selectedArea == 236 || selectedArea == 350) {
+    if (selectedArea == '236' || selectedArea == '350') {
       const tempChannel = lastBatch.channels.find(channel => channel.name === 'TD');
       temperature = tempChannel ? tempChannel.value : null;
 
@@ -156,7 +155,7 @@ router.post('/calculate', async (req, res) => {
       relativeHumidity = rhChannel ? rhChannel.value : null;
     }
 
-    if (selectedArea == 386) {
+    if (selectedArea == '386') {
       const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
       gradValue = gradChannel ? gradChannel.value : null;
     }
@@ -164,20 +163,20 @@ router.post('/calculate', async (req, res) => {
     if (!gradValue || !ws1mmValue || !wsMaxValue || !temperature || !relativeHumidity) {
       let nearbyStationId = null;
 
-      if (selectedArea == 208) { // Ashqelon Port
-        nearbyStationId = 82; // Negba
-      } else if ([271, 98, 112, 338, 379].includes(selectedArea)) { // Avdat, Sede Boqer, Zomet Hanegev, Ezuz, Mizpe Ramon
-        nearbyStationId = 381; // Ashalim
-      } else if ([207, 232].includes(selectedArea)) { // Paran, Neot Smadar
-        nearbyStationId = 36; // Yotvata
-      } else if (selectedArea == 210) { // Metzoke Dragot
-        nearbyStationId = 28; // Shani
-      } else if (selectedArea == 236) { // Gat
-        nearbyStationId = 79; // Dorot
-      } else if (selectedArea == 350) { // Lahav
-        nearbyStationId = 28; // Shani
-      } else if (selectedArea == 60) { // Beer Sheva University
-        nearbyStationId = 28; // Shani
+      if (selectedArea == '208') { // Ashqelon Port
+        nearbyStationId = '82'; // Negba
+      } else if (['271', '98', '112', '338', '379'].includes(selectedArea)) { // Avdat, Sede Boqer, Zomet Hanegev, Ezuz, Mizpe Ramon
+        nearbyStationId = '381'; // Ashalim
+      } else if (['207', '232'].includes(selectedArea)) { // Paran, Neot Smadar
+        nearbyStationId = '36'; // Yotvata
+      } else if (selectedArea == '210') { // Metzoke Dragot
+        nearbyStationId = '28'; // Shani
+      } else if (selectedArea == '236') { // Gat
+        nearbyStationId = '79'; // Dorot
+      } else if (selectedArea == '350') { // Lahav
+        nearbyStationId = '28'; // Shani
+      } else if (selectedArea == '60') { // Beer Sheva University
+        nearbyStationId = '28'; // Shani
       }
 
       if (nearbyStationId) {
@@ -208,6 +207,7 @@ router.post('/calculate', async (req, res) => {
           res.status(500).json({ error: 'An error occurred while fetching data from a nearby station.' });
           return;
         }
+
       }
     }
 
@@ -220,24 +220,24 @@ router.post('/calculate', async (req, res) => {
     const I = computeI(E, Kc, areaSize);
 
     // Create a new recommendation document
-    const recommendation = new Recommendation({
-      user: req.user ? req.user.userId : null, // Save the user ID if authenticated, otherwise null
-      grad: gradValue,
-      windSpeed1mm: ws1mmValue,
-      maxWindSpeed: wsMaxValue,
-      temperature: temperature,
-      relativeHumidity: relativeHumidity,
-      deltaY: deltaY,
-      e0: e0,
-      ea: ea,
-      Ea: Ea,
-      E: E,
-      Kc: Kc,
-      recommendation: I
-    });
+    // const recommendation = new Recommendation({
+    //   user: req.user ? req.user.userId : null, // Save the user ID if authenticated, otherwise null
+    //   grad: gradValue,
+    //   windSpeed1mm: ws1mmValue,
+    //   maxWindSpeed: wsMaxValue,
+    //   temperature: temperature,
+    //   relativeHumidity: relativeHumidity,
+    //   deltaY: deltaY,
+    //   e0: e0,
+    //   ea: ea,
+    //   Ea: Ea,
+    //   E: E,
+    //   Kc: Kc,
+    //   recommendation: I
+    // });
 
     // Save the document to the database
-    await recommendation.save();
+    // await recommendation.save();
 
 
     res.json({
@@ -261,36 +261,36 @@ router.post('/calculate', async (req, res) => {
 });
 
 
-// Endpoint to retrieve saved recommendations
-router.get("/", async (req, res) => {
-  try {
-    // Fetch all saved recommendations from the database
-    const recommendations = await Recommendation.find();
+// // Endpoint to retrieve saved recommendations
+// router.get("/", async (req, res) => {
+//   try {
+//     // Fetch all saved recommendations from the database
+//     const recommendations = await Recommendation.find();
 
-    res.json(recommendations); // Respond with saved recommendations
-  } catch (error) {
-    console.error('Error fetching recommendations:', error);
-    res.status(500).json({ error: 'An error occurred while fetching recommendations.' });
-  }
-});
+//     res.json(recommendations); // Respond with saved recommendations
+//   } catch (error) {
+//     console.error('Error fetching recommendations:', error);
+//     res.status(500).json({ error: 'An error occurred while fetching recommendations.' });
+//   }
+// });
 
 
-// Route to get recommendations by user
-router.get('/user-recommendations', authenticateToken, async (req, res) => {
-  try {
-    // Ensure the user is authenticated
-    if (!req.user) {
-      return res.status(401).json({ message: 'Unauthorized' });
-    }
+// // Route to get recommendations by user
+// router.get('/user-recommendations', authenticateToken, async (req, res) => {
+//   try {
+//     // Ensure the user is authenticated
+//     if (!req.user) {
+//       return res.status(401).json({ message: 'Unauthorized' });
+//     }
 
-    // Find recommendations for the authenticated user
-    const recommendations = await Recommendation.find({ user: req.user.userId });
+//     // Find recommendations for the authenticated user
+//     const recommendations = await Recommendation.find({ user: req.user.userId });
 
-    res.json(recommendations);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
+//     res.json(recommendations);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// });
 
 
 // GET route to check if the user is logged in
