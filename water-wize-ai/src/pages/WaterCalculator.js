@@ -12,6 +12,46 @@ import InputField from "../components/inputs/InputField";
 import InputPicker from "../components/inputs/PickInput";
 import Recommendation from "../components/recommendation/Recomendation"; //TODO: remove after creating user recs page
 
+const bycodejson = require('../resources/bycode2022Updated.json');
+console.log(bycodejson); // Log the entire array to inspect its structure
+console.log(bycodejson["קובץ יישובים 2022"][0].EngName)
+
+const CitiesCities = [];
+for (let i = 0; i < bycodejson["קובץ יישובים 2022"].length; i++) {
+  CitiesCities.push(bycodejson["קובץ יישובים 2022"][i].EngName);
+}
+
+console.log(CitiesCities); // Log the array of EngName values
+
+const areaCoordinates = {
+  381: { name: 'Ashalim', latitude: 30.983, longitude: 34.708 },
+  29: { name: 'Arad', latitude: 31.25, longitude: 35.1855 },
+  208: { name: 'Ashkelon', latitude: 31.6394, longitude: 34.5215 },
+  271: { name: 'Avdat', latitude: 30.7877, longitude: 34.7712 },
+  60: { name: 'Beer Sheva University', latitude: 31.2642, longitude: 34.8045 },
+  58: { name: 'Besor Farm', latitude: 31.2716, longitude: 34.38941 },
+  79: { name: 'Dorot', latitude: 31.5036, longitude: 34.648 },
+  64: { name: 'Eilat', latitude: 29.5526, longitude: 34.952 },
+  211: { name: 'Ein Gedi', latitude: 30.4667, longitude: 35.3833 },
+  338: { name: 'Ezuz', latitude: 30.7911, longitude: 34.4715 },
+  236: { name: 'Gat', latitude: 31.6303, longitude: 34.7913 },
+  33: { name: 'Hatzeva', latitude: 30.7787, longitude: 35.2389 },
+  350: { name: 'Lahav', latitude: 31.3812, longitude: 34.8729 },
+  210: { name: 'Metzoke Dragot', latitude: 31.5881, longitude: 35.3916 },
+  379: { name: 'Mitzpe Ramon', latitude: 30.6101, longitude: 34.8046 },
+  82: { name: 'Negba', latitude: 31.6585, longitude: 34.6798 },
+  232: { name: 'Neot Smadar', latitude: 30.048, longitude: 35.0233 },
+  349: { name: 'Nevatim', latitude: 31.205, longitude: 34.9227 },
+  207: { name: 'Paran', latitude: 30.3655, longitude: 35.1479 },
+  98: { name: 'Sde Boker', latitude: 30.8702, longitude: 34.795 },
+  65: { name: 'Sodom', latitude: 31.0306, longitude: 35.3919 },
+  28: { name: 'Shani', latitude: 31.3568, longitude: 35.0662 },
+  36: { name: 'Yotvata', latitude: 29.8851, longitude: 35.0771 },
+  112: { name: 'Zomet HaNegev', latitude: 31.0708, longitude: 34.8513 },
+};
+
+
+
 const locations = { //TODO: add to json file
   381: 'Ashalim',
   29: 'Arad',
@@ -44,16 +84,35 @@ const optionsAreas = Object.keys(locations).map(key => ({
 }));
 
 
-const cities = { //TODO: add to json filr
-  1: 'Tel Aviv',
-  2: 'Beer Sheva',
-  3: 'Jerusalm'
-};
+const cities = {};
+
+for (let i = 1; i <= 1264; i++) {
+  if (CitiesCities[i - 1]) { // Check if element exists in CitiesCities
+    cities[i] = CitiesCities[i - 1];
+  } else {
+    // Handle cases where CitiesCities might not have enough data (optional)
+    // You can add a default value or log an error message here
+  }
+}
+
+
+// for (let i = 3; i < CitiesCities.length; i++) {
+//   cities[i + 1] = CitiesCities[i];
+// }
+console.log(cities)
 const optionsCities = Object.keys(cities).map(key => ({
   value: key,
   label: cities[key]
 }));
+console.log(optionsCities)
 
+const labels = [];
+
+for (const key in optionsCities) {
+  labels.push(optionsCities[key].label);
+}
+
+console.log(labels); // Output: ["Label 1", "Label 2", ...]
 
 function WaterCalculator() {
   const dict = useDictionary();
@@ -144,16 +203,63 @@ function WaterCalculator() {
 
 
   const showPosition = (position) => {
-    // const latitude = position.coords.latitude;
-    // const longitude = position.coords.longitude;
+    const userLatitude = position.coords.latitude;
+    const userLongitude = position.coords.longitude;
 
-    const wgs84Lat = 29.5526;
-    const wgs84Long = 34.9520;
+    // Function to calculate distance between two points (latitude/longitude)
+    const calculateDistance = (lat1, lon1, lat2, lon2) => {
+      const R = 6371; // Radius of the Earth in km
+      const dLat = (lat2 - lat1) * (Math.PI / 180);
+      const dLon = (lon2 - lon1) * (Math.PI / 180);
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) *
+          Math.cos(lat2 * (Math.PI / 180)) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const d = R * c; // Distance in km
+      return d;
+    };
 
-    // Convert WGS84 to ITM
-    //const itmCoords = WGS84toITM(wgs84Lat, wgs84Long);
-    //console.log(`WGS84 (${wgs84Lat}, ${wgs84Long}) to ITM: X: ${itmCoords.x}, Y: ${itmCoords.y}`);
-  }
+    // Find the closest area
+    let closestArea = null;
+    let minDistanceArea = Infinity;
+
+    for (const areaId in areaCoordinates) {
+      const area = areaCoordinates[areaId];
+      const areaLatitude = area.latitude;
+      const areaLongitude = area.longitude;
+      const dist = calculateDistance(
+        userLatitude,
+        userLongitude,
+        areaLatitude,
+        areaLongitude
+      );
+      if (dist < minDistanceArea) {
+        minDistanceArea = dist;
+        closestArea = area;
+      }
+    }
+
+    // Update selectedArea based on the closest match
+    if (closestArea) {
+      setSelectedArea({ value: closestArea.name, label: closestArea.name });
+    }
+
+    // You can also update selectedCity based on the closest area found
+    // For demonstration, update selectedCity based on a specific logic
+
+    // Example logic: if closestArea is within a certain range of coordinates, set selectedCity
+    // This logic needs to be adjusted based on your actual requirements
+    if (closestArea) {
+      if (closestArea.latitude > 30 && closestArea.latitude < 32 &&
+          closestArea.longitude > 34 && closestArea.longitude < 36) {
+        setSelectedCity({ value: '29', label: 'Arad' }); // Example: Set Arad as the city if within specific coordinates range
+      }
+    }
+  };
+
 
   return (
     <div className={classes.WaterCalculator}>
