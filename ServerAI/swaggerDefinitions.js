@@ -247,7 +247,7 @@
 
     /**
      * @swagger
-     * /calculate:
+     * /calculator/calculate:
      *   post:
      *     summary: Calculate irrigation recommendations
      *     tags: [Recommendations]
@@ -260,9 +260,11 @@
      *             properties:
      *               selectedArea:
      *                 type: integer
+     *                 example: "208"
      *                 description: The ID of the selected area
      *               areaSize:
      *                 type: number
+     *                 example: "1000"
      *                 description: The size of the area
      *     responses:
      *       200:
@@ -300,54 +302,6 @@
      *         description: Error during calculation
      */
 
-
-    /**
-     * @swagger
-     * /recommendations/user-recommendations:
-     *   get:
-     *     summary: Retrieve recommendations for the authenticated user
-     *     tags: [Recommendations]
-     *     responses:
-     *       200:
-     *         description: A list of user-specific recommendations
-     *         content:
-     *           application/json:
-     *             schema:
-     *               type: array
-     *               items:
-     *                 type: object
-     *                 properties:
-     *                   user:
-     *                     type: string
-     *                   grad:
-     *                     type: number
-     *                   windSpeed1mm:
-     *                     type: number
-     *                   maxWindSpeed:
-     *                     type: number
-     *                   temperature:
-     *                     type: number
-     *                   relativeHumidity:
-     *                     type: number
-     *                   deltaY:
-     *                     type: number
-     *                   e0:
-     *                     type: number
-     *                   ea:
-     *                     type: number
-     *                   Ea:
-     *                     type: number
-     *                   E:
-     *                     type: number
-     *                   Kc:
-     *                     type: number
-     *                   recommendation:
-     *                     type: number
-     *       401:
-     *         description: Unauthorized
-     *       500:
-     *         description: Error fetching recommendations
-     */
 
     /**
      * @swagger

@@ -219,27 +219,6 @@ router.post('/calculate', async (req, res) => {
     const E = computeE(deltaY, gradValue, wsMaxValue, Ea);
     const I = computeI(E, Kc, areaSize);
 
-    // Create a new recommendation document
-    // const recommendation = new Recommendation({
-    //   user: req.user ? req.user.userId : null, // Save the user ID if authenticated, otherwise null
-    //   grad: gradValue,
-    //   windSpeed1mm: ws1mmValue,
-    //   maxWindSpeed: wsMaxValue,
-    //   temperature: temperature,
-    //   relativeHumidity: relativeHumidity,
-    //   deltaY: deltaY,
-    //   e0: e0,
-    //   ea: ea,
-    //   Ea: Ea,
-    //   E: E,
-    //   Kc: Kc,
-    //   recommendation: I
-    // });
-
-    // Save the document to the database
-    // await recommendation.save();
-
-
     res.json({
       grad: gradValue,
       windSpeed1mm: ws1mmValue,
@@ -260,40 +239,6 @@ router.post('/calculate', async (req, res) => {
   }
 });
 
-
-
-
-
-
-
-
-
-//     res.json(recommendations); // Respond with saved recommendations
-//   } catch (error) {
-//     console.error('Error fetching recommendations:', error);
-//     res.status(500).json({ error: 'An error occurred while fetching recommendations.' });
-//   }
-// });
-
-
-// // Route to get recommendations by user
-// router.get('/user-recommendations', authenticateToken, async (req, res) => {
-//   try {
-//     // Ensure the user is authenticated
-//     if (!req.user) {
-//       return res.status(401).json({ message: 'Unauthorized' });
-//     }
-
-//     // Find recommendations for the authenticated user
-//     const recommendations = await Recommendation.find({ user: req.user.userId });
-//     // Find recommendations for the authenticated user
-//     const recommendations = await Recommendation.find({ user: req.user.userId });
-
-//     res.json(recommendations);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// });
 
 
 router.post('/recommendations', async (req, res) => {
@@ -369,86 +314,5 @@ router.get('/recommendations', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// // Route to retrieve all recommendations
-// router.get('/recommendations', async (req, res) => {
-//   try {
-//     // Retrieve all recommendations from the database
-//     const recommendations = await Recommendation.find();
-
-//     // Send a response with the recommendations array
-//     res.status(200).json(recommendations);
-//   } catch (err) {
-//     // Handle errors if any occur
-//     console.error(err);
-//     res.status(500).json({ error: err.message });
-//   }
-// });
-
-// // GET route to fetch recommendations by user
-// router.get('/user-recommendations', authenticateToken, async (req, res) => {
-//   try {
-//       // Ensure the user is authenticated
-//       if (!req.user) {
-//           return res.status(401).json({ message: 'Unauthorized' });
-//       }
-
-//       // Find recommendations for the authenticated user
-//       const recommendations = await Recommendation.find({ user: req.user.userId });
-
-//       res.json(recommendations);
-//   } catch (err) {
-//       console.error(err);
-//       res.status(500).json({ error: err.message });
-//   }
-// });
-
-
-// // // POST endpoint to create a new recommendation
-// app.post('/useree', async (req, res) => {
-//   try {
-//     const { userId, grad, windSpeed1mm, maxWindSpeed, temperature, relativeHumidity, deltaY, e0, ea, Ea, E, Kc, recommendation } = req.body;
-
-//     // Create a new recommendation document
-//     const newRecommendation = new Recommendation({
-//       user: userId, // Save the user ID from the request body
-//       grad: grad,
-//       windSpeed1mm: windSpeed1mm,
-//       maxWindSpeed: maxWindSpeed,
-//       temperature: temperature,
-//       relativeHumidity: relativeHumidity,
-//       deltaY: deltaY,
-//       e0: e0,
-//       ea: ea,
-//       Ea: Ea,
-//       E: E,
-//       Kc: Kc,
-//       recommendation: recommendation
-//     });
-
-    // Save the document to the database
-    // const savedRecommendation = await newRecommendation.save();
-
-//     // Send a response to the client
-//     res.status(201).json(savedRecommendation);
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// });
-
-// GET route to check if the user is logged in
-router.get('/check-login', authenticateToken, (req, res) => {
-  // Check if req.user is null, indicating that the user is not logged in
-  if (!req.user) {
-    res.json({ loggedIn: false });
-  } else {
-    // User is logged in
-    // You can access user information from req.user if needed
-    res.json({ loggedIn: true });
-  }
-});
-
-
-
 
 module.exports = router;
