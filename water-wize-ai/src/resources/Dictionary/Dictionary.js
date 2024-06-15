@@ -39,7 +39,8 @@ const hebDict = {
   sendMessage: "שלח הודעה",
 
   //WaterCalculator page content
-  area:"אזור",
+  station:"תחנה",
+  city:"עיר",
   date: "תאריך",
   areaSize: "גודל שטח",
   calculate: "חשב",
@@ -93,6 +94,9 @@ whostyle:"rightwho",
 westyle:"rightwe",
 arestyle:"rightare",
 
+//errors
+errorsAreaSizeRange: "הזינו מספר תקין, בין 0 ל-5000" //todo: update to actual range
+
 };
 
 const engDict = {
@@ -134,7 +138,8 @@ const engDict = {
   sendMessage: "Send Message",
 
   //WaterCalculator page content
-  area:"Area",
+  station:"Station",
+  city:"City",
   date: "Date",
   areaSize: "Area Size",
   calculate: "Calculate",
@@ -186,8 +191,8 @@ whostyle:"leftwho",
 westyle:"leftwe",
 arestyle:"leftare",
 
-// //errors
-// invalitTextInput: "Invalid input"
+//errors
+errorsAreaSizeRange: "please enter a valid number - between 0 to 5000" //todo: update to actual range
 
 };
 

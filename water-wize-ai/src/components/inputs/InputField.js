@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import useDictionary from "../../resources/Dictionary/Dictionary";
 
-const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputProps, type }) => {
+const InputField = ({ label, value, onValueChange, checkIfValid, error, inputProps, type }) => {
     const dict = useDictionary();
     const [isError, setIsError] = useState(false);
 
@@ -110,4 +110,4 @@ const FieldInput = ({ label, value, onValueChange, checkIfValid, error, inputPro
     );
 };
 
-export default FieldInput;
+export default InputField;

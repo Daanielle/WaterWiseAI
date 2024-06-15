@@ -5,12 +5,9 @@ import CustomCard from "../CustomCard";
 import waterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
 import Fab from '@mui/material/Fab';
 import Box from "@mui/material/Box";
-import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { IconButton } from "@mui/material";
-import Modal from "@mui/material/Modal";
 import useDictionary from "../../resources/Dictionary/Dictionary";
-import Typography from '@mui/material/Typography';
 
 const modalStyle = {
   position: "absolute",
@@ -60,7 +57,7 @@ const DetailsPanel = ({ detailedData }) => {
               // />
               <div>
                 <CustomCard
-                  topIcon={waterCalculatorVariablesDetails[key].icon}
+                  topIcon={waterCalculatorVariablesDetails[key]?.icon}
                   title={key}
                   description={detailedData[key]}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
@@ -78,17 +75,32 @@ const DetailsPanel = ({ detailedData }) => {
           </div>
         ))}
       </div>
-      {/* <div className={classes.row}>
+      <div className={classes.row}>
         {keys.slice(6, 12).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
             {key && detailedData[key] &&
-              <DetailCard
+              // <DetailCard
+              //   title={key}
+              //   value={detailedData[key]}
+              // />
+              <div>
+              <CustomCard
+                topIcon={waterCalculatorVariablesDetails[key]?.icon}
                 title={key}
-                value={detailedData[key]}
-              />}
+                description={detailedData[key]}
+                // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
+                bottomIcons={bottomIcons}
+                // openModal={openDetailsModal}
+                //setOpenModal={setOpenDetailsModal}
+
+                openModal={openModal} 
+                onCloseModal={handleCloseModal}
+              />
+            </div>
+              }
           </div>
         ))}
-      </div> */}
+      </div>
 
 
     </div>

@@ -1,20 +1,20 @@
 
 .formControl {
   display: flex;
-  /* gap: 1rem; Optional: Adds space between the columns */
+  gap: 2rem; 
 }
 
 .leftCol {
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* Optional: Adds space between the elements in the left column */
+  gap: 1rem; 
   flex: 1; 
-  padding-left: 100px;
+  /* padding-left: 100px; */
 }
 
 .rightCol {
-  flex: 3; /* Adjust the flex value to control the width ratio */
+  flex: 3; 
   display: flex;
-  justify-content: center; /* Optional: Center the DetailCard horizontally */
-  align-items: flex-start; /* Optional: Align the DetailCard to the top */
+  justify-content: center; 
+  align-items: flex-start; 
 }

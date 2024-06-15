@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from '../AuthContext';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import FieldInput from "../components/inputs/FieldInput";
+import InputField from "../components/inputs/InputField";
 import PageContainer from "../components/PageContainer";
 import ContainerBox from '../components/ContainerBox';
 import CustomButton from "../components/CustomButton";
@@ -51,10 +51,10 @@ function LogIn() {
   return (
     <PageContainer>
       <form onSubmit={handleSubmit}>
-        <ContainerBox >
+        <ContainerBox width="700px">
           <TitleButton style={titleButton}>{dict.LogIn}</TitleButton>
-          <FieldInput label={dict.email} value={email} onValueChange={setEmail} checkIfValid={() => true} error="" />
-          <FieldInput label={dict.password} value={password} type="password" onValueChange={setPassword} checkIfValid={() => true} error="" />
+          <InputField label={dict.email} value={email} onValueChange={setEmail} checkIfValid={() => true} error="" />
+          <InputField label={dict.password} value={password} type="password" onValueChange={setPassword} checkIfValid={() => true} error="" />
           <CustomButton type="Submit" label={dict.Login} />
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '10%' }}>
             <CustomButton type="button" label={dict.forgetpassword} style={{ width: '35%' }} secondary />
