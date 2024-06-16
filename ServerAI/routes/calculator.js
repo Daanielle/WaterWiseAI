@@ -107,7 +107,6 @@ router.post('/calculate', async (req, res) => {
     if (['381', '29', '58', '79', '33', '82', '28', '36'].includes(selectedArea)) {
       const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
       gradValue = gradChannel ? gradChannel.value : null;
-      console.log(gradValue)
 
       const ws1mmChannel = lastBatch.channels.find(channel => channel.name === 'WS1mm');
       ws1mmValue = ws1mmChannel ? ws1mmChannel.value : null;
@@ -256,7 +255,8 @@ router.post('/recommendations', async (req, res) => {
             Ea,
             E,
             Kc,
-            recommendation
+            recommendation,
+            station
         } = req.body.recommendation;
 
         //console.log(mongoose.Types.ObjectId.isValid(req.body.userId))
@@ -267,7 +267,7 @@ router.post('/recommendations', async (req, res) => {
 
         // Create a new recommendation document
         const newRecommendation = new Recommendation({
-            user: userId, // Save the user ID as a string
+            userId: userId, // Save the user ID as a string
             grad: grad,
             windSpeed1mm: windSpeed1mm,
             maxWindSpeed: maxWindSpeed,
@@ -279,7 +279,8 @@ router.post('/recommendations', async (req, res) => {
             Ea: Ea,
             E: E,
             Kc: Kc,
-            recommendation: recommendation
+            recommendation: recommendation,
+            station: station
         });
 
         // Save the document to the database
@@ -305,8 +306,7 @@ router.get('/recommendations', async (req, res) => {
     }
 
     // Find recommendations by userId in the database
-    const recommendations = await Recommendation.find({ user: userId });
-
+    const recommendations = await Recommendation.find({ userId: userId });
     // Send the recommendations as JSON response
     res.status(200).json(recommendations);
   } catch (err) {

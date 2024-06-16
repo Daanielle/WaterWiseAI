@@ -3,8 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const UsersRouter = require('./routes/users');
-
 const CalculatorRouter = require('./routes/calculator'); // Import the calculator router
+const ForumRouter = require('./routes/forum')
 
 const axios = require('axios')
 const app = express();
@@ -24,6 +24,7 @@ app.use(bodyParser.json());
 // Use the Users router
 app.use('/users', UsersRouter);
 app.use('/calculator', CalculatorRouter); // Use the updated calculator router
+app.use('/forum', ForumRouter);
 
 // Swagger setup
 const swaggerUi = require('swagger-ui-express');

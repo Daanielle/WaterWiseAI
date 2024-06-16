@@ -15,6 +15,13 @@ module.exports = function(app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    '/forum',
+    createProxyMiddleware({
+      target: 'http://localhost:80/',
+      changeOrigin: true,
+    })
+  );
   // app.use(
   //   '/',
   //   createProxyMiddleware({

@@ -23,8 +23,7 @@ export const saveRecommendation = async (recommendation) => {
 
 export const getRecommendationsForUser = async (userId) => {
   try {
-    const url = `/recommendations?userId=${userId}`;
-
+    const url = `/calculator/recommendations?userId=${userId}`;
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -38,6 +37,7 @@ export const getRecommendationsForUser = async (userId) => {
     }
 
     const recommendations = await response.json();
+    console.log(response)
     return recommendations;
   } catch (error) {
     console.error('Failed to fetch recommendations:', error);
@@ -72,3 +72,21 @@ export const getLoggedInUserId = async () => {
 
 };
 
+
+export const addNewForumMessage = async (message) => {
+  try {
+    const response = await fetch('/forum/newMessage', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message,
+      }),
+    });
+    const status = await response.json();
+    return status
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
