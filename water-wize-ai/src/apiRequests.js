@@ -23,8 +23,7 @@ export const saveRecommendation = async (recommendation) => {
 
 export const getRecommendationsForUser = async (userId) => {
   try {
-    const url = `/recommendations?userId=${userId}`;
-
+    const url = `/calculator/recommendations?userId=${userId}`;
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -38,6 +37,7 @@ export const getRecommendationsForUser = async (userId) => {
     }
 
     const recommendations = await response.json();
+    console.log(response)
     return recommendations;
   } catch (error) {
     console.error('Failed to fetch recommendations:', error);

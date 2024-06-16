@@ -13,7 +13,8 @@ const recommendationSchema = new mongoose.Schema({
     Ea: String,
     E: String,
     Kc: String,
-    recommendation: String
+    recommendation: String,
+    station:String
 }, { timestamps: true });
 
 module.exports = mongoose.model('Recommendation', recommendationSchema);
