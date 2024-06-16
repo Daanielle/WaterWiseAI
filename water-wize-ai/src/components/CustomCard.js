@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Icon } from '@mui/material';
 import Modal from "@mui/material/Modal";
-import waterCalculatorVariablesDetails from "../resources/mapping/waterCalculatorVariablesDetails";
+import waterCalculatorVariablesDetails from "../resources/mapping/WaterCalculatorVariablesDetails";
 import { styled } from '@mui/material/styles';
 
 const modalStyle = {
