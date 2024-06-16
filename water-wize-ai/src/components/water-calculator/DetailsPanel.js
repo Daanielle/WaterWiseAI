@@ -2,10 +2,10 @@ import React from "react";
 import DetailCard from "./DetailCard";
 import classes from "../../styles/DetailsPanel.module.css";
 import CustomCard from "../CustomCard";
-import waterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
-import Fab from '@mui/material/Fab';
+import WaterCalculatorVariablesDetails from "../../resources/mapping/WaterCalculatorVariablesDetails";
+import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import { IconButton } from "@mui/material";
 import useDictionary from "../../resources/Dictionary/Dictionary";
 
@@ -23,86 +23,83 @@ const modalStyle = {
 
 const DetailsPanel = ({ detailedData }) => {
   const [openModal, setOpenModal] = React.useState(false);
-  const [currentTitle, setCurrentTitle] = React.useState('');
+  const [currentTitle, setCurrentTitle] = React.useState("");
 
   const dict = useDictionary();
+  const variablesMapping = WaterCalculatorVariablesDetails()
 
   // const handleOpenDetailsModal = () => setOpenDetailsModal(true);
   const handleCloseModal = () => setOpenModal(false);
-  const handleOpenModal = () => 
-    {setOpenModal(true);
-      console.log('hh')
-    }
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
 
   const keys = Object.keys(detailedData);
 
-  const bottomIcons = <Box sx={{ '& > :not(style)': { m: 1 } }}>
-    <Fab size="small" aria-label="add">
-      <IconButton aria-label="more info" onClick={handleOpenModal}>
-        <QuestionMarkIcon sx={{ color: "#416e06" }} />
-      </IconButton>
-    </Fab>
-  </Box>
-
+  const bottomIcons = (
+    <Box sx={{ "& > :not(style)": { m: 1 } }}>
+      <Fab size="small" aria-label="add">
+        <IconButton aria-label="more info" onClick={handleOpenModal}>
+          <QuestionMarkIcon sx={{ color: "#416e06" }} />
+        </IconButton>
+      </Fab>
+    </Box>
+  );
 
   return (
     <div className={classes.detailsPanel}>
       <div className={classes.row}>
         {keys.slice(0, 6).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
-            {key && detailedData[key] &&
+            {key && detailedData[key] && (
               // <DetailCard
               //   title={key}
               //   value={detailedData[key]}
               // />
               <div>
                 <CustomCard
-                  topIcon={waterCalculatorVariablesDetails[key]?.icon}
-                  title={key}
-                  description={detailedData[key]}
+                  topIcon={variablesMapping[key]?.icon}
+                  title={variablesMapping[key]?.title}
+                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
                   bottomIcons={bottomIcons}
                   // openModal={openDetailsModal}
                   //setOpenModal={setOpenDetailsModal}
 
-                  openModal={openModal} 
+                  openModal={openModal}
                   onCloseModal={handleCloseModal}
                 />
               </div>
-
-            }
-
+            )}
           </div>
         ))}
       </div>
       <div className={classes.row}>
         {keys.slice(6, 12).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
-            {key && detailedData[key] &&
+            {key && detailedData[key] && (
               // <DetailCard
               //   title={key}
               //   value={detailedData[key]}
               // />
               <div>
-              <CustomCard
-                topIcon={waterCalculatorVariablesDetails[key]?.icon}
-                title={key}
-                description={detailedData[key]}
-                // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
-                bottomIcons={bottomIcons}
-                // openModal={openDetailsModal}
-                //setOpenModal={setOpenDetailsModal}
+                <CustomCard
+                  topIcon={variablesMapping[key]?.icon}
+                  title={variablesMapping[key]?.title}
+                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
+                  // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
+                  bottomIcons={bottomIcons}
+                  // openModal={openDetailsModal}
+                  //setOpenModal={setOpenDetailsModal}
 
-                openModal={openModal} 
-                onCloseModal={handleCloseModal}
-              />
-            </div>
-              }
+                  openModal={openModal}
+                  onCloseModal={handleCloseModal}
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>
-
-
     </div>
   );
 };

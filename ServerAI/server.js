@@ -25,6 +25,51 @@ app.use(bodyParser.json());
 app.use('/users', UsersRouter);
 app.use('/calculator', CalculatorRouter); // Use the updated calculator router
 
+// Swagger setup
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
+
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'API Documentation',
+      version: '1.0.0',
+      description: 'API documentation for your Express application'
+    },
+    servers: [
+      {
+        url: 'http://localhost:80',
+        description: 'Local server'
+      }
+    ]
+  },
+  apis: ['./routes/*.js', './swaggerDefinitions.js'], // Paths to API routes and Swagger definition file
+};
+
+
+
+// const swaggerOptions = {
+//   swaggerDefinition: {
+//     openapi: '3.0.0',
+//     info: {
+//       title: 'API Documentation',
+//       version: '1.0.0',
+//       description: 'API documentation for your Express application'
+//     },
+//     servers: [
+//       {
+//         url: 'http://localhost:80',
+//         description: 'Local server'
+//       }
+//     ]
+//   },
+//   apis: ['./routes/*.js', './swaggerDefinitions.yaml'],};
+
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+
 // // Example route
 // app.get('/', (req, res) => {
 //   res.send('Hello World!');

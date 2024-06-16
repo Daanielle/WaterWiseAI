@@ -1,0 +1,30 @@
+openapi: 3.0.0
+info:
+  title: User Management API
+  description: API endpoints for user management and recommendations
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      summary: Retrieve a list of users
+      responses:
+        '200':
+          description: A list of users
+          content:
+            # application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                    firstName:
+                      type: string
+                    lastName:
+                      type: string
+                    email:
+                      type: string
+                    image:
+                      type: string
+    # Add other operations like POST, PUT, DELETE if defined in your application
