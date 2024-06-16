@@ -5,11 +5,28 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import Recommendation from '../recommendation/Recomendation';
+
+
+const detailedData = [{
+  grad: "--",
+  windSpeed1mm: "--",
+  maxWindSpeed: "--",
+  temperature: "--",
+  relativeHumidity: "--",
+  deltaY: "--",
+  e0: "--",
+  ea: "--",
+  Ea: "--",
+  E: "--",
+  Kc: "--",
+  recommendation: "--",
+}]
 
 export default function AccordionExpandIcon() {
   return (
     <div>
-      <Accordion>
+      <Accordion style={{ backgroundColor: '#f5f5f5'}}>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls="panel1-content"
@@ -18,6 +35,7 @@ export default function AccordionExpandIcon() {
           <Typography>Accordion 1</Typography>
         </AccordionSummary>
         <AccordionDetails>
+          <Recommendation recommendationDataRows={detailedData} />
           <Typography>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             malesuada lacus ex, sit amet blandit leo lobortis eget.
@@ -59,7 +77,7 @@ export default function AccordionExpandIcon() {
           </Accordion>
         </div>
       </Accordion>
-      <Accordion>
+      <Accordion style={{ backgroundColor: '#f5f5f5'}}>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls="panel2-content"

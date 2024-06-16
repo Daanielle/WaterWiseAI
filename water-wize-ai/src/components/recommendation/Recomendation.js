@@ -23,7 +23,7 @@ const Recommendation = ({ recommendationDataRows }) => {
                             <TableCell
                                 key={index}
                                 align="center"
-                                sx={{ fontWeight: 'bold', backgroundColor: '#f5f5f5' }} // Bold text for header cells
+                                sx={{ fontWeight: 'bold', backgroundColor: '#c3c4c0' }}
                             >
                                 <Tooltip title={
                                     <React.Fragment>
