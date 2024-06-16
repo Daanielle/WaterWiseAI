@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Icon } from '@mui/material';
 import Modal from "@mui/material/Modal";
-import waterCalculatorVariablesDetails from "../resources/mapping/WaterCalculatorVariablesDetails";
+import WaterCalculatorVariablesDetails from "../resources/mapping/WaterCalculatorVariablesDetails";
 import { styled } from '@mui/material/styles';
 
 const modalStyle = {
@@ -28,7 +28,7 @@ const CustomBackdrop = styled('div')({
   });
 
 const CustomCard = ({ title, description, image, topIcon, bottomIcons, openModal, onCloseModal }) => {
-
+    const waterCalculatorVariablesDetails = WaterCalculatorVariablesDetails()
     const handleClose = () => {
         onCloseModal(); // Call the parent's onCloseModal function
     };

@@ -6,12 +6,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import waterCalculatorVariablesDetails from '../../resources/mapping/WaterCalculatorVariablesDetails';
+import WaterCalculatorVariablesDetails from '../../resources/mapping/WaterCalculatorVariablesDetails';
 import Tooltip from '@mui/material/Tooltip';
 import { Typography, Icon } from '@mui/material';
 
 const Recommendation = ({ recommendationDataRows }) => {
-    const varData = waterCalculatorVariablesDetails
+    const varData = WaterCalculatorVariablesDetails()
     const tableHeaders = Object.keys(varData).map(key => varData[key].title);
 
     return (
