@@ -11,6 +11,7 @@ import ContainerBox from "../components/ContainerBox";
 import InputField from "../components/inputs/InputField";
 import InputPicker from "../components/inputs/PickInput";
 import Recommendation from "../components/recommendation/Recomendation"; //TODO: remove after creating user recs page
+import { saveRecommendation, getLoggedInUserId } from "../apiRequests";
 
 const bycodejson = require('../resources/bycode2022Updated.json');
 
@@ -175,6 +176,30 @@ function WaterCalculator() {
     }
   };
 
+  const saveRec = async () => {
+
+    const userId = await getLoggedInUserId();
+    let saveStatus = saveRecommendation({
+      userId,
+      ...detailedData
+    })
+
+
+    // user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false }, // Optional user reference
+    // grad: Number,
+    // windSpeed1mm: Number,
+    // maxWindSpeed: Number,
+    // temperature: Number,
+    // relativeHumidity: Number,
+    // deltaY: Number,
+    // e0: Number,
+    // ea: Number,
+    // Ea: Number,
+    // E: Number,
+    // Kc: Number,
+    // recommendation: Number
+  }
+
   const calculate = async () => {
     try {
       if (selectedArea && selectedAreaSize) {
@@ -300,7 +325,8 @@ function WaterCalculator() {
               <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => x === '' || (x < 5000 && x > 0)} error={dict.errorsAreaSizeRange} />
 
               <CustomButton onClick={calculate} label={dict.calculate} type="button" />
-              <CustomButton onClick={calculate} label="Save Calculate" type="button" />
+              <CustomButton onClick={saveRec} label="Save Calculate" type="button" /> 
+              {/* TODO: disable Save Calculate when no calc or not logged in */}
               <CustomButton onClick={calculate} label="Show all calcs" type="button" />
               <CustomButton onClick={findMyCoordinates} label="find my coordinates" type="button" />
             </ContainerBox>
@@ -309,6 +335,7 @@ function WaterCalculator() {
             <DetailsPanel detailedData={detailedData} />
           </div>
         </div>
+        {/* <h1>{loggedInUser}</h1> */}
         <Recommendation recommendationDataRows={[detailedData]}/>
       </PageContainer >
     </div >

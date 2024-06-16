@@ -257,12 +257,13 @@ router.post('/recommendations', async (req, res) => {
             E,
             Kc,
             recommendation
-        } = req.body;
+        } = req.body.recommendation;
 
+        //console.log(mongoose.Types.ObjectId.isValid(req.body.userId))
         // Validate userId format
-        if (!mongoose.Types.ObjectId.isValid(userId)) {
-            return res.status(400).json({ error: 'Invalid userId format' });
-        }
+        // if (!mongoose.Types.ObjectId.isValid(req.body.userId)) {
+        //     return res.status(400).json({ error: 'Invalid userId format' });
+        // }
 
         // Create a new recommendation document
         const newRecommendation = new Recommendation({

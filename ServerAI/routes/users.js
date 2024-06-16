@@ -32,6 +32,7 @@ router.get('/', async (req, res) => {
 
 // Getting a specific user
 router.get('/:id', getUser, (req, res) => {
+    console.log(res.user)
     res.json(res.user);
 });
 
