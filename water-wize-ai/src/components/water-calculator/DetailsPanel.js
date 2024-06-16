@@ -25,7 +25,7 @@ const modalStyle = {
   p: 4,
 };
 
-export default function  DetailsPanel ({ detailedData }){
+function DetailsPanel ({ detailedData }){
   const [openModal, setOpenModal] = React.useState(false);
   const [currentTitle, setCurrentTitle] = React.useState("");
   const [currentDescription, setCurrentDescription] = React.useState('');
@@ -178,4 +178,4 @@ export default function  DetailsPanel ({ detailedData }){
   );
 };
 
-// export default DetailsPanel;
+export default DetailsPanel;
