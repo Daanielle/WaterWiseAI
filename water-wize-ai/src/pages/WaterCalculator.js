@@ -23,6 +23,17 @@ for (let i = 0; i < bycodejson["קובץ יישובים 2022"].length; i++) {
 
 console.log(CitiesCities); // Log the array of EngName values
 
+const cityCoordinates = {};
+
+for (let i = 0; i < bycodejson["קובץ יישובים 2022"].length; i++) {
+  const city = bycodejson["קובץ יישובים 2022"][i];
+  cityCoordinates[city.EngName] = {
+    latitude: city.Latitude,
+    longitude: city.Longitude,
+  };
+}
+console.log(cityCoordinates);
+
 const areaCoordinates = {
   381: { name: 'Ashalim', latitude: 30.983, longitude: 34.708 },
   29: { name: 'Arad', latitude: 31.25, longitude: 35.1855 },
@@ -247,16 +258,30 @@ function WaterCalculator() {
       setSelectedArea({ value: closestArea.name, label: closestArea.name });
     }
 
-    // You can also update selectedCity based on the closest area found
-    // For demonstration, update selectedCity based on a specific logic
+    // Find the closest city
+    let closestCity = null;
+    let minDistanceCity = Infinity;
 
-    // Example logic: if closestArea is within a certain range of coordinates, set selectedCity
-    // This logic needs to be adjusted based on your actual requirements
-    if (closestArea) {
-      if (closestArea.latitude > 30 && closestArea.latitude < 32 &&
-          closestArea.longitude > 34 && closestArea.longitude < 36) {
-        setSelectedCity({ value: '29', label: 'Arad' }); // Example: Set Arad as the city if within specific coordinates range
+    for (const cityName in cityCoordinates) {
+      const city = cityCoordinates[cityName];
+      const cityLatitude = city.latitude;
+      const cityLongitude = city.longitude;
+      const dist = calculateDistance(
+        userLatitude,
+        userLongitude,
+        cityLatitude,
+        cityLongitude
+      );
+      if (dist < minDistanceCity) {
+        minDistanceCity = dist;
+        closestCity = cityName;
       }
+    }
+
+    // Update selectedCity based on the closest match
+    if (closestCity) {
+      const cityValue = optionsCities.find(option => option.label === closestCity).value;
+      setSelectedCity({ value: cityValue, label: closestCity });
     }
   };
 
