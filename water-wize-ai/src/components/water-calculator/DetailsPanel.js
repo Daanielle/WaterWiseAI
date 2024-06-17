@@ -12,6 +12,8 @@ import Modal from "@mui/material/Modal";
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
+import CalculatorsFormula from "./CalculatorsFormula";
+import CalculatorTabs from "./CalculatorTabs";
 
 const modalStyle = {
   position: "absolute",
@@ -23,6 +25,11 @@ const modalStyle = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+};
+
+const RecomendationStyle = {
+backgroundColor:'rgb(11, 119, 54)'
+  // backgroundColor:"green"
 };
 
 function DetailsPanel ({ detailedData }){
@@ -70,6 +77,7 @@ function DetailsPanel ({ detailedData }){
 
 
   return (
+    <div>
     <div className={classes.detailsPanel}>
       <div className={classes.row}>
         {keys.slice(0, 4).map((key, index) => (
@@ -83,7 +91,7 @@ function DetailsPanel ({ detailedData }){
                 <CustomCard
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
-                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
+                  description={ detailedData[key] !== "--" ? detailedData[key].toFixed(3) + " " + variablesMapping[key]?.units : detailedData[key]}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
                   bottomIcons={bottomIcons(key, detailedData[key])}
                   // openModal={openDetailsModal}
@@ -131,12 +139,12 @@ function DetailsPanel ({ detailedData }){
                 <CustomCard
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
-                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
+                  description={ detailedData[key] !== "--" ? detailedData[key].toFixed(3) + " " + variablesMapping[key]?.units : detailedData[key]}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
                   bottomIcons={bottomIcons(key, detailedData[key])}
                   // openModal={openDetailsModal}
                   //setOpenModal={setOpenDetailsModal}
-
+                  // {typeof value === 'number' ? value.toFixed(3) : value}
                   // openModal={openModal}
                   // onCloseModal={handleCloseModal}
                 />
@@ -147,7 +155,7 @@ function DetailsPanel ({ detailedData }){
       </div>
 
       <div className={classes.row}>
-        {keys.slice(8, 12).map((key, index) => (
+        {keys.slice(8, 11).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
             {key && detailedData[key] && (
               // <DetailCard
@@ -158,7 +166,7 @@ function DetailsPanel ({ detailedData }){
                 <CustomCard
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
-                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
+                  description={ detailedData[key] !== "--" ? detailedData[key].toFixed(3) + " " + variablesMapping[key]?.units : detailedData[key]}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
                   bottomIcons={bottomIcons(key, detailedData[key])}
                   // openModal={openDetailsModal}
@@ -174,6 +182,38 @@ function DetailsPanel ({ detailedData }){
       </div>
 
 
+
+      <div className={classes.row} >
+        {keys.slice(11, 12).map((key, index) => (
+          <div className={classes.cardContainer} key={index}>
+            {key && detailedData[key] && (
+              // <DetailCard
+              //   title={key}
+              //   value={detailedData[key]}
+              // />
+              <div>
+                <CustomCard 
+                  topIcon={variablesMapping[key]?.icon}
+                  title={variablesMapping[key]?.title}
+                  description={ detailedData[key] !== "--" ? detailedData[key].toFixed(3) + " " + variablesMapping[key]?.units : detailedData[key]}
+                  // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
+                  bottomIcons={bottomIcons(key, detailedData[key])}
+                  // openModal={openDetailsModal}
+                  //setOpenModal={setOpenDetailsModal}
+
+                  // openModal={openModal}
+                  // onCloseModal={handleCloseModal}
+                />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+
+
+    </div>
+    <div><CalculatorTabs/></div>
     </div>
   );
 };
