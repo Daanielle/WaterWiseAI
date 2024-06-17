@@ -25,9 +25,9 @@ const modalStyle = {
 
 const CustomBackdrop = styled('div')({
     backgroundColor: 'rgba(0, 0, 0, 0)', // Semi-transparent black, adjust as needed
-  });
+});
 
-const CustomCard = ({ title, description, image, topIcon, bottomIcons}) => {
+const CustomCard = ({ title, description, image, topIcon, bottomIcons }) => {
     const waterCalculatorVariablesDetails = WaterCalculatorVariablesDetails()
 
     // const handleClose = () => {
@@ -36,7 +36,7 @@ const CustomCard = ({ title, description, image, topIcon, bottomIcons}) => {
 
     return (
         <div>
-            <Card sx={{ width: 250, height:300, backgroundColor:'rgb(134, 161, 145)'}}>
+            <Card sx={{ width: 250, height: 300, backgroundColor: 'rgb(134, 161, 145)' }}>
 
                 {image && <CardMedia
                     sx={{ height: 140 }}
@@ -55,7 +55,7 @@ const CustomCard = ({ title, description, image, topIcon, bottomIcons}) => {
                 {bottomIcons && <CardActions>
                     {bottomIcons}
                 </CardActions>
-}
+                }
             </Card>
             <div>
 

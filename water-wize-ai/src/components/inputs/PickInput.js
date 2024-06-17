@@ -3,8 +3,6 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import useDictionary from "../../resources/Dictionary/Dictionary";
 
-const options1 = ['Option 1', 'Option 2'];
-
 
 const InputPicker = ({ label, value, onValueChange, options, }) => {
     const [inputValue, setInputValue] = React.useState('');
@@ -12,7 +10,6 @@ const InputPicker = ({ label, value, onValueChange, options, }) => {
 
     return (
         <div>
-
             <Autocomplete
                 disablePortal
                 value={value}

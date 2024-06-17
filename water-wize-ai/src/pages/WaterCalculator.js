@@ -210,6 +210,8 @@ function WaterCalculator() {
       ...detailedData,
       station
     })
+
+    console.log(saveStatus) //TODO: handle error if needed
   }
 
   const calculate = async () => {
@@ -255,6 +257,8 @@ function WaterCalculator() {
         break;
       case error.UNKNOWN_ERROR:
         console.log("An unknown error occurred.");
+        break;
+      default:
         break;
     }
   };
