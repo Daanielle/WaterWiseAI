@@ -88,6 +88,8 @@ async function fetchDataFromStation(stationId) {
 
   if (response.status >= 200 && response.status < 300) {
     const data = response.data;
+    console.log("abc")
+    console.log(data)
     const lastBatch = data.data[data.data.length - 1];
     return lastBatch;
   } else {
@@ -161,6 +163,12 @@ router.post('/calculate', async (req, res) => {
 
     if (!gradValue || !ws1mmValue || !wsMaxValue || !temperature || !relativeHumidity) {
       let nearbyStationId = null;
+
+      console.log("gradValue: " + gradValue)
+      console.log("ws1mmValue: " + ws1mmValue)
+      console.log("wsMaxValue: " + wsMaxValue)
+      console.log("temperature: " + temperature)
+      console.log("relativeHumidity: " + relativeHumidity)
 
       if (selectedArea == '208') { // Ashqelon Port
         nearbyStationId = '82'; // Negba

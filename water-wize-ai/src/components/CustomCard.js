@@ -36,7 +36,7 @@ const CustomCard = ({ title, description, image, topIcon, bottomIcons}) => {
 
     return (
         <div>
-            <Card sx={{ width: 200 }}>
+            <Card sx={{ width: 250, height:300, backgroundColor:'rgb(134, 161, 145)'}}>
 
                 {image && <CardMedia
                     sx={{ height: 140 }}

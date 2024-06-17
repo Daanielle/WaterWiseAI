@@ -11,10 +11,6 @@ import ContainerBox from "../components/ContainerBox";
 import InputField from "../components/inputs/InputField";
 import InputPicker from "../components/inputs/PickInput";
 import Recommendation from "../components/recommendation/Recomendation"; //TODO: remove after creating user recs page
-import { saveRecommendation, getLoggedInUserId } from "../apiRequests";
-import AllUserRecommendations from "../components/AllUserRecommendations";
-import Modal from '@mui/material/Modal';
-import { Box } from "@mui/material";
 
 const bycodejson = require('../resources/bycode2022Updated.json');
 
@@ -139,22 +135,9 @@ for (const key in optionsCities) {
   labels.push(optionsCities[key].label);
 }
 
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  // width: /,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
 function WaterCalculator() {
   const dict = useDictionary();
 
-  const [openRecsModal, setOpenRecsModal] = React.useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
@@ -192,20 +175,6 @@ function WaterCalculator() {
     }
   };
 
-  const handleOpenRecsModal = () => setOpenRecsModal(true);
-  const handleCloseRecsModal = () => setOpenRecsModal(false);
-
-
-  const saveRec = async () => {
-const station = selectedArea.value;
-    const userId = await getLoggedInUserId();
-    let saveStatus = saveRecommendation({
-      userId,
-      ...detailedData,
-      station
-    })
-  }
-
   const calculate = async () => {
     try {
       if (selectedArea && selectedAreaSize) {
@@ -239,6 +208,7 @@ const station = selectedArea.value;
     switch (error.code) {
       case error.PERMISSION_DENIED:
         console.log("User denied the request for Geolocation.");
+        setLocationAllowed(false);
         break;
       case error.POSITION_UNAVAILABLE:
         console.log("Location information is unavailable.");
@@ -250,9 +220,10 @@ const station = selectedArea.value;
         console.log("An unknown error occurred.");
         break;
     }
-  }
+  };
 
   const showPosition = (position) => {
+    setLocationAllowed(true); // User allowed location access
     const userLatitude = position.coords.latitude;
     const userLongitude = position.coords.longitude;
 
@@ -263,9 +234,9 @@ const station = selectedArea.value;
       const a =
         Math.sin(dLat / 2) * Math.sin(dLat / 2) +
         Math.cos(lat1 * (Math.PI / 180)) *
-        Math.cos(lat2 * (Math.PI / 180)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+          Math.cos(lat2 * (Math.PI / 180)) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       const d = R * c;
       return d;
@@ -319,6 +290,13 @@ const station = selectedArea.value;
     }
   };
 
+const [locationAllowed, setLocationAllowed] = useState(false);
+
+useEffect(() => {
+  findMyCoordinates();
+}, []);
+
+
   return (
     <div className={classes.WaterCalculator}>
       <PageContainer>
@@ -326,31 +304,26 @@ const station = selectedArea.value;
         <div className={classes.formControl}>
           <div className={classes.leftCol}>
             <ContainerBox width="10px">
-              <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities} />
-              <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas} />
+              <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities}/>
+              <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas}/>
               <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => x === '' || (x < 5000 && x > 0)} error={dict.errorsAreaSizeRange} />
 
               <CustomButton onClick={calculate} label={dict.calculate} type="button" />
-              <CustomButton onClick={saveRec} label="Save Calculate" type="button" />
-              {/* TODO: disable Save Calculate when no calc or not logged in */}
-              <CustomButton onClick={handleOpenRecsModal} label="Show all calcs" type="button" />
+              <CustomButton onClick={calculate} label="Save Calculate" type="button" />
+              <CustomButton onClick={calculate} label="Show all calcs" type="button" />
               <CustomButton onClick={findMyCoordinates} label="find my coordinates" type="button" />
+              {!locationAllowed && (
+              <p>
+                You can use the "Find My Coordinates" button if you change your mind and want to find your location later.
+              </p>
+            )}
             </ContainerBox>
           </div>
           <div className={classes.rightCol}>
             <DetailsPanel detailedData={detailedData} />
           </div>
         </div>
-        <Modal
-          open={openRecsModal}
-          onClose={handleCloseRecsModal}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={modalStyle}>
-            <AllUserRecommendations />
-          </Box>
-        </Modal>
+        <Recommendation recommendationDataRows={[detailedData]}/>
       </PageContainer >
     </div >
   );
