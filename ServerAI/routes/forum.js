@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const ForumMessage = require('../models/forumMessage');
 
-// Add a new forum message
+// add a new forum message
 router.post('/newMessage', async (req, res) => {
     console.log('Received POST request:', req.body);
     try {
@@ -12,7 +12,6 @@ router.post('/newMessage', async (req, res) => {
             image: req.body.image,
             title: req.body.title,
             body: req.body.body,
-            likes: req.body.number,
             recommendation: req.body.recommendation
         });
 
@@ -23,10 +22,14 @@ router.post('/newMessage', async (req, res) => {
     }
 });
 
-//add like
+// add new comment
 
-//get all messages
+// get all messages
 
-//add comment
+// get all comments for a message
+
+// add comment
+
+// TODO: think about adding edit and delete message and comment
 
 module.exports = router;

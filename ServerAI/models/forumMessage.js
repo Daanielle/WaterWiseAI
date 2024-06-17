@@ -5,7 +5,6 @@ const forumMessageSchema = new mongoose.Schema({
     image: String,
     title: String,
     body: String,
-    likes: Number,
     recommendation: String
 }, { timestamps: true });
 

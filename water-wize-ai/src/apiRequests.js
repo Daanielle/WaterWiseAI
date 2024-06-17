@@ -80,9 +80,9 @@ export const addNewForumMessage = async (message) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
+      body: JSON.stringify(
         message,
-      }),
+      ),
     });
     const status = await response.json();
     return status

@@ -12,8 +12,9 @@ const InputPicker = ({ label, value, onValueChange, options, }) => {
 
     return (
         <div>
-            
+
             <Autocomplete
+                disablePortal
                 value={value}
                 onChange={(event, newValue) => {
                     onValueChange(newValue);
@@ -33,14 +34,14 @@ const InputPicker = ({ label, value, onValueChange, options, }) => {
                         color: "#4CAF50",
                         textAlign: dict.stylePage
                     },
-    
+
                     "& .MuiInputLabel-shrink": {
                         width: "127%",
                         color: "#4CAF50 !important",
                         textAlign: dict.stylePage,
                         // transformOrigin: 'center',
                     },
-    
+
                     "& .MuiOutlinedInput-root": {
                         // Change input color and border color
                         color: "#4CAF50",
@@ -64,9 +65,15 @@ const InputPicker = ({ label, value, onValueChange, options, }) => {
                             textAlign: dict.stylePage
                         },
                         "& .MuiAutocomplete-popupIndicator": {
-                            color: "#4CAF50", 
-                            paddingRight:  dict.stylePage === "right" ? "175px": "",
+                            color: "#4CAF50",
+                            marginRight: dict.stylePage === "right" ? "175px" : "",
+
                         },
+                        "& .MuiAutocomplete-popupIndicatorOpen": {
+                            color: "#4CAF50", 
+                            marginRight: dict.stylePage === "right" ? "175px" : "",
+                        },
+
                     },
                 }}
                 renderInput={(params) => <TextField {...params} label={label} />}
