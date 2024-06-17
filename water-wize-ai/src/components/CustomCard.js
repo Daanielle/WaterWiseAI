@@ -11,35 +11,20 @@ import Modal from "@mui/material/Modal";
 import WaterCalculatorVariablesDetails from "../resources/mapping/WaterCalculatorVariablesDetails";
 import { styled } from '@mui/material/styles';
 
-const modalStyle = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 3,
-    p: 4,
-};
-
-const CustomBackdrop = styled('div')({
-    backgroundColor: 'rgba(0, 0, 0, 0)', // Semi-transparent black, adjust as needed
-});
+const style={
+    marginBottom:"0px"
+  }
 
 const CustomCard = ({ title, description, image, topIcon, bottomIcons }) => {
-    const waterCalculatorVariablesDetails = WaterCalculatorVariablesDetails()
 
-    // const handleClose = () => {
-    //     onCloseModal(); // Call the parent's onCloseModal function
-    // };
 
     return (
         <div>
-            <Card sx={{ width: 250, height: 300, backgroundColor: 'rgb(134, 161, 145)' }}>
+            <Card sx={{ width: 250, height: 300,   border: "2px solid #72ab38", color:"grey",marginLeft:"20px",marginRight:"20px"
+ }}>
 
                 {image && <CardMedia
-                    sx={{ height: 140 }}
+                    sx={{ height: "40%", width:"50%", marginBottom:"0px",marginLeft:"50px" }}
                     image={image}
                 />}
 

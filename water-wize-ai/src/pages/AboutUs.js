@@ -8,7 +8,9 @@ import GrouDetails from "../resources/mapping/GrouDetails";
 import TeamInfo from "../components/TeamInfo"
 
 
-
+const style={
+  marginLeft:"10px"
+}
 
 function AboutUs() {
   const dict = useDictionary();
@@ -18,7 +20,7 @@ function AboutUs() {
   return (
     <div>
       <PageContainer>
-      <div className={classes.back}>
+      {/* <div className={classes.back}>
           <p className={classes.WHO}>{dict.who}</p>
         </div>
         <div>
@@ -26,7 +28,7 @@ function AboutUs() {
         </div>
         <div>
           <p className={classes.ARE}>{dict.are}</p>
-        </div>
+        </div> */}
         <div className={classes.team}>
           <CustomCard
            title={teamDetails.Danielle.my_Name}

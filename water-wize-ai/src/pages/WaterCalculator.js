@@ -339,7 +339,7 @@ function WaterCalculator() {
         <TitleButton label={dict.waterCalculatorTitle}></TitleButton>
         <div className={classes.formControl}>
           <div className={classes.leftCol}>
-            <ContainerBox width="10px">
+            <ContainerBox width="500px">
               <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities} />
               <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas} />
               <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => x === '' || (x < 5000 && x > 0)} error={dict.errorsAreaSizeRange} />

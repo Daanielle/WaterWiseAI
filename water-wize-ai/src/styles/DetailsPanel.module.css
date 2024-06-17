@@ -1,15 +1,24 @@
 .detailsPanel {
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* Optional: Add space between the rows */
+  gap: 2rem; /* Optional: Add space between the rows */
 }
 
 .row {
   display: flex;
-  gap: 1rem; /* Optional: Add space between the cards */
+  /* gap: 2rem; Optional: Add space between the cards */
+  margin-left: 10%;
 }
 
 .cardContainer {
   flex: 1;
   /* color: rgb(11, 119, 54); */
 }
+
+.row2{
+  display: flex;
+  gap: 2rem; /* Optional: Add space between the cards */
+  margin-left: 23%;
+
+}
+

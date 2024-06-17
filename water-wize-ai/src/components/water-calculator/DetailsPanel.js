@@ -55,7 +55,7 @@ function DetailsPanel ({ detailedData }){
   
   const keys = Object.keys(detailedData);
 
-  const bottomIcons =(title, description)=>( <Box sx={{ '& > :not(style)': { m: 1 } }}>
+  const bottomIcons =(title, description)=>( <Box sx={{ '& > :not(style)': { m: 12 } }}>
     <Fab size="small" aria-label="add">
       <IconButton aria-label="more info" onClick={() => handleOpenModal(title, description)}>
         <QuestionMarkIcon sx={{ color: "#416e06" }} aria-label="more info" />
@@ -127,8 +127,8 @@ function DetailsPanel ({ detailedData }){
                 } 
 
 
-      <div className={classes.row}>
-        {keys.slice(4, 8).map((key, index) => (
+      <div className={classes.row2}>
+        {keys.slice(4, 7).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
             {key && detailedData[key] && (
               // <DetailCard
@@ -155,7 +155,7 @@ function DetailsPanel ({ detailedData }){
       </div>
 
       <div className={classes.row}>
-        {keys.slice(8, 11).map((key, index) => (
+        {keys.slice(7, 11).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
             {key && detailedData[key] && (
               // <DetailCard

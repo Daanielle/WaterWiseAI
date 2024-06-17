@@ -2,17 +2,13 @@
   .team{
     display: flex;
     margin: 0%;
-    /* padding-left: 2rem; */
     margin-left:2rem ;
-    /* padding-right: 2rem; */
     margin-right:2rem ;
-    /* padding-top: 50vh; */
-    /* margin-top:50vh ; */
     padding-bottom: 15vh;
     margin-bottom: 80vh;
   }
 
-  .text{
+  /* .text{
     text-align: center;
     font-style: italic;
   } 
@@ -23,10 +19,6 @@
 }
 
 .back{
-    /* background-image: url("../resources/images/about_us.jpg"); */
-    /* background-size: 100% 60%; */
-    /* background-position-y:top; */
-    /* background-repeat: no-repeat; */
     position:absolute;
     top: 8%;
     left: 0;
@@ -37,32 +29,4 @@
     background-attachment: fixed;
     background-size: cover;
 
-}
-
-.WHO{
-  font-style: italic;
-  font-size: 80px;
-  margin-left: 28%;
-  margin-top: 10%;
-  text-decoration: underline;
-  font-weight: bolder;
-  color: rgb(41, 67, 54);
-}
-
-.WE{
-  font-style: italic;
-  font-size: 80px;
-  margin-left: 43%;
-  text-decoration: underline;
-  font-weight: bolder;
-  color: rgb(41, 67, 54);
-}
-
-.ARE{
-  font-style: italic;
-  font-size: 80px;
-  margin-left: 53%;
-  text-decoration: underline;
-  font-weight: bolder;
-  color: rgb(41, 67, 54);
-}
+} */
