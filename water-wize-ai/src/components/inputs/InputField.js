@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import useDictionary from "../../resources/Dictionary/Dictionary";
 
-const InputField = ({ label, value, onValueChange, checkIfValid, error, inputProps, type }) => {
+const InputField = ({ label, value, onValueChange, checkIfValid, error, inputProps, type, multiline, rows }) => {
     const dict = useDictionary();
     const [isError, setIsError] = useState(false);
 
@@ -19,15 +19,26 @@ const InputField = ({ label, value, onValueChange, checkIfValid, error, inputPro
 
     const handleInputChange = (event) => {
         const newValue = event.target.value;
-        if (checkIfValid(newValue)) {
-            setIsError(false);
-            if (type == "file") {
-                handleFileChange(event)
+
+        if (checkIfValid) {
+            if (checkIfValid(newValue)) {
+                setIsError(false);
+                if (type == "file") {
+                    handleFileChange(event)
+                } else {
+                    handleChange(newValue);
+                }
             } else {
-                handleChange(newValue);
+                setIsError(true);
             }
-        } else {
-            setIsError(true);
+        }
+        else {
+            setIsError(false);
+                if (type == "file") {
+                    handleFileChange(event)
+                } else {
+                    handleChange(newValue);
+                }
         }
         // if (!isNaN(newSize)) { // Check if the input is a valid number
         //   setError(false);
@@ -93,17 +104,13 @@ const InputField = ({ label, value, onValueChange, checkIfValid, error, inputPro
                 error={isError}
                 helperText={isError ? error : ""}
                 type={type}
+                multiline={multiline}
+                rows={rows}
                 InputProps={{
                     style: {
                         color: "#4CAF50",
-                        // color: "red",
                         paddingLeft: (type === "file" && dict.stylePage === "left") ? '60px' : '',
-                        //textAlign: (dict.stylePage === "right") ? "right" : "left"
                     },
-                    // {
-                    //     // Allow only numeric input
-                    //     pattern: "[0-9]*",
-                    // },
                 }}
             />
         </Box>
