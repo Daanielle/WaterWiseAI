@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PageContainer from "../components/PageContainer";
 import classes from "../styles/WaterCalculator.module.css";
-import DatePickerComponent from "../components/water-calculator/DatePickerComponent";
-import AreaPicker from "../components/water-calculator/AreaPicker";
+// import DatePickerComponent from "../components/water-calculator/DatePickerComponent";
 import CustomButton from "../components/CustomButton";
 import DetailsPanel from "../components/water-calculator/DetailsPanel";
 import useDictionary from "../resources/Dictionary/Dictionary";
@@ -10,7 +9,11 @@ import TitleButton from "../components/TitleButton";
 import ContainerBox from "../components/ContainerBox";
 import InputField from "../components/inputs/InputField";
 import InputPicker from "../components/inputs/PickInput";
-import Recommendation from "../components/recommendation/Recomendation"; //TODO: remove after creating user recs page
+import AllUserRecommendations from "../components/AllUserRecommendations";
+import Modal from '@mui/material/Modal';
+import { Box } from "@mui/material";
+import { saveRecommendation, getLoggedInUserId } from "../apiRequests";
+
 
 const bycodejson = require('../resources/bycode2022Updated.json');
 
@@ -29,6 +32,19 @@ for (let i = 0; i < bycodejson["קובץ יישובים 2022"].length; i++) {
     closestArea: city.Closest // Include the closest area information
   };
 }
+
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  // width: /,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 
 const areaCoordinates = {
   381: { name: 'Ashalim', latitude: 30.983, longitude: 34.708 },
@@ -138,9 +154,11 @@ for (const key in optionsCities) {
 function WaterCalculator() {
   const dict = useDictionary();
 
+  const [openRecsModal, setOpenRecsModal] = React.useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
+  const [locationAllowed, setLocationAllowed] = useState(false);
   const [detailedData, setDetailedData] = useState({
     grad: "--",
     windSpeed1mm: "--",
@@ -155,6 +173,12 @@ function WaterCalculator() {
     Kc: "--",
     recommendation: "--",
   });
+
+
+  useEffect(() => {
+    findMyCoordinates();
+  }, []);
+
 
   const handleAreaChange = (newArea) => {
     setSelectedArea(newArea);
@@ -174,6 +198,19 @@ function WaterCalculator() {
       setSelectedArea({ value: closestAreaId, label: closestAreaName });
     }
   };
+
+  const handleOpenRecsModal = () => setOpenRecsModal(true);
+  const handleCloseRecsModal = () => setOpenRecsModal(false);
+
+  const saveRec = async () => {
+    const station = selectedArea.value;
+    const userId = await getLoggedInUserId();
+    let saveStatus = saveRecommendation({
+      userId,
+      ...detailedData,
+      station
+    })
+  }
 
   const calculate = async () => {
     try {
@@ -234,9 +271,9 @@ function WaterCalculator() {
       const a =
         Math.sin(dLat / 2) * Math.sin(dLat / 2) +
         Math.cos(lat1 * (Math.PI / 180)) *
-          Math.cos(lat2 * (Math.PI / 180)) *
-          Math.sin(dLon / 2) *
-          Math.sin(dLon / 2);
+        Math.cos(lat2 * (Math.PI / 180)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       const d = R * c;
       return d;
@@ -290,11 +327,6 @@ function WaterCalculator() {
     }
   };
 
-const [locationAllowed, setLocationAllowed] = useState(false);
-
-useEffect(() => {
-  findMyCoordinates();
-}, []);
 
 
   return (
@@ -304,26 +336,35 @@ useEffect(() => {
         <div className={classes.formControl}>
           <div className={classes.leftCol}>
             <ContainerBox width="10px">
-              <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities}/>
-              <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas}/>
+              <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities} />
+              <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas} />
               <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => x === '' || (x < 5000 && x > 0)} error={dict.errorsAreaSizeRange} />
 
               <CustomButton onClick={calculate} label={dict.calculate} type="button" />
-              <CustomButton onClick={calculate} label="Save Calculate" type="button" />
-              <CustomButton onClick={calculate} label="Show all calcs" type="button" />
+              <CustomButton onClick={saveRec} label="Save Calculate" type="button" />
+              <CustomButton onClick={handleOpenRecsModal} label="Show all calcs" type="button" />
               <CustomButton onClick={findMyCoordinates} label="find my coordinates" type="button" />
               {!locationAllowed && (
-              <p>
-                You can use the "Find My Coordinates" button if you change your mind and want to find your location later.
-              </p>
-            )}
+                <p>
+                  You can use the "Find My Coordinates" button if you change your mind and want to find your location later.
+                </p>
+              )}
             </ContainerBox>
           </div>
           <div className={classes.rightCol}>
             <DetailsPanel detailedData={detailedData} />
           </div>
         </div>
-        <Recommendation recommendationDataRows={[detailedData]}/>
+        <Modal
+          open={openRecsModal}
+          onClose={handleCloseRecsModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={modalStyle}>
+            <AllUserRecommendations />
+          </Box>
+        </Modal>
       </PageContainer >
     </div >
   );
