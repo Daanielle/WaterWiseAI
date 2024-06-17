@@ -208,6 +208,7 @@ function WaterCalculator() {
     switch (error.code) {
       case error.PERMISSION_DENIED:
         console.log("User denied the request for Geolocation.");
+        setLocationAllowed(false);
         break;
       case error.POSITION_UNAVAILABLE:
         console.log("Location information is unavailable.");
@@ -219,9 +220,10 @@ function WaterCalculator() {
         console.log("An unknown error occurred.");
         break;
     }
-  }
+  };
 
   const showPosition = (position) => {
+    setLocationAllowed(true); // User allowed location access
     const userLatitude = position.coords.latitude;
     const userLongitude = position.coords.longitude;
 
@@ -288,6 +290,13 @@ function WaterCalculator() {
     }
   };
 
+const [locationAllowed, setLocationAllowed] = useState(false);
+
+useEffect(() => {
+  findMyCoordinates();
+}, []);
+
+
   return (
     <div className={classes.WaterCalculator}>
       <PageContainer>
@@ -303,6 +312,11 @@ function WaterCalculator() {
               <CustomButton onClick={calculate} label="Save Calculate" type="button" />
               <CustomButton onClick={calculate} label="Show all calcs" type="button" />
               <CustomButton onClick={findMyCoordinates} label="find my coordinates" type="button" />
+              {!locationAllowed && (
+              <p>
+                You can use the "Find My Coordinates" button if you change your mind and want to find your location later.
+              </p>
+            )}
             </ContainerBox>
           </div>
           <div className={classes.rightCol}>
