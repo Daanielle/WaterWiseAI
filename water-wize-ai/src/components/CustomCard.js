@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Icon } from '@mui/material';
 import Modal from "@mui/material/Modal";
-import waterCalculatorVariablesDetails from "../resources/mapping/WaterCalculatorVariablesDetails";
+import WaterCalculatorVariablesDetails from "../resources/mapping/WaterCalculatorVariablesDetails";
 import { styled } from '@mui/material/styles';
 
 const modalStyle = {
@@ -27,11 +27,12 @@ const CustomBackdrop = styled('div')({
     backgroundColor: 'rgba(0, 0, 0, 0)', // Semi-transparent black, adjust as needed
   });
 
-const CustomCard = ({ title, description, image, topIcon, bottomIcons, openModal, onCloseModal }) => {
+const CustomCard = ({ title, description, image, topIcon, bottomIcons}) => {
+    const waterCalculatorVariablesDetails = WaterCalculatorVariablesDetails()
 
-    const handleClose = () => {
-        onCloseModal(); // Call the parent's onCloseModal function
-    };
+    // const handleClose = () => {
+    //     onCloseModal(); // Call the parent's onCloseModal function
+    // };
 
     return (
         <div>
@@ -40,7 +41,6 @@ const CustomCard = ({ title, description, image, topIcon, bottomIcons, openModal
                 {image && <CardMedia
                     sx={{ height: 140 }}
                     image={image}
-                    // title="green iguana"
                 />}
 
                 <CardContent>
@@ -59,26 +59,6 @@ const CustomCard = ({ title, description, image, topIcon, bottomIcons, openModal
             </Card>
             <div>
 
-            {openModal&&  <Modal
-                    open={openModal}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                    BackdropComponent={CustomBackdrop} // 
-                >
-                    <Box sx={modalStyle}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
-                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                                {title}
-                            </Typography>
-                        </Box>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            {waterCalculatorVariablesDetails[title.description]}
-                        </Typography>
-                        <Button onClick={handleClose}>Close Child Modal</Button>
-                    </Box>
-                </Modal>
-                }
             </div>
         </div>
     );
