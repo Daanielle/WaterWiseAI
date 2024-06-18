@@ -13,6 +13,7 @@ import AllUserRecommendations from "../components/AllUserRecommendations";
 import Modal from '@mui/material/Modal';
 import { Box } from "@mui/material";
 import { saveRecommendation, getLoggedInUserId } from "../apiRequests";
+import CalculatorTabs from "../components/water-calculator/CalculatorTabs";
 
 
 const bycodejson = require('../resources/bycode2022Updated.json');
@@ -358,7 +359,9 @@ function WaterCalculator() {
           <div className={classes.rightCol}>
             <DetailsPanel detailedData={detailedData} />
           </div>
+          
         </div>
+        
         <Modal
           open={openRecsModal}
           onClose={handleCloseRecsModal}
@@ -370,7 +373,9 @@ function WaterCalculator() {
           </Box>
         </Modal>
       </PageContainer >
+      <div><CalculatorTabs/></div>
     </div >
+    
   );
 }
 

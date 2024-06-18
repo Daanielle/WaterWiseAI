@@ -15,9 +15,13 @@ export default function CalculatorTabs() {
         <Tab value={1}>Values</Tab>
       </TabsList>
       <TabPanel value={0}><CalculatorsFormula/></TabPanel>
-      <TabPanel value={1}>Values ​​you received according to your inputs</TabPanel>
+      <TabPanel style={valuesstyle} value={1}>Values ​​you received according to your inputs</TabPanel>
     </Tabs>
   );
+}
+const valuesstyle={
+  fontWeight: "bold",
+  fontSize: "30px"
 }
 
 const blue = {
@@ -76,7 +80,7 @@ const Tab = styled(BaseTab)`
   }
 
   &.${buttonClasses.disabled} {
-    // opacity: 0.5;
+    opacity: 0.5;
     cursor: not-allowed;
   }
 `;
@@ -91,6 +95,7 @@ const TabPanel = styled(BaseTabPanel)(
   border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
   border-radius: 12px;
   opacity: 0.6;
+  margin-left:80px;
   `,
 );
 

@@ -13,7 +13,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import CalculatorsFormula from "./CalculatorsFormula";
-import CalculatorTabs from "./CalculatorTabs";
 
 const modalStyle = {
   position: "absolute",
@@ -191,8 +190,8 @@ function DetailsPanel ({ detailedData }){
               //   title={key}
               //   value={detailedData[key]}
               // />
-              <div>
-                <CustomCard 
+              <div className={classes.reco}>
+                <CustomCard
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
                   description={ detailedData[key] !== "--" ? detailedData[key].toFixed(3) + " " + variablesMapping[key]?.units : detailedData[key]}
@@ -213,7 +212,7 @@ function DetailsPanel ({ detailedData }){
 
 
     </div>
-    <div><CalculatorTabs/></div>
+    
     </div>
   );
 };
