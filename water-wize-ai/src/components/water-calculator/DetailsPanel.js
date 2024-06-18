@@ -90,7 +90,7 @@ function DetailsPanel ({ detailedData }){
                 <CustomCard
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
-                  description={ detailedData[key] !== "--" ? detailedData[key].toFixed(3) + " " + variablesMapping[key]?.units : detailedData[key]}
+                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
                   bottomIcons={bottomIcons(key, detailedData[key])}
                   // openModal={openDetailsModal}
@@ -138,7 +138,7 @@ function DetailsPanel ({ detailedData }){
                 <CustomCard
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
-                  description={ detailedData[key] !== "--" ? detailedData[key].toFixed(3) + " " + variablesMapping[key]?.units : detailedData[key]}
+                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
                   bottomIcons={bottomIcons(key, detailedData[key])}
                   // openModal={openDetailsModal}
@@ -165,7 +165,7 @@ function DetailsPanel ({ detailedData }){
                 <CustomCard
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
-                  description={ detailedData[key] !== "--" ? detailedData[key].toFixed(3) + " " + variablesMapping[key]?.units : detailedData[key]}
+                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
                   bottomIcons={bottomIcons(key, detailedData[key])}
                   // openModal={openDetailsModal}
@@ -194,7 +194,7 @@ function DetailsPanel ({ detailedData }){
                 <CustomCard
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
-                  description={ detailedData[key] !== "--" ? detailedData[key].toFixed(3) + " " + variablesMapping[key]?.units : detailedData[key]}
+                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
                   bottomIcons={bottomIcons(key, detailedData[key])}
                   // openModal={openDetailsModal}
