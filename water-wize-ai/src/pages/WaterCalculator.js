@@ -322,9 +322,9 @@ function WaterCalculator() {
               <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => x === '' || (x < 5000 && x > 0)} error={dict.errorsAreaSizeRange} />
 
               <CustomButton onClick={calculate} label={dict.calculate} type="button" />
-              <CustomButton onClick={saveRec} label="Save Calculate" type="button" />
-              <CustomButton onClick={handleOpenRecsModal} label="Show all calcs" type="button" />
-              <CustomButton onClick={findMyCoordinates} label="find my coordinates" type="button" />
+              <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" />
+              <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" />
+              <CustomButton onClick={findMyCoordinates} label={dict.findMyCoordinates} type="button" />
               {!locationAllowed && (
                 <p>
                   You can use the "Find My Coordinates" button if you change your mind and want to find your location later.
