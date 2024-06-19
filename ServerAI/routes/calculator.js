@@ -245,7 +245,7 @@ router.post('/calculate', async (req, res) => {
   }
 });
 
-const bycodejson = require('C:\\Users\\user\\Desktop\\WaterWiseAI\\water-wize-ai\\src\\resources\\bycode2022Updated.json');
+const bycodejson = require('../../water-wize-ai/src/resources/bycode2022Updated.json');
 
 
 const CitiesCities = [];
