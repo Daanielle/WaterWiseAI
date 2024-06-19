@@ -58,7 +58,9 @@ E:`.קצב אידוי
 `,
 Kc:`.מקדם יבול לחודש הנוכחי מבוסס על מחקר חקלאי`,
 recommendation:`.המלצת השקיה על פי חישובים`,
-
+saveCalculate:"שמור חישוב",
+showAllCalcts:"הצגת החישובים שלי",
+findMyCoordinates:"מציאת הקורדינטות שלי",
 //Support page
 Explanation1:"הסבר למסך 1",
 Explanation2:"הסבר למסך 2",
@@ -68,9 +70,7 @@ Explanation5:"הסבר למסך 5",
 Explanation6:"הסבר למסך 6",
 
 //AboutUs page
-who:"מי",
-we:"אנחנו",
-are:"באמת",
+MeetTeam:"..הכירו את הצוות שלנו",
 aboutMe:".אני סטודנט שנה ד' להנדסת תוכנה ומערכות מידע באוניברסיטת בן גוריון בנגב",
 Danielle_Name:"דניאל אספיר",
 Hadar_Name:"הדר סבתאי מור",
@@ -147,7 +147,9 @@ E:`Evapotranspiration rate.`,
 Kc:`Crop coefficient for the current month
 based on agricultural research.`,
 recommendation:`Irrigation recommendation based on calculations.`,
-
+saveCalculate:"Save Calculate",
+showAllCalcts:"Show all calcs",
+findMyCoordinates:"Find my coordinates",
 //Support page
 Explanation1:"Explanation for Screen 1",
 Explanation2:"Explanation for Screen 2",
@@ -157,9 +159,7 @@ Explanation5:"Explanation for Screen 5",
 Explanation6:"Explanation for Screen 6",
 
 //AboutUs page
-who:"WHO",
-we:"WE",
-are:"ARE",
+MeetTeam:"Meet Our Team..",
 aboutMe:"I am a fourth year software and information systems engineering student at Ben Gurion University of the Negev.",
 Danielle_Name:"Danielle Aspir",
 Hadar_Name:"Hadar Sabati Mor",

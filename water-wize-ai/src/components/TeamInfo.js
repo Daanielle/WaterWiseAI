@@ -4,10 +4,8 @@ import { IconButton } from '@mui/material';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
-const style={
-    marginLeft:"50px"
-  }
-function TeamInfo({ linkedinUrl, emailUrl, facebookUrl }) {
+
+function TeamInfo({ linkedinUrl, emailUrl, facebookUrl, style }) {
     return (
             <div style={style} >
                 <IconButton onClick={() => window.open(emailUrl, '_blank')}>

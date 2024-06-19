@@ -2,10 +2,10 @@
   .team{
     display: flex;
     margin: 0%;
-    margin-left:2rem ;
-    margin-right:2rem ;
-    padding-bottom: 15vh;
-    margin-bottom: 80vh;
+    /* margin-left:2rem ;
+    margin-right:2rem ; */
+    padding-bottom: 30vh;
+    /* margin-bottom: 80vh; */
     margin-top: 20%;
   }
 

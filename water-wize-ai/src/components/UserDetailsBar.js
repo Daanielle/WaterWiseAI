@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import Avatar from "@mui/material/Avatar";
-import palmImage from "../resources/images/palm.jpg";
 import Typography from "@mui/material/Typography";
 import useDictionary from "../resources/Dictionary/Dictionary";
 import CustomButton from "../components/CustomButton";

@@ -20,16 +20,46 @@ const CardStyle={
    height: 400,
   border: "2px solid #72ab38",
   color:"grey",
+  minHeight: 180,
   //marginLeft:"20px",
   //marginRight:"20px",
   //minHeight: 180,
-  image: {
-    //height: "140",
-    //width: "500",
-     //marginBottom:"0px",
-     //marginLeft:"50px"
-  }
+ image:{
+  height: 140
+ }
+
+
 }
+const CardStyleExlain={ 
+  //width: 250,
+   height: 130,
+  border: "2px solid #72ab38",
+  color:"grey",
+  //marginLeft:"20px",
+  //marginRight:"20px",
+  //minHeight: 180,
+}
+
+
+const stylebutton={ 
+     justifyContent: 'center',
+      width: '100%',
+  paddingBottom:"0px" }
+
+const BottomIcons=(link)=>(
+  <Button
+size="small"
+color="primary"
+href={link}
+target="_blank"
+rel="noopener noreferrer"
+style={stylebutton}
+>
+Read More
+</Button>
+)
+
+
 const faqData = [
   {
     question: "How do I use the water calculator?",
@@ -111,41 +141,19 @@ const Guide = () => {
         </Box>
 
          {/* Resources & Tools Section */}
+
          <Box mb={4}>
-          <Typography variant="h4" gutterBottom>Resources & Tools</Typography>
+          <Typography variant="h4"  gutterBottom>Resources & Tools</Typography>
           <Grid container spacing={2}>
             {resources.map((resource, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
-                <Card sx={{ height: 400 }}>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={resource.imageUrl}
-                    alt={resource.title}
-                  />
-                  <CardContent sx={{ minHeight: 180 }}>
-                    <Typography variant="h5" component="div">
-                      {resource.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {resource.summary}
-                    </Typography>
-                  </CardContent>
-                  <Button
-                    size="small"
-                    color="primary"
-                    href={resource.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Read More
-                  </Button>
-                </Card>
+               
                 <CustomCard
+                style={CardStyle}
                 title={resource.title}
                 description={resource.summary}
                 image={resource.imageUrl}
-                bottomIcons={resource.link}
+                 bottomIcons={BottomIcons(resource.link)}
                 />
               </Grid>
             ))}
@@ -158,13 +166,14 @@ const Guide = () => {
           <Grid container spacing={2}>
             {screenExplanations.map((screen, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
-                <Card sx={{ height: 130 }}>
+                {/*<Card sx={{ height: 130 }}>
                   <CardContent>
                     <Typography variant="h5" component="div">{screen.screen}</Typography>
                     <Typography variant="body2" color="text.secondary">{screen.explanation}</Typography>
                   </CardContent>
-                </Card>
+                </Card> */}
                 <CustomCard
+                style={CardStyleExlain}
                 title={screen.screen}
                 description={screen.explanation}
                 />

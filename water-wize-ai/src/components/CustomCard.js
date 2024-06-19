@@ -11,15 +11,6 @@ import Modal from "@mui/material/Modal";
 import WaterCalculatorVariablesDetails from "../resources/mapping/WaterCalculatorVariablesDetails";
 import { styled } from '@mui/material/styles';
 
-const CardStyle={ 
-    /*width: 250,
-     height: 300,
-    border: "2px solid #72ab38",
-    color:"grey",
-    marginLeft:"20px",
-    marginRight:"20px"*/
-}
-
 const CustomCard = ({ title, description, image, topIcon, bottomIcons, style }) => {
 
 
@@ -29,13 +20,16 @@ const CustomCard = ({ title, description, image, topIcon, bottomIcons, style }) 
 
                 {image && <CardMedia
                     //sx={{ height: "35%", width:"54%", marginBottom:"0px",marginLeft:"50px" }}
-                    //style={style.image}
+                    style={style?.image}
                     image={image}
+                    component="img"
+                    alt={title}
+
                 />}
 
-                <CardContent>
+                <CardContent sx={{ minHeight: 180 }}>
                     {topIcon && <Icon component={topIcon} sx={{ color: "#72ab38" }} />}
-                    <Typography gutterBottom variant="h6" component="div">
+                    <Typography gutterBottom variant="h6" component="div" fontWeight="bold">
                         {title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">

@@ -83,7 +83,7 @@ function DetailsPanel ({ detailedData }){
   
   const keys = Object.keys(detailedData);
 
-  const bottomIcons =(title, description)=>( <Box sx={{ '& > :not(style)': { m: 1,marginLeft: '185%'} }}>
+  const bottomIcons =(title, description)=>( <Box sx={{ '& > :not(style)': { m: 1,marginLeft: '185%',marginTop: '-150%'} }}>
     <Fab size="small" aria-label="add">
       <IconButton aria-label="more info" onClick={(e) => handleOpenModal(e,title, description)}>
         <QuestionMarkIcon sx={{ color: "#416e06" }} aria-label="more info" />
