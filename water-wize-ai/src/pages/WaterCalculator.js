@@ -238,13 +238,51 @@ function WaterCalculator() {
     }
   };
 
-  const findMyCoordinates = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, handleError);
-    } else {
-      console.log("Geolocation is not supported by this browser.");
+  const findMyCoordinates = async () => {
+    try {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const userLatitude = position.coords.latitude;
+          const userLongitude = position.coords.longitude;
+    
+          const response = await fetch('/calculator/coordinates', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ latitude: userLatitude, longitude: userLongitude }),
+          });
+    
+          if (response.ok) {
+            const data = await response.json();
+            console.log('Received data:', data);
+  
+            // Extract closest area and city from the response
+            const { closestArea, closestCity } = data;
+  
+            // Update the state with the closest area and city
+            if (closestArea) {
+              setSelectedArea({ value: closestArea.name, label: closestArea.name });
+            }
+            if (closestCity) {
+              setSelectedCity({ label: closestCity });
+            }
+  
+            console.log('Selected Area:', closestArea);
+            console.log('Selected City:', closestCity);
+          } else {
+            console.error('Error fetching geolocation data:', response.statusText);
+          }
+        }, handleError);
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
-  }
+  };
+  
+  
 
   const handleError = (error) => {
     switch (error.code) {
@@ -268,70 +306,6 @@ function WaterCalculator() {
 
   const showPosition = (position) => {
     setLocationAllowed(true); // User allowed location access
-    const userLatitude = position.coords.latitude;
-    const userLongitude = position.coords.longitude;
-
-    const calculateDistance = (lat1, lon1, lat2, lon2) => {
-      const R = 6371;
-      const dLat = (lat2 - lat1) * (Math.PI / 180);
-      const dLon = (lon2 - lon1) * (Math.PI / 180);
-      const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(lat1 * (Math.PI / 180)) *
-        Math.cos(lat2 * (Math.PI / 180)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      const d = R * c;
-      return d;
-    };
-
-    let closestArea = null;
-    let minDistanceArea = Infinity;
-
-    for (const areaId in areaCoordinates) {
-      const area = areaCoordinates[areaId];
-      const areaLatitude = area.latitude;
-      const areaLongitude = area.longitude;
-      const dist = calculateDistance(
-        userLatitude,
-        userLongitude,
-        areaLatitude,
-        areaLongitude
-      );
-      if (dist < minDistanceArea) {
-        minDistanceArea = dist;
-        closestArea = area;
-      }
-    }
-
-    if (closestArea) {
-      setSelectedArea({ value: closestArea.name, label: closestArea.name });
-    }
-
-    let closestCity = null;
-    let minDistanceCity = Infinity;
-
-    for (const cityName in cityCoordinates) {
-      const city = cityCoordinates[cityName];
-      const cityLatitude = city.latitude;
-      const cityLongitude = city.longitude;
-      const dist = calculateDistance(
-        userLatitude,
-        userLongitude,
-        cityLatitude,
-        cityLongitude
-      );
-      if (dist < minDistanceCity) {
-        minDistanceCity = dist;
-        closestCity = cityName;
-      }
-    }
-
-    if (closestCity) {
-      const cityValue = optionsCities.find(option => option.label === closestCity).value;
-      setSelectedCity({ value: cityValue, label: closestCity });
-    }
   };
 
 
