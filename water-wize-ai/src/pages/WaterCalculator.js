@@ -190,13 +190,15 @@ function WaterCalculator() {
   };
 
   const handleCityChange = (newCity) => {
-    setSelectedCity(newCity);
+    setSelectedCity({ label: newCity.label });
+    console.log("195");
+    console.log(newCity);
     const cityData = cityCoordinates[newCity.label];
     if (cityData) {
       const closestAreaName = cityData.closestArea;
       console.log(cityData);
       const closestAreaId = lopsidedlocations[closestAreaName];
-      setSelectedArea({ value: closestAreaId, label: closestAreaName });
+      setSelectedArea({ value: closestAreaName, label: closestAreaName });
     }
   };
 
@@ -218,13 +220,14 @@ function WaterCalculator() {
   const calculate = async () => {
     try {
       if (selectedArea && selectedAreaSize) {
+        console.log(selectedArea.value);
         const calculationResponse = await fetch('/calculator/calculate', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            selectedArea: selectedArea.value,
+            selectedArea: lopsidedlocations[selectedArea.value],
             areaSize: selectedAreaSize,
           }),
         });
