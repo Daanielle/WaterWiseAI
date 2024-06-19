@@ -102,7 +102,8 @@ router.post('/calculate', async (req, res) => {
   try {
     const { selectedArea, areaSize } = req.body;
     const lastBatch = await fetchDataFromStation(selectedArea);
-
+    console.log("last batch is here");
+    console.log(lastBatch)
     let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
     // Ashalim, Arad, Besor Farm, Dorot, Hazeva, Negba, Neot smadar, Shani, Yotvata
     if (['381', '29', '58', '79', '33', '82', '28', '36'].includes(selectedArea)) {
