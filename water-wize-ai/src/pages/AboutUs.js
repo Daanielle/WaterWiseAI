@@ -11,6 +11,8 @@ import TeamInfo from "../components/TeamInfo"
 const style={
   marginLeft:"10px"
 }
+const AboutUsStyle={
+}
 
 function AboutUs() {
   const dict = useDictionary();
@@ -19,16 +21,10 @@ function AboutUs() {
 
   return (
     <div>
-      <PageContainer>
-      {/* <div className={classes.back}>
-          <p className={classes.WHO}>{dict.who}</p>
-        </div>
+      <PageContainer style={AboutUsStyle}>
         <div>
-          <p className={classes.WE}>{dict.we}</p>
-        </div>
-        <div>
-          <p className={classes.ARE}>{dict.are}</p>
-        </div> */}
+          <p className={classes.ARE}>Meet Our Team...</p>
+        </div> 
         <div className={classes.team}>
           <CustomCard
            title={teamDetails.Danielle.my_Name}

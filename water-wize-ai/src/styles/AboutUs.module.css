@@ -6,6 +6,7 @@
     margin-right:2rem ;
     padding-bottom: 15vh;
     margin-bottom: 80vh;
+    margin-top: 20%;
   }
 
   /* .text{
@@ -30,3 +31,17 @@
     background-size: cover;
 
 } */
+
+.ARE{
+  position:absolute;
+  top: 26%;
+  left: 40%;
+  /* background-position: center; */
+  background-attachment: fixed;
+  /* text-align: center; */
+  font-style: italic;
+  font-size: 60px;
+  font-weight: bold;
+  color: #72ab38;
+
+}

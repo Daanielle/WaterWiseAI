@@ -6,6 +6,7 @@ import { TabPanel as BaseTabPanel } from '@mui/base/TabPanel';
 import { buttonClasses } from '@mui/base/Button';
 import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
 import CalculatorsFormula from './CalculatorsFormula';
+import FormulaValues from './FormulaValues';
 
 export default function CalculatorTabs() {
   return (
@@ -15,7 +16,7 @@ export default function CalculatorTabs() {
         <Tab value={1}>Values</Tab>
       </TabsList>
       <TabPanel value={0}><CalculatorsFormula/></TabPanel>
-      <TabPanel style={valuesstyle} value={1}>Values ​​you received according to your inputs</TabPanel>
+      <TabPanel style={valuesstyle} value={1}><FormulaValues/></TabPanel>
     </Tabs>
   );
 }
