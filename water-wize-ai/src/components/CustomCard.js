@@ -11,20 +11,25 @@ import Modal from "@mui/material/Modal";
 import WaterCalculatorVariablesDetails from "../resources/mapping/WaterCalculatorVariablesDetails";
 import { styled } from '@mui/material/styles';
 
-const style={
-    marginBottom:"0px"
-  }
+const CardStyle={ 
+    /*width: 250,
+     height: 300,
+    border: "2px solid #72ab38",
+    color:"grey",
+    marginLeft:"20px",
+    marginRight:"20px"*/
+}
 
-const CustomCard = ({ title, description, image, topIcon, bottomIcons }) => {
+const CustomCard = ({ title, description, image, topIcon, bottomIcons, style }) => {
 
 
     return (
         <div>
-            <Card sx={{ width: 250, height: 300,   border: "2px solid #72ab38", color:"grey",marginLeft:"20px",marginRight:"20px"
- }}>
+            <Card style={style}>
 
                 {image && <CardMedia
-                    sx={{ height: "40%", width:"50%", marginBottom:"0px",marginLeft:"50px" }}
+                    //sx={{ height: "35%", width:"54%", marginBottom:"0px",marginLeft:"50px" }}
+                    //style={style.image}
                     image={image}
                 />}
 

@@ -45,31 +45,19 @@ const hebDict = {
   areaSize: "גודל שטח",
   calculate: "חשב",
   WindSpeed1mmTitle: "מהירות הרוח המקסימלית בדקה האחרונה",
-  grad: " (W/m^2) .מייצג את האיזון בין קרינה נכנסת ויוצאת על פני השטח ",
-  windSpeed1mm:" (m/s).מהירות הרוח הגבוהה ביותר שנצפתה על פני תקופה של דקה אחת",
-  maxWindSpeed:"(m/s).מהירות הרוח המרבית הנצפית בתוך מרווח זמן מסוים",
-  temperature:"(°C).טמפרטורה - טמפרטורת האוויר הסביבתי בתחנה המטאורולוגית",
-  relativeHumidity:"(%).לחות יחסית - כמות אדי המים הקיימים באוויר ביחס לכמות המקסימלית שהאוויר יכול להחזיק בטמפרטורה נתונה",
-  deltaY:"(kPa/°C).שינוי בלחץ אדי המים בהתאם לטמפרטורה",
-  e0:`  :לחץ אדים רווי, מחושב כ  
-    e_0 = 6.2 * exp(17.26T / (T - 35.8 + 273.16)). (kPa)`,
-  ea:`:לחץ אדים בפועל, מחושב כ 
-   RH / 100 * e0.`,
-  Ea:`.(ea) ללחץ אדים בפועל ,(e0) אידוי אווירודינמי, מכמת את ההבדל בין לחץ אדי רוויה
- :מחושב כ  
- Ea = 0.35 * (e0 - ea) * (0.5 + 0.54 * WS) * C,
- הוא קבוע שווה ל C כאשר 
- 1 / (24 * 3600 * 1000).(mm/day)
+  grad: ".מייצג את האיזון בין קרינה נכנסת ויוצאת על פני השטח ",
+  windSpeed1mm:" .מהירות הרוח הגבוהה ביותר שנצפתה על פני תקופה של דקה אחת",
+  maxWindSpeed:".מהירות הרוח המרבית הנצפית בתוך מרווח זמן מסוים",
+  temperature:".טמפרטורה - טמפרטורת האוויר הסביבתי בתחנה המטאורולוגית",
+  relativeHumidity:".לחות יחסית - כמות אדי המים הקיימים באוויר ביחס לכמות המקסימלית שהאוויר יכול להחזיק בטמפרטורה נתונה",
+  deltaY:".שינוי בלחץ אדי המים בהתאם לטמפרטורה",
+  e0:`.לחץ אדים רווי`,
+  ea:`לחץ אדים בפועל.`,
+  Ea:`.(ea) ללחץ אדים בפועל ,(e0) אידוי אווירודינמי, מכמת את ההבדל בין לחץ אדי רוויה`,
+E:`.קצב אידוי 
 `,
-E:`,קצב אידוי 
- :מחושב כ  
-((deltaY * (Grad - WSmax) + Ea * L) / (deltaY + 1)) / L,
-with L = 2.45 * 10^9.
-(mm/day)`,
-Kc:`מקדם יבול לחודש הנוכחי מבוסס על מחקר חקלאי. (קָבוּעַ)`,
-recommendation:`המלצת השקיה על פי חישובים
-I = Total Area * Kc * E
-(ליטר ליום עבור השטח הנתון)`,
+Kc:`.מקדם יבול לחודש הנוכחי מבוסס על מחקר חקלאי`,
+recommendation:`.המלצת השקיה על פי חישובים`,
 
 //Support page
 Explanation1:"הסבר למסך 1",
@@ -145,29 +133,20 @@ const engDict = {
   areaSize: "Area Size",
   calculate: "Calculate",
   WindSpeed1mmTitle: "Maximum wind speed last minute",
-  grad: "Represents the balance between incoming and outgoing radiation at the surface. (W/m^2)",
-  windSpeed1mm:"Highest wind speed observed over a period of one minute. (m/s)",
-  maxWindSpeed:"Maximum wind speed observed within a certain time interval. (m/s)",
-  temperature:"Temperature - the ambient air temperature at the meteorological station. (°C)",
-  relativeHumidity:"Relative humidity - the amount of water vapor present in the air relative to the maximum amount the air can hold at a given temperature. (%)",
-  deltaY:"Change in water vapor pressure based on temperature. (kPa/°C)",
-  e0:`Saturated vapor pressure, 
-  calculated as e_0 = 6.2 * exp(17.26T / (T - 35.8 + 273.16)). (kPa)`,
-  ea:`Actual vapor pressure, calculated as RH / 100 * e0.`,
+  grad: "Represents the balance between incoming and outgoing radiation at the surface.",
+  windSpeed1mm:"Highest wind speed observed over a period of one minute.",
+  maxWindSpeed:"Maximum wind speed observed within a certain time interval. ",
+  temperature:"Temperature - the ambient air temperature at the meteorological station.",
+  relativeHumidity:"Relative humidity - the amount of water vapor present in the air relative to the maximum amount the air can hold at a given temperature. ",
+  deltaY:"Change in water vapor pressure based on temperature.",
+  e0:`Saturated vapor pressure.`,
+  ea:`Actual vapor pressure.`,
   Ea:`Aerodynamic evaporation, quantifying the difference between
-saturation vapor pressure (e0) and actual vapor pressure (ea).
-Calculated as Ea = 0.35 * (e0 - ea) * (0.5 + 0.54 * WS) * C,
-with C being a constant equal to 1 / (24 * 3600 * 1000).
-(mm/day)`,
-E:`Evapotranspiration rate,
-calculated as ((deltaY * (Grad - WSmax) + Ea * L) / (deltaY + 1)) / L,
-with L = 2.45 * 10^9.
-(mm/day)`,
+saturation vapor pressure (e0) and actual vapor pressure (ea).`,
+E:`Evapotranspiration rate.`,
 Kc:`Crop coefficient for the current month
-based on agricultural research. (Constant)`,
-recommendation:`Irrigation recommendation based on calculations.
-I = Total Area * Kc * E
-(liters/day for the given area)`,
+based on agricultural research.`,
+recommendation:`Irrigation recommendation based on calculations.`,
 
 //Support page
 Explanation1:"Explanation for Screen 1",

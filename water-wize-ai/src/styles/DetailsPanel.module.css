@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem; /* Optional: Add space between the rows */
+  margin-top: 90px;
 }
 
 .row {
@@ -22,9 +23,9 @@
 
 }
 
-.reco{
+/*.reco{
   margin-left: 43%;
-}
+}*/
 
 .specificStyles{
   background-color: 'red',

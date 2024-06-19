@@ -14,6 +14,8 @@ import Modal from '@mui/material/Modal';
 import { Box } from "@mui/material";
 import { saveRecommendation, getLoggedInUserId } from "../apiRequests";
 import CalculatorTabs from "../components/water-calculator/CalculatorTabs";
+import EditIcon from '@mui/icons-material/Edit';
+import Fab from '@mui/material/Fab';
 
 
 const bycodejson = require('../resources/bycode2022Updated.json');
@@ -351,6 +353,13 @@ function WaterCalculator() {
         </Modal>
       </PageContainer >
       <div><CalculatorTabs/></div>
+      <Box sx={{ '& > :not(style)': { m: 1 } }}>
+
+      <Fab color="secondary" aria-label="edit">
+        <EditIcon />
+      </Fab>
+    </Box>
+  );
     </div >
     
   );

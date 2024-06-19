@@ -27,26 +27,55 @@ const modalStyle = {
 };
 
 const RecomendationStyle = {
-backgroundColor:'rgb(11, 119, 54)'
-  // backgroundColor:"green"
-};
-
+ backgroundColor:'#72ab38', 
+ width: 250,
+ height: 200,
+border: "2px solid darkgreen",
+ marginLeft: "43%",
+}
+const CardStyle={ 
+  width: 250,
+   height: 200,
+  border: "2px solid #72ab38",
+  color:"grey",
+  marginLeft:"20px",
+  marginRight:"20px"
+}
 function DetailsPanel ({ detailedData }){
   const [openModal, setOpenModal] = React.useState(false);
   const [currentTitle, setCurrentTitle] = React.useState("");
   const [currentDescription, setCurrentDescription] = React.useState('');
+  const [clickPosition, setClickPosition] = React.useState({ top: 0, left: 0 });
 
   const dict = useDictionary();
   const variablesMapping = WaterCalculatorVariablesDetails()
 
   // const handleOpenDetailsModal = () => setOpenDetailsModal(true);
   const handleCloseModal = () => setOpenModal(false);
-  const handleOpenModal = (title, description) => {
+  const handleOpenModal = (event, title, description) => {
     setOpenModal(true);
     setCurrentDescription(description);
     setCurrentTitle(title);
+    setClickPosition({ top: event.clientY , left: event.clientX - window.scrollX });
 
   };
+  const modalStyle = {
+  // position: "absolute",
+  // top: "50%",
+  // left: "50%",
+  // transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: `${clickPosition.top}px`,
+  left: `${clickPosition.left}px`,
+  transform: 'translate(-50%, -50%)',
+
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 
   const CustomBackdrop = styled('div')({
     backgroundColor: 'rgba(0, 0, 0, 0)', // Semi-transparent black, adjust as needed
@@ -54,9 +83,9 @@ function DetailsPanel ({ detailedData }){
   
   const keys = Object.keys(detailedData);
 
-  const bottomIcons =(title, description)=>( <Box sx={{ '& > :not(style)': { m: 12 } }}>
+  const bottomIcons =(title, description)=>( <Box sx={{ '& > :not(style)': { m: 1,marginLeft: '185%'} }}>
     <Fab size="small" aria-label="add">
-      <IconButton aria-label="more info" onClick={() => handleOpenModal(title, description)}>
+      <IconButton aria-label="more info" onClick={(e) => handleOpenModal(e,title, description)}>
         <QuestionMarkIcon sx={{ color: "#416e06" }} aria-label="more info" />
       </IconButton>
     </Fab>
@@ -82,22 +111,13 @@ function DetailsPanel ({ detailedData }){
         {keys.slice(0, 4).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
             {key && detailedData[key] && (
-              // <DetailCard
-              //   title={key}
-              //   value={detailedData[key]}
-              // />
               <div>
-                <CustomCard
+                <CustomCard style={CardStyle}
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
                   description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
                   bottomIcons={bottomIcons(key, detailedData[key])}
-                  // openModal={openDetailsModal}
-                  //setOpenModal={setOpenDetailsModal}
-
-                  // openModal={openModal}
-                  // onCloseModal={handleCloseModal}
                 />
               </div>
             )}
@@ -135,17 +155,12 @@ function DetailsPanel ({ detailedData }){
               //   value={detailedData[key]}
               // />
               <div>
-                <CustomCard
+                <CustomCard style={CardStyle}
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
                   description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
                   bottomIcons={bottomIcons(key, detailedData[key])}
-                  // openModal={openDetailsModal}
-                  //setOpenModal={setOpenDetailsModal}
-                  // {typeof value === 'number' ? value.toFixed(3) : value}
-                  // openModal={openModal}
-                  // onCloseModal={handleCloseModal}
                 />
               </div>
             )}
@@ -162,7 +177,7 @@ function DetailsPanel ({ detailedData }){
               //   value={detailedData[key]}
               // />
               <div>
-                <CustomCard
+                <CustomCard style={CardStyle}
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
                   description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
@@ -186,22 +201,13 @@ function DetailsPanel ({ detailedData }){
         {keys.slice(11, 12).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
             {key && detailedData[key] && (
-              // <DetailCard
-              //   title={key}
-              //   value={detailedData[key]}
-              // />
-              <div className={classes.reco}>
-                <CustomCard
+              <div >
+                <CustomCard style={RecomendationStyle}
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
                   description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
                   bottomIcons={bottomIcons(key, detailedData[key])}
-                  // openModal={openDetailsModal}
-                  //setOpenModal={setOpenDetailsModal}
-
-                  // openModal={openModal}
-                  // onCloseModal={handleCloseModal}
                 />
               </div>
             )}

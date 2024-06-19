@@ -11,9 +11,13 @@ const style={
 }
 
 const styleFormula={
-  fontSize: "30px"
+  fontSize: "25px"
 }
 
+const mainformula={
+  fontWeight: "bold",
+  fontSize: "25px"
+}
 
 const CalculatorsFormula = () => {
 
@@ -50,9 +54,8 @@ const CalculatorsFormula = () => {
         How did we get the result? We used several formulas listed here..
         </div>
         <div style={styleFormula}>
-            <p>E*L=(∆γ*(Rn-G)+Ea*L)/(∆γ+1)</p>
+            <p style={mainformula}>E=((∆γ*(Rn-G)+Ea*L)/(∆γ+1))/L</p>
             <p>L = constant</p>
-            <p>E = want to calculate</p>
             <p>Rn = Grad</p>
             <p>G = WSmax</p>
     
@@ -60,7 +63,7 @@ const CalculatorsFormula = () => {
         </div>
         
         <div style={styleFormula}>
-        <p>Ea = 0.35 * (e0- ea) (0.5 + 0.54 * u2m) * C
+        <p style={mainformula}>Ea = 0.35 * (e0- ea) (0.5 + 0.54 * u2m) * C
             </p> 
         <p>e_0=6.2 * exp⁡(17.26T/(T-35.8+273.16))</p>
         <p>T = TD</p>
@@ -71,7 +74,8 @@ const CalculatorsFormula = () => {
         </div>
 
         <div style={styleFormula}>
-            <p>l = ET0 *Kc*Total Area</p>
+            <p style={mainformula}>l = ET0 *Kc*Total Area</p>
+            <p>ET0 = E</p>
             <p>Kc = constant by month</p>
             <p>Total Area = users input</p>
             <p>l=Recomendation</p>

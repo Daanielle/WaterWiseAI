@@ -14,7 +14,22 @@ import imsLogoImg from '../resources/images/IMS.jpg';
 import govmapIMG from "../resources/images/govmapIMG.jpeg";
 import SouthernIMG from "../resources/images/SouthernArava.png";
 import MappingIMG from "../resources/images/MappingSite.png"
-
+import CustomCard from '../components/CustomCard';
+const CardStyle={ 
+  //width: 250,
+   height: 400,
+  border: "2px solid #72ab38",
+  color:"grey",
+  //marginLeft:"20px",
+  //marginRight:"20px",
+  //minHeight: 180,
+  image: {
+    //height: "140",
+    //width: "500",
+     //marginBottom:"0px",
+     //marginLeft:"50px"
+  }
+}
 const faqData = [
   {
     question: "How do I use the water calculator?",
@@ -77,8 +92,8 @@ const Guide = () => {
   const dict = useDictionary();
   return (
     <PageContainer>
-      <Container sx={{ backgroundColor: '#e8f5e9', padding: '2rem' }}>
-        <Typography variant="h3" gutterBottom align="center" color="primary">Support and Guidance</Typography>
+      <Container sx={{ backgroundColor: ' var(--extra-white)', padding: '2rem' }}>
+        <Typography variant="h3" gutterBottom align="center" color="#72ab38">Support and Guidance</Typography>
 
         {/* FAQ Section */}
         <Box mb={4}>
@@ -126,6 +141,12 @@ const Guide = () => {
                     Read More
                   </Button>
                 </Card>
+                <CustomCard
+                title={resource.title}
+                description={resource.summary}
+                image={resource.imageUrl}
+                bottomIcons={resource.link}
+                />
               </Grid>
             ))}
           </Grid>
@@ -143,6 +164,11 @@ const Guide = () => {
                     <Typography variant="body2" color="text.secondary">{screen.explanation}</Typography>
                   </CardContent>
                 </Card>
+                <CustomCard
+                title={screen.screen}
+                description={screen.explanation}
+                />
+
               </Grid>
             ))}
           </Grid>
