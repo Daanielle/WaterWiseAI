@@ -47,8 +47,9 @@ function ContactUs() {
 
     {/* </ContainerBox> */}
      <ContainerBox>
+     <TitleButton >{dict.contuctUs}</TitleButton>
       <div className="contact-form">
-      <TitleButton label={dict.contuctUs}></TitleButton>
+      {/* <TitleButton >{dict.contuctUs}</TitleButton> */}
         <form onSubmit={handleSubmit}>
           <label>{dict.name}</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} required />

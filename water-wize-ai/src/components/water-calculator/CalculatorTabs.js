@@ -7,13 +7,13 @@ import { buttonClasses } from '@mui/base/Button';
 import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
 import CalculatorsFormula from './CalculatorsFormula';
 import FormulaValues from './FormulaValues';
-
+import FarmulaExplanation from "./FermulaExplanations"
 export default function CalculatorTabs() {
   return (
     <Tabs defaultValue={0}>
       <TabsList>
         <Tab value={0}>Calculator Formula</Tab>
-        <Tab value={1}>Values</Tab>
+        <Tab value={1}>Editing Fermula</Tab>
       </TabsList>
       <TabPanel value={0}><CalculatorsFormula/></TabPanel>
       <TabPanel style={valuesstyle} value={1}><FormulaValues/></TabPanel>
@@ -92,11 +92,12 @@ const TabPanel = styled(BaseTabPanel)(
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 0.875rem;
   padding: 20px 12px;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#72ab38'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+  //  background: ${theme.palette.mode === 'dark' ? grey[900] : '#72ab38'};
+  border: 2px solid ${theme.palette.mode === 'dark' ? "#72ab38" : "#72ab38"};
   border-radius: 12px;
   opacity: 0.6;
   margin-left:80px;
+  // border: "2px solid #72ab38"
   `,
 );
 

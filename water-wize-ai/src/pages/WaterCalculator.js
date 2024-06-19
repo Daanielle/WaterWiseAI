@@ -316,7 +316,8 @@ function WaterCalculator() {
   return (
     <div className={classes.WaterCalculator}>
       <PageContainer>
-        <TitleButton label={dict.waterCalculatorTitle}></TitleButton>
+        {/* <TitleButton label={dict.waterCalculatorTitle}></TitleButton> */}
+        <TitleButton >{dict.waterCalculatorTitle}</TitleButton>
         <div className={classes.formControl}>
           <div className={classes.leftCol}>
             <ContainerBox width="500px">
@@ -359,7 +360,7 @@ function WaterCalculator() {
         <EditIcon />
       </Fab>
     </Box>
-  );
+  
     </div >
     
   );

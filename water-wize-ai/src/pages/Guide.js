@@ -123,7 +123,7 @@ const Guide = () => {
   return (
     <PageContainer>
       <Container sx={{ backgroundColor: ' var(--extra-white)', padding: '2rem' }}>
-        <Typography variant="h3" gutterBottom align="center" color="#72ab38">Support and Guidance</Typography>
+        <Typography variant="h3" gutterBottom align="center" color="#72ab38">{dict.support}</Typography>
 
         {/* FAQ Section */}
         <Box mb={4}>

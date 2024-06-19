@@ -5,9 +5,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import useDictionary from "../../resources/Dictionary/Dictionary";
+import FermulaExplanations from "./FermulaExplanations";
+import InputField from "../../components/inputs/InputField"
+
 const style={
   fontWeight: "bold",
-  fontSize: "30px"
+  fontSize: "30px",
+  marginBottom:"40px"
 }
 
 const styleFormula={
@@ -19,14 +23,15 @@ const FormulaValues = () => {
 
 
   return (
+    <div>
     <Box
       sx={{
       }}
     >
               <div style={style}> 
-              Values ​​you received according to your inputs
+              You can edit the value of the variable Kc, if you want please enter your new value..
         </div>
-        <div style={styleFormula}>
+        {/* <div style={styleFormula}>
             <p>E*L=(∆γ*(Rn-G)+Ea*L)/(∆γ+1)</p>
             <p>L = constant</p>
             <p>E = want to calculate</p>
@@ -53,13 +58,11 @@ const FormulaValues = () => {
             <p>Kc = constant by month</p>
             <p>Total Area = users input</p>
             <p>l=Recomendation</p>
-        </div>
+        </div> */}
 
-        
-   
-
-        
+<InputField  />
     </Box>
+    </div>
   );
 };
 
