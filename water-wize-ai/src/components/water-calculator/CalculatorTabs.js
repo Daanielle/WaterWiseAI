@@ -8,7 +8,7 @@ import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
 import CalculatorsFormula from './CalculatorsFormula';
 import FormulaValues from './FormulaValues';
 import FarmulaExplanation from "./FermulaExplanations"
-export default function CalculatorTabs() {
+export default function CalculatorTabs({formulaValues}) {
   return (
     <Tabs defaultValue={0}>
       <TabsList>
@@ -16,7 +16,7 @@ export default function CalculatorTabs() {
         <Tab value={1}>Editing Fermula</Tab>
       </TabsList>
       <TabPanel value={0}><CalculatorsFormula/></TabPanel>
-      <TabPanel style={valuesstyle} value={1}><FormulaValues/></TabPanel>
+      <TabPanel style={valuesstyle} value={1}>{formulaValues}</TabPanel>
     </Tabs>
   );
 }
