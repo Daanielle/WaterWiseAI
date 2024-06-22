@@ -794,3 +794,150 @@
  *                   type: string
  *                   description: Error message
  */
+
+/**
+ * @swagger
+ * /forum/messages:
+ *   get:
+ *     tags:
+ *       - Forum
+ *     summary: Get all forum messages ordered by newest to oldest
+ *     description: Retrieve all forum messages, sorted by creation date in descending order (newest first).
+ *     responses:
+ *       200:
+ *         description: A list of forum messages
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     description: Message ID
+ *                     example: "60c72b2f9b1e8b3a6c9a1a2b"
+ *                   content:
+ *                     type: string
+ *                     description: The content of the message
+ *                     example: "This is a forum message."
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: Creation timestamp
+ *                     example: "2023-06-19T12:00:00.000Z"
+ *                   updatedAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: Last update timestamp
+ *                     example: "2023-06-19T12:00:00.000Z"
+ *       400:
+ *         description: Bad Request - Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ *                   example: "Invalid request parameters."
+ *       404:
+ *         description: Not Found - Message not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ *                   example: "Messages not found."
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ *                   example: "Internal server error."
+ */
+/**
+
+/**
+ * @swagger
+ * /forum/messages/{messageId}/comments:
+ *   get:
+ *     summary: Get all comments for a specific message ordered by createdAt (newest to oldest)
+ *     tags:
+ *       - Forum
+ *     parameters:
+ *       - in: path
+ *         name: messageId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the message to retrieve comments for
+ *         example: "60c72b2f9b1e8b3a6c9a1a2b"
+ *     responses:
+ *       200:
+ *         description: A list of comments
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     description: Comment ID
+ *                     example: "60c72b2f9b1e8b3a6c9a1a2c"
+ *                   content:
+ *                     type: string
+ *                     description: The content of the comment
+ *                     example: "This is a comment."
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: Creation timestamp
+ *                     example: "2023-06-19T12:00:00.000Z"
+ *                   updatedAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: Last update timestamp
+ *                     example: "2023-06-19T12:00:00.000Z"
+ *       400:
+ *         description: Bad Request - Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Invalid message ID."
+ *       404:
+ *         description: Not Found - Comments not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Comments not found for the message ID."
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error."
+ */

@@ -10,14 +10,21 @@ router.post('/newMessage', async (req, res) => {
     console.log('Received POST request:', req.body);
     try {
         // Create a new message object with mandatory fields
-        const messageData = {
-            userId: req.body.userId,
-            image: req.body.image,
-            title: req.body.title,
-            body: req.body.body
-        };
+        const { userId, image, title, body } = req.body;
+
+        // Check if userId is provided
+        if (!userId) {
+            return res.status(400).json({ message: 'userId is required' });
+        }
+
+        // Check if the user exists
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
         // Include recommendation if it exists
+        const messageData = { userId, image, title, body };
         if (req.body.recommendation !== undefined) {
             messageData.recommendation = req.body.recommendation;
         }
@@ -30,6 +37,37 @@ router.post('/newMessage', async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 });
+
+// // add a new forum message
+// router.post('/newMessage', async (req, res) => {
+//     console.log('Received POST request:', req.body);
+//     try {
+//         // Create a new message object with mandatory fields
+//         const messageData = {
+//             userId: req.body.userId,
+//             image: req.body.image,
+//             title: req.body.title,
+//             body: req.body.body
+//         };
+//         // Check if the user exists
+//         const user = await User.findById(userId);
+//         if (!user) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
+
+//         // Include recommendation if it exists
+//         if (req.body.recommendation !== undefined) {
+//             messageData.recommendation = req.body.recommendation;
+//         }
+
+//         const message = new ForumMessage(messageData);
+
+//         const newMessage = await message.save();
+//         res.status(201).json(newMessage);
+//     } catch (err) {
+//         res.status(400).json({ message: err.message });
+//     }
+// });
 
 
 // add new comment
@@ -74,28 +112,29 @@ router.post('/messages/:messageId/comments', async (req, res) => {
     }
 });
 
-// get all messages
-// Route to get all forum messages
+// Route to get all forum messages ordered by newest to oldest
 router.get('/messages', async (req, res) => {
     try {
-        const messages = await ForumMessage.find();
+        // Find all messages and sort by createdAt field in descending order
+        const messages = await ForumMessage.find().sort({ createdAt: -1 });
         res.json(messages);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-
-// get all comments for a message
-// Route to get all comments for a specific message
+// Route to get all comments for a specific message ordered by createdAt (newest to oldest)
 router.get('/messages/:messageId/comments', async (req, res) => {
     try {
-        const comments = await ForumComment.find({ message: req.params.messageId });
+        const comments = await ForumComment.find({ message: req.params.messageId })
+            .sort({ createdAt: -1 }); // Sort by createdAt in descending order
+
         res.json(comments);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
+
 
 
 
