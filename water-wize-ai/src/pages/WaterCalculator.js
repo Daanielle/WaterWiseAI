@@ -48,11 +48,6 @@ const modalStyle = {
   p: 4,
 };
 
-const style={
-  fontWeight: "bold",
-  fontSize: "30px",
-  marginBottom:"40px"
-}
 
 const areaCoordinates = {
   381: { name: 'Ashalim', latitude: 30.983, longitude: 34.708 },
@@ -367,12 +362,14 @@ function WaterCalculator() {
       </PageContainer >
       <div><CalculatorTabs
         formulaValues={    
-          <div>
-              <div style={style}> 
+          <Box>
+              <Box sx={{marginLeft:"18%", fontWeight: "bold", fontSize: "30px", marginBottom:"40px"}}>
                     You can edit the value of the variable Kc, if you want please enter your new value..
-              </div>
+              </Box>
+              <Box sx={{marginLeft:"39%", width:"500px"}}>
               <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />
-          </div>}
+              </Box>
+          </Box>}
       
       /></div>
 

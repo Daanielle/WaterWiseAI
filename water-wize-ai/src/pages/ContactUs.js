@@ -5,6 +5,8 @@ import CustomButton from "../components/CustomButton";
 import TitleButton from "../components/TitleButton";
 import useDictionary from "../resources/Dictionary/Dictionary";
 import ContainerBox from '../components/ContainerBox';
+import contacuUsLogoImg from '../resources/images/ContactUs.jpg';
+import { Box } from "@mui/material";
 
 
 function ContactUs() {
@@ -43,9 +45,22 @@ function ContactUs() {
   };
 
   return (
-    <PageContainer>
-
-    {/* </ContainerBox> */}
+    <PageContainer
+    children={
+      <Box
+       sx={{
+      //   backgroundImage: `url(${contacuUsLogoImg})`,
+      //   backgroundSize: 'cover',
+      //   backgroundPosition: 'center',
+        // height: '100vh',
+        width: '100vw',
+        display: 'flex',
+      //   alignItems: 'center',
+        justifyContent: 'center',
+      //   marginTop:"-88px",
+      //   marginBottom:"-88px"
+      }}
+  >
      <ContainerBox>
      <TitleButton >{dict.contuctUs}</TitleButton>
       <div className="contact-form">
@@ -61,6 +76,11 @@ function ContactUs() {
         </form>
       </div>
       </ContainerBox>
+</Box>
+    }
+
+   >
+
     </PageContainer>
   );
 }
