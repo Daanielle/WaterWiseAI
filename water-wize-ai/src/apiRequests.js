@@ -2,7 +2,7 @@ import { AuthContext } from "./AuthContext";
 import { useContext } from "react";
 
 
-export const getCalculate = async (selectedArea, areaSize, date) => {
+export const getCalculate = async (selectedArea, areaSize, date, kc) => {
   try {
 
     const calculationResponse = await fetch('/calculator/calculate', {
@@ -14,6 +14,7 @@ export const getCalculate = async (selectedArea, areaSize, date) => {
         selectedArea: selectedArea,
         areaSize: areaSize,
         date: date,
+        userKc: kc
       }),
     });
     const recommendationData = await calculationResponse.json();

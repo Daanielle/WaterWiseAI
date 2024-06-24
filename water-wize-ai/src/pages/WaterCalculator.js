@@ -234,7 +234,7 @@ function WaterCalculator() {
       if (selectedArea && selectedAreaSize && selectedDate) {
         let area = lopsidedlocations[selectedArea.value] ? lopsidedlocations[selectedArea.value] : selectedArea.value
         let date = selectedDate.add(1, 'day')
-        const recommendationData = await getCalculate(area, selectedAreaSize,  date);
+        const recommendationData = await getCalculate(area, selectedAreaSize,  date, selectedKc);
         setDetailedData(recommendationData);
       }
     } catch (error) {
