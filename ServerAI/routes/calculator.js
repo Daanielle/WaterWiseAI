@@ -84,14 +84,16 @@ async function fetchDataFromStation(stationId) {
       Authorization: 'ApiToken f058958a-d8bd-47cc-95d7-7ecf98610e47'
     }
   });
-  console.log(response);
+  console.log(response.status)
   if (response.status >= 200 && response.status < 300) {
-    const data = response.data;
-    console.log("abc")
-    console.log(data)
-    const lastBatch = data.data[data.data.length - 1];
-    return lastBatch;
-  } else {
+    if(response.status != 204){
+      const data = response.data;
+      console.log(data)
+      const lastBatch = data.data[data.data.length - 1];
+      return lastBatch;
+    }
+  } 
+  else {
     throw new Error(`Error fetching data from station ${stationId}`);
   }
 }
@@ -448,19 +450,22 @@ async function fetchDataFromStation(stationId) {
 // before kc change.
 router.post('/calculate', async (req, res) => {
   try {
-    const { selectedArea, areaSize } = req.body;
+    let { selectedArea, areaSize } = req.body;
+    selectedArea = String(selectedArea)
     const lastBatch = await fetchDataFromStation(selectedArea);
-    console.log("last batch is here");
-    console.log(lastBatch)
+    // console.log("last batch is here");
+    // console.log(lastBatch)
     let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
     // Ashalim, Arad, Besor Farm, Dorot, Hazeva, Negba, Neot smadar, Shani, Yotvata
-    if (['381', '29', '58', '79', '33', '82', '28', '36'].includes(selectedArea)) {
+    if (['381', '29', '58', '79', '33', '82', '28', '36', '64', '65', '211', '349'].includes(selectedArea)) {
       const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
       gradValue = gradChannel ? gradChannel.value : null;
 
       const ws1mmChannel = lastBatch.channels.find(channel => channel.name === 'WS1mm');
       ws1mmValue = ws1mmChannel ? ws1mmChannel.value : null;
-
+      console.log(ws1mmValue)
+      console.log(ws1mmChannel)
+      
       const wsMaxChannel = lastBatch.channels.find(channel => channel.name === 'WSmax');
       wsMaxValue = wsMaxChannel ? wsMaxChannel.value : null;
 
@@ -512,11 +517,11 @@ router.post('/calculate', async (req, res) => {
     if (!gradValue || !ws1mmValue || !wsMaxValue || !temperature || !relativeHumidity) {
       let nearbyStationId = null;
 
-      console.log("gradValue: " + gradValue)
-      console.log("ws1mmValue: " + ws1mmValue)
-      console.log("wsMaxValue: " + wsMaxValue)
-      console.log("temperature: " + temperature)
-      console.log("relativeHumidity: " + relativeHumidity)
+      // console.log("gradValue: " + gradValue)
+      // console.log("ws1mmValue: " + ws1mmValue)
+      // console.log("wsMaxValue: " + wsMaxValue)
+      // console.log("temperature: " + temperature)
+      // console.log("relativeHumidity: " + relativeHumidity)
 
       if (selectedArea == '208') { // Ashqelon Port
         nearbyStationId = '82'; // Negba
@@ -532,6 +537,10 @@ router.post('/calculate', async (req, res) => {
         nearbyStationId = '28'; // Shani
       } else if (selectedArea == '60') { // Beer Sheva University
         nearbyStationId = '28'; // Shani
+      } else if (selectedArea == '33') { // Hazeva
+        nearbyStationId = '271'; // Avdat
+      } else if (selectedArea == '349') { // Nevatim
+        nearbyStationId = '60'; // Beer Sheva University
       }
 
       if (nearbyStationId) {
@@ -735,12 +744,12 @@ const locations = {
 // Route handler for /calculator/geolocation
 router.post('/coordinates', async (req, res) => {
   try {
-    console.log("Request body:", req.body);
-    console.log("Request body:", req.body);
+    // console.log("Request body:", req.body);
+    // console.log("Request body:", req.body);
 
     const userLatitude = req.body.latitude;
     const userLongitude = req.body.longitude;
-    console.log("Received coordinates:", userLatitude, userLongitude);
+    // console.log("Received coordinates:", userLatitude, userLongitude);
 
     // Logic to determine closest area based on user's geolocation
     let closestArea = null;
@@ -800,7 +809,7 @@ const modelPaths = {
 };
 
 async function loadModel(modelPath) {
-  console.log(`Loading model from: ${modelPath}`);
+  // console.log(`Loading model from: ${modelPath}`);
   return await ort.InferenceSession.create(modelPath);
 }
 
@@ -815,8 +824,8 @@ router.post('/predict', async (req, res) => {
   try {
     const { selectedArea, areaSize } = req.body;
     const lastBatch = await fetchDataFromStation(selectedArea);
-    console.log("last batch is here");
-    console.log(lastBatch)
+    // console.log("last batch is here");
+    // console.log(lastBatch)
     let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
     // Ashalim, Arad, Besor Farm, Dorot, Hazeva, Negba, Neot smadar, Shani, Yotvata
     if (['381', '29', '58', '79', '33', '82', '28', '36'].includes(selectedArea)) {
@@ -877,11 +886,11 @@ router.post('/predict', async (req, res) => {
     if (!gradValue || !ws1mmValue || !wsMaxValue || !temperature || !relativeHumidity) {
       let nearbyStationId = null;
 
-      console.log("gradValue: " + gradValue)
-      console.log("ws1mmValue: " + ws1mmValue)
-      console.log("wsMaxValue: " + wsMaxValue)
-      console.log("temperature: " + temperature)
-      console.log("relativeHumidity: " + relativeHumidity)
+      // console.log("gradValue: " + gradValue)
+      // console.log("ws1mmValue: " + ws1mmValue)
+      // console.log("wsMaxValue: " + wsMaxValue)
+      // console.log("temperature: " + temperature)
+      // console.log("relativeHumidity: " + relativeHumidity)
 
       if (selectedArea == '208') { // Ashqelon Port
         nearbyStationId = '82'; // Negba
@@ -933,7 +942,7 @@ router.post('/predict', async (req, res) => {
     }
 
     const input = [gradValue, relativeHumidity, temperature, ws1mmValue, wsMaxValue];
-    console.log('Model input values:', input);
+    // console.log('Model input values:', input);
     const tensorInput = new ort.Tensor('float32', Float32Array.from(input), [1, input.length]);
 
     const predictions = {};
@@ -945,7 +954,7 @@ router.post('/predict', async (req, res) => {
       if (output && output.variable && output.variable.cpuData) {
         const predictionValues = Array.from(output.variable.cpuData);
         predictions[key] = predictionValues;
-        console.log(`Predictions for ${key}:`, predictionValues);
+        // console.log(`Predictions for ${key}:`, predictionValues);
       } else {
         console.error(`No valid output received for model ${key}`);
         predictions[key] = null; // Handle case where prediction is not available

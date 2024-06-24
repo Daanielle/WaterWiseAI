@@ -199,8 +199,8 @@ function WaterCalculator() {
 
   const handleCityChange = (newCity) => {
     setSelectedCity({ label: newCity.label });
-    console.log("195");
-    console.log(newCity);
+    // console.log("195");
+    // console.log(newCity);
     const cityData = cityCoordinates[newCity.label];
     if (cityData) {
       const closestAreaName = cityData.closestArea;
@@ -228,14 +228,15 @@ function WaterCalculator() {
   const calculate = async () => {
     try {
       if (selectedArea && selectedAreaSize) {
-        console.log(selectedArea.value);
+
         const calculationResponse = await fetch('/calculator/calculate', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            selectedArea: lopsidedlocations[selectedArea.value],
+            // selectedArea: lopsidedlocations[selectedArea.value],
+            selectedArea: lopsidedlocations[selectedArea.value] ? lopsidedlocations[selectedArea.value] : selectedArea.value, //TODO: ask Shachar why line before
             areaSize: selectedAreaSize,
             // selectedKc: selectedKc,
           }),
