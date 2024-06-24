@@ -9,7 +9,7 @@ const hebDict = {
   aboutUs: "עלינו",
   home: "בית",
   waterCalculator: "מחשבון מים",
-  goodMorning: "בוקר טוב",
+  goodMorning: "שלום",
   userPage: "פרטים",
   logOut: "התנתקות",
 
@@ -101,7 +101,7 @@ const engDict = {
   aboutUs: "About Us",
   home: "Home",
   waterCalculator: "Water Calculator",
-  goodMorning: "Good morning",
+  goodMorning: "Hello",
   userPage: "Details",
   logOut: "Logout",
 

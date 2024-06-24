@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PageContainer from "../components/PageContainer";
 import classes from "../styles/WaterCalculator.module.css";
-// import DatePickerComponent from "../components/water-calculator/DatePickerComponent";
+import DatePickerComponent from "../components/water-calculator/DatePickerComponent";
 import CustomButton from "../components/CustomButton";
 import DetailsPanel from "../components/water-calculator/DetailsPanel";
 import useDictionary from "../resources/Dictionary/Dictionary";
@@ -12,7 +12,7 @@ import InputPicker from "../components/inputs/PickInput";
 import AllUserRecommendations from "../components/AllUserRecommendations";
 import Modal from '@mui/material/Modal';
 import { Box } from "@mui/material";
-import { saveRecommendation, getLoggedInUserId } from "../apiRequests";
+import { saveRecommendation, getLoggedInUserId, getCalculate } from "../apiRequests";
 import CalculatorTabs from "../components/water-calculator/CalculatorTabs";
 import EditIcon from '@mui/icons-material/Edit';
 import Fab from '@mui/material/Fab';
@@ -164,6 +164,7 @@ function WaterCalculator() {
   const [openRecsModal, setOpenRecsModal] = React.useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
   const [locationAllowed, setLocationAllowed] = useState(false);
   const [selectedKc, setSelectedKc] = useState(null);
@@ -201,10 +202,13 @@ function WaterCalculator() {
     setSelectedAreaSize(newSize);
   };
 
+  const handleDateChange = (newDate) => {
+    console.log(newDate)
+    setSelectedDate(newDate);
+  };
+
   const handleCityChange = (newCity) => {
     setSelectedCity({ label: newCity.label });
-    console.log("195");
-    console.log(newCity);
     const cityData = cityCoordinates[newCity.label];
     if (cityData) {
       const closestAreaName = cityData.closestArea;
@@ -226,25 +230,15 @@ function WaterCalculator() {
       station
     })
 
-    console.log(saveStatus) //TODO: handle error if needed
+    //console.log(saveStatus) //TODO: handle error if needed
   }
 
-  const calculate = async () => {
+  const calculate = async () => { 
     try {
-      if (selectedArea && selectedAreaSize) {
-        console.log(selectedArea.value);
-        const calculationResponse = await fetch('/calculator/calculate', {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            selectedArea: lopsidedlocations[selectedArea.value],
-            areaSize: selectedAreaSize,
-            // selectedKc: selectedKc,
-          }),
-        });
-        const recommendationData = await calculationResponse.json();
+      if (selectedArea && selectedAreaSize && selectedDate) {
+        let area = lopsidedlocations[selectedArea.value] ? lopsidedlocations[selectedArea.value] : selectedArea.value
+        let date = selectedDate.add(1, 'day')
+        const recommendationData = await getCalculate(area, selectedAreaSize,  date, selectedKc);
         setDetailedData(recommendationData);
       }
     } catch (error) {
@@ -252,32 +246,7 @@ function WaterCalculator() {
     }
   };
 
-  const predict = async () => {
-    try {
-      if (selectedArea && selectedAreaSize) {
-        const predictionResponse = await fetch('/calculator/predict', {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            selectedArea: lopsidedlocations[selectedArea.value],
-            areaSize: selectedAreaSize,
-          }),
-        });
-        if (predictionResponse.ok) {
-          const predictionData = await predictionResponse.json();
-          console.log(predictionData);
-        } else {
-          console.error("Failed to fetch prediction data");
-        }
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  const findMyCoordinates = async () => {
+  const findMyCoordinates = async () => { //TODO: move to apiRequests
     try {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(async (position) => {
@@ -347,8 +316,6 @@ function WaterCalculator() {
     setLocationAllowed(true); // User allowed location access
   };
 
-
-
   return (
     <div className={classes.WaterCalculator}>
       <PageContainer>
@@ -358,18 +325,22 @@ function WaterCalculator() {
             <ContainerBox width="500px">
               <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities} />
               <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas} />
+              <DatePickerComponent
+                onDateChange={handleDateChange}
+                date={selectedDate}
+              />
               <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => (x <= 100000 && x >= 10)} error={dict.errorsAreaSizeRange} />
 
               <CustomButton onClick={calculate} label={dict.calculate} type="button" />
-              <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" />
-              <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" />
-              <CustomButton onClick={findMyCoordinates} label={dict.findMyCoordinates} type="button" />
-              <CustomButton onClick={predict} label={dict.predict} type="button" />
-              {!locationAllowed && (
+              <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" secondary/>
+              <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" secondary/>
+              {/* <CustomButton onClick={findMyCoordinates} label={dict.findMyCoordinates} type="button" />
+              <CustomButton onClick={predict} label={dict.predict} type="button" /> */}
+              {/* {!locationAllowed && (
                 <p>
                   You can use the "Find My Coordinates" button if you change your mind and want to find your location later.
                 </p>
-              )}
+              )} */}
             </ContainerBox>
           </div>
           <div className={classes.rightCol}>
