@@ -28,7 +28,7 @@ const CustomCard = ({ title, description, image, topIcon, bottomIcons, style }) 
                 />}
 
                 <CardContent sx={{ minHeight: 180 }}>
-                    {topIcon && <Icon component={topIcon} sx={{ color: "#72ab38" }} />}
+                    {topIcon && <Icon component={topIcon} sx={{ color: "var(--medium-green)" }} />}
                     <Typography gutterBottom variant="h6" component="div" fontWeight="bold">
                         {title}
                     </Typography>

@@ -6,7 +6,7 @@
   }
   
   .guide-button {
-    background-color: #4CAF50; /* Green */
+    background-color: var(--shrink-green); /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -21,7 +21,7 @@
   }
   
   .guide-button:hover {
-    background-color: #45a049; /* Darker green */
+    background-color: var(--darker-green); /* Darker green */
   }
   
   .explanation {
@@ -29,7 +29,7 @@
   }
   
   .explanation h2 {
-    color: #4CAF50; /* Green */
+    color: var(--shrink-green); /* Green */
   }
   
   .explanation p {

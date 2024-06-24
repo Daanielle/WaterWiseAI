@@ -28,43 +28,43 @@ const InputPicker = ({ label, value, onValueChange, options, }) => {
                     },
                     "& .MuiInputLabel-root": {
                         width: "127%",
-                        color: "#4CAF50",
+                        color: "var(--medium-green)",
                         textAlign: dict.stylePage
                     },
                     "& .MuiInputLabel-shrink": {
                         width: "127%",
-                        color: "#4CAF50 !important",
+                        color: "var(--medium-green) !important",
                         textAlign: dict.stylePage,
                         // transformOrigin: 'center',
                     },
                     "& .MuiAutocomplete-popupIndicator": {
-                        color: "#4CAF50",
+                        color: "var(--medium-green)",
                         marginRight: dict.stylePage === "right" ? "175px" : "",
 
                     },
                     "& .MuiAutocomplete-popupIndicatorOpen": {
-                        color: "#4CAF50",
+                        color: "var(--medium-green)",
                         marginRight: dict.stylePage === "right" ? "175px" : "",
                     },
                     "& .MuiOutlinedInput-root": {
                         // Change input color and border color
-                        color: "#4CAF50",
+                        color: "var(--medium-green)",
                         "& fieldset": {
-                            borderColor: "#4CAF50",
+                            borderColor: "var(--medium-green)",
                             textAlign: dict.stylePage
                         },
                         "&:hover fieldset": {
                             // Change border color on hover
-                            borderColor: "#4CAF50",
+                            borderColor: "var(--medium-green)",
                         },
                         "&.Mui-focused fieldset": {
                             // Change border color when focused
-                            borderColor: "#4CAF50",
+                            borderColor: "var(--medium-green)",
                             textAlign: dict.stylePage,
                         },
                         "&.Mui-focused .MuiInputLabel-root": {
                             // Change label color when focused
-                            color: "#4CAF50",
+                            color: "var(--medium-green)",
                             // textAlign: "right",
                             textAlign: dict.stylePage
                         },

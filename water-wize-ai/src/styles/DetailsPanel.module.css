@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem; /* Optional: Add space between the rows */
-  margin-top: 90px;
+  margin-top: 0px;
 }
 
 .row {

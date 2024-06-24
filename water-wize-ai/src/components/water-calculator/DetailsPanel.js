@@ -14,20 +14,10 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import CalculatorsFormula from "./CalculatorsFormula";
 
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+
 
 const RecomendationStyle = {
- backgroundColor:'#72ab38', 
+ backgroundColor:'var(--medium-green)', 
  width: 250,
  height: 200,
 border: "2px solid darkgreen",
@@ -36,7 +26,7 @@ border: "2px solid darkgreen",
 const CardStyle={ 
   width: 250,
    height: 200,
-  border: "2px solid #72ab38",
+  border: "2px solid var(--medium-green)",
   color:"grey",
   marginLeft:"20px",
   marginRight:"20px"
@@ -71,7 +61,7 @@ function DetailsPanel ({ detailedData }){
 
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "2px solid --text-color",
   boxShadow: 24,
   p: 4,
 };
@@ -86,7 +76,7 @@ function DetailsPanel ({ detailedData }){
   const bottomIcons =(title, description)=>( <Box sx={{ '& > :not(style)': { m: 1,marginLeft: '185%',marginTop: '-150%'} }}>
     <Fab size="small" aria-label="add">
       <IconButton aria-label="more info" onClick={(e) => handleOpenModal(e,title, description)}>
-        <QuestionMarkIcon sx={{ color: "#416e06" }} aria-label="more info" />
+        <QuestionMarkIcon sx={{ color: "var(--dark-green)" }} aria-label="more info" />
       </IconButton>
     </Fab>
   </Box>
@@ -98,7 +88,7 @@ function DetailsPanel ({ detailedData }){
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: '2px solid --text-color',
     boxShadow: 24,
     p: 4,
   };
@@ -107,6 +97,28 @@ function DetailsPanel ({ detailedData }){
   return (
     <div>
     <div className={classes.detailsPanel}>
+
+    <div className={classes.row} >
+        {keys.slice(11, 12).map((key, index) => (
+          <div className={classes.cardContainer} key={index}>
+            {key && detailedData[key] && (
+              <div >
+                <CustomCard style={RecomendationStyle}
+                  topIcon={variablesMapping[key]?.icon}
+                  title={variablesMapping[key]?.title}
+                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
+                  // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
+                  bottomIcons={bottomIcons(key, detailedData[key])}
+                />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+
+
+
       <div className={classes.row}>
         {keys.slice(0, 4).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
@@ -197,23 +209,7 @@ function DetailsPanel ({ detailedData }){
 
 
 
-      <div className={classes.row} >
-        {keys.slice(11, 12).map((key, index) => (
-          <div className={classes.cardContainer} key={index}>
-            {key && detailedData[key] && (
-              <div >
-                <CustomCard style={RecomendationStyle}
-                  topIcon={variablesMapping[key]?.icon}
-                  title={variablesMapping[key]?.title}
-                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
-                  // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
-                  bottomIcons={bottomIcons(key, detailedData[key])}
-                />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+      
 
 
 

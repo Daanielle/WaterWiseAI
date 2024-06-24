@@ -33,7 +33,7 @@ const Recommendation = ({ recommendationDataRows, onRowClick }) => {
                             <TableCell
                                 key={index}
                                 align="center"
-                                sx={{ fontWeight: 'bold', backgroundColor: '#c3c4c0' }}
+                                sx={{ fontWeight: 'bold', backgroundColor: 'var(--light-gray)' }}
                             >
                                 <Tooltip title={
                                     <React.Fragment>
@@ -42,7 +42,7 @@ const Recommendation = ({ recommendationDataRows, onRowClick }) => {
                                 }>
                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                         {header.icon && (
-                                            <Icon component={header.icon} sx={{ color: "#72ab38", fontSize: '1rem', marginRight: '0.5rem' }} />
+                                            <Icon component={header.icon} sx={{ color: "var(--medium-green)", fontSize: '1rem', marginRight: '0.5rem' }} />
                                         )}
                                         <div style={{ fontSize: '1rem' }}>{header.title}</div>
                                     </div>
@@ -74,7 +74,7 @@ const Recommendation = ({ recommendationDataRows, onRowClick }) => {
                                         key={cellIndex}
                                         align="right"
                                         sx={isLastCell ? {
-                                            backgroundColor: '#c98736',
+                                            backgroundColor: 'var(--accent-orange)',
                                             fontWeight: 'bold',
                                         } : {}}
                                     >

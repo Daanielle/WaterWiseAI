@@ -3,7 +3,7 @@ body {
 }
 
 .navbarenglish {
-  background: linear-gradient(to bottom left, #72ab38 0%, #72ab38 100%);
+  background: linear-gradient(to bottom left, var(--medium-green) 0%, var(--medium-green) 100%);
   border-bottom-left-radius: 50px;
   overflow: hidden;
   width: 80%;
@@ -17,7 +17,7 @@ body {
 }
 
 .navbarhebrew {
-  background: linear-gradient(to bottom left, #72ab38 0%, #72ab38 100%);
+  background: linear-gradient(to bottom left, var(--medium-green) 0%, var(--medium-green) 100%);
   border-bottom-right-radius: 50px;
   overflow: hidden;
   width: 83%;

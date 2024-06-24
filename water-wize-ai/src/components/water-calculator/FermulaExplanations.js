@@ -12,8 +12,8 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
 const StyledAccordion = styled(Accordion)(({ theme }) => ({
-  // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#72ab38',
-  border: "2px solid #72ab38",
+  // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'var(--medium-green)',
+  border: "2px solid var(--medium-green)",
   color: theme.palette.text.primary,
 
 }));
@@ -27,7 +27,7 @@ const FermulaExplanations = ({equation, Explanation})=> {
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography sx={{ fontSize:"26px" }}>{equation} </Typography>
               </AccordionSummary>
-              <AccordionDetails  sx={{ fontSize:"20px", color:"#72ab38" }}>{Explanation}</AccordionDetails>
+              <AccordionDetails  sx={{ fontSize:"20px", color:"var(--medium-green)" }}>{Explanation}</AccordionDetails>
             </StyledAccordion>
           </Paper>
        

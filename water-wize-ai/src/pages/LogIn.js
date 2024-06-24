@@ -12,7 +12,7 @@ import TitleButton from "../components/TitleButton"
 const titleButton = {
   fontStyle: "italic",
   /* font-size: larger; */
-  color: "#bef5dc"
+  color: "var(--medium-green)"
 
 };
 

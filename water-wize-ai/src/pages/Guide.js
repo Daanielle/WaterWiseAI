@@ -18,7 +18,7 @@ import CustomCard from '../components/CustomCard';
 const CardStyle={ 
   //width: 250,
    height: 400,
-  border: "2px solid #72ab38",
+  border: "2px solid var(--medium-green)",
   color:"grey",
   minHeight: 180,
   //marginLeft:"20px",
@@ -33,7 +33,7 @@ const CardStyle={
 const CardStyleExlain={ 
   //width: 250,
    height: 130,
-  border: "2px solid #72ab38",
+  border: "2px solid var(--medium-green)",
   color:"grey",
   //marginLeft:"20px",
   //marginRight:"20px",
@@ -123,7 +123,7 @@ const Guide = () => {
   return (
     <PageContainer>
       <Container sx={{ backgroundColor: ' var(--extra-white)', padding: '2rem' }}>
-        <Typography variant="h3" gutterBottom align="center" color="#72ab38">{dict.support}</Typography>
+        <Typography variant="h3" gutterBottom align="center" color="var(--medium-green)">{dict.support}</Typography>
 
         {/* FAQ Section */}
         <Box mb={4}>

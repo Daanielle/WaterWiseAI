@@ -22,7 +22,7 @@ function Home() {
         display: 'flex',
         // alignItems: 'center',
         justifyContent: 'center',
-        border:"#72ab38"
+        border:"var(--medium-green)"
       //   marginTop:"-88px",
       //   marginBottom:"-88px"
        }}
@@ -31,7 +31,7 @@ function Home() {
 <ContainerBox
 sx={{backgroundColor:"white"}}
 width={"50%"}>
-<div><h1 style={{fontStyle:"italic", color:"#72ab38"}} >Water Wise AI</h1></div>
+<div><h1 style={{fontStyle:"italic", color:"var(--medium-green)"}} >Water Wise AI</h1></div>
 <div>
 <p style={{width: "500px",  flex: "1", paddingRight: "20px", display: "flex", alignItems: "center"}}>The Water Wise AI system deals with calculating the amount of irrigation required for date crops in the Araba region in Israel. The system will use existing models and especially the Evapotranspiration formula in order to automatically calculate the irrigation needs of Tamari Majhol in the Araba. Our system offers a comprehensive solution by integrating factors and real-time data specifically adapted to the needs of growing dates in the Arava region, such as soil characteristics, crop coefficients and local weather data. This integration ensures that the farmers will receive the most accurate and practical insights for irrigation management, while addressing the specific challenges facing date farming with great precision and efficiency.</p>
 

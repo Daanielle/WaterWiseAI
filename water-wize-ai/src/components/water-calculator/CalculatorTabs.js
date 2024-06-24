@@ -53,17 +53,17 @@ const Tab = styled(BaseTab)`
   justify-content: center;
 
   &:hover {
-    background-color: #72ab38;
+    background-color: var(--medium-green);
   }
 
   &:focus {
-    color: #72ab38;
-    outline: 3px solid #72ab38;
+    color: var(--medium-green);
+    outline: 3px solid var(--medium-green);
   }
 
   &.${tabClasses.selected} {
-    background-color: #fff;
-    color: #72ab38;
+    background-color: var(--background-color);
+    color: var(--medium-green);
   }
 
   &.${buttonClasses.disabled} {
@@ -78,8 +78,8 @@ const TabPanel = styled(BaseTabPanel)(
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 0.875rem;
   padding: 40px 12px;
-  //  background: ${theme.palette.mode === 'dark' ? grey[900] : '#72ab38'};
-  border: 2px solid ${theme.palette.mode === 'dark' ? "#72ab38" : "#72ab38"};
+  //  background: ${theme.palette.mode === 'dark' ? grey[900] : 'var(--medium-green)'};
+  border: 2px solid ${theme.palette.mode === 'dark' ? "var(--medium-green)" : "var(--medium-green)"};
   border-radius: 12px;
   opacity: 0.6;
   `,
@@ -88,7 +88,7 @@ const TabPanel = styled(BaseTabPanel)(
 const TabsList = styled(BaseTabsList)(
   ({ theme }) => `
   min-width: 400px;
-  background-color: #72ab38;
+  background-color: var(--medium-green);
   border-radius: 12px;
   margin-bottom: 16px;
   display: flex;

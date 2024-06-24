@@ -10,7 +10,7 @@ import {Grid} from '@mui/material';
 const CardStyle={ 
   width: 360,
    height: 380,
-  border: "2px solid #72ab38",
+  border: "2px solid var(--medium-green)",
   color:"grey",
   marginLeft:"20px",
   marginRight:"20px",
@@ -43,6 +43,7 @@ function AboutUs() {
   return (
     <div>
       <PageContainer >
+        <div><p className={classes.ARE}>{dict.TitleWhoWeAre}</p></div>
         <div>
           <p className={classes.ARE}>{dict.MeetTeam}</p>
         </div> 

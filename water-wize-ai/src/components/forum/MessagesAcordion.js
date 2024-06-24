@@ -26,7 +26,7 @@ const detailedData = [{
 export default function AccordionExpandIcon() {
   return (
     <div>
-      <Accordion style={{ backgroundColor: '#f5f5f5'}}>
+      <Accordion style={{ backgroundColor: 'var(--background-color)'}}>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls="panel1-content"
@@ -45,7 +45,7 @@ export default function AccordionExpandIcon() {
           comments
         </Typography>
         <div style={{ paddingLeft: '30px' }}>
-          <Accordion style={{ backgroundColor: '#b0d66a', border: '1px solid #ccc', borderRadius: '8px', marginBottom: '8px' }}>
+          <Accordion style={{ backgroundColor: 'var(--light-green)', border: '1px solid var(--background-color)', borderRadius: '8px', marginBottom: '8px' }}>
             <AccordionSummary
               expandIcon={<ArrowDropDownIcon />}
               aria-controls="panel1-content"
@@ -60,7 +60,7 @@ export default function AccordionExpandIcon() {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          <Accordion style={{ backgroundColor: '#b0d66a', border: '1px solid #ccc', borderRadius: '8px', marginBottom: '8px' }}>
+          <Accordion style={{ backgroundColor: 'var(--light-green)', border: '1px solid var(--background-color)', borderRadius: '8px', marginBottom: '8px' }}>
             <AccordionSummary
               expandIcon={<ArrowDropDownIcon />}
               aria-controls="panel1-content"
@@ -77,7 +77,7 @@ export default function AccordionExpandIcon() {
           </Accordion>
         </div>
       </Accordion>
-      <Accordion style={{ backgroundColor: '#f5f5f5'}}>
+      <Accordion style={{ backgroundColor: 'var(--background-color)'}}>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls="panel2-content"
@@ -95,7 +95,7 @@ export default function AccordionExpandIcon() {
           comments
         </Typography>
         <div style={{ paddingLeft: '30px' }}>
-          <Accordion style={{ backgroundColor: '#b0d66a', border: '1px solid #ccc', borderRadius: '8px', marginBottom: '8px' }}>
+          <Accordion style={{ backgroundColor: 'var(--light-green)', border: '1px solid var(--background-color)', borderRadius: '8px', marginBottom: '8px' }}>
             <AccordionSummary
               expandIcon={<ArrowDropDownIcon />}
               aria-controls="panel1-content"

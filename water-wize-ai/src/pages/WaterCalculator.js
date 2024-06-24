@@ -43,7 +43,7 @@ const modalStyle = {
   transform: 'translate(-50%, -50%)',
   // width: /,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  border: '2px solid var(--black-color)',
   boxShadow: 24,
   p: 4,
 };
@@ -352,8 +352,7 @@ function WaterCalculator() {
   return (
     <div className={classes.WaterCalculator}>
       <PageContainer>
-        {/* <TitleButton label={dict.waterCalculatorTitle}></TitleButton> */}
-        <TitleButton >{dict.waterCalculatorTitle}</TitleButton>
+        {/* <TitleButton >{dict.waterCalculatorTitle}</TitleButton> */}
         <div className={classes.formControl}>
           <div className={classes.leftCol}>
             <ContainerBox width="500px">

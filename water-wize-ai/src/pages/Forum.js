@@ -17,7 +17,7 @@ const modalStyle = {
   width: '60%',
   height: '50%',
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  border: '2px solid var(--black-color)',
   boxShadow: 24,
   p: 4,
   justifyContent: 'center',
