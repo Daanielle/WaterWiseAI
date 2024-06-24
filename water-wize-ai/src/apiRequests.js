@@ -2,6 +2,27 @@ import { AuthContext } from "./AuthContext";
 import { useContext } from "react";
 
 
+export const getCalculate = async (selectedArea, areaSize, date) => {
+  try {
+
+    const calculationResponse = await fetch('/calculator/calculate', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        selectedArea: selectedArea,
+        areaSize: areaSize,
+        date: date,
+      }),
+    });
+    const recommendationData = await calculationResponse.json();
+    return recommendationData;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
 export const saveRecommendation = async (recommendation) => {
   try {
     const calculationResponse = await fetch('/calculator/recommendations', {

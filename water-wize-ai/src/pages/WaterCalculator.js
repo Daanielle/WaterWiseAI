@@ -12,7 +12,7 @@ import InputPicker from "../components/inputs/PickInput";
 import AllUserRecommendations from "../components/AllUserRecommendations";
 import Modal from '@mui/material/Modal';
 import { Box } from "@mui/material";
-import { saveRecommendation, getLoggedInUserId } from "../apiRequests";
+import { saveRecommendation, getLoggedInUserId, getCalculate } from "../apiRequests";
 import CalculatorTabs from "../components/water-calculator/CalculatorTabs";
 import EditIcon from '@mui/icons-material/Edit';
 import Fab from '@mui/material/Fab';
@@ -229,50 +229,13 @@ function WaterCalculator() {
     //console.log(saveStatus) //TODO: handle error if needed
   }
 
-  const calculate = async () => { //TODO: move to apiRequests
+  const calculate = async () => { 
     try {
-      if (selectedArea && selectedAreaSize) {
-
-        const calculationResponse = await fetch('/calculator/calculate', {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            // selectedArea: lopsidedlocations[selectedArea.value],
-            selectedArea: lopsidedlocations[selectedArea.value] ? lopsidedlocations[selectedArea.value] : selectedArea.value,
-            areaSize: selectedAreaSize,
-            date: selectedDate.add(1, 'day') ,
-            // selectedKc: selectedKc,
-          }),
-        });
-        const recommendationData = await calculationResponse.json();
+      if (selectedArea && selectedAreaSize && selectedDate) {
+        let area = lopsidedlocations[selectedArea.value] ? lopsidedlocations[selectedArea.value] : selectedArea.value
+        let date = selectedDate.add(1, 'day')
+        const recommendationData = await getCalculate(area, selectedAreaSize,  date);
         setDetailedData(recommendationData);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  const predict = async () => {
-    try {
-      if (selectedArea && selectedAreaSize) {
-        const predictionResponse = await fetch('/calculator/predict', {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            selectedArea: lopsidedlocations[selectedArea.value],
-            areaSize: selectedAreaSize,
-          }),
-        });
-        if (predictionResponse.ok) {
-          const predictionData = await predictionResponse.json();
-          console.log(predictionData);
-        } else {
-          console.error("Failed to fetch prediction data");
-        }
       }
     } catch (error) {
       console.error("Error:", error);
