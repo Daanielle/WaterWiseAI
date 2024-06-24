@@ -10,16 +10,26 @@ import WaterCalculatorVariablesDetails from '../../resources/mapping/WaterCalcul
 import Tooltip from '@mui/material/Tooltip';
 import { Typography, Icon } from '@mui/material';
 
-const Recommendation = ({ recommendationDataRows }) => {
-    const varData = WaterCalculatorVariablesDetails()
-    const tableHeaders = Object.keys(varData).map(key => varData[key].title);
+const Recommendation = ({ recommendationDataRows, onRowClick }) => {
+    const varData = WaterCalculatorVariablesDetails();
+
+    // Add the two new headers
+    const tableHeaders = [
+        { title: 'Date', description: 'Date of the recommendation', icon: null },
+        { title: 'Station', description: 'Station associated with the recommendation', icon: null },
+        ...Object.keys(varData).map(key => ({
+            title: varData[key].title,
+            description: varData[key].description,
+            icon: varData[key].icon,
+        }))
+    ];
 
     return (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        {Object.keys(varData).map((key, index) => (
+                        {tableHeaders.map((header, index) => (
                             <TableCell
                                 key={index}
                                 align="center"
@@ -27,13 +37,14 @@ const Recommendation = ({ recommendationDataRows }) => {
                             >
                                 <Tooltip title={
                                     <React.Fragment>
-                                        <Typography color="inherit">{varData[key].description}</Typography>
+                                        <Typography color="inherit">{header.description}</Typography>
                                     </React.Fragment>
-                                }
-                                >
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                                        <Icon component={varData[key].icon} sx={{ color: "#72ab38", fontSize: '1rem' }} />
-                                        <div style={{ fontSize: '1rem', marginRight: '0.5rem' }}>{varData[key].title}</div>
+                                }>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        {header.icon && (
+                                            <Icon component={header.icon} sx={{ color: "#72ab38", fontSize: '1rem', marginRight: '0.5rem' }} />
+                                        )}
+                                        <div style={{ fontSize: '1rem' }}>{header.title}</div>
                                     </div>
                                 </Tooltip>
                             </TableCell>
@@ -44,8 +55,17 @@ const Recommendation = ({ recommendationDataRows }) => {
                     {recommendationDataRows.map((row, rowIndex) => (
                         <TableRow
                             key={rowIndex}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            onClick={() => onRowClick(row)}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
                         >
+                            <TableCell align="right">
+                                {new Date(row.createdAt).toLocaleDateString(undefined, {
+                                    year: 'numeric',
+                                    month: '2-digit',
+                                    day: '2-digit'
+                                })}
+                            </TableCell>
+                            <TableCell align="right">{row.station}</TableCell>
                             {Object.keys(varData).map((key, cellIndex, arr) => {
                                 const value = row[key];
                                 const isLastCell = cellIndex === arr.length - 1;
@@ -56,9 +76,10 @@ const Recommendation = ({ recommendationDataRows }) => {
                                         sx={isLastCell ? {
                                             backgroundColor: '#c98736',
                                             fontWeight: 'bold',
-                                        } : {}}>
+                                        } : {}}
+                                    >
                                         {typeof value === 'number' ? value.toFixed(3) : value}
-                                    </TableCell> //TODO: add units
+                                    </TableCell>
                                 );
                             })}
                         </TableRow>
@@ -69,4 +90,4 @@ const Recommendation = ({ recommendationDataRows }) => {
     );
 }
 
-export default Recommendation
+export default Recommendation;

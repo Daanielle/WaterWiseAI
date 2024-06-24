@@ -194,7 +194,7 @@ function WaterCalculator() {
 
   const handleKcChange = (newKc) => {
     setSelectedKc(newKc);
-  
+
   };
 
   const handleAreaSizeChange = (newSize) => {
@@ -241,11 +241,36 @@ function WaterCalculator() {
           body: JSON.stringify({
             selectedArea: lopsidedlocations[selectedArea.value],
             areaSize: selectedAreaSize,
-            // KcValue: selectedKc,
+            // selectedKc: selectedKc,
           }),
         });
         const recommendationData = await calculationResponse.json();
         setDetailedData(recommendationData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const predict = async () => {
+    try {
+      if (selectedArea && selectedAreaSize) {
+        const predictionResponse = await fetch('/calculator/predict', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            selectedArea: lopsidedlocations[selectedArea.value],
+            areaSize: selectedAreaSize,
+          }),
+        });
+        if (predictionResponse.ok) {
+          const predictionData = await predictionResponse.json();
+          console.log(predictionData);
+        } else {
+          console.error("Failed to fetch prediction data");
+        }
       }
     } catch (error) {
       console.error("Error:", error);
@@ -258,7 +283,7 @@ function WaterCalculator() {
         navigator.geolocation.getCurrentPosition(async (position) => {
           const userLatitude = position.coords.latitude;
           const userLongitude = position.coords.longitude;
-    
+
           const response = await fetch('/calculator/coordinates', {
             method: 'POST',
             headers: {
@@ -266,14 +291,14 @@ function WaterCalculator() {
             },
             body: JSON.stringify({ latitude: userLatitude, longitude: userLongitude }),
           });
-    
+
           if (response.ok) {
             const data = await response.json();
             console.log('Received data:', data);
-  
+
             // Extract closest area and city from the response
             const { closestArea, closestCity } = data;
-  
+
             // Update the state with the closest area and city
             if (closestArea) {
               setSelectedArea({ value: closestArea.name, label: closestArea.name });
@@ -281,7 +306,7 @@ function WaterCalculator() {
             if (closestCity) {
               setSelectedCity({ label: closestCity });
             }
-  
+
             console.log('Selected Area:', closestArea);
             console.log('Selected City:', closestCity);
           } else {
@@ -295,8 +320,8 @@ function WaterCalculator() {
       console.error('Error:', error);
     }
   };
-  
-  
+
+
 
   const handleError = (error) => {
     switch (error.code) {
@@ -334,12 +359,13 @@ function WaterCalculator() {
             <ContainerBox width="500px">
               <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities} />
               <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas} />
-              <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) =>  (x <= 100000 && x >= 10)} error={dict.errorsAreaSizeRange} />
+              <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => (x <= 100000 && x >= 10)} error={dict.errorsAreaSizeRange} />
 
               <CustomButton onClick={calculate} label={dict.calculate} type="button" />
               <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" />
               <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" />
               <CustomButton onClick={findMyCoordinates} label={dict.findMyCoordinates} type="button" />
+              <CustomButton onClick={predict} label={dict.predict} type="button" />
               {!locationAllowed && (
                 <p>
                   You can use the "Find My Coordinates" button if you change your mind and want to find your location later.
@@ -350,9 +376,9 @@ function WaterCalculator() {
           <div className={classes.rightCol}>
             <DetailsPanel detailedData={detailedData} />
           </div>
-          
+
         </div>
-        
+
         <Modal
           open={openRecsModal}
           onClose={handleCloseRecsModal}
@@ -363,26 +389,23 @@ function WaterCalculator() {
             <AllUserRecommendations />
           </Box>
         </Modal>
-      </PageContainer >
-      <div><CalculatorTabs
-      formulaValues={
-        <div>
-          <div style={style}> 
-            You can edit the value of the variable Kc, if you want please enter your new value..
-          </div>
-          <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />
-          </div>}
-      
-      /></div>
-      {/*<Box sx={{ '& > :not(style)': { m: 1 } }}>
+        <div><CalculatorTabs
+          formulaValues={
+            <Box>
+              <Box sx={{ marginLeft: "18%", fontWeight: "bold", fontSize: "30px", marginBottom: "40px" }}>
+                You can edit the value of the variable Kc, if you want please enter your new value..
+              </Box>
+              <Box sx={{ marginLeft: "39%", width: "500px" }}>
+                <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />
+              </Box>
+            </Box>}
 
-      <Fab color="secondary" aria-label="edit">
-        <EditIcon />
-      </Fab>
-    </Box>*/}
-  
+        /></div>
+      </PageContainer >
+
+
     </div >
-    
+
   );
 }
 

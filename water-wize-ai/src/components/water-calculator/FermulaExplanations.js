@@ -11,23 +11,23 @@ import {
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
-
 const StyledAccordion = styled(Accordion)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#72ab38',
+  // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#72ab38',
   border: "2px solid #72ab38",
-  color: theme.palette.text.secondary,
+  color: theme.palette.text.primary,
+
 }));
 
 const FermulaExplanations = ({equation, Explanation})=> {
   return (
-    <Box sx={{ width: 500, minHeight: 70 }}>
+    <Box sx={{ width: 600, minHeight: 90 }}>
       <Grid columns={3} spacing={2}>
           <Paper >
             <StyledAccordion sx={{ minHeight: 20 }}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>{equation} </Typography>
+                <Typography sx={{ fontSize:"26px" }}>{equation} </Typography>
               </AccordionSummary>
-              <AccordionDetails>{Explanation}</AccordionDetails>
+              <AccordionDetails  sx={{ fontSize:"20px", color:"#72ab38" }}>{Explanation}</AccordionDetails>
             </StyledAccordion>
           </Paper>
        

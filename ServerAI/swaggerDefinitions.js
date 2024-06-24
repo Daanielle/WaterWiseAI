@@ -526,3 +526,418 @@
  *                 error:
  *                   type: string
  */
+
+
+/**
+ * @swagger
+ * /calculator/recommendations/{recommendationId}:
+ *   get:
+ *     summary: Retrieve a single recommendation by recommendationId
+ *     tags: [Recommendations]
+ *     parameters:
+ *       - in: path
+ *         name: recommendationId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the recommendation to retrieve
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved the recommendation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Recommendation'
+ *       400:
+ *         description: Bad Request - Invalid recommendationId format
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *       404:
+ *         description: Recommendation not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ */
+
+/**
+ * @swagger
+ * /forum/newMessage:
+ *   post:
+ *     summary: Add a new forum message
+ *     tags: [Forum]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userId:
+ *                 type: string
+ *                 description: ID of the user creating the message
+ *                 example: "60c72b2f9b1d8e30d4c8b456"
+ *               image:
+ *                 type: string
+ *                 description: URL of the image associated with the message
+ *                 example: "https://example.com/image.jpg"
+ *               title:
+ *                 type: string
+ *                 description: Title of the forum message
+ *                 example: "My First Forum Post"
+ *               body:
+ *                 type: string
+ *                 description: Body of the forum message
+ *                 example: "This is the body of my first forum post."
+ *               recommendation:
+ *                 type: string
+ *                 description: Recommendation status
+ *                 enum: [yes, no, neutral]
+ *                 example: "yes"
+ *     responses:
+ *       201:
+ *         description: Message created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   description: ID of the created message
+ *                   example: "60c72b2f9b1d8e30d4c8b457"
+ *                 userId:
+ *                   type: string
+ *                   description: ID of the user who created the message
+ *                   example: "60c72b2f9b1d8e30d4c8b456"
+ *                 image:
+ *                   type: string
+ *                   description: URL of the image associated with the message
+ *                   example: "https://example.com/image.jpg"
+ *                 title:
+ *                   type: string
+ *                   description: Title of the forum message
+ *                   example: "My First Forum Post"
+ *                 body:
+ *                   type: string
+ *                   description: Body of the forum message
+ *                   example: "This is the body of my first forum post."
+ *                 recommendation:
+ *                   type: string
+ *                   description: Recommendation status
+ *                   example: "yes"
+ *                 createdAt:
+ *                   type: string
+ *                   format: date-time
+ *                   description: Creation timestamp
+ *                   example: "2023-06-19T12:00:00.000Z"
+ *                 updatedAt:
+ *                   type: string
+ *                   format: date-time
+ *                   description: Last update timestamp
+ *                   example: "2023-06-19T12:00:00.000Z"
+ *       400:
+ *         description: Bad Request - Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ */
+
+
+/**
+ * @swagger
+ * /forum/messages/{messageId}/comments:
+ *   post:
+ *     summary: Add a new comment to a forum message
+ *     tags: [Forum]
+ *     parameters:
+ *       - in: path
+ *         name: messageId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the forum message to add the comment to
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userId:
+ *                 type: string
+ *                 description: ID of the user creating the comment
+ *                 example: "60c72b2f9b1d8e30d4c8b459"
+ *               image:
+ *                 type: string
+ *                 description: URL of the image associated with the comment
+ *                 example: "https://example.com/comment-image.jpg"
+ *               title:
+ *                 type: string
+ *                 description: Title of the comment
+ *                 example: "Interesting point!"
+ *               body:
+ *                 type: string
+ *                 description: Body of the comment
+ *                 example: "I really like your post!"
+ *               recommendation:
+ *                 type: string
+ *                 description: Recommendation status
+ *                 enum: [yes, no, neutral]
+ *                 example: "yes"
+ *     responses:
+ *       201:
+ *         description: Comment added successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   description: ID of the created comment
+ *                   example: "60c72b2f9b1d8e30d4c8b458"
+ *                 userId:
+ *                   type: string
+ *                   description: ID of the user who created the comment
+ *                   example: "60c72b2f9b1d8e30d4c8b459"
+ *                 image:
+ *                   type: string
+ *                   description: URL of the image associated with the comment
+ *                   example: "https://example.com/comment-image.jpg"
+ *                 title:
+ *                   type: string
+ *                   description: Title of the comment
+ *                   example: "Interesting point!"
+ *                 body:
+ *                   type: string
+ *                   description: Body of the comment
+ *                   example: "I really like your post!"
+ *                 recommendation:
+ *                   type: string
+ *                   description: Recommendation status
+ *                   example: "yes"
+ *                 message:
+ *                   type: string
+ *                   description: ID of the forum message this comment is related to
+ *                   example: "60c72b2f9b1d8e30d4c8b457"
+ *                 createdAt:
+ *                   type: string
+ *                   format: date-time
+ *                   description: Creation timestamp
+ *                   example: "2023-06-19T12:00:00.000Z"
+ *                 updatedAt:
+ *                   type: string
+ *                   format: date-time
+ *                   description: Last update timestamp
+ *                   example: "2023-06-19T12:00:00.000Z"
+ *       400:
+ *         description: Bad Request - Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ *       404:
+ *         description: Not Found - Message not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ */
+
+/**
+ * @swagger
+ * /forum/messages:
+ *   get:
+ *     tags:
+ *       - Forum
+ *     summary: Get all forum messages ordered by newest to oldest
+ *     description: Retrieve all forum messages, sorted by creation date in descending order (newest first).
+ *     responses:
+ *       200:
+ *         description: A list of forum messages
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     description: Message ID
+ *                     example: "60c72b2f9b1e8b3a6c9a1a2b"
+ *                   content:
+ *                     type: string
+ *                     description: The content of the message
+ *                     example: "This is a forum message."
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: Creation timestamp
+ *                     example: "2023-06-19T12:00:00.000Z"
+ *                   updatedAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: Last update timestamp
+ *                     example: "2023-06-19T12:00:00.000Z"
+ *       400:
+ *         description: Bad Request - Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ *                   example: "Invalid request parameters."
+ *       404:
+ *         description: Not Found - Message not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ *                   example: "Messages not found."
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ *                   example: "Internal server error."
+ */
+/**
+
+/**
+ * @swagger
+ * /forum/messages/{messageId}/comments:
+ *   get:
+ *     summary: Get all comments for a specific message ordered by createdAt (newest to oldest)
+ *     tags:
+ *       - Forum
+ *     parameters:
+ *       - in: path
+ *         name: messageId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the message to retrieve comments for
+ *         example: "60c72b2f9b1e8b3a6c9a1a2b"
+ *     responses:
+ *       200:
+ *         description: A list of comments
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     description: Comment ID
+ *                     example: "60c72b2f9b1e8b3a6c9a1a2c"
+ *                   content:
+ *                     type: string
+ *                     description: The content of the comment
+ *                     example: "This is a comment."
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: Creation timestamp
+ *                     example: "2023-06-19T12:00:00.000Z"
+ *                   updatedAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: Last update timestamp
+ *                     example: "2023-06-19T12:00:00.000Z"
+ *       400:
+ *         description: Bad Request - Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Invalid message ID."
+ *       404:
+ *         description: Not Found - Comments not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Comments not found for the message ID."
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error."
+ */

@@ -43,12 +43,12 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:443',
+        url: 'http://localhost:80',
         description: 'Local server'
       }
     ]
   },
-  apis: ['./routes/*.js'], // Paths to API routes
+  apis: ['./routes/*.js','./swaggerDefinitions.js'], // Paths to API routes
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);

@@ -7,6 +7,8 @@ import { buttonClasses } from '@mui/base/Button';
 import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
 import CalculatorsFormula from './CalculatorsFormula';
 import FarmulaExplanation from "./FermulaExplanations"
+
+
 export default function CalculatorTabs({formulaValues}) {
   return (
     <Tabs defaultValue={0}>
@@ -15,27 +17,12 @@ export default function CalculatorTabs({formulaValues}) {
         <Tab value={1}>Editing Fermula</Tab>
       </TabsList>
       <TabPanel value={0}><CalculatorsFormula/></TabPanel>
-      <TabPanel style={valuesstyle} value={1}>{formulaValues}</TabPanel>
+      <TabPanel value={1}>{formulaValues}</TabPanel>
     </Tabs>
   );
 }
-const valuesstyle={
-  fontWeight: "bold",
-  fontSize: "30px"
-}
 
-const blue = {
-  50: '#F0F7FF',
-  100: '#C2E0FF',
-  200: '#80BFFF',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0059B2',
-  800: '#004C99',
-  900: '#003A75',
-};
+
 
 const grey = {
   50: '#F3F6F9',
@@ -59,7 +46,7 @@ const Tab = styled(BaseTab)`
   background-color: transparent;
   width: 100%;
   padding: 10px 12px;
-  margin: 6px;
+  margin: 4px;
   border: none;
   border-radius: 7px;
   display: flex;
@@ -87,16 +74,14 @@ const Tab = styled(BaseTab)`
 
 const TabPanel = styled(BaseTabPanel)(
   ({ theme }) => `
-  width: 100%;
+  width: 99%;
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 0.875rem;
-  padding: 20px 12px;
+  padding: 40px 12px;
   //  background: ${theme.palette.mode === 'dark' ? grey[900] : '#72ab38'};
   border: 2px solid ${theme.palette.mode === 'dark' ? "#72ab38" : "#72ab38"};
   border-radius: 12px;
   opacity: 0.6;
-  margin-left:80px;
-  // border: "2px solid #72ab38"
   `,
 );
 
