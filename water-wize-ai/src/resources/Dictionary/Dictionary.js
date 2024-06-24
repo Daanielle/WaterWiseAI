@@ -43,6 +43,7 @@ const hebDict = {
   city:"עיר",
   date: "תאריך",
   areaSize: "גודל שטח",
+  KcValue: "Kc",
   calculate: "חשב",
   WindSpeed1mmTitle: "מהירות הרוח המקסימלית בדקה האחרונה",
   grad: ".מייצג את האיזון בין קרינה נכנסת ויוצאת על פני השטח ",
@@ -84,8 +85,8 @@ westyle:"rightwe",
 arestyle:"rightare",
 
 //errors
-errorsAreaSizeRange: "הזינו מספר תקין, בין 0 ל-5000" //todo: update to actual range
-
+errorsAreaSizeRange: "הזינו מספר תקין, בין 10 ל-100000", 
+errorsKcRange: "הזינו מספר תקין, בין 0 ל-2", 
 };
 
 const engDict = {
@@ -131,6 +132,7 @@ const engDict = {
   city:"City",
   date: "Date",
   areaSize: "Area Size",
+  KcValue: "Kc",
   calculate: "Calculate",
   WindSpeed1mmTitle: "Maximum wind speed last minute",
   grad: "Represents the balance between incoming and outgoing radiation at the surface.",
@@ -173,8 +175,8 @@ westyle:"leftwe",
 arestyle:"leftare",
 
 //errors
-errorsAreaSizeRange: "please enter a valid number - between 0 to 5000" //todo: update to actual range
-
+errorsAreaSizeRange: "please enter a valid number - between 10 to 100000", 
+errorsKcRange: "please enter a valid number - between 0 to 2",
 };
 
 const useDictionary = () => {

@@ -100,6 +100,7 @@ async function fetchDataFromStation(stationId) {
 // router.post("/calculate", authenticateToken, async (req, res) => {
 router.post('/calculate', async (req, res) => {
   try {
+    // const { selectedArea, areaSize, KcValue } = req.body;
     const { selectedArea, areaSize } = req.body;
     const lastBatch = await fetchDataFromStation(selectedArea);
     console.log("last batch is here");
@@ -219,7 +220,15 @@ router.post('/calculate', async (req, res) => {
     }
 
     const deltaY = computeDeltaY(temperature);
-    const Kc = getKc();
+    const Kc=getKc();
+    // const Kc=null;
+    // if(KcValue=!null){
+    //   Kc = KcValue;
+    // }
+    // else{
+    //    Kc = getKc();
+    // }
+    
     const e0 = computeE0(temperature);
     const ea = computesmallea(relativeHumidity, e0);
     const Ea = computeBigEa(e0, ea, wsMaxValue);

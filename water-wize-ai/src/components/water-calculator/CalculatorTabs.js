@@ -6,9 +6,8 @@ import { TabPanel as BaseTabPanel } from '@mui/base/TabPanel';
 import { buttonClasses } from '@mui/base/Button';
 import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
 import CalculatorsFormula from './CalculatorsFormula';
-import FormulaValues from './FormulaValues';
 import FarmulaExplanation from "./FermulaExplanations"
-export default function CalculatorTabs() {
+export default function CalculatorTabs({formulaValues}) {
   return (
     <Tabs defaultValue={0}>
       <TabsList>
@@ -16,7 +15,7 @@ export default function CalculatorTabs() {
         <Tab value={1}>Editing Fermula</Tab>
       </TabsList>
       <TabPanel value={0}><CalculatorsFormula/></TabPanel>
-      <TabPanel style={valuesstyle} value={1}><FormulaValues/></TabPanel>
+      <TabPanel style={valuesstyle} value={1}>{formulaValues}</TabPanel>
     </Tabs>
   );
 }
@@ -53,7 +52,7 @@ const grey = {
 
 const Tab = styled(BaseTab)`
   font-family: 'IBM Plex Sans', sans-serif;
-  color: white;
+  color: var( --light-green);
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 600;

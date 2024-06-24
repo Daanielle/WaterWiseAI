@@ -48,7 +48,11 @@ const modalStyle = {
   p: 4,
 };
 
-
+const style={
+  fontWeight: "bold",
+  fontSize: "30px",
+  marginBottom:"40px"
+}
 const areaCoordinates = {
   381: { name: 'Ashalim', latitude: 30.983, longitude: 34.708 },
   29: { name: 'Arad', latitude: 31.25, longitude: 35.1855 },
@@ -162,6 +166,7 @@ function WaterCalculator() {
   const [selectedArea, setSelectedArea] = useState(null);
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
   const [locationAllowed, setLocationAllowed] = useState(false);
+  const [selectedKc, setSelectedKc] = useState(null);
   const [detailedData, setDetailedData] = useState({
     grad: "--",
     windSpeed1mm: "--",
@@ -185,6 +190,11 @@ function WaterCalculator() {
 
   const handleAreaChange = (newArea) => {
     setSelectedArea(newArea);
+  };
+
+  const handleKcChange = (newKc) => {
+    setSelectedKc(newKc);
+  
   };
 
   const handleAreaSizeChange = (newSize) => {
@@ -231,6 +241,7 @@ function WaterCalculator() {
           body: JSON.stringify({
             selectedArea: lopsidedlocations[selectedArea.value],
             areaSize: selectedAreaSize,
+            // KcValue: selectedKc,
           }),
         });
         const recommendationData = await calculationResponse.json();
@@ -323,7 +334,7 @@ function WaterCalculator() {
             <ContainerBox width="500px">
               <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities} />
               <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas} />
-              <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => x === '' || (x < 5000 && x > 0)} error={dict.errorsAreaSizeRange} />
+              <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) =>  (x <= 100000 && x >= 10)} error={dict.errorsAreaSizeRange} />
 
               <CustomButton onClick={calculate} label={dict.calculate} type="button" />
               <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" />
@@ -353,13 +364,22 @@ function WaterCalculator() {
           </Box>
         </Modal>
       </PageContainer >
-      <div><CalculatorTabs/></div>
-      <Box sx={{ '& > :not(style)': { m: 1 } }}>
+      <div><CalculatorTabs
+      formulaValues={
+        <div>
+          <div style={style}> 
+            You can edit the value of the variable Kc, if you want please enter your new value..
+          </div>
+          <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />
+          </div>}
+      
+      /></div>
+      {/*<Box sx={{ '& > :not(style)': { m: 1 } }}>
 
       <Fab color="secondary" aria-label="edit">
         <EditIcon />
       </Fab>
-    </Box>
+    </Box>*/}
   
     </div >
     
