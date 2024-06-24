@@ -190,7 +190,7 @@ function WaterCalculator() {
 
   const handleKcChange = (newKc) => {
     setSelectedKc(newKc);
-  
+
   };
 
   const handleAreaSizeChange = (newSize) => {
@@ -254,7 +254,7 @@ function WaterCalculator() {
         navigator.geolocation.getCurrentPosition(async (position) => {
           const userLatitude = position.coords.latitude;
           const userLongitude = position.coords.longitude;
-    
+
           const response = await fetch('/calculator/coordinates', {
             method: 'POST',
             headers: {
@@ -262,14 +262,14 @@ function WaterCalculator() {
             },
             body: JSON.stringify({ latitude: userLatitude, longitude: userLongitude }),
           });
-    
+
           if (response.ok) {
             const data = await response.json();
             console.log('Received data:', data);
-  
+
             // Extract closest area and city from the response
             const { closestArea, closestCity } = data;
-  
+
             // Update the state with the closest area and city
             if (closestArea) {
               setSelectedArea({ value: closestArea.name, label: closestArea.name });
@@ -277,7 +277,7 @@ function WaterCalculator() {
             if (closestCity) {
               setSelectedCity({ label: closestCity });
             }
-  
+
             console.log('Selected Area:', closestArea);
             console.log('Selected City:', closestCity);
           } else {
@@ -291,8 +291,8 @@ function WaterCalculator() {
       console.error('Error:', error);
     }
   };
-  
-  
+
+
 
   const handleError = (error) => {
     switch (error.code) {
@@ -330,7 +330,7 @@ function WaterCalculator() {
             <ContainerBox width="500px">
               <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities} />
               <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas} />
-              <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x)  =>  (x <= 100000 && x >= 10)} error={dict.errorsAreaSizeRange} />
+              <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => (x <= 100000 && x >= 10)} error={dict.errorsAreaSizeRange} />
 
               <CustomButton onClick={calculate} label={dict.calculate} type="button" />
               <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" />
@@ -346,9 +346,9 @@ function WaterCalculator() {
           <div className={classes.rightCol}>
             <DetailsPanel detailedData={detailedData} />
           </div>
-          
+
         </div>
-        
+
         <Modal
           open={openRecsModal}
           onClose={handleCloseRecsModal}
@@ -359,22 +359,23 @@ function WaterCalculator() {
             <AllUserRecommendations />
           </Box>
         </Modal>
+        <div><CalculatorTabs
+          formulaValues={
+            <Box>
+              <Box sx={{ marginLeft: "18%", fontWeight: "bold", fontSize: "30px", marginBottom: "40px" }}>
+                You can edit the value of the variable Kc, if you want please enter your new value..
+              </Box>
+              <Box sx={{ marginLeft: "39%", width: "500px" }}>
+                <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />
+              </Box>
+            </Box>}
+
+        /></div>
       </PageContainer >
-      <div><CalculatorTabs
-        formulaValues={    
-          <Box>
-              <Box sx={{marginLeft:"18%", fontWeight: "bold", fontSize: "30px", marginBottom:"40px"}}>
-                    You can edit the value of the variable Kc, if you want please enter your new value..
-              </Box>
-              <Box sx={{marginLeft:"39%", width:"500px"}}>
-              <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />
-              </Box>
-          </Box>}
-      
-      /></div>
+
 
     </div >
-    
+
   );
 }
 
