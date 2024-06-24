@@ -248,6 +248,31 @@ function WaterCalculator() {
     }
   };
 
+  const predict = async () => {
+    try {
+      if (selectedArea && selectedAreaSize) {
+        const predictionResponse = await fetch('/calculator/predict', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            selectedArea: lopsidedlocations[selectedArea.value],
+            areaSize: selectedAreaSize,
+          }),
+        });
+        if (predictionResponse.ok) {
+          const predictionData = await predictionResponse.json();
+          console.log(predictionData);
+        } else {
+          console.error("Failed to fetch prediction data");
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   const findMyCoordinates = async () => {
     try {
       if (navigator.geolocation) {
@@ -336,6 +361,7 @@ function WaterCalculator() {
               <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" />
               <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" />
               <CustomButton onClick={findMyCoordinates} label={dict.findMyCoordinates} type="button" />
+              <CustomButton onClick={predict} label={dict.predict} type="button" />
               {!locationAllowed && (
                 <p>
                   You can use the "Find My Coordinates" button if you change your mind and want to find your location later.
