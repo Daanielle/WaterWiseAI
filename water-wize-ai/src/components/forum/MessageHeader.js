@@ -45,7 +45,7 @@ export default function MessageHeader({ userId, title, time, numOfComments, isRe
                 </div>
                 <div style={{ marginRight: '10px', marginLeft: '20px' }}>
                     <Typography color="text.secondary" style={{ marginBottom: '5px' }}>
-                        {user ? user.firstName : 'Guest'}
+                        {user ? user.firstName + " " + user.lastName : 'Guest'}
                     </Typography>
                     <Typography color="text.secondary">
                         {time}

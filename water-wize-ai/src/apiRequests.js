@@ -59,8 +59,30 @@ export const getRecommendationsForUser = async (userId) => {
     }
 
     const recommendations = await response.json();
-    //console.log(response)
     return recommendations;
+  } catch (error) {
+    console.error('Failed to fetch recommendations:', error);
+    throw error;
+  }
+};
+
+export const getRecommendationsById = async (recId) => {
+  try {
+    const url = `/calculator/recommendations/${recId}`;
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Error ${response.status}: ${errorData.error}`);
+    }
+
+    const recommendation = await response.json();
+    return recommendation;
   } catch (error) {
     console.error('Failed to fetch recommendations:', error);
     throw error;
@@ -84,12 +106,7 @@ export const getLoggedInUserId = async () => {
         throw new Error(errorData.message || 'update failed!');
       }
       const data = await response.json(); // Parse the JSON response
-      //console.log(data.firstName)
-      //console.log(data._id)
-
       return data._id
-    } else {
-      console.log('no logged in user')
     }
   } catch (error) {
     console.error("Error:", error);
@@ -113,8 +130,6 @@ export const getLoggedInUserImage = async () => {
       }
       const data = await response.json(); // Parse the JSON response
       return data.image
-    } else {
-      console.log('no logged in user')
     }
   } catch (error) {
     console.error("Error:", error);
@@ -124,8 +139,6 @@ export const getLoggedInUserImage = async () => {
 
 export const getUserById = async (userId) => {
   try {
-    //console.log(userId)
-
     const url = `/users/${userId}`;
     const response = await fetch(url, {
       method: 'GET',
@@ -138,8 +151,6 @@ export const getUserById = async (userId) => {
       const errorData = await response.json();
       throw new Error(`Error ${response.status}: ${errorData.error}`);
     }
-    console.log(userId)
-
     const user = await response.json();
     return user;
   } catch (error) {
@@ -164,7 +175,6 @@ export const getAllUsers = async (userId) => {
     }
 
     const users = await response.json();
-    //console.log(user)
     return users;
   } catch (error) {
     console.error('Failed to fetch recommendations:', error);
@@ -186,6 +196,60 @@ export const addNewForumMessage = async (message) => {
     });
     const status = await response.json();
     return status
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+
+export const getAllForumMessages = async () => {
+  try {
+    const response = await fetch('forum/messages', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const messages = await response.json();
+    return messages
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+
+export const addNewForumComment = async (comment) => {
+  try {
+    const response = await fetch(`/forum/messages/${comment.message}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: comment.userId,
+        title: comment.title,
+        body: comment.body,
+      }),
+    });
+    const status = await response.json();
+    return status
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+export const getAllCommentsForMsg = async (msgId) => {
+  try {
+    console.log(msgId)
+    const response = await fetch(`/forum/messages/${msgId}/comments`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const comments = await response.json();
+    console.log(comments)
+    return comments
   } catch (error) {
     console.error("Error:", error);
   }

@@ -74,7 +74,7 @@ router.post('/newMessage', async (req, res) => {
 
 // Route to add a new comment to a message
 router.post('/messages/:messageId/comments', async (req, res) => {
-    const { userId, image, title, body, recommendation } = req.body;
+    const { userId, title, body } = req.body;
     const messageId = req.params.messageId;
 
     try {
@@ -83,34 +83,36 @@ router.post('/messages/:messageId/comments', async (req, res) => {
         if (!parentMessage) {
             return res.status(404).json({ message: 'Message not found' });
         }
+
         // Check if the user exists
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
+
         // Create a new comment
         const commentData = {
             userId,
-            image,
             title,
             body,
             message: messageId  // Store the message ID as a reference
         };
 
-        // Include recommendation if it exists
-        if (recommendation !== undefined && recommendation !== null) {
-            commentData.recommendation = recommendation;
-        }
-
         const comment = new ForumComment(commentData);
 
         // Save the comment
         const newComment = await comment.save();
+
+        // Update parentMessage numOfComments
+        parentMessage.numOfComments = parentMessage.numOfComments + 1;
+        await parentMessage.save();
+
         res.status(201).json(newComment);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
 });
+
 
 // Route to get all forum messages ordered by newest to oldest
 router.get('/messages', async (req, res) => {

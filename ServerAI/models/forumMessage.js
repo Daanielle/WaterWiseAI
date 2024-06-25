@@ -6,15 +6,16 @@ const forumMessageSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    image: {
-        type: String,
+    numOfComments: {
+        type: Number,
+        default: 0,
         required: false
     },
     title: {
         type: String,
         required: true,
         trim: true,
-        minlength: 5,
+        minlength: 3,
         maxlength: 100
     },
     body: {

@@ -19,10 +19,6 @@ const forumCommentSchema = new mongoose.Schema({
         ref: 'User', // Reference to the User model
         required: true
     },
-    image: {
-        type: String,
-        required: false
-    },
     title: {
         type: String,
         required: true,
@@ -34,11 +30,6 @@ const forumCommentSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    },
-    recommendation: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Recommendation', // Reference to the Recommendation model
-        required: false
     },
     message: {
         type: mongoose.Schema.Types.ObjectId,

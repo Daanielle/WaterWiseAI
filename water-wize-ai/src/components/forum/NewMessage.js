@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
-import { addNewForumMessage, getLoggedInUserId, getLoggedInUserImage } from '../../apiRequests';
+import { addNewForumMessage, getLoggedInUserId } from '../../apiRequests';
 import InputField from "../inputs/InputField";
 import CustomButton from "../CustomButton";
 import TitleButton from "../TitleButton";
 import { Modal, Box } from "@mui/material";
 import AllUserRecommendations from "../AllUserRecommendations";
 
-const NewMessage = () => {
+const NewMessage = ({ onCloseNewMsg  }) => {
     const [userId, setUserId] = useState('');
-    const [image, setImage] = useState('');
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const [rec, setRec] = useState('');
+    const [recommendation, setRecommendation] = useState(null);
     const [openRecsModal, setOpenRecsModal] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
 
@@ -19,13 +18,10 @@ const NewMessage = () => {
         const fetchUserDetails = async () => {
             try {
                 const userId = await getLoggedInUserId();
-                const userImage = await getLoggedInUserImage();
                 if (!userId) {
                     setUserId('0');
-                    setImage('');
                 } else {
                     setUserId(userId);
-                    setImage(userImage);
                 }
             } catch (err) {
                 console.error(err);
@@ -39,17 +35,18 @@ const NewMessage = () => {
 
     const handleRowClick = (row) => {
         setSelectedRow(row);
-        setRec(row._id)
+        setRecommendation(row._id)
         setOpenRecsModal(false); // Close modal on row click
     };
 
     const saveMessage = async () => {
         try {
             let message = {
-                userId, image, title, body, rec
+                userId, title, body, recommendation
             };
             let status = await addNewForumMessage(message);
-            console.log("Message saved successfully:", status);
+            //console.log("Message saved successfully:", status);
+            onCloseNewMsg();
         } catch (error) {
             console.error("Error saving message:", error);
         }
