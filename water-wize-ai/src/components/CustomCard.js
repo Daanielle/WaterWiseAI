@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Icon } from '@mui/material';
 import Modal from "@mui/material/Modal";
-import WaterCalculatorVariablesDetails from "../resources/mapping/WaterCalculatorVariablesDetails";
+import WaterCalculatorVariablesDetails from "../resources/mapping/waterCalculatorVariablesDetails";
 import { styled } from '@mui/material/styles';
 
 const CustomCard = ({ title, description, image, topIcon, bottomIcons, style }) => {

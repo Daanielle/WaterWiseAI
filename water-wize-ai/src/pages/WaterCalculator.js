@@ -169,6 +169,7 @@ function WaterCalculator() {
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
   const [locationAllowed, setLocationAllowed] = useState(false);
   const [selectedKc, setSelectedKc] = useState(null);
+  const [userId, setUserId] = useState(null)
   const [detailedData, setDetailedData] = useState({
     grad: "--",
     windSpeed1mm: "--",
@@ -186,7 +187,13 @@ function WaterCalculator() {
 
 
   useEffect(() => {
-    findMyCoordinates();
+    const fetchData = async () => {
+      await findMyCoordinates();
+      const id = await getLoggedInUserId();
+      setUserId(id);
+    };
+  
+    fetchData();
   }, []);
 
 
@@ -204,7 +211,6 @@ function WaterCalculator() {
   };
 
   const handleDateChange = (newDate) => {
-    console.log(newDate)
     setSelectedDate(newDate);
   };
 
@@ -213,7 +219,6 @@ function WaterCalculator() {
     const cityData = cityCoordinates[newCity.label];
     if (cityData) {
       const closestAreaName = cityData.closestArea;
-      console.log(cityData);
       const closestAreaId = lopsidedlocations[closestAreaName];
       setSelectedArea({ value: closestAreaName, label: closestAreaName });
     }
@@ -224,7 +229,7 @@ function WaterCalculator() {
 
   const saveRec = async () => {
     const station = selectedArea.value;
-    const userId = await getLoggedInUserId();
+    // const userId = await getLoggedInUserId();
     let saveStatus = saveRecommendation({
       userId,
       ...detailedData,
@@ -264,7 +269,7 @@ function WaterCalculator() {
 
           if (response.ok) {
             const data = await response.json();
-            console.log('Received data:', data);
+            // console.log('Received data:', data);
 
             // Extract closest area and city from the response
             const { closestArea, closestCity } = data;
@@ -277,8 +282,8 @@ function WaterCalculator() {
               setSelectedCity({ label: closestCity });
             }
 
-            console.log('Selected Area:', closestArea);
-            console.log('Selected City:', closestCity);
+            // console.log('Selected Area:', closestArea);
+            // console.log('Selected City:', closestCity);
           } else {
             console.error('Error fetching geolocation data:', response.statusText);
           }
@@ -333,8 +338,8 @@ function WaterCalculator() {
               <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => (x <= 100000 && x >= 10)} error={dict.errorsAreaSizeRange} />
 
               <CustomButton onClick={calculate} label={dict.calculate} type="button" />
-              <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" secondary/>
-              <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" secondary/>
+              <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" secondary disabled={!userId} disabledTooltip={"Log in in order to save a calculation"}/>
+              <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" secondary disabled={!userId} disabledTooltip={"Log in in order to show saved calculations"}/>
               {/* <CustomButton onClick={findMyCoordinates} label={dict.findMyCoordinates} type="button" />
               <CustomButton onClick={predict} label={dict.predict} type="button" /> */}
               {/* {!locationAllowed && (

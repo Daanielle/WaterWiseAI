@@ -1,9 +1,5 @@
 /* CustomButtons.module.css */
 
-.ripplecontainer {
-  position: relative;
-}
-
 .button {
   position: relative;
   overflow: hidden;
@@ -12,15 +8,34 @@
   font-size: large;
   padding: 8px;
   transition: background-color 0.3s, transform 0.3s;
-  margin-top: 10px; 
-  background-color: var( --light-green);
-  /* color: var(--dark-gray); */
+  margin-top: 10px;
+  background-color: var(--light-green);
+  cursor: pointer;
 }
 
 .button:hover {
   background-color: var(--medium-green);
 }
 
+.secondary-button {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  height: 40px;
+  font-size: large;
+  padding: 8px;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 10px;
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  background-color: var(--accent-orange);
+}
+
+/* Ripple Effect Styles */
 .ripple {
   position: absolute;
   border-radius: 50%;
@@ -36,7 +51,12 @@
   }
 }
 
-.secondary-button {
+.secondary-button .ripple {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Disabled Secondary Button Styles */
+.disabled-secondary-button {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
@@ -45,19 +65,13 @@
   padding: 8px;
   transition: background-color 0.3s, transform 0.3s;
   margin-top: 10px;
-  background-color: var(--light-gray); /* Set secondary button background color */
-  color: var(--dark-gray); /* Set secondary button text color */
+  background-color: var(--medium-gray); /* Gray background */
+  color: var(--light-gray); /* Lighter gray text */
+  cursor: not-allowed; /* Disabled cursor */
+  opacity: 0.6; /* Slightly transparent */
 }
 
-.secondary-button:hover {
-  background-color: var(--accent-orange); /* Change background color on hover */
-}
-
-.secondary-button:hover .ripple {
-  background-color: rgba(0, 0, 0, 0.3); /* Change ripple color on hover */
-}
-
-.secondary-button .ripple {
-  /* Ripple animation styles */
-  background: rgba(0, 0, 0, 0.2); /* Set initial ripple color */
+.disabled-secondary-button:hover {
+  background-color: var(--medium-gray); /* No change on hover */
+  color: var(--light-gray); /* No change on hover */
 }
