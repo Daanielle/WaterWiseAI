@@ -206,7 +206,6 @@ function WaterCalculator() {
   };
 
   const handleDateChange = (newDate) => {
-    console.log(newDate)
     setSelectedDate(newDate);
   };
 
@@ -215,7 +214,6 @@ function WaterCalculator() {
     const cityData = cityCoordinates[newCity.label];
     if (cityData) {
       const closestAreaName = cityData.closestArea;
-      console.log(cityData);
       const closestAreaId = lopsidedlocations[closestAreaName];
       setSelectedArea({ value: closestAreaName, label: closestAreaName });
     }
@@ -266,7 +264,7 @@ function WaterCalculator() {
 
           if (response.ok) {
             const data = await response.json();
-            console.log('Received data:', data);
+            // console.log('Received data:', data);
 
             // Extract closest area and city from the response
             const { closestArea, closestCity } = data;
@@ -279,8 +277,8 @@ function WaterCalculator() {
               setSelectedCity({ label: closestCity });
             }
 
-            console.log('Selected Area:', closestArea);
-            console.log('Selected City:', closestCity);
+            // console.log('Selected Area:', closestArea);
+            // console.log('Selected City:', closestCity);
           } else {
             console.error('Error fetching geolocation data:', response.statusText);
           }

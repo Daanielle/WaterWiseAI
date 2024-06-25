@@ -59,7 +59,7 @@ export const getRecommendationsForUser = async (userId) => {
     }
 
     const recommendations = await response.json();
-    console.log(response)
+    //console.log(response)
     return recommendations;
   } catch (error) {
     console.error('Failed to fetch recommendations:', error);
@@ -84,6 +84,9 @@ export const getLoggedInUserId = async () => {
         throw new Error(errorData.message || 'update failed!');
       }
       const data = await response.json(); // Parse the JSON response
+      //console.log(data.firstName)
+      //console.log(data._id)
+
       return data._id
     } else {
       console.log('no logged in user')
@@ -118,6 +121,56 @@ export const getLoggedInUserImage = async () => {
   }
 
 };
+
+export const getUserById = async (userId) => {
+  try {
+    //console.log(userId)
+
+    const url = `/users/${userId}`;
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Error ${response.status}: ${errorData.error}`);
+    }
+    console.log(userId)
+
+    const user = await response.json();
+    return user;
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    throw error;
+  }
+}
+
+export const getAllUsers = async (userId) => {
+  try {
+    const url = `/users`;
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Error ${response.status}: ${errorData.error}`);
+    }
+
+    const users = await response.json();
+    //console.log(user)
+    return users;
+  } catch (error) {
+    console.error('Failed to fetch recommendations:', error);
+    throw error;
+  }
+}
 
 
 export const addNewForumMessage = async (message) => {
