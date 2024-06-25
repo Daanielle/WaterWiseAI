@@ -87,10 +87,12 @@ const TabPanel = styled(BaseTabPanel)(
 
 const TabsList = styled(BaseTabsList)(
   ({ theme }) => `
-  min-width: 400px;
+  min-width: 1750px;
   background-color: var(--medium-green);
   border-radius: 12px;
   margin-bottom: 16px;
+    margin-top: 100px;
+
   display: flex;
   align-items: center;
   justify-content: center;

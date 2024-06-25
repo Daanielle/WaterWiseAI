@@ -17,6 +17,7 @@ import CalculatorTabs from "../components/water-calculator/CalculatorTabs";
 import EditIcon from '@mui/icons-material/Edit';
 import Fab from '@mui/material/Fab';
 
+import RecommendationDetails from "../components/water-calculator/RecommendationDetails";
 
 const bycodejson = require('../resources/bycode2022Updated.json');
 
@@ -342,6 +343,7 @@ function WaterCalculator() {
                 </p>
               )} */}
             </ContainerBox>
+              <RecommendationDetails detailedData={detailedData}/>
           </div>
           <div className={classes.rightCol}>
             <DetailsPanel detailedData={detailedData} />

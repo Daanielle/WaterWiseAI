@@ -13,35 +13,29 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import CalculatorsFormula from "./CalculatorsFormula";
-import WavesIcon from "@mui/icons-material/Waves";
+// import recommendation from "../../../../ServerAI/models/recommendation";
 
 
 
-const CardStyle={ 
-  width: 250,
-   height: 200,
-  border: "2px solid var(--medium-green)",
-  color:"grey",
-  marginLeft:"20px",
-  marginRight:"20px"
+const RecomendationStyle = {
+ backgroundColor:'var(--medium-green)', 
+ width: 250,
+ height: 200,
+border: "2px solid darkgreen",
+ marginLeft: "100px",
 }
+
 function DetailsPanel ({ detailedData }){
   const [openModal, setOpenModal] = React.useState(false);
   const [currentTitle, setCurrentTitle] = React.useState("");
-  const [currentIcon, setCurrentIcon] = React.useState(<WavesIcon/>);
-  const [currentDescription, setCurrentDescription] = React.useState('');
   const [clickPosition, setClickPosition] = React.useState({ top: 0, left: 0 });
 
   const dict = useDictionary();
   const variablesMapping = WaterCalculatorVariablesDetails()
-
-  // const handleOpenDetailsModal = () => setOpenDetailsModal(true);
   const handleCloseModal = () => setOpenModal(false);
   const handleOpenModal = (event, title, description) => {
     setOpenModal(true);
-    setCurrentDescription(description);
     setCurrentTitle(title);
-    // setCurrentIcon(icon);
     setClickPosition({ top: event.clientY , left: event.clientX - window.scrollX });
 
   };
@@ -63,7 +57,6 @@ function DetailsPanel ({ detailedData }){
     backgroundColor: 'rgba(0, 0, 0, 0)', // Semi-transparent black, adjust as needed
   });
   
-  const keys = Object.keys(detailedData);
 
   const bottomIcons =(title, description)=>( <Box sx={{ '& > :not(style)': { m: 1,marginLeft: '185%',marginTop: '-150%'} }}>
     <Fab size="small" aria-label="add">
@@ -75,29 +68,24 @@ function DetailsPanel ({ detailedData }){
   );
 
 
-
   return (
     <div>
     <div className={classes.detailsPanel}>
 
 
-      <div className={classes.row}>
-        {keys.slice(0, 4).map((key, index) => (
-          <div className={classes.cardContainer} key={index}>
-            {key && detailedData[key] && (
+
+
+          <div className={classes.cardContainer}>
               <div>
-                <CustomCard style={CardStyle}
-                  topIcon={variablesMapping[key].icon}
-                  title={variablesMapping[key]?.title}
-                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
+                <CustomCard style={RecomendationStyle}
+                  topIcon={variablesMapping["recommendation"].icon}
+                  title={variablesMapping["recommendation"]?.title}
+                  description={ detailedData.recommendation !== "--" ? detailedData.recommendation + " " + variablesMapping["recommendation"]?.units : detailedData.recommendation}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
-                  bottomIcons={bottomIcons(key, detailedData[key])}
+                  bottomIcons={bottomIcons("recommendation", detailedData.recommendation)}
                 />
               </div>
-            )}
           </div>
-        ))}
-      </div>
 
       {openModal&&  <Modal
                     open={openModal}
@@ -107,9 +95,6 @@ function DetailsPanel ({ detailedData }){
                     BackdropComponent={CustomBackdrop} // 
                 >
                     <Box sx={modalStyle}>
-                    <Typography>
-                                {currentIcon}
-                            </Typography>
                             <Typography id="modal-modal-title" variant="h6" component="h2">
                                 {currentTitle}
                             </Typography>
@@ -123,41 +108,6 @@ function DetailsPanel ({ detailedData }){
                 } 
 
 
-      <div className={classes.row2}>
-        {keys.slice(4, 7).map((key, index) => (
-          <div className={classes.cardContainer} key={index}>
-            {key && detailedData[key] && (
-              <div>
-                <CustomCard style={CardStyle}
-                  topIcon={variablesMapping[key]?.icon}
-                  title={variablesMapping[key]?.title}
-                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
-                  // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
-                  bottomIcons={bottomIcons(key, detailedData[key])}
-                />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      <div className={classes.row}>
-        {keys.slice(7, 11).map((key, index) => (
-          <div className={classes.cardContainer} key={index}>
-            {key && detailedData[key] && (
-              <div>
-                <CustomCard style={CardStyle}
-                  topIcon={variablesMapping[key]?.icon}
-                  title={variablesMapping[key]?.title}
-                  description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
-                  // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
-                  bottomIcons={bottomIcons(key, detailedData[key])}
-                />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
 
 
 
