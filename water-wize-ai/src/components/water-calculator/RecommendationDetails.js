@@ -13,44 +13,25 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import CalculatorsFormula from "./CalculatorsFormula";
-// import recommendation from "../../../../ServerAI/models/recommendation";
+import { Icon } from '@mui/material';
 
-
-
-const RecomendationStyle = {
- backgroundColor:'var(--medium-green)', 
- width: 250,
- height: 200,
-border: "2px solid darkgreen",
- marginLeft: "100px",
-}
 
 function DetailsPanel ({ detailedData }){
   const [openModal, setOpenModal] = React.useState(false);
   const [currentTitle, setCurrentTitle] = React.useState("");
+  const [currentIcon, setCurrentIcon] = React.useState();
   const [clickPosition, setClickPosition] = React.useState({ top: 0, left: 0 });
 
   const dict = useDictionary();
   const variablesMapping = WaterCalculatorVariablesDetails()
   const handleCloseModal = () => setOpenModal(false);
-  const handleOpenModal = (event, title, description) => {
+  const handleOpenModal = (event, title, description, icon) => {
     setOpenModal(true);
     setCurrentTitle(title);
+    setCurrentIcon(icon);
     setClickPosition({ top: event.clientY , left: event.clientX - window.scrollX });
 
   };
-  const modalStyle = {
-  position: 'absolute',
-  top: `${clickPosition.top}px`,
-  left: `${clickPosition.left}px`,
-  transform: 'translate(-50%, -50%)',
-
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid --text-color",
-  boxShadow: 24,
-  p: 4,
-};
 
 
   const CustomBackdrop = styled('div')({
@@ -58,31 +39,41 @@ function DetailsPanel ({ detailedData }){
   });
   
 
-  const bottomIcons =(title, description)=>( <Box sx={{ '& > :not(style)': { m: 1,marginLeft: '185%',marginTop: '-150%'} }}>
+  const bottomIcons =(title, description,icon)=>( <Box sx={{ position: 'sticky','& > :not(style)': { m: 1,marginLeft: '185%',marginTop: '-150%'} }}>
     <Fab size="small" aria-label="add">
-      <IconButton aria-label="more info" onClick={(e) => handleOpenModal(e,title, description)}>
+      <IconButton aria-label="more info" onClick={(e) => handleOpenModal(e,title, description,icon)}>
         <QuestionMarkIcon sx={{ color: "var(--dark-green)" }} aria-label="more info" />
       </IconButton>
     </Fab>
   </Box>
   );
 
+  const modalStyle = {
+    position: 'absolute',
+    top: `${clickPosition.top}px`,
+    left: `${clickPosition.left}px`,
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid --text-color",
+    boxShadow: 24,
+    p: 4,
+  };
+  
+
+   
 
   return (
     <div>
     <div className={classes.detailsPanel}>
-
-
-
-
           <div className={classes.cardContainer}>
               <div>
-                <CustomCard style={RecomendationStyle}
-                  topIcon={variablesMapping["recommendation"].icon}
+                <CustomCard sx={{width: 250, height: 200,border: "2px solid darkgreen",marginLeft:"100px",backgroundColor:'var(--medium-green)',color:"var(--black)", icon:{color:"var(  --light-gray)"}}}
+                  topIcon={variablesMapping["recommendation"].icon} 
                   title={variablesMapping["recommendation"]?.title}
                   description={ detailedData.recommendation !== "--" ? detailedData.recommendation + " " + variablesMapping["recommendation"]?.units : detailedData.recommendation}
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
-                  bottomIcons={bottomIcons("recommendation", detailedData.recommendation)}
+                  bottomIcons={bottomIcons("recommendation", detailedData.recommendation,variablesMapping['recommendation'].icon)}
                 />
               </div>
           </div>
@@ -95,25 +86,18 @@ function DetailsPanel ({ detailedData }){
                     BackdropComponent={CustomBackdrop} // 
                 >
                     <Box sx={modalStyle}>
-                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                    {currentIcon && <Icon component={currentIcon} sx={{ color: "var(--medium-green)",marginLeft:"45%"}} />}
+                            <Typography sx={{marginLeft:"30%"}} id="modal-modal-title" variant="h6" component="h2">
                                 {currentTitle}
                             </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        <Typography sx={{textAlign: dict.textAlign,marginLeft: "auto", mt: 2}} id="modal-modal-description" >
                         {dict[currentTitle]}
                         </Typography>
-                      <Button onClick={handleCloseModal}>Close Modal</Button>
+                      <Button sx={{marginLeft:"30%"}} onClick={handleCloseModal}>{dict.CloseModal}</Button>
 
                     </Box>
                 </Modal>
                 } 
-
-
-
-
-
-      
-
-
 
     </div>
     

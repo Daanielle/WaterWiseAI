@@ -15,30 +15,7 @@ import govmapIMG from "../resources/images/govmapIMG.jpeg";
 import SouthernIMG from "../resources/images/SouthernArava.png";
 import MappingIMG from "../resources/images/MappingSite.png"
 import CustomCard from '../components/CustomCard';
-const CardStyle={ 
-  //width: 250,
-   height: 400,
-  border: "2px solid var(--medium-green)",
-  color:"grey",
-  minHeight: 180,
-  //marginLeft:"20px",
-  //marginRight:"20px",
-  //minHeight: 180,
- image:{
-  height: 140
- }
 
-
-}
-const CardStyleExlain={ 
-  //width: 250,
-   height: 130,
-  border: "2px solid var(--medium-green)",
-  color:"grey",
-  //marginLeft:"20px",
-  //marginRight:"20px",
-  //minHeight: 180,
-}
 
 
 const stylebutton={ 
@@ -148,8 +125,7 @@ const Guide = () => {
             {resources.map((resource, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
                
-                <CustomCard
-                style={CardStyle}
+                <CustomCard sx={{width:370,height: 400,minHeight: 180,image:{height: 140}}}
                 title={resource.title}
                 description={resource.summary}
                 image={resource.imageUrl}
@@ -166,14 +142,8 @@ const Guide = () => {
           <Grid container spacing={2}>
             {screenExplanations.map((screen, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
-                {/*<Card sx={{ height: 130 }}>
-                  <CardContent>
-                    <Typography variant="h5" component="div">{screen.screen}</Typography>
-                    <Typography variant="body2" color="text.secondary">{screen.explanation}</Typography>
-                  </CardContent>
-                </Card> */}
                 <CustomCard
-                style={CardStyleExlain}
+                sx={{width:300, height: 130,image:{height: 140}}}
                 title={screen.screen}
                 description={screen.explanation}
                 />

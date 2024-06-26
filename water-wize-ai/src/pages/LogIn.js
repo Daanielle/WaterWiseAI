@@ -11,9 +11,7 @@ import TitleButton from "../components/TitleButton"
 
 const titleButton = {
   fontStyle: "italic",
-  /* font-size: larger; */
-  color: "var(--medium-green)"
-
+  color: "var(--medium-green)",
 };
 
 function LogIn() {
@@ -51,7 +49,7 @@ function LogIn() {
   return (
     <PageContainer>
       <form onSubmit={handleSubmit}>
-        <ContainerBox width="700px">
+        <ContainerBox  sx={{ width:"700px", border: "2px solid var(--medium-green)",}} >
           <TitleButton style={titleButton}>{dict.LogIn}</TitleButton>
           <InputField label={dict.email} value={email} onValueChange={setEmail} checkIfValid={() => true} error="" />
           <InputField label={dict.password} value={password} type="password" onValueChange={setPassword} checkIfValid={() => true} error="" />

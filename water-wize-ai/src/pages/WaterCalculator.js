@@ -42,18 +42,13 @@ const modalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  // width: /,
   bgcolor: 'background.paper',
   border: '2px solid var(--black-color)',
   boxShadow: 24,
   p: 4,
 };
 
-const style={
-  fontWeight: "bold",
-  fontSize: "30px",
-  marginBottom:"40px"
-}
+
 const areaCoordinates = {
   381: { name: 'Ashalim', latitude: 30.983, longitude: 34.708 },
   29: { name: 'Arad', latitude: 31.25, longitude: 35.1855 },
@@ -325,7 +320,6 @@ function WaterCalculator() {
   return (
     <div className={classes.WaterCalculator}>
       <PageContainer>
-        {/* <TitleButton >{dict.waterCalculatorTitle}</TitleButton> */}
         <div className={classes.formControl}>
           <div className={classes.leftCol}>
             <ContainerBox width="500px">
@@ -372,11 +366,10 @@ function WaterCalculator() {
               <Box sx={{ marginLeft: "18%", fontWeight: "bold", fontSize: "30px", marginBottom: "40px" }}>
                 You can edit the value of the variable Kc, if you want please enter your new value..
               </Box>
-              <Box sx={{ marginLeft: "39%", width: "500px" }}>
+              <Box sx={{ marginLeft: "39%", width: "500px", height:"450px"}}>
                 <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />
               </Box>
             </Box>}
-
         /></div>
       </PageContainer >
 
