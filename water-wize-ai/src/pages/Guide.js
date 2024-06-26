@@ -18,13 +18,21 @@ import CustomCard from '../components/CustomCard';
 
 
 
-const stylebutton={ 
-     justifyContent: 'center',
-      width: '100%',
-  paddingBottom:"0px" }
+
+
+
+
+
+
+const Guide = () => {
+  const dict = useDictionary();
+  const stylebutton={ 
+    justifyContent: 'center',
+     width: '100%',
+ paddingBottom:"0px" }
 
 const BottomIcons=(link)=>(
-  <Button
+ <Button
 size="small"
 color="primary"
 href={link}
@@ -32,71 +40,65 @@ target="_blank"
 rel="noopener noreferrer"
 style={stylebutton}
 >
-Read More
+{dict.GuideReadMore}
 </Button>
 )
-
-
-const faqData = [
-  {
-    question: "How do I use the water calculator?",
-    answer: "The water calculator is designed to help you estimate the amount of water needed for your plants. You simply need to input the relevant parameters and the calculator will provide a recommendation."
-  },
-  {
-    question: "What factors does the water calculator consider?",
-    answer: "The water calculator takes into account factors such as temperature, humidity, wind speed, and solar radiation to provide accurate recommendations."
-  }
-];
-
-const resources = [
-  {
-    title: "Central and Northern ARAVA R&D",
-    summary: "Research and Development in the Arava was established in 1986, as part of the Negev Arava R&D, with the aim of serving the development needs of the settlement in preferred areas along Israel's borders in the Negev and Arava.",
-    imageUrl: MOPCenterImg, // Use the imported image variable
-    link: "http://agri.arava.co.il/"
-  },
-  {
-    title: "Research and scientific articles about soil and water",
-    summary: "The goals of the Arava R&D agricultural are to develop and research irrigation interfaces that will ensure agricultural sustainability in the southern Arava, while preserving environmental resources, and to reach technological developments in the science of irrigation.",
-    imageUrl: KarkaIMG, // Use the imported image variable
-    link: "https://aravard.org.il/%D7%9E%D7%97%D7%A7%D7%A8%D7%99%D7%9D/"
-  },
-  {
-    title: "Israel Meteorological Service (IMS)",
-    summary: "A unit of the Israeli Ministry of Transportation responsible for forecasting weather, meteorological data, and climate research in Israel. Provides accurate and reliable meteorological information.",
-    imageUrl: imsLogoImg, // Use the imported image variable
-    link: "https://ims.gov.il/en"
-  },
-  {
-    title: "Govmap",
-    summary: "The official map site of the State of Israel. Enables: various searches such as address, block/plot, viewing information layers on a variety of topics, map sharing capabilities, creating personal information layers and more.",
-    imageUrl: govmapIMG, // Use the imported image variable
-    link: "https://www.govmap.gov.il/?c=176414.17,648081.48&z=0"
-  },
-  {
-    title: "Southern ARAVA R&D",
-    summary: "Southern Arava R&D is located near Kibbutz Yotvata in the Southern Arava and centers extensive agricultural research activities in a variety of fields such as: soil and water, post-harvest fruit handling, orchards, flowers and ornamental plants, vegetables, plant protection, animals and agrotechnics.",
-    imageUrl: SouthernIMG, // Use the imported image variable
-    link: "https://aravard.org.il/"
-  },
-  {
-    title: "Web Mapping Application Of Agricultural Plots",
-    summary: "This map shows the mapping of agricultural plots in the State of Israel. The map allows the identification of an agricultural plot according to its identification number.",
-    imageUrl: MappingIMG, // Use the imported image variable
-    link: "https://data1-moag.opendata.arcgis.com/apps/deb443ad1b1f44a2baa74a4880d0ec27/explore"
-  }
-];
-
-const screenExplanations = [
-  { screen: "Home", explanation: "The Home screen allows users to register and log in to the application." },
-  { screen: "About Us", explanation: "The About Us screen provides background information about the project developers." },
-  { screen: "Contact Us", explanation: "The Contact Us screen lets users reach out to the project developers." },
-  { screen: "Water Calculator", explanation: "The Water Calculator screen helps users estimate the water needs for their plants based on various parameters." },
-  { screen: "Forum", explanation: "The Forum screen allows users to ask questions and engage in discussions." }
-];
-
-const Guide = () => {
-  const dict = useDictionary();
+  const screenExplanations = [
+    { screen: dict.GuideHomeTitle, explanation: dict.GuideHomeExplanation },
+    { screen: dict.GuideAboutUs, explanation: dict.GuideAboutUsExplanation },
+    { screen: dict.GuideContactUs, explanation: dict.GuideContactExplanation },
+    { screen: dict.GuideWaterCalculator, explanation: dict.GuideWCExplanation },
+    { screen: dict.GuideForum, explanation: dict.GuideForumExplanation }
+  ];
+  const faqData = [
+    {
+      question: dict.GuideFaq1Title,
+      answer: dict.GuideFaq1Ans
+    },
+    {
+      question: dict.GuideFaq2Title,
+      answer: dict.GuideFaq2Ans
+    }
+  ];
+  
+  const resources = [
+    {
+      title: dict.GuideAravaCenter,
+      summary: dict.GuideCenterAravaDesc,
+      imageUrl: MOPCenterImg, // Use the imported image variable
+      link: "http://agri.arava.co.il/"
+    },
+    {
+      title: dict.GuideResearch,
+      summary: dict.GuideResearchDesc,
+      imageUrl: KarkaIMG, // Use the imported image variable
+      link: "https://aravard.org.il/%D7%9E%D7%97%D7%A7%D7%A8%D7%99%D7%9D/"
+    },
+    {
+      title: dict.GuideIMS,
+      summary: dict.GuideIMSDesc,
+      imageUrl: imsLogoImg, // Use the imported image variable
+      link: "https://ims.gov.il/en"
+    },
+    {
+      title: dict.GuideGovMap,
+      summary: dict.GuideGovDesc,
+      imageUrl: govmapIMG, // Use the imported image variable
+      link: "https://www.govmap.gov.il/?c=176414.17,648081.48&z=0"
+    },
+    {
+      title: dict.GuideSouthernArava,
+      summary: dict.GuideSouthernAravaDesc,
+      imageUrl: SouthernIMG, // Use the imported image variable
+      link: "https://aravard.org.il/"
+    },
+    {
+      title: dict.GuideWebMap,
+      summary: dict.GuideWebDesc,
+      imageUrl: MappingIMG, // Use the imported image variable
+      link: "https://data1-moag.opendata.arcgis.com/apps/deb443ad1b1f44a2baa74a4880d0ec27/explore"
+    }
+  ];  
   return (
     <PageContainer>
       <Container sx={{ backgroundColor: ' var(--extra-white)', padding: '2rem' }}>
@@ -104,7 +106,7 @@ const Guide = () => {
 
         {/* FAQ Section */}
         <Box mb={4}>
-          <Typography variant="h4" gutterBottom>FAQ</Typography>
+          <Typography variant="h4" gutterBottom>{dict.GuideFAQ}</Typography>
           {faqData.map((faq, index) => (
             <Accordion key={index}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -120,7 +122,7 @@ const Guide = () => {
          {/* Resources & Tools Section */}
 
          <Box mb={4}>
-          <Typography variant="h4"  gutterBottom>Resources & Tools</Typography>
+          <Typography variant="h4"  gutterBottom>{dict.GuideResourcesAndTools}</Typography>
           <Grid container spacing={2}>
             {resources.map((resource, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
@@ -138,7 +140,7 @@ const Guide = () => {
 
         {/* Screen Explanations Section */}
         <Box mb={4}>
-          <Typography variant="h4" gutterBottom>Screen Explanations</Typography>
+          <Typography variant="h4" gutterBottom>{dict.GuideScreenExplanations}</Typography>
           <Grid container spacing={2}>
             {screenExplanations.map((screen, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
@@ -155,7 +157,7 @@ const Guide = () => {
 
         {/* Video Section */}
         <Box mb={4}>
-          <Typography variant="h4" gutterBottom>Water Calculator Demonstration</Typography>
+          <Typography variant="h4" gutterBottom>{dict.GuideDemonstration}</Typography>
           <Paper>
             <Box p={2}>
               <iframe width="100%" height="400" src="https://www.youtube.com/embed/your-video-id" title="Water Calculator Demonstration" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
