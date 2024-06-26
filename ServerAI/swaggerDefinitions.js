@@ -627,12 +627,13 @@
  *                   type: string
  */
 
-/**
- * @swagger
+/** 
+* @swagger
  * /forum/newMessage:
  *   post:
  *     summary: Add a new forum message
- *     tags: [Forum]
+ *     tags: 
+ *       - Forum
  *     requestBody:
  *       required: true
  *       content:
@@ -643,11 +644,7 @@
  *               userId:
  *                 type: string
  *                 description: ID of the user creating the message
- *                 example: "60c72b2f9b1d8e30d4c8b456"
- *               image:
- *                 type: string
- *                 description: URL of the image associated with the message
- *                 example: "https://example.com/image.jpg"
+ *                 example: "60c7c6b0b4381a4f24b9f21d"
  *               title:
  *                 type: string
  *                 description: Title of the forum message
@@ -656,10 +653,13 @@
  *                 type: string
  *                 description: Body of the forum message
  *                 example: "This is the body of my first forum post."
- *               recommendation:
- *                 type: string
- *                 description: Recommendation status
- *                 example: "667b08697469bcebb22b3a74"
+ *               recommendations:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   description: Array of recommendation IDs
+ *                   example:
+ *                     - "667c02c026bd6faa88772901"
  *     responses:
  *       201:
  *         description: Message created successfully
@@ -668,40 +668,22 @@
  *             schema:
  *               type: object
  *               properties:
- *                 _id:
- *                   type: string
- *                   description: ID of the created message
- *                   example: "60c72b2f9b1d8e30d4c8b457"
  *                 userId:
  *                   type: string
- *                   description: ID of the user who created the message
- *                   example: "667698a0aea27578a40561e7"
- *                 image:
- *                   type: string
- *                   description: URL of the image associated with the message
- *                   example: "https://example.com/image.jpg"
+ *                   example: "60c7c6b0b4381a4f24b9f21d"
  *                 title:
  *                   type: string
- *                   description: Title of the forum message
  *                   example: "My First Forum Post"
  *                 body:
  *                   type: string
- *                   description: Body of the forum message
  *                   example: "This is the body of my first forum post."
- *                 recommendation:
- *                   type: string
- *                   description: Recommendation status
- *                   example: "yes"
- *                 createdAt:
- *                   type: string
- *                   format: date-time
- *                   description: Creation timestamp
- *                   example: "2023-06-19T12:00:00.000Z"
- *                 updatedAt:
- *                   type: string
- *                   format: date-time
- *                   description: Last update timestamp
- *                   example: "2023-06-19T12:00:00.000Z"
+ *                 recommendations:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                     example:
+ *                       - "667c02c026bd6faa88772901"
+ *                       - "667c01e0bc889c4bd3c56bea"
  *       400:
  *         description: Bad Request - Invalid input
  *         content:
@@ -732,8 +714,7 @@
  *                 message:
  *                   type: string
  *                   description: Error message
- */
-
+*/
 
 /**
  * @swagger
@@ -771,11 +752,6 @@
  *                 type: string
  *                 description: Body of the comment
  *                 example: "I really like your post!"
- *               recommendation:
- *                 type: string
- *                 description: Recommendation status
- *                 enum: [yes, no, neutral]
- *                 example: "yes"
  *     responses:
  *       201:
  *         description: Comment added successfully
@@ -792,10 +768,6 @@
  *                   type: string
  *                   description: ID of the user who created the comment
  *                   example: "60c72b2f9b1d8e30d4c8b459"
- *                 image:
- *                   type: string
- *                   description: URL of the image associated with the comment
- *                   example: "https://example.com/comment-image.jpg"
  *                 title:
  *                   type: string
  *                   description: Title of the comment
@@ -804,10 +776,6 @@
  *                   type: string
  *                   description: Body of the comment
  *                   example: "I really like your post!"
- *                 recommendation:
- *                   type: string
- *                   description: Recommendation status
- *                   example: "yes"
  *                 message:
  *                   type: string
  *                   description: ID of the forum message this comment is related to

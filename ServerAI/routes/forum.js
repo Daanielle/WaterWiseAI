@@ -5,12 +5,14 @@ const ForumComment = require('../models/forumComment')
 const ForumMessage = require('../models/forumMessage');
 const User = require('../models/user');
 
+
+
 // add a new forum message
 router.post('/newMessage', async (req, res) => {
     console.log('Received POST request:', req.body);
     try {
         // Create a new message object with mandatory fields
-        const { userId, image, title, body } = req.body;
+        const { userId, image, title, body, recommendations } = req.body;
 
         // Check if userId is provided
         if (!userId) {
@@ -23,10 +25,12 @@ router.post('/newMessage', async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Include recommendation if it exists
+        // Include recommendations if they exist
         const messageData = { userId, image, title, body };
-        if (req.body.recommendation !== undefined) {
-            messageData.recommendation = req.body.recommendation;
+
+        // Check if recommendations are provided and are an array
+        if (recommendations && Array.isArray(recommendations)) {
+            messageData.recommendations = recommendations;
         }
 
         const message = new ForumMessage(messageData);
@@ -37,6 +41,38 @@ router.post('/newMessage', async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 });
+// // add a new forum message
+// router.post('/newMessage', async (req, res) => {
+//     console.log('Received POST request:', req.body);
+//     try {
+//         // Create a new message object with mandatory fields
+//         const { userId, image, title, body } = req.body;
+
+//         // Check if userId is provided
+//         if (!userId) {
+//             return res.status(400).json({ message: 'userId is required' });
+//         }
+
+//         // Check if the user exists
+//         const user = await User.findById(userId);
+//         if (!user) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
+
+//         // Include recommendation if it exists
+//         const messageData = { userId, image, title, body };
+//         if (req.body.recommendation !== undefined) {
+//             messageData.recommendation = req.body.recommendation;
+//         }
+
+//         const message = new ForumMessage(messageData);
+
+//         const newMessage = await message.save();
+//         res.status(201).json(newMessage);
+//     } catch (err) {
+//         res.status(400).json({ message: err.message });
+//     }
+// });
 
 // // add a new forum message
 // router.post('/newMessage', async (req, res) => {
