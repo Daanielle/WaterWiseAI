@@ -1,12 +1,13 @@
-import { useState } from "react"
+import { useState, useEffect } from "react";
 import { Modal, Box } from "@mui/material";
+
 import PageContainer from "../components/PageContainer";
 import TitleButton from "../components/TitleButton";
-import useDictionary from "../resources/Dictionary/Dictionary";
+import CustomButton from "../components/CustomButton";
 import MesssagesAcordion from "../components/forum/MessagesAcordion";
 import NewMessage from "../components/forum/NewMessage";
-import CustomButton from "../components/CustomButton";
-
+import useDictionary from "../resources/Dictionary/Dictionary";
+import { getAllForumMessages } from "../apiRequests";
 
 
 const modalStyle = {
@@ -28,6 +29,20 @@ const modalStyle = {
 
 function Forum() {
   const [openNewMessageModal, setOpenNewMessageModal] = useState(false);
+  const [allMessages, setAllMessages] = useState([]);
+
+  useEffect(() => {
+    const fetchAllMessages = async () => {
+      try {
+        const messages = await getAllForumMessages();
+        setAllMessages(messages);
+        console.log(messages)
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchAllMessages();
+  }, [openNewMessageModal]);
 
   const dict = useDictionary();
 
@@ -36,14 +51,13 @@ function Forum() {
 
   return (
     <PageContainer>
-      {/* <h1>פורום</h1> */}
       <TitleButton label={dict.forum}></TitleButton>
       <div style={{ display: 'flex', justifyContent: 'flex-end', width: '80%', paddingBottom: '20px' }}>
         <div style={{ width: '300px' }}>
           <CustomButton onClick={handleOpenNewMessageModal} label="New Message" />
         </div>
       </div>
-      <MesssagesAcordion />
+      <MesssagesAcordion messages={allMessages}/>
       <Modal
         open={openNewMessageModal}
         onClose={handleCloseNewMessageModal}
@@ -51,7 +65,7 @@ function Forum() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={modalStyle}>
-          <NewMessage />
+          <NewMessage onCloseNewMsg={handleCloseNewMessageModal} />
         </Box>
       </Modal>
     </PageContainer>

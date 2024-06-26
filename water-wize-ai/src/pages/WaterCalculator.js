@@ -357,7 +357,7 @@ function WaterCalculator() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={modalStyle}>
-            <AllUserRecommendations />
+            <AllUserRecommendations onRowClick={()=>{}}/>
           </Box>
         </Modal>
         <div><CalculatorTabs

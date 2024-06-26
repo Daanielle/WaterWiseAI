@@ -1,30 +1,463 @@
-openapi: 3.0.0
+swagger: '2.0'
 info:
-  title: User Management API
-  description: API endpoints for user management and recommendations
+  title: Farming Recommendation API
+  description: API for irrigation recommendations and user management
   version: 1.0.0
+tags:
+  - name: Users
+    description: User management and login
+  - name: Recommendations
+    description: API operations related to irrigation recommendations
+  - name: Forum
+    description: Operations related to forum messages and comments
+schemes:
+  - https
 paths:
   /users:
     get:
       summary: Retrieve a list of users
+      tags:
+        - Users
       responses:
         '200':
           description: A list of users
-          content:
-            # application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                    firstName:
-                      type: string
-                    lastName:
-                      type: string
-                    email:
-                      type: string
-                    image:
-                      type: string
-    # Add other operations like POST, PUT, DELETE if defined in your application
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        '500':
+          description: Internal Server Error
+    post:
+      summary: Register a new user
+      tags:
+        - Users
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: User object that needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/NewUser'
+      responses:
+        '201':
+          description: User created successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal Server Error
+  /users/{id}:
+    get:
+      summary: Retrieve a specific user by ID
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+          description: ID of the user to retrieve
+      responses:
+        '200':
+          description: User data retrieved successfully
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+    patch:
+      summary: Update a user by ID
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+          description: ID of the user to update
+        - in: body
+          name: body
+          description: Updated user object
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: User updated successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+    delete:
+      summary: Delete a user by ID
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+          description: ID of the user to delete
+      responses:
+        '200':
+          description: User deleted successfully
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+  /users/login:
+    post:
+      summary: User login
+      tags:
+        - Users
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: User credentials for login
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                example: johndoe@gmail.com
+              password:
+                type: string
+                example: newPassword123
+      responses:
+        '200':
+          description: Login successful
+        '400':
+          description: Invalid email or password
+        '500':
+          description: Server error
+  /calculator/calculate:
+    post:
+      summary: Calculate irrigation recommendations
+      tags:
+        - Recommendations
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Parameters for irrigation calculation
+          required: true
+          schema:
+            $ref: '#/definitions/CalculationRequest'
+      responses:
+        '200':
+          description: Calculation successful
+          schema:
+            $ref: '#/definitions/Recommendation'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /calculator/recommendations:
+    post:
+      summary: Create a new recommendation
+      tags:
+        - Recommendations
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: New recommendation object
+          required: true
+          schema:
+            $ref: '#/definitions/NewRecommendation'
+      responses:
+        '201':
+          description: Recommendation created successfully
+          schema:
+            $ref: '#/definitions/Recommendation'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+    get:
+      summary: Retrieve recommendations for a specific user
+      tags:
+        - Recommendations
+      parameters:
+        - in: query
+          name: userId
+          required: true
+          type: string
+          description: ID of the user to retrieve recommendations for
+      responses:
+        '200':
+          description: Recommendations retrieved successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Recommendation'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /calculator/recommendations/{recommendationId}:
+    get:
+      summary: Retrieve a specific recommendation by ID
+      tags:
+        - Recommendations
+      parameters:
+        - in: path
+          name: recommendationId
+          required: true
+          type: string
+          description: ID of the recommendation to retrieve
+      responses:
+        '200':
+          description: Recommendation retrieved successfully
+          schema:
+            $ref: '#/definitions/Recommendation'
+        '400':
+          description: Bad Request
+        '404':
+          description: Recommendation not found
+        '500':
+          description: Internal Server Error
+  /forum/newMessage:
+    post:
+      summary: Add a new forum message
+      tags:
+        - Forum
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: New forum message object
+          required: true
+          schema:
+            $ref: '#/definitions/NewForumMessage'
+      responses:
+        '201':
+          description: Message created successfully
+          schema:
+            $ref: '#/definitions/ForumMessage'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /forum/messages/{messageId}/comments:
+    post:
+      summary: Add a new comment to a forum message
+      tags:
+        - Forum
+      parameters:
+        - in: path
+          name: messageId
+          required: true
+          type: string
+          description: ID of the forum message to add a comment to
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: New comment object
+          required: true
+          schema:
+            $ref: '#/definitions/NewForumComment'
+      responses:
+        '201':
+          description: Comment added successfully
+          schema:
+            $ref: '#/definitions/ForumComment'
+        '400':
+          description: Bad Request
+        '404':
+          description: Message not found
+        '500':
+          description: Internal Server Error
+  /forum/messages:
+    get:
+      summary: Get all forum messages
+      tags:
+        - Forum
+      responses:
+        '200':
+          description: Forum messages retrieved successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ForumMessage'
+        '400':
+          description: Bad Request
+        '404':
+          description: Forum messages not found
+        '500':
+          description: Internal Server Error
+  /forum/messages/{messageId}/comments:
+    get:
+      summary: Get all comments for a specific forum message
+      tags:
+        - Forum
+      parameters:
+        - in: path
+          name: messageId
+          required: true
+          type: string
+          description: ID of the forum message to retrieve comments for
+      responses:
+        '200':
+          description: Comments retrieved successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ForumComment'
+        '400':
+          description: Bad Request
+        '404':
+          description: Comments not found
+        '500':
+          description: Internal Server Error
+definitions:
+  User:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: The user ID
+      firstName:
+        type: string
+        description: First name of the user
+      lastName:
+        type: string
+        description: Last name of the user
+      email:
+        type: string
+        description: Email address of the user
+      image:
+        type: string
+        description: URL of the user's profile image
+  NewUser:
+    type: object
+    properties:
+      firstName:
+        type: string
+        example: John
+      lastName:
+        type: string
+        example: Doe
+      email:
+        type: string
+        example: johndoe@gmail.com
+      image:
+        type: string
+        example: https://example.com/johndoe.jpg
+      password:
+        type: string
+        example: newPassword123
+  Recommendation:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: ID of the recommendation
+      station:
+        type: string
+        description: Station ID
+      moistureLevel:
+        type: string
+        description: Moisture level
+      cropType:
+        type: string
+        description: Type of crop
+  NewRecommendation:
+    type: object
+    properties:
+      userId:
+        type: string
+        description: ID of the user receiving the recommendation
+      station:
+        type: string
+        description: Station ID
+      moistureLevel:
+        type: string
+        description: Moisture level
+      cropType:
+        type: string
+        description: Type of crop
+  CalculationRequest:
+    type: object
+    properties:
+      userId:
+        type: string
+        description: ID of the user requesting the calculation
+      station:
+        type: string
+        description: Station ID
+      cropType:
+        type: string
+        description: Type of crop
+  ForumMessage:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: The message ID
+      userId:
+        type: string
+        description: ID of the user who posted the message
+      content:
+        type: string
+        description: Content of the message
+  NewForumMessage:
+    type: object
+    properties:
+      userId:
+        type: string
+        description: ID of the user posting the message
+      content:
+        type: string
+        description: Content of the message
+  ForumComment:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: The comment ID
+      messageId:
+        type: string
+        description: ID of the message the comment belongs to
+      userId:
+        type: string
+        description: ID of the user who posted the comment
+      content:
+        type: string
+        description: Content of the comment
+  NewForumComment:
+    type: object
+    properties:
+      messageId:
+        type: string
+        description: ID of the message the comment belongs to
+      userId:
+        type: string
+        description: ID of the user posting the comment
+      content:
+        type: string
+        description: Content of the comment
