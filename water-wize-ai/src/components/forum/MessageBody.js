@@ -24,11 +24,10 @@ const modalStyle = {
     textAlign: 'center',
 };
 
-export default function MessageBody({ msgId, msgBody, recId }) {
+export default function MessageBody({ msgId, msgBody, recId, setLoading }) {
 
     const [comments, setComments] = useState(null);
     const [rec, setRec] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [openNewCommentModal, setOpenNewCommentModal] = useState(false);
 
@@ -71,7 +70,7 @@ export default function MessageBody({ msgId, msgBody, recId }) {
         recId && fetchRec();
         fetchComments();
         //window.location.reload()
-    }, [openNewCommentModal]);
+    }, [openNewCommentModal, setLoading]);
 
     const handleOpenNewCommentModal = () => setOpenNewCommentModal(true);
     const handleCloseNewCommentModal = () => setOpenNewCommentModal(false);

@@ -185,13 +185,18 @@ export const getAllUsers = async (userId) => {
 
 export const addNewForumMessage = async (message) => {
   try {
+    //const recommendations = message.recommendation.map(id => ObjectId(id));
+    console.log("fffffffffff" + message.recommendations)
     const response = await fetch('/forum/newMessage', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+
       body: JSON.stringify(
-        message,
+        message
+        // message.userId, message.title, message.body,
+        // message.recommendation,
       ),
     });
     const status = await response.json();

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Modal, Box } from "@mui/material";
+import { Modal, Box, Skeleton } from "@mui/material";
 
 import PageContainer from "../components/PageContainer";
 import TitleButton from "../components/TitleButton";
@@ -31,6 +31,7 @@ function Forum() {
   const [openNewMessageModal, setOpenNewMessageModal] = useState(false);
   const [allMessages, setAllMessages] = useState([]);
   const [userId, setUserId] = useState(null)
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAllMessages = async () => {
@@ -39,10 +40,14 @@ function Forum() {
         setAllMessages(messages);
         const id = await getLoggedInUserId();
         setUserId(id);
-  
+        setLoading(false);
+
+
         // console.log(messages)
       } catch (err) {
         console.error(err);
+        setLoading(false);
+
       }
     };
     fetchAllMessages();
@@ -50,18 +55,28 @@ function Forum() {
 
   const dict = useDictionary();
 
+  const handleSetLoadingFalse = () => setLoading(false);
   const handleOpenNewMessageModal = () => setOpenNewMessageModal(true);
   const handleCloseNewMessageModal = () => setOpenNewMessageModal(false);
 
+//   {loading ? <Box sx={{ pt: 0.5 }}>
+//   <Skeleton />
+//   <Skeleton width="60%" />
+// </Box> :
+//   <MesssagesAcordion messages={allMessages} setLoading={setLoading} />
+// }
+
   return (
     <PageContainer>
-      <TitleButton label={dict.forum}></TitleButton>
+      <TitleButton >{dict.forum}</TitleButton>
       <div style={{ display: 'flex', justifyContent: 'flex-end', width: '80%', paddingBottom: '20px' }}>
         <div style={{ width: '300px' }}>
-          <CustomButton onClick={handleOpenNewMessageModal} label="New Message" disabled={!userId} disabledTooltip={"Log in in order to add a new message"}/>
+          <CustomButton onClick={handleOpenNewMessageModal} label="New Message" disabled={!userId} disabledTooltip={"Log in in order to add a new message"} />
         </div>
       </div>
-      <MesssagesAcordion messages={allMessages}/>
+
+      <MesssagesAcordion messages={allMessages} setLoading={setLoading} />
+
       <Modal
         open={openNewMessageModal}
         onClose={handleCloseNewMessageModal}

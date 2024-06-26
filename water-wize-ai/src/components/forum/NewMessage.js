@@ -5,12 +5,14 @@ import CustomButton from "../CustomButton";
 import TitleButton from "../TitleButton";
 import { Modal, Box } from "@mui/material";
 import AllUserRecommendations from "../AllUserRecommendations";
+import mongoose from "mongoose";
+
 
 const NewMessage = ({ onCloseNewMsg  }) => {
     const [userId, setUserId] = useState('');
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const [recommendation, setRecommendation] = useState(null);
+    const [recommendation, setRecommendation] = useState([]);
     const [openRecsModal, setOpenRecsModal] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
 
@@ -18,31 +20,33 @@ const NewMessage = ({ onCloseNewMsg  }) => {
         const fetchUserDetails = async () => {
             try {
                 const userId = await getLoggedInUserId();
-                if (!userId) {
-                    setUserId('0');
-                } else {
-                    setUserId(userId);
-                }
+                setUserId(userId || '0');
             } catch (err) {
                 console.error(err);
             }
         };
         fetchUserDetails();
     }, []);
+    const { ObjectId } = mongoose.Types;
 
     const handleOpenRecsModal = () => setOpenRecsModal(true);
     const handleCloseRecsModal = () => setOpenRecsModal(false);
 
     const handleRowClick = (row) => {
         setSelectedRow(row);
+        // let recArr = [row._id, ...recommendation]
+        let recArr = [new ObjectId(row._id)];
+
         setRecommendation(row._id)
         setOpenRecsModal(false); // Close modal on row click
     };
 
     const saveMessage = async () => {
         try {
+            console.log("&&&&&&&&&&&" + recommendation)
+            let recArr = [recommendation]
             let message = {
-                userId, title, body, recommendation
+                userId: userId, title:title, body:body, recommendations:recArr
             };
             let status = await addNewForumMessage(message);
             //console.log("Message saved successfully:", status);

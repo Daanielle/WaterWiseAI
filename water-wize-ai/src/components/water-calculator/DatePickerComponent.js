@@ -7,7 +7,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import useDictionary from "../../resources/Dictionary/Dictionary";  
 
-const DatePickerComponent = ({ date, onDateChange }) => {
+const DatePickerComponent = ({ date = dayjs(), onDateChange }) => {
   const dict = useDictionary();
   
   const handleDateChange = (newDate) => {
@@ -35,7 +35,6 @@ const DatePickerComponent = ({ date, onDateChange }) => {
             width: "127%",
             color: "#4CAF50 !important",
             textAlign: dict.stylePage,
-            // transformOrigin: 'center',
         },
         "& .MuiAutocomplete-popupIndicator": {
             color: "#4CAF50",
@@ -47,29 +46,22 @@ const DatePickerComponent = ({ date, onDateChange }) => {
             marginRight: dict.stylePage === "right" ? "175px" : "",
         },
         "& .MuiOutlinedInput-root": {
-            // Change input color and border color
             color: "#4CAF50",
             "& fieldset": {
                 borderColor: "#4CAF50",
                 textAlign: dict.stylePage
             },
             "&:hover fieldset": {
-                // Change border color on hover
                 borderColor: "#4CAF50",
             },
             "&.Mui-focused fieldset": {
-                // Change border color when focused
                 borderColor: "#4CAF50",
                 textAlign: dict.stylePage,
             },
             "&.Mui-focused .MuiInputLabel-root": {
-                // Change label color when focused
                 color: "#4CAF50",
-                // textAlign: "right",
                 textAlign: dict.stylePage
             },
-
-
         },
     }}
     >

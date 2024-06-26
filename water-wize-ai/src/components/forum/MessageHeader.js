@@ -5,27 +5,27 @@ import { Avatar, Typography, IconButton, Badge } from '@mui/material';
 import ChatBubbleOutlineRoundedIcon from '@mui/icons-material/ChatBubbleOutlineRounded';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
-export default function MessageHeader({ userId, title, time, numOfComments, isRec }) {
+export default function MessageHeader({ userId, title, time, numOfComments, isRec, setLoading }) {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchUser = async () => {
-            try {
-                const fetchedUser = await getUserById(userId);
-                setUser(fetchedUser);
-                setLoading(false);
-            } catch (err) {
-                setError(err);
-                setLoading(false);
-            }
+          //setLoading(true);
+          try {
+            const fetchedUser = await getUserById(userId);
+            setUser(fetchedUser);
+          } catch (err) {
+            setError(err);
+          } finally {
+            //setLoading(false);
+          }
         };
         fetchUser();
-    }, []);
+      }, []); // Only include necessary dependencies
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error loading user</div>;
+    // if (loading) return <div>Loading...</div>;
+    // if (error) return <div>Error loading user</div>;
 
 
     return (

@@ -18,7 +18,7 @@ const AllUserRecommendations = ({ onRowClick }) => {
                 }
 
                 const recsData = await getRecommendationsForUser(userId);
-                console.log(recsData);
+                //console.log(recsData);
                 if (recsData) {
                     setRecommendations(recsData);
                 } else {

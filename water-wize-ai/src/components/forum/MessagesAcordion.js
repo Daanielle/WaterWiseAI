@@ -6,7 +6,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import MessageHeader from './MessageHeader';
 import MessageBody from './MessageBody';
 
-export default function AccordionExpandIcon({ messages }) {
+export default function AccordionExpandIcon({ messages, setLoading }) {
   function formatDate(dateString) {
     const date = new Date(dateString);
     const options = {
@@ -19,7 +19,7 @@ export default function AccordionExpandIcon({ messages }) {
     return date.toLocaleTimeString('en-US', options);
   }
 
-  
+
 
   return (
     <div>
@@ -29,18 +29,20 @@ export default function AccordionExpandIcon({ messages }) {
             expandIcon={<ArrowDropDownIcon />}
           >
             <MessageHeader
+              setLoading={setLoading}
               title={message.title}
               userId={message.userId}
               time={formatDate(message.createdAt)}
-              isRec={message.recommendation}
+              isRec={message.recommendations.length > 0}
               numOfComments={message.numOfComments}
             />
           </AccordionSummary>
           <AccordionDetails>
-            <MessageBody 
-            msgBody={message.body} 
-            recId={message.recommendation} 
-            msgId={message._id} />
+            <MessageBody
+              setLoading={setLoading}
+              msgBody={message.body}
+              recId={message.recommendations[0]}
+              msgId={message._id} />
           </AccordionDetails>
         </Accordion>
       ))}
