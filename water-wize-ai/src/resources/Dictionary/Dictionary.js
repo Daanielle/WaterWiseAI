@@ -18,6 +18,47 @@ const hebDict = {
   LogIn: "התחברות",
   Register: "הרשמה",
 
+  //Guide
+  GuideScreenExplanations: "הסברים על המסכים",
+  GuideHomeTitle: "בית",
+  GuideAboutUs: "עלינו",
+  GuideContactUs: "צרו קשר",
+  GuideWaterCalculator: "מחשבון מים",
+  GuideForum: "פורום",
+
+  GuideHomeExplanation: "מסך הבית מאפשר למשתמשים להירשם ולהיכנס לאפליקציה.",
+  GuideAboutUsExplanation: "המסך עלינו נותן רקע על מפתחי הפרויקט",
+  GuideContactExplanation: "מסך צרו קשר מאפשר למשתמשים ליצור קשר עם מפתחי הפרויקט",
+  GuideWCExplanation: "מסך מחשבון המים מסייע למשתמשים להעריך את צרכי המים עבור היבול שלהם על סמך פרמטרים שונים.",
+  GuideForumExplanation: "מסך הפורום מאפשר למשתמשים לשאול שאלות ולהשתתף בדיונים.",
+
+  GuideFAQ: "שאלות נפוצות",
+  GuideResourcesAndTools: "כלי עזר ומשאבים שימושיים",
+  GuideDemonstration: "הדגמת מחשבון מים",
+
+
+  GuideAravaCenter: "מרכז ופיתוח ערבה תיכונה וצפונית",
+  GuideResearch: "מחקר ומאמרים מדעיים על קרקע ומים",
+  GuideIMS: "השירות המטאורולוגי של ישראל (IMS)",
+  GuideGovMap: "אתר המפות הממשלתי",
+  GuideSouthernArava: "מרכז ופיתוח ערבה דרומית",
+  GuideWebMap: "יישום מיפוי אינטרנטי של חלקות חקלאיות",
+
+  GuideCenterAravaDesc: "מרכז מחקר ופיתוח זה בערבה הוקם בשנת 1986 במטרה לשרת את צורכי הפיתוח של היישוב באזורים מועדפים לאורך גבולות ישראל בנגב ובערבה.",
+  GuideResearchDesc: "מטרות מרכז מחקר ופיתוח זה הן לפתח ולחקור ממשקי השקיה שיבטיחו קיימות חקלאית בדרום הערבה, תוך שמירה על משאבים סביבתיים, ולהגיע להתפתחויות טכנולוגיות במדעי ההשקיה.",
+  GuideIMSDesc: "יחידה של משרד התחבורה הישראלי האחראית על חיזוי מזג האוויר, נתונים מטאורולוגיים וחקר האקלים בישראל. מספק מידע מטאורולוגי מדויק ואמין.",
+  GuideGovDesc: "אתר המפות הרשמי של מדינת ישראל. מאפשר: חיפושים שונים כגון כתובת, חלקה חקלאית, צפייה בשכבות מידע במגוון נושאים, שיתוף מפות, יצירת שכבות מידע אישיות ועוד.",
+  GuideSouthernAravaDesc: "מרכז מחקר ופיתוח הערבה הדרומית ממוקם בסמוך לקיבוץ יטבתה שבערבה הדרומית ומרכז בו פעילות מחקר חקלאי ענפה במגוון תחומים כגון: קרקע ומים, טיפול בפירות לאחר הקטיף, פרדסים, פרחים וצמחי נוי, ירקות, הגנת הצומח, בעלי חיים ואגרוטכניקה.",
+  GuideWebDesc: "מפה זו מציגה את מיפוי החלקות החקלאיות במדינת ישראל. המפה מאפשרת זיהוי חלקה חקלאית על פי מספר הזיהוי שלה.",
+
+  GuideReadMore: "קראו עוד",
+
+  GuideFaq1Title: "?כיצד משמשים במחשבון המים",
+  GuideFaq1Ans: "מחשבון המים נועד לעזור לך להעריך את כמות המים הדרושה להשקית היבול שלכם. עליכם פשוט צריך להזין את הפרמטרים הרלוונטיים והמחשבון יספק המלצה.",
+  GuideFaq2Title: "?אילו משתנים נלקחים בחשבון בעת חישוב כמות ההשקיה",
+  GuideFaq2Ans: "מחשבון המים לוקח בחשבון גורמים כמו טמפרטורה, לחות, מהירות רוח וקרינת שמש כדי לספק המלצות מדויקות.",
+
+
   //Register & Log in page content
   username: "שם משתמש",
   password: "סיסמה",
@@ -113,6 +154,45 @@ const engDict = {
   waterCalculatorTitle: "Water Calculator",
   LogIn: "Log In",
   Register: "Register",
+
+  //Guide
+  GuideScreenExplanations: "Screen Explanations",
+  GuideHomeTitle: "Home",
+  GuideAboutUs: "About Us",
+  GuideContactUs: "Contact Us",
+  GuideWaterCalculator: "Water Calculator",
+  GuideForum: "Forum",
+
+  GuideHomeExplanation: "The Home screen allows users to register and log in to the application.",
+  GuideAboutUsExplanation: "The About Us screen provides background information about the project developers.",
+  GuideContactExplanation: "The Contact Us screen lets users reach out to the project developers.",
+  GuideWCExplanation: "The Water Calculator screen helps users estimate the water needs for their plants based on various parameters.",
+  GuideForumExplanation: "The Forum screen allows users to ask questions and engage in discussions.",
+
+  GuideFAQ: "FAQ",
+  GuideResourcesAndTools: "Resources & Tools",
+  GuideDemonstration: "Water Calculator Demonstration",
+
+  GuideAravaCenter: "Central and Northern ARAVA R&D",
+  GuideResearch: "Research and scientific articles about soil and water",
+  GuideIMS: "Israel Meteorological Service (IMS)",
+  GuideGovMap: "Govmap",
+  GuideSouthernArava: "Southern ARAVA R&D",
+  GuideWebMap: "Web Mapping Application Of Agricultural Plots",
+
+  GuideCenterAravaDesc: "Research and Development in the Arava was established in 1986, as part of the Negev Arava R&D, with the aim of serving the development needs of the settlement in preferred areas along Israel's borders in the Negev and Arava.",
+  GuideResearchDesc: "The goals of the Arava R&D agricultural are to develop and research irrigation interfaces that will ensure agricultural sustainability in the southern Arava, while preserving environmental resources, and to reach technological developments in the science of irrigation.",
+  GuideIMSDesc: "A unit of the Israeli Ministry of Transportation responsible for forecasting weather, meteorological data, and climate research in Israel. Provides accurate and reliable meteorological information.",
+  GuideGovDesc: "The official map site of the State of Israel. Enables: various searches such as address, block/plot, viewing information layers on a variety of topics, map sharing capabilities, creating personal information layers and more.",
+  GuideSouthernAravaDesc: "Southern Arava R&D is located near Kibbutz Yotvata in the Southern Arava and centers extensive agricultural research activities in a variety of fields such as: soil and water, post-harvest fruit handling, orchards, flowers and ornamental plants, vegetables, plant protection, animals and agrotechnics.",
+  GuideWebDesc: "This map shows the mapping of agricultural plots in the State of Israel. The map allows the identification of an agricultural plot according to its identification number.",
+
+  GuideReadMore: "Read More",
+
+  GuideFaq1Title: "How do I use the water calculator?",
+  GuideFaq1Ans: "The water calculator is designed to help you estimate the amount of water needed for your plants. You simply need to input the relevant parameters and the calculator will provide recommendation.",
+  GuideFaq2Title: "What factors does the water calculator consides?",
+  GuideFaq2Ans: "The water calculator takes into account factors such as temperature, humidity, wind speed, and solar radiation to provide accurate recommendations.",
 
   //Register & Log in page content
   username: "Username",
