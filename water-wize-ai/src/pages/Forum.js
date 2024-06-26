@@ -7,7 +7,7 @@ import CustomButton from "../components/CustomButton";
 import MesssagesAcordion from "../components/forum/MessagesAcordion";
 import NewMessage from "../components/forum/NewMessage";
 import useDictionary from "../resources/Dictionary/Dictionary";
-import { getAllForumMessages } from "../apiRequests";
+import { getAllForumMessages, getLoggedInUserId } from "../apiRequests";
 
 
 const modalStyle = {
@@ -30,13 +30,17 @@ const modalStyle = {
 function Forum() {
   const [openNewMessageModal, setOpenNewMessageModal] = useState(false);
   const [allMessages, setAllMessages] = useState([]);
+  const [userId, setUserId] = useState(null)
 
   useEffect(() => {
     const fetchAllMessages = async () => {
       try {
         const messages = await getAllForumMessages();
         setAllMessages(messages);
-        console.log(messages)
+        const id = await getLoggedInUserId();
+        setUserId(id);
+  
+        // console.log(messages)
       } catch (err) {
         console.error(err);
       }
@@ -54,7 +58,7 @@ function Forum() {
       <TitleButton label={dict.forum}></TitleButton>
       <div style={{ display: 'flex', justifyContent: 'flex-end', width: '80%', paddingBottom: '20px' }}>
         <div style={{ width: '300px' }}>
-          <CustomButton onClick={handleOpenNewMessageModal} label="New Message" />
+          <CustomButton onClick={handleOpenNewMessageModal} label="New Message" disabled={!userId} disabledTooltip={"Log in in order to add a new message"}/>
         </div>
       </div>
       <MesssagesAcordion messages={allMessages}/>
