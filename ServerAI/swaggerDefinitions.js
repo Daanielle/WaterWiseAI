@@ -214,8 +214,10 @@
  *             properties:
  *               email:
  *                 type: string
+ *                 default: johndoe@gmail.com
  *               password:
  *                 type: string
+ *                 default: newPassword123
  *     responses:
  *       200:
  *         description: Login successful
@@ -225,103 +227,82 @@
  *         description: Server error
  */
 
+
+
+
 /**
  * @swagger
- * /check-login:
- *   get:
- *     summary: Check if the user is logged in
- *     tags: [Users]
+ * /calculator/calculate:
+ *   post:
+ *     summary: Calculate irrigation recommendations
+ *     tags: [Recommendations]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               selectedArea:
+ *                 type: string
+ *                 example: "381"
+ *                 description: The ID of the selected area
+ *               areaSize:
+ *                 type: number
+ *                 example: 100
+ *                 description: The size of the area
+ *               date:
+ *                 type: string
+ *                 format: date
+ *                 example: "2024-06-26"
+ *                 description: The date for the calculation in YYYY-MM-DD format
  *     responses:
  *       200:
- *         description: Login status
+ *         description: Calculation successful
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 loggedIn:
- *                   type: boolean
+ *                 grad:
+ *                   type: number
+ *                   example: 1042
+ *                 windSpeed1mm:
+ *                   type: number
+ *                   example: 5
+ *                 maxWindSpeed:
+ *                   type: number
+ *                   example: 5.6
+ *                 temperature:
+ *                   type: number
+ *                   example: 33.8
+ *                 relativeHumidity:
+ *                   type: number
+ *                   example: 38
+ *                 deltaY:
+ *                   type: number
+ *                   example: 0.2149
+ *                 e0:
+ *                   type: number
+ *                   example: 53.30351671933922
+ *                 ea:
+ *                   type: number
+ *                   example: 20.255336353348905
+ *                 Ea:
+ *                   type: number
+ *                   example: 13.587208554470816
+ *                 E:
+ *                   type: number
+ *                   example: 11.183808252019013
+ *                 Kc:
+ *                   type: number
+ *                   example: 1.3
+ *                 recommendation:
+ *                   type: number
+ *                   example: 1453.8950727624717
  */
 
 
-
-    /**
-     * @swagger
-     * /calculator/calculate:
-     *   post:
-     *     summary: Calculate irrigation recommendations
-     *     tags: [Recommendations]
-     *     requestBody:
-     *       required: true
-     *       content:
-     *         application/json:
-     *           schema:
-     *             type: object
-     *             properties:
-     *               selectedArea:
-     *                 type: integer
-     *                 example: "208"
-     *                 description: The ID of the selected area
-     *               areaSize:
-     *                 type: number
-     *                 example: "1000"
-     *                 description: The size of the area
-     *     responses:
-     *       200:
-     *         description: Calculation successful
-     *         content:
-     *           application/json:
-     *             schema:
-     *               type: object
-     *               properties:
-     *                 grad:
-     *                   type: number
-     *                 windSpeed1mm:
-     *                   type: number
-     *                 maxWindSpeed:
-     *                   type: number
-     *                 temperature:
-     *                   type: number
-     *                 relativeHumidity:
-     *                   type: number
-     *                 deltaY:
-     *                   type: number
-     *                 e0:
-     *                   type: number
-     *                 ea:
-     *                   type: number
-     *                 Ea:
-     *                   type: number
-     *                 E:
-     *                   type: number
-     *                 Kc:
-     *                   type: number
-     *                 recommendation:
-     *                   type: number
-     *       500:
-     *         description: Error during calculation
-     */
-
-
-    /**
-     * @swagger
-     * /check-login:
-     *   get:
-     *     summary: Check if the user is logged in
-     *     tags: [Users]
-     *     responses:
-     *       200:
-     *         description: Login status
-     *         content:
-     *           application/json:
-     *             schema:
-     *               type: object
-     *               properties:
-     *                 loggedIn:
-     *                   type: boolean
-     */
-
-    /**
 /**
  * @swagger
  * components:
@@ -329,59 +310,67 @@
  *     NewRecommendation:
  *       type: object
  *       properties:
- *         userId:
- *           type: string
- *           description: ID of the user making the recommendation
- *         grad:
- *           type: number
- *           description: Gradient value
- *         windSpeed1mm:
- *           type: number
- *           description: Wind speed at 1mm
- *         maxWindSpeed:
- *           type: number
- *           description: Maximum wind speed
- *         temperature:
- *           type: number
- *           description: Temperature
- *         relativeHumidity:
- *           type: number
- *           description: Relative humidity
- *         deltaY:
- *           type: number
- *           description: Delta Y value
- *         e0:
- *           type: number
- *           description: E0 value
- *         ea:
- *           type: number
- *           description: Ea value
- *         Ea:
- *           type: number
- *           description: Ea value
- *         E:
- *           type: number
- *           description: E value
- *         Kc:
- *           type: number
- *           description: Kc value
  *         recommendation:
- *           type: number
- *           description: Recommendation value
+ *           type: object
+ *           properties:
+ *             userId:
+ *               type: string
+ *               description: ID of the user making the recommendation
+ *             grad:
+ *               type: number
+ *               description: Gradient value
+ *             windSpeed1mm:
+ *               type: number
+ *               description: Wind speed at 1mm
+ *             maxWindSpeed:
+ *               type: number
+ *               description: Maximum wind speed
+ *             temperature:
+ *               type: number
+ *               description: Temperature
+ *             relativeHumidity:
+ *               type: number
+ *               description: Relative humidity
+ *             deltaY:
+ *               type: number
+ *               description: Delta Y value
+ *             e0:
+ *               type: number
+ *               description: E0 value
+ *             ea:
+ *               type: number
+ *               description: Ea value
+ *             Ea:
+ *               type: number
+ *               description: Ea value
+ *             E:
+ *               type: number
+ *               description: E value
+ *             Kc:
+ *               type: number
+ *               description: Kc value
+ *             recommendation:
+ *               type: number
+ *               description: Recommendation value
+ *             station:
+ *               type: string
+ *               description: Station name
  *       example:
- *         userId: "60c7c6b0b4381a4f24b9f21d"
- *         grad: 5.6
- *         windSpeed1mm: 12.5
- *         maxWindSpeed: 18.3
- *         temperature: 25.7
- *         relativeHumidity: 72.4
- *         deltaY: 4.8
- *         e0: 2.1
- *         ea: 1.5
- *         Ea: 3.6
- *         E: 0.9
- *         Kc: 1.2
- *         recommendation: 3
+ *         recommendation:
+ *           userId: "60c7c6b0b4381a4f24b9f21d"
+ *           grad: 999
+ *           windSpeed1mm: 9
+ *           maxWindSpeed: 9.6
+ *           temperature: 34.9
+ *           relativeHumidity: 32
+ *           deltaY: 0.2149
+ *           e0: 56.65865187344365
+ *           ea: 18.13076859950197
+ *           Ea: 25.549123661726526
+ *           E: 21.029816238794172
+ *           Kc: 1.3
+ *           recommendation: 2733.8761110432424
+ *           station: "200"
  *
  *     Recommendation:
  *       type: object
@@ -389,7 +378,7 @@
  *         _id:
  *           type: string
  *           description: ID of the recommendation
- *         user:
+ *         userId:
  *           type: string
  *           description: ID of the user
  *         grad:
@@ -428,22 +417,27 @@
  *         recommendation:
  *           type: number
  *           description: Recommendation value
+ *         station:
+ *           type: string
+ *           description: Station name
  *       example:
- *         _id: "60c7c6b0b4381a4f24b9f21e"
- *         user: "60c7c6b0b4381a4f24b9f21d"
- *         grad: 5.6
- *         windSpeed1mm: 12.5
- *         maxWindSpeed: 18.3
- *         temperature: 25.7
- *         relativeHumidity: 72.4
- *         deltaY: 4.8
- *         e0: 2.1
- *         ea: 1.5
- *         Ea: 3.6
- *         E: 0.9
- *         Kc: 1.2
- *         recommendation: 3
+ *         _id: "667bfabc9d4fb23a7268d158"
+ *         userId: "666ab63df170b9b3fdbd2f46"
+ *         grad: 999
+ *         windSpeed1mm: 9
+ *         maxWindSpeed: 9.6
+ *         temperature: 34.9
+ *         relativeHumidity: 32
+ *         deltaY: 0.2149
+ *         e0: 56.65865187344365
+ *         ea: 18.13076859950197
+ *         Ea: 25.549123661726526
+ *         E: 21.029816238794172
+ *         Kc: 1.3
+ *         recommendation: 2733.8761110432424
+ *         station: "200"
  */
+
 
 /**
  * @swagger
@@ -483,7 +477,6 @@
  *                 error:
  *                   type: string
  */
-
 
 /**
  * @swagger
@@ -526,6 +519,63 @@
  *                 error:
  *                   type: string
  */
+/**
+ * @swagger
+ * /calculator/calculate:
+ *   post:
+ *     summary: Calculate irrigation recommendations
+ *     tags: [Recommendations]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               selectedArea:
+ *                 type: integer
+ *                 example: 381
+ *                 description: The ID of the selected area
+ *               areaSize:
+ *                 type: number
+ *                 example: 100
+ *                 description: The size of the area
+ *               date:
+ *                 type: string
+ *                 format: date
+ *                 example: "2024-06-27"
+ *                 description: The date for the calculation
+ *               userKc:
+ *                 type: number
+ *                 example: 0.8
+ *                 description: The crop coefficient value provided by the user
+ *     responses:
+ *       200:
+ *         description: Calculation successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Recommendation'
+ *       400:
+ *         description: Bad Request - Missing userId parameter
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
 
 
 /**
@@ -609,8 +659,7 @@
  *               recommendation:
  *                 type: string
  *                 description: Recommendation status
- *                 enum: [yes, no, neutral]
- *                 example: "yes"
+ *                 example: "667b08697469bcebb22b3a74"
  *     responses:
  *       201:
  *         description: Message created successfully
@@ -626,7 +675,7 @@
  *                 userId:
  *                   type: string
  *                   description: ID of the user who created the message
- *                   example: "60c72b2f9b1d8e30d4c8b456"
+ *                   example: "667698a0aea27578a40561e7"
  *                 image:
  *                   type: string
  *                   description: URL of the image associated with the message
@@ -655,6 +704,16 @@
  *                   example: "2023-06-19T12:00:00.000Z"
  *       400:
  *         description: Bad Request - Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ *       404:
+ *         description: User not found
  *         content:
  *           application/json:
  *             schema:

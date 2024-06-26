@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import WaterCalculatorVariablesDetails from '../../resources/mapping/waterCalculatorVariablesDetails';
+import WaterCalculatorVariablesDetails from '../../resources/mapping/WaterCalculatorVariablesDetails';
 import Tooltip from '@mui/material/Tooltip';
 import { Typography, Icon } from '@mui/material';
 

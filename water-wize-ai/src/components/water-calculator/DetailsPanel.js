@@ -2,7 +2,7 @@ import React from "react";
 import DetailCard from "./DetailCard";
 import classes from "../../styles/DetailsPanel.module.css";
 import CustomCard from "../CustomCard";
-import WaterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
+import WaterCalculatorVariablesDetails from "../../resources/mapping/WaterCalculatorVariablesDetails";
 import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
