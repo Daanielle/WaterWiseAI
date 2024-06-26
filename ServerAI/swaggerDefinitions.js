@@ -14,18 +14,23 @@
  *       properties:
  *         _id:
  *           type: string
+ *           example: 66697a16bcd943393430ab2d
  *           description: The user ID
  *         firstName:
  *           type: string
+ *           example: John
  *           description: First name of the user
  *         lastName:
  *           type: string
+ *           example: Doe
  *           description: Last name of the user
  *         email:
  *           type: string
+ *           example: https://example.com/johndoe.jpg
  *           description: Email address of the user
  *         image:
  *           type: string
+ *           example: https://example.com/johndoe.jpg
  *           description: URL of the user's profile image
  *
  *     NewUser:
@@ -519,63 +524,6 @@
  *                 error:
  *                   type: string
  */
-/**
- * @swagger
- * /calculator/calculate:
- *   post:
- *     summary: Calculate irrigation recommendations
- *     tags: [Recommendations]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               selectedArea:
- *                 type: integer
- *                 example: 381
- *                 description: The ID of the selected area
- *               areaSize:
- *                 type: number
- *                 example: 100
- *                 description: The size of the area
- *               date:
- *                 type: string
- *                 format: date
- *                 example: "2024-06-27"
- *                 description: The date for the calculation
- *               userKc:
- *                 type: number
- *                 example: 0.8
- *                 description: The crop coefficient value provided by the user
- *     responses:
- *       200:
- *         description: Calculation successful
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Recommendation'
- *       400:
- *         description: Bad Request - Missing userId parameter
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *       500:
- *         description: Internal Server Error
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
 
 
 /**
