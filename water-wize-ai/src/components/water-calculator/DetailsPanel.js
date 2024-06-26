@@ -101,7 +101,8 @@ function DetailsPanel ({ detailedData }){
       <div className={classes.row2}>
         {keys.slice(4, 7).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
-            {key && detailedData[key] && (
+            {/* {key && detailedData[key] && ( */}
+            {key && detailedData[key] !== undefined && detailedData[key] !== null && ( 
                 <CustomCard 
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
@@ -118,7 +119,8 @@ function DetailsPanel ({ detailedData }){
       <div className={classes.row}>
         {keys.slice(7, 11).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
-            {key && detailedData[key] && (
+            {/* {key && detailedData[key] && ( */}
+            {key && detailedData[key] !== undefined && detailedData[key] !== null && ( 
                 <CustomCard 
                   topIcon={variablesMapping[key]?.icon}
                   title={variablesMapping[key]?.title}
