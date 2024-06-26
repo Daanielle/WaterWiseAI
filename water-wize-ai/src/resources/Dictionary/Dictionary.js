@@ -92,7 +92,7 @@ errorsAreaSizeRange: "הזינו מספר תקין, בין 10 ל-100000",
 errorsKcRange: "הזינו מספר תקין, בין 0 ל-2", 
 
 //Modal
-CloseModal: "סגור מודאל",
+CloseModal: "סגירה",
 textAlign: "right"
 };
 
@@ -188,7 +188,7 @@ errorsAreaSizeRange: "please enter a valid number - between 10 to 100000",
 errorsKcRange: "please enter a valid number - between 0 to 2",
 
 //Modal
-CloseModal: "Close Modal",
+CloseModal: "Close",
 textAlign: "left"
 };
 

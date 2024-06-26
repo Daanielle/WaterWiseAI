@@ -38,7 +38,7 @@ function DetailsPanel ({ detailedData }){
   const keys = Object.keys(detailedData);
 
   const bottomIcons =(title, description, icon)=>( <Box sx={{ position: 'sticky',
-    '& > :not(style)': { m: 1,marginLeft: '185%',marginTop: '-150%'} }}>
+    '& > :not(style)': { m: 1,marginLeft: '120%',marginTop: '-230%'} }}>
     <Fab size="small" aria-label="add" >
       <IconButton aria-label="more info" onClick={(e) => handleOpenModal(e,title, description, icon)}>
         <QuestionMarkIcon sx={{ color: "var(--dark-green)" }} aria-label="more info" />
@@ -52,7 +52,7 @@ function DetailsPanel ({ detailedData }){
     top: `${clickPosition.top}px`,
     left: `${clickPosition.left}px`,
     transform: 'translate(-50%, -50%)',
-  
+    // height: 200,
     width: 400,
     bgcolor: "background.paper",
     border: "2px solid --text-color",
@@ -60,10 +60,11 @@ function DetailsPanel ({ detailedData }){
     p: 4,
 
   };
-  
+
+
   
     const CustomBackdrop = styled('div')({
-      backgroundColor: 'rgba(0, 0, 0, 0)', // Semi-transparent black, adjust as needed
+      backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black, adjust as needed
     });
 
 
@@ -142,15 +143,26 @@ function DetailsPanel ({ detailedData }){
                     aria-describedby="modal-modal-description"
                     BackdropComponent={CustomBackdrop} // 
                 >
+
+
+
+
+
+
+
+
                     <Box sx={modalStyle}>
-                    {currentIcon && <Icon component={currentIcon} sx={{ color: "var(--medium-green)",marginLeft:"45%"}} />}
-                            <Typography sx={{marginLeft:"45%"}} id="modal-modal-title" variant="h6" component="h2">
-                                {currentTitle}
-                            </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center',justifyContent: 'center',flexDirection: 'column',marginBottom: 1 }}>
+                    
+                    <Typography variant="h6" component="div" gutterBottom>
+                    {currentIcon && <Icon component={currentIcon} sx={{ color: "var(--medium-green)",marginRight: 1}} />}
+                    {currentTitle}
+                    </Typography>
+                    </Box>
                         <Typography sx={{textAlign: dict.textAlign,marginLeft: "auto", mt: 2}} id="modal-modal-description" >
                         {dict[currentTitle]}
                         </Typography>
-                      <Button sx={{marginLeft:"30%"}} onClick={handleCloseModal}>{dict.CloseModal}</Button>
+                      <Button sx={{marginLeft: "45%"}} onClick={handleCloseModal}>{dict.CloseModal}</Button>
 
                     </Box>
                 </Modal>

@@ -8,6 +8,32 @@ import { Box } from "@mui/material";
 import irrigationImg from '../resources/images/irrigation.jpg';
 import ContainerBox from "../components/ContainerBox";
 import WaterCalculator from "./WaterCalculator";
+import leafpalm from "../resources/images/LeafPalmRight.jpg"
+import leafpalmLeft from "../resources/images/LeafPalmLeft.jpg"
+
+const containerStyle = {
+  position: 'absolute',
+  top: '60px', // Adjust as needed
+  right: '10px', // Adjust as needed
+  zIndex: 10, // Ensures the div is in the front
+  width: '500px', // Adjust as needed
+  height: '500px', // Adjust as needed
+  backgroundImage: `url(${leafpalm})`,
+  backgroundSize: 'cover', // Cover the entire div
+  backgroundPosition: 'center', // Center the image
+};
+
+const containerStyleLeft = {
+  position: 'absolute',
+  bottom: '-700px', // Adjust as needed
+  left: '10px', // Adjust as needed
+  zIndex: 10, // Ensures the div is in the front
+  width: '500px', // Adjust as needed
+  height: '500px', // Adjust as needed
+  backgroundImage: `url(${leafpalmLeft})`,
+  backgroundSize: 'cover', // Cover the entire div
+  backgroundPosition: 'center', // Center the image
+};
 
 function Home() {
   return (
@@ -18,7 +44,7 @@ function Home() {
       //   backgroundImage: `url(${imsLogoImg})`,
       //   backgroundSize: 'cover',
         // backgroundPosition: 'center',
-        height: '100vh',
+        height: '70vh',
         width: '100vw',
         display: 'flex',
         // alignItems: 'center',
@@ -29,6 +55,8 @@ function Home() {
        }}
   >
 
+    <div style={containerStyle}/>
+    <div style={containerStyleLeft}/>
 <ContainerBox
 sx={{backgroundColor:"white", width:"50%", height:1400, border:"2px solid var(--medium-green)"}}>
 <div><h1 style={{fontStyle:"italic", color:"var(--medium-green)"}} >Water Wise AI</h1></div>
