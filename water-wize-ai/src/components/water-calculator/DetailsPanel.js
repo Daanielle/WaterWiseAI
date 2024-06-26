@@ -82,12 +82,13 @@ function DetailsPanel ({ detailedData }){
       <div className={classes.row}>
         {keys.slice(0, 4).map((key, index) => (
           <div className={classes.cardContainer} key={index}>
-            {key && detailedData[key] && (
+            {/* {key && detailedData[key] && (   */}
+            {key && detailedData[key] !== undefined && detailedData[key] !== null && (  
                 <CustomCard 
                   topIcon={variablesMapping[key].icon}
                   title={variablesMapping[key]?.title}
                   description={ detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
-                  // description={ detailedData[key] !== "--" ? detailedData[key]==0 ? "vaule equal to zero" : detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
+                  // description={ detailedData[key] !== undefined && detailedData[key] !== null && detailedData[key] !== "--" ? `${detailedData[key]} ${variablesMapping[key]?.units}` : detailedData[key] }
                   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
                   bottomIcons={bottomIcons(key, detailedData[key],variablesMapping[key].icon)}
                 />
