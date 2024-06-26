@@ -276,7 +276,6 @@ function WaterCalculator() {
             if (closestCity) {
               setSelectedCity({ label: closestCity });
             }
-
             // console.log('Selected Area:', closestArea);
             // console.log('Selected City:', closestCity);
           } else {
