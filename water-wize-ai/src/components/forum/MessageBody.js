@@ -70,6 +70,7 @@ export default function MessageBody({ msgId, msgBody, recId }) {
 
         recId && fetchRec();
         fetchComments();
+        //window.location.reload()
     }, [openNewCommentModal]);
 
     const handleOpenNewCommentModal = () => setOpenNewCommentModal(true);

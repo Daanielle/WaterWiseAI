@@ -52,38 +52,46 @@ const Recommendation = ({ recommendationDataRows, onRowClick }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {recommendationDataRows.map((row, rowIndex) => (
-                        <TableRow
-                            key={rowIndex}
-                            onClick={() => onRowClick(row)}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
-                        >
-                            <TableCell align="right">
-                                {new Date(row.createdAt).toLocaleDateString(undefined, {
-                                    year: 'numeric',
-                                    month: '2-digit',
-                                    day: '2-digit'
+                    {recommendationDataRows.length > 0 ? (
+                        recommendationDataRows.map((row, rowIndex) => (
+                            <TableRow
+                                key={rowIndex}
+                                onClick={() => onRowClick(row)}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
+                            >
+                                <TableCell align="right">
+                                    {new Date(row.createdAt).toLocaleDateString(undefined, {
+                                        year: 'numeric',
+                                        month: '2-digit',
+                                        day: '2-digit'
+                                    })}
+                                </TableCell>
+                                <TableCell align="right">{row.station}</TableCell>
+                                {Object.keys(varData).map((key, cellIndex, arr) => {
+                                    const value = row[key];
+                                    const isLastCell = cellIndex === arr.length - 1;
+                                    return (
+                                        <TableCell
+                                            key={cellIndex}
+                                            align="right"
+                                            sx={isLastCell ? {
+                                                backgroundColor: 'var(--accent-orange)',
+                                                fontWeight: 'bold',
+                                            } : {}}
+                                        >
+                                            {typeof value === 'number' ? value.toFixed(3) : value}
+                                        </TableCell>
+                                    );
                                 })}
+                            </TableRow>
+                        ))
+                    ) : (
+                        <TableRow>
+                            <TableCell colSpan={tableHeaders.length} align="center">
+                                There are no saved recommendations  for this user yet
                             </TableCell>
-                            <TableCell align="right">{row.station}</TableCell>
-                            {Object.keys(varData).map((key, cellIndex, arr) => {
-                                const value = row[key];
-                                const isLastCell = cellIndex === arr.length - 1;
-                                return (
-                                    <TableCell
-                                        key={cellIndex}
-                                        align="right"
-                                        sx={isLastCell ? {
-                                            backgroundColor: 'var(--accent-orange)',
-                                            fontWeight: 'bold',
-                                        } : {}}
-                                    >
-                                        {typeof value === 'number' ? value.toFixed(3) : value}
-                                    </TableCell>
-                                );
-                            })}
                         </TableRow>
-                    ))}
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>

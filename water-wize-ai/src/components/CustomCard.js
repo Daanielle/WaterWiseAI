@@ -15,7 +15,7 @@ const CustomCard = ({ title, description, image, topIcon, bottomIcons, sx }) => 
 
     return (
         <div>
-            <Card sx={{width: 250, height: 200,border: "2px solid var(--medium-green)",color:"grey",marginLeft:"10px",marginRight:"20px", ...sx,}}>
+            <Card sx={{width: 170, height: 170,border: "2px solid var(--medium-green)",color:"grey",marginLeft:"10px",marginRight:"20px", ...sx,}}>
                 {image && <CardMedia
                     style={sx?.image}
                     image={image}
