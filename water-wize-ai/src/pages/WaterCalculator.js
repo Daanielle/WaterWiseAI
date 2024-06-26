@@ -364,7 +364,7 @@ function WaterCalculator() {
           formulaValues={
             <Box>
               <Box sx={{ marginLeft: "18%", fontWeight: "bold", fontSize: "30px", marginBottom: "40px" }}>
-                You can edit the value of the variable Kc, if you want please enter your new value..
+                You can edit the value of the variable Kc, if you want please enter your new value...
               </Box>
               <Box sx={{ marginLeft: "39%", width: "500px", height:"450px"}}>
                 <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />

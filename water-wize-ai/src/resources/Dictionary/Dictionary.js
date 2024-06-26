@@ -72,7 +72,7 @@ Explanation5:"הסבר למסך 5",
 Explanation6:"הסבר למסך 6",
 
 //AboutUs page
-MeetTeam:"..הכירו את הצוות שלנו",
+MeetTeam:"...הכירו את הצוות שלנו",
 aboutMe:".אני סטודנט שנה ד' להנדסת תוכנה ומערכות מידע באוניברסיטת בן גוריון בנגב",
 Danielle_Name:"דניאל אספיר",
 Hadar_Name:"הדר סבתאי מור",
@@ -169,7 +169,7 @@ Explanation5:"Explanation for Screen 5",
 Explanation6:"Explanation for Screen 6",
 
 //AboutUs page
-MeetTeam:"Meet Our Team..",
+MeetTeam:"Meet Our Team...",
 aboutMe:"I am a fourth year software and information systems engineering student at Ben Gurion University of the Negev.",
 Danielle_Name:"Danielle Aspir",
 Hadar_Name:"Hadar Sabati Mor",

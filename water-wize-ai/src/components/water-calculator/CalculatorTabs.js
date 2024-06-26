@@ -14,7 +14,7 @@ export default function CalculatorTabs({formulaValues}) {
     <Tabs defaultValue={0}>
       <TabsList>
         <Tab value={0}>Calculator Formula</Tab>
-        <Tab value={1}>Editing Fermula</Tab>
+        <Tab value={1}>Editing Formula</Tab>
       </TabsList>
       <TabPanel value={0}><CalculatorsFormula/></TabPanel>
       <TabPanel value={1}>{formulaValues}</TabPanel>
