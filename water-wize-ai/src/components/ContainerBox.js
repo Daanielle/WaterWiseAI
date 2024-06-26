@@ -7,7 +7,7 @@ const ContainerBox = ({ children, sx, width, ...props }) => {
         <Box
             sx={{
                 p: 2,
-                backgroundColor: '#f5f5f5',
+                backgroundColor: 'var(--background-color)',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                 borderRadius: '20px',
                 width: width || { xs: '90%', sm: '70%', md: '50%', lg: '30%' },

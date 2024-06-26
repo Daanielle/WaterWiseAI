@@ -17,6 +17,7 @@ import CalculatorTabs from "../components/water-calculator/CalculatorTabs";
 import EditIcon from '@mui/icons-material/Edit';
 import Fab from '@mui/material/Fab';
 
+import RecommendationDetails from "../components/water-calculator/RecommendationDetails";
 
 const bycodejson = require('../resources/bycode2022Updated.json');
 
@@ -41,9 +42,8 @@ const modalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  // width: /,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  border: '2px solid var(--black-color)',
   boxShadow: 24,
   p: 4,
 };
@@ -276,7 +276,6 @@ function WaterCalculator() {
             if (closestCity) {
               setSelectedCity({ label: closestCity });
             }
-
             // console.log('Selected Area:', closestArea);
             // console.log('Selected City:', closestCity);
           } else {
@@ -320,8 +319,6 @@ function WaterCalculator() {
   return (
     <div className={classes.WaterCalculator}>
       <PageContainer>
-        {/* <TitleButton label={dict.waterCalculatorTitle}></TitleButton> */}
-        <TitleButton >{dict.waterCalculatorTitle}</TitleButton>
         <div className={classes.formControl}>
           <div className={classes.leftCol}>
             <ContainerBox width="500px">
@@ -344,6 +341,7 @@ function WaterCalculator() {
                 </p>
               )} */}
             </ContainerBox>
+              <RecommendationDetails detailedData={detailedData}/>
           </div>
           <div className={classes.rightCol}>
             <DetailsPanel detailedData={detailedData} />
@@ -365,13 +363,12 @@ function WaterCalculator() {
           formulaValues={
             <Box>
               <Box sx={{ marginLeft: "18%", fontWeight: "bold", fontSize: "30px", marginBottom: "40px" }}>
-                You can edit the value of the variable Kc, if you want please enter your new value..
+                You can edit the value of the variable Kc, if you want please enter your new value...
               </Box>
-              <Box sx={{ marginLeft: "39%", width: "500px" }}>
+              <Box sx={{ marginLeft: "39%", width: "500px", height:"450px"}}>
                 <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />
               </Box>
             </Box>}
-
         /></div>
       </PageContainer >
 

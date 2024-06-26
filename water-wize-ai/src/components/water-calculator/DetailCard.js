@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
-import waterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
+import waterCalculatorVariablesDetails from "../../resources/mapping/WaterCalculatorVariablesDetails";
 import { Icon } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import useDictionary from "../../resources/Dictionary/Dictionary";
@@ -20,7 +20,7 @@ const modalStyle = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "2px solid var(--black-color)",
   boxShadow: 24,
   p: 4,
 };
@@ -37,7 +37,7 @@ export default function DetailCard({ title, value }) {
 
   function getIcon(variableDetails) {
     const IconComponent = variableDetails?.icon || HelpOutlineIcon;
-    return <Icon component={IconComponent} sx={{ color: "#72ab38" }} />;
+    return <Icon component={IconComponent} sx={{ color: "var(--medium-green)" }} />;
   }
 
   return (
@@ -59,7 +59,7 @@ export default function DetailCard({ title, value }) {
           </CardContent>
           <CardActions disableSpacing>
             <IconButton aria-label="more info" onClick={handleOpenDetailsModal}>
-              <HelpOutlinedIcon sx={{ color: "#bcbcbc" }} />
+              <HelpOutlinedIcon sx={{ color: "var(--light-gray)" }} />
             </IconButton>
           </CardActions>
         </React.Fragment>

@@ -7,24 +7,11 @@ import CustomCard from "../components/CustomCard";
 import GrouDetails from "../resources/mapping/GrouDetails";
 import TeamInfo from "../components/TeamInfo"
 import {Grid} from '@mui/material';
-const CardStyle={ 
-  width: 360,
-   height: 380,
-  border: "2px solid #72ab38",
-  color:"grey",
-  marginLeft:"20px",
-  marginRight:"20px",
-  image:{
-    height: "55%",
-     width:"58%",
-      marginLeft:"20%" 
-  }
-}
+
 
 const stylebutton={ 
-  //  width: '100%',
-  marginTop: '-90px',  // Adjust vertical positioning as needed
-  marginLeft: '100px',
+  marginTop: '-150px',  // Adjust vertical positioning as needed
+  marginLeft: '60px',
 }
 
 const BottomIcons=(linkedIn,email,facebook, style)=>(
@@ -38,59 +25,30 @@ const BottomIcons=(linkedIn,email,facebook, style)=>(
 function AboutUs() {
   const dict = useDictionary();
   const teamDetails = GrouDetails();
-
+  const keys = Object.keys(teamDetails);
 
   return (
     <div>
       <PageContainer >
         <div>
-          <p className={classes.ARE}>{dict.MeetTeam}</p>
+          <p className={classes.Title}>{dict.MeetTeam}</p>
+          <p className={classes.Description}>We are a team of four passionate students in our fourth year of Software and Information Systems Engineering. Our team is dedicated to leveraging technology and data-driven insights to solve real-world problems in agriculture. With a strong foundation in software development, data analysis, and systems engineering, we are well-equipped to bring solutions to the farming community.
+          </p>
         </div> 
         <Grid item xs={12} sm={6} md={4}>
         <div className={classes.team}>
-        
-          <CustomCard
-          style={CardStyle}
-           title={teamDetails.Danielle.my_Name}
-           description={teamDetails.Danielle.about_me}
-           image={teamDetails.Danielle.image_link}
-           bottomIcons={BottomIcons(teamDetails.Danielle.linkedinUrl,teamDetails.Danielle.emailUrl,teamDetails.Danielle.facebookUrl,stylebutton)}
-
-            
-           />
-           <CustomCard
-           style={CardStyle}
-           title={teamDetails.Hadar.my_Name}
-           description={teamDetails.Hadar.about_me}
-           image={teamDetails.Hadar.image_link}
-           bottomIcons={BottomIcons(teamDetails.Hadar.linkedinUrl,teamDetails.Hadar.emailUrl,teamDetails.Hadar.facebookUrl,stylebutton)}
-            
-            // <TeamInfo 
-            // linkedinUrl={teamDetails.Hadar.linkedinUrl} 
-            // emailUrl={teamDetails.Hadar.emailUrl}  
-            // facebookUrl={teamDetails.Hadar.facebookUrl} 
-        // />
-      
-
-           />
-           <CustomCard
-           style={CardStyle}
-           title={teamDetails.Lana.my_Name}
-           description={teamDetails.Lana.about_me}
-           image={teamDetails.Lana.image_link}
-           bottomIcons={BottomIcons(teamDetails.Lana.linkedinUrl,teamDetails.Lana.emailUrl,teamDetails.Lana.facebookUrl,stylebutton)}
-
-
-
-           />
-           <CustomCard
-           style={CardStyle}
-           title={teamDetails.Shachar.my_Name}
-           description={teamDetails.Shachar.about_me}
-           image={teamDetails.Shachar.image_link}
-           bottomIcons={BottomIcons(teamDetails.Shachar.linkedinUrl,teamDetails.Shachar.emailUrl,teamDetails.Shachar.facebookUrl,stylebutton)}
-        
-           />
+          {keys.slice().map((key, index) => (
+          <div  key={index}>
+            {key && teamDetails[key] && (
+                <CustomCard sx={{width: 260,height: 280,marginLeft:"20px",image:{height: "45%", width:"50%", marginLeft:"20%" }}}
+                  title={teamDetails[key].my_Name}
+                  // description={ teamDetails[key].about_me}
+                  image={teamDetails[key].image_link}
+                  bottomIcons={BottomIcons(teamDetails[key].linkedinUrl,teamDetails[key].emailUrl,teamDetails[key].facebookUrl,stylebutton)}
+                />
+            )}
+          </div>
+        ))}
             </div>
            </Grid>
           

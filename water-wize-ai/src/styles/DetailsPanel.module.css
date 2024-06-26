@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem; /* Optional: Add space between the rows */
-  margin-top: 90px;
+  margin-top: 0px;
 }
 
 .row {
@@ -14,6 +14,8 @@
 .cardContainer {
   flex: 1;
   /* color: rgb(11, 119, 54); */
+
+
 }
 
 .row2{
@@ -22,10 +24,6 @@
   margin-left: 23%;
 
 }
-
-/*.reco{
-  margin-left: 43%;
-}*/
 
 .specificStyles{
   background-color: 'red',

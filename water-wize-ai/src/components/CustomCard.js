@@ -8,19 +8,16 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Icon } from '@mui/material';
 import Modal from "@mui/material/Modal";
-import WaterCalculatorVariablesDetails from "../resources/mapping/waterCalculatorVariablesDetails";
+import WaterCalculatorVariablesDetails from "../resources/mapping/WaterCalculatorVariablesDetails";
 import { styled } from '@mui/material/styles';
 
-const CustomCard = ({ title, description, image, topIcon, bottomIcons, style }) => {
-
+const CustomCard = ({ title, description, image, topIcon, bottomIcons, sx }) => {
 
     return (
         <div>
-            <Card style={style}>
-
+            <Card sx={{width: 170, height: 170,border: "2px solid var(--medium-green)",color:"grey",marginLeft:"10px",marginRight:"20px", ...sx,}}>
                 {image && <CardMedia
-                    //sx={{ height: "35%", width:"54%", marginBottom:"0px",marginLeft:"50px" }}
-                    style={style?.image}
+                    style={sx?.image}
                     image={image}
                     component="img"
                     alt={title}
@@ -28,7 +25,7 @@ const CustomCard = ({ title, description, image, topIcon, bottomIcons, style }) 
                 />}
 
                 <CardContent sx={{ minHeight: 180 }}>
-                    {topIcon && <Icon component={topIcon} sx={{ color: "#72ab38" }} />}
+                    {topIcon && <Icon component={topIcon} sx={{ color: "var(--medium-green)", ...sx?.icon}} />}
                     <Typography gutterBottom variant="h6" component="div" fontWeight="bold">
                         {title}
                     </Typography>
@@ -36,7 +33,7 @@ const CustomCard = ({ title, description, image, topIcon, bottomIcons, style }) 
                         {description}
                     </Typography>
                 </CardContent>
-                {bottomIcons && <CardActions>
+                {bottomIcons && <CardActions >
                     {bottomIcons}
                 </CardActions>
                 }

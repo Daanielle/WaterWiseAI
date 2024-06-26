@@ -16,7 +16,7 @@ const CalculatorsFormula = () => {
     <Box
       sx={{fontWeight: "bold", fontSize: "30px"}}
     >
-      <Box sx={{ marginBottom:"40px", marginLeft:"28%"}}> 
+      <Box sx={{ marginBottom:"40px", marginLeft:"8%"}}> 
         How did we get the result? We used several formulas listed here..
       </Box>
       <Box sx={{marginLeft:"36%"}}> 

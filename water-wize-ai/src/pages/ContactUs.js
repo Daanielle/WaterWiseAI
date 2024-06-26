@@ -55,16 +55,12 @@ function ContactUs() {
         // height: '100vh',
         width: '100vw',
         display: 'flex',
-      //   alignItems: 'center',
         justifyContent: 'center',
-      //   marginTop:"-88px",
-      //   marginBottom:"-88px"
       }}
   >
-     <ContainerBox>
+     <ContainerBox sx={{border: "2px solid var(--primary-color)",}}>
      <TitleButton >{dict.contuctUs}</TitleButton>
       <div className="contact-form">
-      {/* <TitleButton >{dict.contuctUs}</TitleButton> */}
         <form onSubmit={handleSubmit}>
           <label>{dict.name}</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} required />

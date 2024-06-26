@@ -72,12 +72,14 @@ Explanation5:"הסבר למסך 5",
 Explanation6:"הסבר למסך 6",
 
 //AboutUs page
-MeetTeam:"..הכירו את הצוות שלנו",
+MeetTeam:"...הכירו את הצוות שלנו",
 aboutMe:".אני סטודנט שנה ד' להנדסת תוכנה ומערכות מידע באוניברסיטת בן גוריון בנגב",
 Danielle_Name:"דניאל אספיר",
 Hadar_Name:"הדר סבתאי מור",
 Lana_Name:"לנא אבוריא",
 Shachar_Name:"שחר אדם",
+TitleWhoWeAre: "Who We Are",
+WhoWeAre: "We are a team of four passionate students in our fourth year of Software and Information Systems Engineering. Our team is dedicated to leveraging technology and data-driven insights to solve real-world problems in agriculture. With a strong foundation in software development, data analysis, and systems engineering, we are well-equipped to bring solutions to the farming community.",
 
 //style
 stylePage:"right",
@@ -88,6 +90,10 @@ arestyle:"rightare",
 //errors
 errorsAreaSizeRange: "הזינו מספר תקין, בין 10 ל-100000", 
 errorsKcRange: "הזינו מספר תקין, בין 0 ל-2", 
+
+//Modal
+CloseModal: "סגירה",
+textAlign: "right"
 };
 
 const engDict = {
@@ -163,13 +169,14 @@ Explanation5:"Explanation for Screen 5",
 Explanation6:"Explanation for Screen 6",
 
 //AboutUs page
-MeetTeam:"Meet Our Team..",
+MeetTeam:"Meet Our Team...",
 aboutMe:"I am a fourth year software and information systems engineering student at Ben Gurion University of the Negev.",
 Danielle_Name:"Danielle Aspir",
 Hadar_Name:"Hadar Sabati Mor",
 Lana_Name:"Lana AbuRaya",
 Shachar_Name:"Shachar Adam",
-
+TitleWhoWeAre: "Who We Are",
+WhoWeAre: "We are a team of four passionate students in our fourth year of Software and Information Systems Engineering. Our team is dedicated to leveraging technology and data-driven insights to solve real-world problems in agriculture. With a strong foundation in software development, data analysis, and systems engineering, we are well-equipped to bring solutions to the farming community.",
 //style
 stylePage:"left",
 whostyle:"leftwho",
@@ -179,6 +186,10 @@ arestyle:"leftare",
 //errors
 errorsAreaSizeRange: "please enter a valid number - between 10 to 100000", 
 errorsKcRange: "please enter a valid number - between 0 to 2",
+
+//Modal
+CloseModal: "Close",
+textAlign: "left"
 };
 
 const useDictionary = () => {

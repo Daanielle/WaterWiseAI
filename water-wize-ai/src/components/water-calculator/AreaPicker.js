@@ -16,25 +16,25 @@ const AreaPicker = ({ area, onAreaChange }) => {
     <Box
       sx={{
         "& > :not(style)": { mt: 1, width: "100%" },
-        "& .MuiInputLabel-shrink": { color: "#4CAF50 !important" }, // Change label color when shrink
-        "& .MuiInputLabel-root": { color: "#4CAF50" }, // Change label color
+        "& .MuiInputLabel-shrink": { color: "var(--shrink-green) !important" }, // Change label color when shrink
+        "& .MuiInputLabel-root": { color: "var(--shrink-green)" }, // Change label color
         "& .MuiOutlinedInput-root": {
           // Change input color and border color
-          color: "#4CAF50",
+          color: "var(--shrink-green)",
           "& fieldset": {
-            borderColor: "#4CAF50",
+            borderColor: "var(--shrink-green)",
           },
           "&:hover fieldset": {
             // Change border color on hover
-            borderColor: "#4CAF50",
+            borderColor: "var(--shrink-green)",
           },
           "&.Mui-focused fieldset": {
             // Change border color when focused
-            borderColor: "#4CAF50",
+            borderColor: "var(--shrink-green)",
           },
           "&.Mui-focused .MuiInputLabel-root": {
             // Change label color when focused
-            color: "#4CAF50",
+            color: "var(--shrink-green)",
           },
         },
       }}

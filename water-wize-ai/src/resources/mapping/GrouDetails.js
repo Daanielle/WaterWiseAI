@@ -5,7 +5,7 @@ import shacharsImage from "../images/shachar.png";
 import daniellesImage from "../images/danielle.png";
 import useDictionary from "../Dictionary/Dictionary";
 
-const GrouDetails =()=> {
+function GrouDetails () {
 const dict = useDictionary();
 const facebookUrl = "https://www.facebook.com/yourfacebookprofile"; // Change this to your Facebook profile URL
 

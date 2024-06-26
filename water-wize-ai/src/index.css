@@ -20,13 +20,15 @@
   --primary-color: #89ce00; /* Main green color */
   --accent-color: #d86018; /* Burnt orange accent */
 
-  --background-color: #fff5e1; /* Cream/white background */
+  --background-color: #f5f5f5; /* Cream/white background */
   --extra-white: #e0e0e0; /* Extra white */
   --extra-white-transparent: #e0e0e0d8; /* Extra white */
 
   --dark-green: #416e06; /* Darker green */
   --light-green: #b0d66a; /* Lighter green */
   --medium-green: #72ab38; /* Medium green */
+  --shrink-green: #4CAF50;
+  --darker-green:#45a049;
 
   --light-accent-gray: #f8dcb8f6; /* Brighter burnt orange */
   --accent-orange: #c98736; /* Brighter burnt orange */
@@ -34,6 +36,10 @@
 
   --text-color: #333; /* Main text color */
   --subtle-text-color: #666; /* Subtle text color */
+  --black-color : #000; 
+  
+  --light-gray : #c3c4c0;
+  
 }
 
 body {

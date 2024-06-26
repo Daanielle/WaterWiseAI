@@ -9,8 +9,7 @@ import useDictionary from "../resources/Dictionary/Dictionary";
 
 const titleButton = {
   fontStyle: "italic",
-  /* font-size: larger; */
-  color: "#bef5dc"
+  color: "var(--medium-green)"
 
 };
 
@@ -100,7 +99,7 @@ function Register() {
   return (
     <PageContainer>
       <form onSubmit={handleSubmit}>
-        <ContainerBox width="700px">
+        <ContainerBox sx={{width:"700px", border:"2px solid var(--medium-green)",}}>
           <TitleButton style={titleButton}>{dict.Register}</TitleButton>
           <InputField label={dict.firstName} value={firstName} onValueChange={setFirstName} checkIfValid={() => true} error="" />
           <InputField label={dict.lastName} value={lastName} onValueChange={setLastName} checkIfValid={() => true} error="" />

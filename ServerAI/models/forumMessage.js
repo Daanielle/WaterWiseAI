@@ -23,11 +23,11 @@ const forumMessageSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    recommendation: {
+    recommendations: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Recommendation', // Reference to the Recommendation model
         required: false
-    }
+    }]
 }, { timestamps: true });
 
 // Adding an index for better performance on userId and title
