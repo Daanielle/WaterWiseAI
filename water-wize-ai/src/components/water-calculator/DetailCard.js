@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
-import waterCalculatorVariablesDetails from "../../resources/mapping/WaterCalculatorVariablesDetails";
+import waterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
 import { Icon } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import useDictionary from "../../resources/Dictionary/Dictionary";
