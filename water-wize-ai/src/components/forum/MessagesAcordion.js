@@ -33,7 +33,7 @@ export default function AccordionExpandIcon({ messages, setLoading }) {
               title={message.title}
               userId={message.userId}
               time={formatDate(message.createdAt)}
-              isRec={message.recommendations.length > 0}
+              isRec={message.recommendations[0]}
               numOfComments={message.numOfComments}
             />
           </AccordionSummary>

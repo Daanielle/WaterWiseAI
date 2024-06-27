@@ -149,7 +149,7 @@ function DetailsPanel({ detailedData }) {
             </Typography>
           </Box>
           <Typography sx={{ textAlign: dict.textAlign, marginLeft: "auto", mt: 2 }} id="modal-modal-description" >
-            {dict[currentTitle]}
+            {currentDescription}
           </Typography>
           <Button sx={{ marginLeft: "45%" }} onClick={handleCloseModal}>{dict.CloseModal}</Button>
 

@@ -92,7 +92,7 @@ const hebDict = {
   areaSize: "גודל שטח",
   KcValue: "Kc",
   calculate: "חשב",
-  WindSpeed1mmTitle: "מהירות הרוח המקסימלית בדקה האחרונה",
+  WindSpeed1mmTitle: "מהירות רוח מקסימלית בדקה אחרונה",
   grad: ".מייצג את האיזון בין קרינה נכנסת ויוצאת על פני השטח ",
   windSpeed1mm:" .מהירות הרוח הגבוהה ביותר שנצפתה על פני תקופה של דקה אחת",
   maxWindSpeed:".מהירות הרוח המרבית הנצפית בתוך מרווח זמן מסוים",
@@ -110,6 +110,25 @@ saveCalculate:"שמור חישוב",
 showAllCalcts:"הצגת החישובים שלי",
 findMyCoordinates:"מציאת הקורדינטות שלי",
 predict: "בצע חיזוי",
+
+
+// Calculator Parameters
+gradParameter: "קרינה גלובלית",
+windSpeed1mmParameter: "מהירות רוח מקסימלית בדקה האחרונה",
+maxWindSpeedParameter:"מהירות רוח מקסימלית",
+temperatureParameter:"טמפרטורה",
+relativeHumidityParameter:"לחות יחסית",
+deltaYParameter:"שינוי בלחץ אדי המים",
+e0Parameter:`לחץ אדים רווי`,
+eaParameter:`לחץ אדים בפועל`,
+EaParameter:`התאדות אירודינמית`,
+EParameter: "אידוי",
+KcParameter: "קבוע השקיה",
+RecParmeter: "המלצה",
+
+CalculatorFormulaParam: "נוסחת המחשבון",
+EditFormulaParm: "ערכו נוסחה",
+
 
 
   //Explenations Fermulas
@@ -261,6 +280,23 @@ saveCalculate:"Save Calculate",
 showAllCalcts:"Show all calcs",
 findMyCoordinates:"Find my coordinates",
 predict: "predict",
+
+// Calculator Parameters
+gradParameter: "Global Radiation",
+windSpeed1mmParameter: "Max Wind Speed Last Min",
+maxWindSpeedParameter:"Max Wind Speed",
+temperatureParameter:"Temperature",
+relativeHumidityParameter:"Relative humidity",
+deltaYParameter:"Change in water vapor pressure",
+e0Parameter:`Saturated vapor pressure.`,
+eaParameter:`Actual vapor pressure.`,
+EaParameter:`Aerodynamic evaporation`,
+EParameter: "Evapotranspiration rate",
+KcParameter: "Irrigation Constant",
+RecParmeter: "Recommendation",
+
+CalculatorFormulaParam: "Calculator Formula",
+EditFormulaParm: "Editing Formula",
 
   //Explenations Fermulas
   e0:"This formula is used to calculate the saturated vapor pressure indicating the pressure exerted by vapor molecules in the atmosphere when the air contains the maximum amount of vapor it can hold depending on the temperature, the calculation is based on the approximate temperature",
