@@ -12,7 +12,7 @@ const NewMessage = ({ onCloseNewMsg  }) => {
     const [userId, setUserId] = useState('');
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const [recommendation, setRecommendation] = useState([]);
+    const [recommendation, setRecommendation] = useState(null);
     const [openRecsModal, setOpenRecsModal] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
 
@@ -99,12 +99,12 @@ const NewMessage = ({ onCloseNewMsg  }) => {
                 rows={4}
             />
             <CustomButton label="Save Message" onClick={saveMessage} style={{ width: '50%', marginTop: '20px' }} />
-            {selectedRow && (
+            {/* {selectedRow && (
                 <div>
                     <h2>Selected Recommendation Details</h2>
                     <pre>{JSON.stringify(selectedRow, null, 2)}</pre>
                 </div>
-            )}
+            )} */}
             <Modal
                 open={openRecsModal}
                 onClose={handleCloseRecsModal}
