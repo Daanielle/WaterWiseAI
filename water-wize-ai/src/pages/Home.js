@@ -9,7 +9,8 @@ import irrigationImg from '../resources/images/irrigation.jpg';
 import ContainerBox from "../components/ContainerBox";
 import WaterCalculator from "./WaterCalculator";
 import leafpalm from "../resources/images/LeafPalmRight.jpg"
-import leafpalmLeft from "../resources/images/LeafPalmLeft.jpg"
+import leafpalmLeft from "../resources/images/LeafPalmLeft.jpg";
+import useDictionary from "../resources/Dictionary/Dictionary";
 
 const containerStyle = {
   position: 'absolute',
@@ -36,6 +37,7 @@ const containerStyleLeft = {
 };
 
 function Home() {
+  const dict = useDictionary();
   return (
     <PageContainer
       children={
@@ -59,21 +61,21 @@ function Home() {
           <div style={containerStyleLeft} />
           <ContainerBox
             sx={{ backgroundColor: "white", width: "60%", height: 640, border: "2px solid var(--medium-green)" }}>
-            <div><h1 style={{ fontStyle: "italic", color: "var(--medium-green)" }} >Water Wise AI</h1></div>
+            <div><h1 style={{ fontStyle: "italic", color: "var(--medium-green)" }} >{dict.HomeWW}</h1></div>
             <Grid container spacing={4}>
               <Grid item xs={7}>
-                The Water Wise AI system deals with calculating the amount of irrigation required for date crops in the Araba region in Israel. The system will use existing models and especially the Evapotranspiration formula in order to automatically calculate the irrigation needs of Tamari Majhol in the Araba.
+                {dict.HomeText1}
               </Grid>
               <Grid item xs={5}></Grid>
               <Grid item xs={5}></Grid>
               <Grid item xs={7}>
-                Our system offers a comprehensive solution by integrating factors and real-time data specifically adapted to the needs of growing dates in the Arava region, such as soil characteristics, crop coefficients and local weather data. This integration ensures that the farmers will receive the most accurate and practical insights for irrigation management, while addressing the specific challenges facing date farming with great precision and efficiency
+                {dict.HomeText2}
               </Grid>
               <Grid item xs={3} >
               </Grid>
               <Grid item xs={6} justifyContent="center" style={{ marginTop: '40px' }}>
-                "Join us today in harnessing the power of data to cultivate smarter, conserve better, and grow sustainably with Water Wise AI."
-                <CustomButton label={"Start Saving Water"} to={"/WaterCalculator"} type="button" />
+                {dict.HomeText3}
+                <CustomButton label={dict.HomeSaveWater} to={"/WaterCalculator"} type="button" />
               </Grid>
               <Grid item xs={3}>
               </Grid>
