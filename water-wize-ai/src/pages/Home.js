@@ -89,7 +89,7 @@ function Home() {
               <Grid item xs={7}>
                 {dict.HomeText1}
               </Grid>
-              <Grid item xs={5}></Grid>
+                <Grid item xs={5}></Grid>
               <Grid item xs={5}></Grid>
               <Grid item xs={7}>
                 {dict.HomeText2}

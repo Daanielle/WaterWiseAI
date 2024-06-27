@@ -225,7 +225,7 @@ export const getAllUsers = async (userId) => {
 export const addNewForumMessage = async (message) => {
   try {
     //const recommendations = message.recommendation.map(id => ObjectId(id));
-    console.log("fffffffffff" + message.recommendations)
+    //console.log("fffffffffff" + message.recommendations)
     const response = await fetch('/forum/newMessage', {
       method: "POST",
       headers: {
@@ -284,7 +284,7 @@ export const addNewForumComment = async (comment) => {
 
 export const getAllCommentsForMsg = async (msgId) => {
   try {
-    console.log(msgId)
+    //console.log(msgId)
     const response = await fetch(`/forum/messages/${msgId}/comments`, {
       method: "GET",
       headers: {
@@ -292,7 +292,7 @@ export const getAllCommentsForMsg = async (msgId) => {
       },
     });
     const comments = await response.json();
-    console.log(comments)
+    //console.log(comments)
     return comments
   } catch (error) {
     console.error("Error:", error);
