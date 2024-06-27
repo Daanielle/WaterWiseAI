@@ -28,38 +28,38 @@ const DatePickerComponent = ({ date = dayjs(), onDateChange }) => {
         },
         "& .MuiInputLabel-root": {
             width: "127%",
-            color: "#4CAF50",
+            color: "var(--medium-green)",
             textAlign: dict.stylePage
         },
         "& .MuiInputLabel-shrink": {
             width: "127%",
-            color: "#4CAF50 !important",
+            color: "var(--medium-green) !important",
             textAlign: dict.stylePage,
         },
         "& .MuiAutocomplete-popupIndicator": {
-            color: "#4CAF50",
+            color: "var(--medium-green)",
             marginRight: dict.stylePage === "right" ? "175px" : "",
 
         },
         "& .MuiAutocomplete-popupIndicatorOpen": {
-            color: "#4CAF50",
+            color: "var(--medium-green)",
             marginRight: dict.stylePage === "right" ? "175px" : "",
         },
         "& .MuiOutlinedInput-root": {
-            color: "#4CAF50",
+            color: "var(--medium-green)",
             "& fieldset": {
-                borderColor: "#4CAF50",
+                borderColor: "var(--medium-green)",
                 textAlign: dict.stylePage
             },
             "&:hover fieldset": {
-                borderColor: "#4CAF50",
+                borderColor: "var(--medium-green)",
             },
             "&.Mui-focused fieldset": {
-                borderColor: "#4CAF50",
+                borderColor: "var(--medium-green)",
                 textAlign: dict.stylePage,
             },
             "&.Mui-focused .MuiInputLabel-root": {
-                color: "#4CAF50",
+                color: "var(--medium-green)",
                 textAlign: dict.stylePage
             },
         },

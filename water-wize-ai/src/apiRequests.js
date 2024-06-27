@@ -137,6 +137,45 @@ export const getLoggedInUserImage = async () => {
 
 };
 
+
+
+
+
+
+
+
+
+export const getLoggedInUserEmail = async () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  try {
+    if (user) {
+      const response = await fetch(`/users/${user._id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'update failed!');
+      }
+      const data = await response.json(); // Parse the JSON response
+      return data.email
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+
+};
+
+
+
+
+
+
+
+
+
 export const getUserById = async (userId) => {
   try {
     const url = `/users/${userId}`;

@@ -62,7 +62,30 @@ function Home() {
           <ContainerBox
             sx={{ backgroundColor: "white", width: "60%", height: 640, border: "2px solid var(--medium-green)" }}>
             <div><h1 style={{ fontStyle: "italic", color: "var(--medium-green)" }} >{dict.HomeWW}</h1></div>
-            <Grid container spacing={4}>
+            
+
+            {dict.stylePage === 'right' ? (
+              <Grid container spacing={4} sx={{right:"100px"}}>
+              <Grid item xs={5}>
+              </Grid>
+              <Grid item xs={7}>{dict.HomeText1}</Grid>
+              <Grid item xs={7}>{dict.HomeText2}</Grid>
+              <Grid item xs={5}>
+                
+              </Grid>
+              <Grid item xs={3} >
+              </Grid>
+              <Grid item xs={6} justifyContent="center" style={{ marginTop: '40px' }}>
+                {dict.HomeText3}
+                <CustomButton label={dict.HomeSaveWater} to={"/WaterCalculator"} type="button" />
+              </Grid>
+              <Grid item xs={3}>
+              </Grid>
+            </Grid>
+
+
+            ) : (
+              <Grid container spacing={4}>
               <Grid item xs={7}>
                 {dict.HomeText1}
               </Grid>
@@ -80,6 +103,33 @@ function Home() {
               <Grid item xs={3}>
               </Grid>
             </Grid>
+
+            )}
+
+
+
+
+
+
+
+            {/* <Grid container spacing={4}>
+              <Grid item xs={7}>
+                {dict.HomeText1}
+              </Grid>
+              <Grid item xs={5}></Grid>
+              <Grid item xs={5}></Grid>
+              <Grid item xs={7}>
+                {dict.HomeText2}
+              </Grid>
+              <Grid item xs={3} >
+              </Grid>
+              <Grid item xs={6} justifyContent="center" style={{ marginTop: '40px' }}>
+                {dict.HomeText3}
+                <CustomButton label={dict.HomeSaveWater} to={"/WaterCalculator"} type="button" />
+              </Grid>
+              <Grid item xs={3}>
+              </Grid>
+            </Grid> */}
           </ContainerBox>
         </Box>
 
