@@ -65,11 +65,11 @@ function Home() {
             
 
             {dict.stylePage === 'right' ? (
-              <Grid container spacing={4} sx={{right:"100px"}}>
+              <Grid container spacing={4} >
               <Grid item xs={5}>
               </Grid>
-              <Grid item xs={7}>{dict.HomeText1}</Grid>
-              <Grid item xs={7}>{dict.HomeText2}</Grid>
+              <Grid item sx={{paddingRight: "80px" }} xs={7}>{dict.HomeText1}</Grid>
+              <Grid item  xs={7}>{dict.HomeText2}</Grid>
               <Grid item xs={5}>
                 
               </Grid>
