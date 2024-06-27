@@ -88,7 +88,7 @@ function DetailsPanel({ detailedData }) {
                 description={detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
                 // description={ detailedData[key] !== undefined && detailedData[key] !== null && detailedData[key] !== "--" ? `${detailedData[key]} ${variablesMapping[key]?.units}` : detailedData[key] }
                 // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
-                bottomIcons={bottomIcons(variablesMapping[key].title, variablesMapping[key].description, variablesMapping[key].icon)}
+                bottomIcons={bottomIcons(key, variablesMapping[key].description, variablesMapping[key].icon)}
               />
             )}
           </div>

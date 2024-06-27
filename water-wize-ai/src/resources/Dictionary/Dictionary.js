@@ -110,6 +110,16 @@ saveCalculate:"שמור חישוב",
 showAllCalcts:"הצגת החישובים שלי",
 findMyCoordinates:"מציאת הקורדינטות שלי",
 predict: "בצע חיזוי",
+
+
+  //Explenations Fermulas
+  e0:" •	נוסחה זו משמשת לחישוב לחץ האדים רווי המציין את הלחץ המופעל על ידי מולקולות אדים באטמוספירה כשהאוויר מכיל את כמות האדים המקסימלית שהוא יכול להחזיק בהתאם לטמפרטורה את החישוב מתבסס על טמפרטורת הקירוב ",
+  ea:"•	נוסחה זו משמשת לחישוב הלחץ האדים בפועל באטמוספירה, המייצג את הלחץ החלקי של אדי המים באוויר ביחס למקסימום שהאוויר יכול להחזיק בהתאם ללחות היחסית. את החישוב נעשה בהתבסס על הלחות היחסית שזה היחס בין כמות האדים הנוכחית באוויר לכמות האדים המקסימלית שהוא יכול להחזיק באותה טמפרטורה, מסופר באחוזים ועל הלחץ האדים.",
+  Ea:"נוסחה זו משמשת לחישוב ערך התאדות אירודינמית, המייצג את ההבדל בין לחץ אדים הרווי לבין לחץ אדים בפועל ומתחשבת גם במהירות הרוח בגובה 2 מטרים מעל פני הקרקע.",
+  E:"הנוסחה משמשת לחיזוי התאיידות המים מפני השטח של כדור הארץ, בהתבסס על מרכיבים כמו קרינה על המשטח, חילופי חום, התאיידות אירודינאמית, לחץ אדי המים, וחום כמוס. הנוסחה מחלקת את כל זה על ידי, ומצטפה ב ואחד.",
+  I:"הנוסחה מתייחסת לכמות המים הנדרשת ליבול התמרים בהתבסס על השקיה ואידוי המים הפוטנציאלי. היא משתמשת במקדם הכיסוי, שמייצג את הצורך הנוכחי של התמרים במים ביחס לאידוי המים, ובשטח הכללי של החלקה לחישוב כמות המים הכוללת הנדרשת להשקיה.",
+
+
 //Support page
 Explanation1:"הסבר למסך 1",
 Explanation2:"הסבר למסך 2",
@@ -251,6 +261,21 @@ saveCalculate:"Save Calculate",
 showAllCalcts:"Show all calcs",
 findMyCoordinates:"Find my coordinates",
 predict: "predict",
+
+  //Explenations Fermulas
+  e0:"This formula is used to calculate the saturated vapor pressure indicating the pressure exerted by vapor molecules in the atmosphere when the air contains the maximum amount of vapor it can hold depending on the temperature, the calculation is based on the approximate temperature",
+  ea:"This formula is used to calculate the actual vapor pressure in the atmosphere, which represents the partial pressure of the water vapor in the air in relation to the maximum that the air can hold according to the relative humidity. The calculation is made based on the relative humidity, which is the ratio between the current amount of vapor in the air and the maximum amount of vapor it can hold at the same temperature, expressed in percentages and the vapor pressure.",
+  Ea:"This formula is used to calculate the aerodynamic evaporation value, which represents the difference between the saturated vapor pressure and the actual vapor pressure and also takes into account the wind speed at a height of 2 meters above the ground.",
+  E:"The formula is used to predict water evaporation from the Earth's surface, based on components such as surface radiation, heat exchange, aerodynamic evaporation, water vapor pressure, and capsule heat. The formula divides all of this by, and adds up to and one.",
+  I:"The formula refers to the amount of water required for the date crop based on irrigation and potential water evaporation. It uses the coverage factor, which represents the date palm's current need for water in relation to water evaporation, and the general area of ​​the plot to calculate the total amount of water required for irrigation.",
+
+
+
+
+
+
+
+
 //Support page
 Explanation1:"Explanation for Screen 1",
 Explanation2:"Explanation for Screen 2",
