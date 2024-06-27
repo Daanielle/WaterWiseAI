@@ -5,7 +5,7 @@ import CustomButton from "../CustomButton";
 import TitleButton from "../TitleButton";
 import { Modal, Box } from "@mui/material";
 import AllUserRecommendations from "../AllUserRecommendations";
-import mongoose from "mongoose";
+//import mongoose from "mongoose";
 
 
 const NewMessage = ({ onCloseNewMsg  }) => {
@@ -27,7 +27,7 @@ const NewMessage = ({ onCloseNewMsg  }) => {
         };
         fetchUserDetails();
     }, []);
-    const { ObjectId } = mongoose.Types;
+    //const { ObjectId } = mongoose.Types;
 
     const handleOpenRecsModal = () => setOpenRecsModal(true);
     const handleCloseRecsModal = () => setOpenRecsModal(false);
@@ -35,7 +35,7 @@ const NewMessage = ({ onCloseNewMsg  }) => {
     const handleRowClick = (row) => {
         setSelectedRow(row);
         // let recArr = [row._id, ...recommendation]
-        let recArr = [new ObjectId(row._id)];
+        let recArr = [row._id];
 
         setRecommendation(row._id)
         setOpenRecsModal(false); // Close modal on row click
