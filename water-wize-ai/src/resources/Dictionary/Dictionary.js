@@ -102,7 +102,7 @@ const hebDict = {
   e0:`.לחץ אדים רווי`,
   ea:`לחץ אדים בפועל.`,
   Ea:`.(ea) ללחץ אדים בפועל ,(e0) אידוי אווירודינמי, מכמת את ההבדל בין לחץ אדי רוויה`,
-E:`.קצב אידוי 
+  E:`.קצב אידוי 
 `,
 Kc:`.מקדם יבול לחודש הנוכחי מבוסס על מחקר חקלאי`,
 recommendation:`.המלצת השקיה על פי חישובים`,
@@ -125,8 +125,7 @@ Danielle_Name:"דניאל אספיר",
 Hadar_Name:"הדר סבתאי מור",
 Lana_Name:"לנא אבוריא",
 Shachar_Name:"שחר אדם",
-TitleWhoWeAre: "Who We Are",
-WhoWeAre: "We are a team of four passionate students in our fourth year of Software and Information Systems Engineering. Our team is dedicated to leveraging technology and data-driven insights to solve real-world problems in agriculture. With a strong foundation in software development, data analysis, and systems engineering, we are well-equipped to bring solutions to the farming community.",
+WhoWeAre: ".אנחנו צוות של ארבעה סטודנטים בשנה הרביעית בהנדסת תוכנה ומערכות מידע. הצוות שלנו מוקדש למינוף טכנולוגיה ותובנות מבוססות נתונים כדי לפתור בעיות בעולם האמיתי בחקלאות. עם בסיס חזק בפיתוח תוכנה, ניתוח נתונים והנדסת מערכות, אנו ערוכים היטב על מנת להביא פתרונות לקהילת החקלאים",
 
 //style
 stylePage:"right",
@@ -233,7 +232,7 @@ const engDict = {
   areaSize: "Area Size",
   KcValue: "Kc",
   calculate: "Calculate",
-  WindSpeed1mmTitle: "Maximum wind speed last minute",
+  WindSpeed1mmTitle: "Max Wind Speed Last Min",
   grad: "Represents the balance between incoming and outgoing radiation at the surface.",
   windSpeed1mm:"Highest wind speed observed over a period of one minute.",
   maxWindSpeed:"Maximum wind speed observed within a certain time interval. ",
@@ -267,7 +266,6 @@ Danielle_Name:"Danielle Aspir",
 Hadar_Name:"Hadar Sabati Mor",
 Lana_Name:"Lana AbuRaya",
 Shachar_Name:"Shachar Adam",
-TitleWhoWeAre: "Who We Are",
 WhoWeAre: "We are a team of four passionate students in our fourth year of Software and Information Systems Engineering. Our team is dedicated to leveraging technology and data-driven insights to solve real-world problems in agriculture. With a strong foundation in software development, data analysis, and systems engineering, we are well-equipped to bring solutions to the farming community.",
 //style
 stylePage:"left",
