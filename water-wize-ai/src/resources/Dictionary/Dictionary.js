@@ -110,6 +110,25 @@ saveCalculate:"שמור חישוב",
 showAllCalcts:"הצגת החישובים שלי",
 findMyCoordinates:"מציאת הקורדינטות שלי",
 predict: "בצע חיזוי",
+
+
+// Calculator Parameters
+gradParameter: "קרינה גלובלית",
+windSpeed1mmParameter: "מהירות רוח מקסימלית בדקה האחרונה",
+maxWindSpeedParameter:"מהירות רוח מקסימלית",
+temperatureParameter:"טמפרטורה",
+relativeHumidityParameter:"לחות יחסית",
+deltaYParameter:"שינוי בלחץ אדי המים",
+e0Parameter:`לחץ אדים רווי`,
+eaParameter:`לחץ אדים בפועל`,
+EaParameter:`התאדות אירודינמית`,
+EParameter: "אידוי",
+KcParameter: "קבוע השקיה",
+RecParmeter: "המלצה",
+
+CalculatorFormulaParam: "נוסחת המחשבון",
+EditFormulaParm: "ערכו נוסחה",
+
 //Support page
 Explanation1:"הסבר למסך 1",
 Explanation2:"הסבר למסך 2",
@@ -251,6 +270,23 @@ saveCalculate:"Save Calculate",
 showAllCalcts:"Show all calcs",
 findMyCoordinates:"Find my coordinates",
 predict: "predict",
+
+// Calculator Parameters
+gradParameter: "Global Radiation",
+windSpeed1mmParameter: "Max Wind Speed Last Min",
+maxWindSpeedParameter:"Max Wind Speed",
+temperatureParameter:"Temperature",
+relativeHumidityParameter:"Relative humidity",
+deltaYParameter:"Change in water vapor pressure",
+e0Parameter:`Saturated vapor pressure.`,
+eaParameter:`Actual vapor pressure.`,
+EaParameter:`Aerodynamic evaporation`,
+EParameter: "Evapotranspiration rate",
+KcParameter: "Irrigation Constant",
+RecParmeter: "Recommendation",
+
+CalculatorFormulaParam: "Calculator Formula",
+EditFormulaParm: "Editing Formula",
 //Support page
 Explanation1:"Explanation for Screen 1",
 Explanation2:"Explanation for Screen 2",

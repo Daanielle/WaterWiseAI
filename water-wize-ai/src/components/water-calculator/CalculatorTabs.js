@@ -7,14 +7,15 @@ import { buttonClasses } from '@mui/base/Button';
 import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
 import CalculatorsFormula from './CalculatorsFormula';
 import FarmulaExplanation from "./FermulaExplanations"
-
+import useDictionary from "./../../resources/Dictionary/Dictionary";
 
 export default function CalculatorTabs({formulaValues}) {
+  const dict = useDictionary();
   return (
     <Tabs defaultValue={0}>
       <TabsList>
-        <Tab value={0}>Calculator Formula</Tab>
-        <Tab value={1}>Editing Formula</Tab>
+        <Tab value={0}>{dict.CalculatorFormulaParam}</Tab>
+        <Tab value={1}>{dict.EditFormulaParm}</Tab>
       </TabsList>
       <TabPanel value={0}><CalculatorsFormula/></TabPanel>
       <TabPanel value={1}>{formulaValues}</TabPanel>
