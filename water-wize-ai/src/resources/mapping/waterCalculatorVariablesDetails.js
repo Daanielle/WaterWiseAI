@@ -20,8 +20,8 @@ function WaterCalculatorVariablesDetails() {
     },
     windSpeed1mm: {
       icon: AirIcon,
-      title: dict?.WindSpeed1mmTitle,
-      // title:"WindSpeed1mm",
+      // title: dict?.WindSpeed1mmTitle,
+      title:"WindSpeed1mm",
       description: `Highest wind speed observed over a period of one minute. `,
       units: "[m/s]",
     },
