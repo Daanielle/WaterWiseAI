@@ -19,30 +19,30 @@ const CalculatorsFormula = () => {
       sx={{fontWeight: "bold", fontSize: "30px"}}
     >
       <Box sx={{ marginBottom:"40px", marginLeft:"8%"}}> 
-        How did we get the result? We used several formulas listed here..
+        {dict.HowGetResult}
       </Box>
       <Box sx={{marginLeft:"36%"}}> 
         <FermulaExplanations
           equation={"e_0=6.2 * exp⁡(17.26T/(T-35.8+273.16))"}
-          Explanation={dict.e0}
+          Explanation={dict.Explenationse0}
         />
 
         <FermulaExplanations
           equation={"ea =  RH/100 * e0"}
-          Explanation={dict.ea}
+          Explanation={dict.Explenationsea}
         />
         <FermulaExplanations
           equation={"Ea = 0.35 * (e0- ea) (0.5 + 0.54 * u2m) * C"}
-          Explanation={dict.Ea}
+          Explanation={dict.ExplenationsEa}
         />
         <FermulaExplanations
           equation={"E=((∆γ*(Rn-G)+Ea*L)/(∆γ+1))/L"}
-          Explanation={dict.E}
+          Explanation={dict.ExplenationsE}
         />
                           
         <FermulaExplanations
           equation={"l = ET0 *Kc*Total Area"}
-          Explanation={dict.I}
+          Explanation={dict.ExplenationsI}
         />
       </Box>
     </Box>

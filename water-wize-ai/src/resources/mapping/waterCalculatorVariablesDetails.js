@@ -14,94 +14,74 @@ function WaterCalculatorVariablesDetails() {
   const details = {
     grad: {
       icon: WavesIcon,
-      // title: "Grad",
-      title: dict?.gradParameter,
-      description: `Represents the balance between incoming and outgoing radiation at the surface. `,
+      title: "Grad",
+      description: dict.grad,
       units: "[W/m^2]",
     },
     windSpeed1mm: {
       icon: AirIcon,
-<<<<<<< HEAD
       // title: dict?.WindSpeed1mmTitle,
       title:"WindSpeed1mm",
-=======
-      title: dict?.WindSpeed1mmTitle,
-      //title:"WindSpeed1mm",
->>>>>>> 767e3670b32fd2684e103a054443215787648dfe
-      description: `Highest wind speed observed over a period of one minute. `,
+      description: dict.windSpeed1mm,
       units: "[m/s]",
     },
     maxWindSpeed: {
       icon: AirIcon,
-      title: dict?.windSpeed1mmParameter,
-      description: `Maximum wind speed observed within a certain time interval.`,
+      title: "WSmax",
+      description: dict.maxWindSpeed,
       units: "[m/s]",
     },
     temperature: {
       icon: ThermostatIcon,
-      title: dict?.temperatureParameter,
-      description: `Temperature - the ambient air temperature at the meteorological station.`,
+      title: "TD",
+      description: dict.temperature,
       units: "[°C]",
     },
     relativeHumidity: {
       icon: AirIcon,
-      title: dict?.relativeHumidityParameter,
-      description: `Relative humidity - the amount of water vapor present in the air
-relative to the maximum amount the air can hold at a given temperature. `,
+      title: "RH",
+      description: dict.relativeHumidity,
       units: "[%]",
     },
     deltaY: {
       icon: ChangeHistoryIcon,
-      title: dict?.deltaYParameter,
-      description: `Change in water vapor pressure based on temperature.`,
+      title: "Delta Y",
+      description: dict.deltaY,
       units: "[kPa/°C]",
     },
     e0: {
       icon: WaterDropIcon,
-      title: dict?.e0Parameter,
-      description: `Saturated vapor pressure,
-calculated as e_0 = 6.2 * exp(17.26T / (T - 35.8 + 273.16)). `,
-      units: "[kPa]",
+      title: "e0",
+      description: dict.e0,
     },
     ea: {
       icon: WaterDropIcon,
-      title: dict?.eaParameter,
-      description: `Actual vapor pressure,
-calculated as RH / 100 * e0.`,
+      title: "ea",
+      description: dict.ea,
       units: "",
     },
     Ea: {
       icon: TrendingUpIcon,
-      title: dict?.EaParameter,
-      description: `Aerodynamic evaporation, quantifying the difference between
-saturation vapor pressure (e0) and actual vapor pressure (ea).
-Calculated as Ea = 0.35 * (e0 - ea) * (0.5 + 0.54 * WS) * C,
-with C being a constant equal to 1 / (24 * 3600 * 1000).
-`,
+      title: "Ea",
+      description: dict.Ea,
       units: "[mm/day]",
     },
     E: {
       icon: TrendingUpIcon,
-      title: dict?.EParameter,
-      description: `Evapotranspiration rate,
-calculated as ((deltaY * (Grad - WSmax) + Ea * L) / (deltaY + 1)) / L,
-with L = 2.45 * 10^9.
-`,
+      title: "E",
+      description: dict.E,
       units: "[mm/day]",
     },
     Kc: {
       icon: NumbersIcon,
-      title: dict?.KcParameter,
-      description: `Crop coefficient for the current month
-based on agricultural research. `,
+      title: "Kc",
+      description: dict.Kc,
       units: "[Constant]",
     },
     recommendation: {
       icon: RecommendIcon,
-      title: dict?.RecParmeter,
-      description: `Irrigation recommendation based on calculations.
-I = Total Area * Kc * E
-`,
+      title: "Recommendation",
+      description: dict.recommendation,
       units: "[liters/day for the given area]",
     },
   };
