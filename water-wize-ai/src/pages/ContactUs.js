@@ -1,74 +1,61 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import PageContainer from "../components/PageContainer";
 import "../ContactUs.css"; // Import the CSS file
 import CustomButton from "../components/CustomButton";
 import TitleButton from "../components/TitleButton";
-import useDictionary from "../resources/Dictionary/Dictionary";
 import ContainerBox from '../components/ContainerBox';
-import contacuUsLogoImg from '../resources/images/ContactUs.jpg';
 import { Box } from "@mui/material";
+import useDictionary from "../resources/Dictionary/Dictionary";
 
 
-function ContactUs() {
+
+ const ContactUs = () => {
   const dict = useDictionary();
-  const [formData, setFormData] = useState({
-    name: '',
-    position: '',
-    message: ''
-  });
+  const form = useRef();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
+  const sendEmail = (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+
+    emailjs
+      .sendForm('service_9wpkekd', 'template_bem1owy', form.current, {
+        publicKey: 'D5FWWX57AkcDUP2o8',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
         },
-        body: JSON.stringify(formData)
-      });
-      if (response.ok) {
-        // Message sent successfully
-        console.log('Message sent successfully');
-      } else {
-        // Error handling
-        console.error('Failed to send message');
-      }
-    } catch (error) {
-      console.error('Error sending message:', error);
-    }
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
   };
+
+ 
 
   return (
     <PageContainer
     children={
       <Box
        sx={{
-      //   backgroundImage: `url(${contacuUsLogoImg})`,
-      //   backgroundSize: 'cover',
-      //   backgroundPosition: 'center',
-        // height: '100vh',
-        width: '100vw',
+        width: '200vw',
         display: 'flex',
         justifyContent: 'center',
+       
       }}
   >
+    <div />
      <ContainerBox sx={{border: "2px solid var(--primary-color)",}}>
      <TitleButton >{dict.contuctUs}</TitleButton>
       <div className="contact-form">
-        <form onSubmit={handleSubmit}>
+        <form ref={form} onSubmit={sendEmail}>
           <label>{dict.name}</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-          <label>{dict.position}</label>
-          <input type="text" name="position" value={formData.position} onChange={handleChange} required />
+          <input type="text" name="user_name"  />
+          <label>{dict.email}</label>
+          <input type="text" name="user_email"/>
           <label>{dict.message}</label>
-          <textarea name="message" value={formData.message} onChange={handleChange} required maxLength={500} />
-          <CustomButton label={dict.sendMessage} type="submit" />
+          <textarea name="message" maxLength={500} />
+          <CustomButton label={dict.sendMessage} type="submit" value="Send" />
         </form>
       </div>
       </ContainerBox>
@@ -79,6 +66,8 @@ function ContactUs() {
 
     </PageContainer>
   );
-}
+
+
+};
 
 export default ContactUs;
