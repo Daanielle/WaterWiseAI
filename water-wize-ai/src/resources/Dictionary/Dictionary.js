@@ -1,6 +1,12 @@
 import { useLanguage } from "../../LanguageContext";
 
 const hebDict = {
+  // Home Page
+  HomeWW: "Water Wise AI",
+  HomeText1: "המערכת שלנו עוסקת בחישוב כמות ההשקיה הנדרשת לגידולי תמרים באזור הערבה בישראל. המערכת משתמשת במודלים של למידת מכונה ובנוסחת התאדות על מנת לחשב באופן אוטומטי את צרכי ההשקיה של תמרים מג'הול בערבה.",
+  HomeText2: "המערכת שלנו מציעה פתרון מקיף על ידי שילוב משתנים ונתוני זמן אמת המותאמים במיוחד לצורכי גידול תמרים באזור הערבה, כגון מקדמי יבול ונתוני מזג אוויר מקומיים. שילוב זה מבטיח שהחקלאים יקבלו את התובנות המדויקות והמעשיות ביותר לניהול השקיה, תוך התייחסות לאתגרים הספציפיים העומדים בפני גידול תמרים בדיוק ויעילות רבה.",
+  HomeText3: "הצטרפו אלינו היום ונצלו את כוחם של הנתונים על מנת לגדל יבול בצורה חכמה יותר, לשמרו טוב יותר וגדלו בצורה בת קיימא יחד איתנו",
+  HomeSaveWater: "התחילו לחסוך במים",
   // navBar
   forum: "פורום",
   tasksManagement: "ניהול משימות",
@@ -138,6 +144,12 @@ textAlign: "right"
 };
 
 const engDict = {
+  // Home Page
+  HomeWW: "Water Wise AI",
+  HomeText1: "The Water Wise AI system deals with calculating the amount of irrigation required for date crops in the Arava region in Israel. The system uses machine learning models and the Evapotranspiration formula in order to automatically calculate the irrigation needs of Majhool dates in the Arava.",
+  HomeText2: "Our system offers a comprehensive solution by integrating factors and real-time data specifically adapted to the needs of growing dates in the Arava region, such as crop coefficients and local weather data. This integration ensures that the farmers will receive the most accurate and practical insights for irrigation management, while addressing the specific challenges facing date farming with great precision and efficiency",
+  HomeText3: "Join us today in harnessing the power of data to cultivate smarter, conserve better, and grow sustainably with Water Wise AI.",
+  HomeSaveWater: "Start Saving Water",
   // navBar
   forum: "Forum",
   tasksManagement: "To Do List",
