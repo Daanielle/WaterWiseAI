@@ -32,7 +32,8 @@ function AboutUs() {
       <PageContainer >
         <div>
           <p className={classes.Title}>{dict.MeetTeam}</p>
-          <p className={classes.Description}>We are a team of four passionate students in our fourth year of Software and Information Systems Engineering. Our team is dedicated to leveraging technology and data-driven insights to solve real-world problems in agriculture. With a strong foundation in software development, data analysis, and systems engineering, we are well-equipped to bring solutions to the farming community.
+          <p className={classes.Description}>
+            {dict.WhoWeAre}
           </p>
         </div> 
         <Grid item xs={12} sm={6} md={4}>
