@@ -65,8 +65,23 @@
   padding: 8px;
   transition: background-color 0.3s, transform 0.3s;
   margin-top: 10px;
-  background-color: var(--medium-gray); /* Gray background */
-  color: var(--light-gray); /* Lighter gray text */
+  background-color: var(--medium-gray); 
+  color: var(--text-color);
+  cursor: not-allowed; 
+  opacity: 0.6; 
+}
+
+.disabled-button {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  height: 40px;
+  font-size: large;
+  padding: 8px;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 10px;
+  background-color: var(--light-green); /* Gray background */
+  color: var(--text-color); /* Lighter gray text */
   cursor: not-allowed; /* Disabled cursor */
   opacity: 0.6; /* Slightly transparent */
 }

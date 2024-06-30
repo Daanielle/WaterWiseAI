@@ -15,6 +15,7 @@ import { saveRecommendation, getLoggedInUserId, getCalculate } from "../apiReque
 import CalculatorTabs from "../components/water-calculator/CalculatorTabs";
 import RecommendationDetails from "../components/water-calculator/RecommendationDetails";
 import CustomSnackbar from "../components/CustomSnackbar";
+import { getMyCoordinates } from "../apiRequests";
 
 const bycodejson = require('../resources/bycode2022Updated.json');
 
@@ -33,45 +34,6 @@ for (let i = 0; i < bycodejson["קובץ יישובים 2022"].length; i++) {
     closestArea: city.Closest // Include the closest area information
   };
 }
-
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  bgcolor: 'background.paper',
-  border: '2px solid var(--black-color)',
-  boxShadow: 24,
-  p: 4,
-};
-
-
-// const areaCoordinates = {
-//   381: { name: 'Ashalim', latitude: 30.983, longitude: 34.708 },
-//   29: { name: 'Arad', latitude: 31.25, longitude: 35.1855 },
-//   208: { name: 'Ashkelon', latitude: 31.6394, longitude: 34.5215 },
-//   271: { name: 'Avdat', latitude: 30.7877, longitude: 34.7712 },
-//   60: { name: 'Beer Sheva University', latitude: 31.2642, longitude: 34.8045 },
-//   58: { name: 'Besor Farm', latitude: 31.2716, longitude: 34.38941 },
-//   79: { name: 'Dorot', latitude: 31.5036, longitude: 34.648 },
-//   64: { name: 'Eilat', latitude: 29.5526, longitude: 34.952 },
-//   211: { name: 'Ein Gedi', latitude: 30.4667, longitude: 35.3833 },
-//   338: { name: 'Ezuz', latitude: 30.7911, longitude: 34.4715 },
-//   236: { name: 'Gat', latitude: 31.6303, longitude: 34.7913 },
-//   33: { name: 'Hatzeva', latitude: 30.7787, longitude: 35.2389 },
-//   350: { name: 'Lahav', latitude: 31.3812, longitude: 34.8729 },
-//   210: { name: 'Metzoke Dragot', latitude: 31.5881, longitude: 35.3916 },
-//   379: { name: 'Mitzpe Ramon', latitude: 30.6101, longitude: 34.8046 },
-//   82: { name: 'Negba', latitude: 31.6585, longitude: 34.6798 },
-//   232: { name: 'Neot Smadar', latitude: 30.048, longitude: 35.0233 },
-//   349: { name: 'Nevatim', latitude: 31.205, longitude: 34.9227 },
-//   207: { name: 'Paran', latitude: 30.3655, longitude: 35.1479 },
-//   98: { name: 'Sde Boker', latitude: 30.8702, longitude: 34.795 },
-//   65: { name: 'Sodom', latitude: 31.0306, longitude: 35.3919 },
-//   28: { name: 'Shani', latitude: 31.3568, longitude: 35.0662 },
-//   36: { name: 'Yotvata', latitude: 29.8851, longitude: 35.0771 },
-//   112: { name: 'Zomet HaNegev', latitude: 31.0708, longitude: 34.8513 },
-// };
 
 const locations = {
   381: 'Ashalim',
@@ -151,6 +113,18 @@ for (const key in optionsCities) {
   labels.push(optionsCities[key].label);
 }
 
+
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: 'background.paper',
+  border: '2px solid var(--black-color)',
+  boxShadow: 24,
+  p: 4,
+};
+
 function WaterCalculator() {
   const dict = useDictionary();
 
@@ -229,7 +203,6 @@ function WaterCalculator() {
 
   const saveRec = async () => {
     const station = selectedArea.value;
-    // const userId = await getLoggedInUserId();
     let saveStatus = await saveRecommendation({
       userId,
       ...detailedData,
@@ -239,8 +212,6 @@ function WaterCalculator() {
     if (saveStatus) {
       handleOpenSnackbar()
     }
-
-    //console.log(saveStatus) //TODO: handle error if needed
   }
 
   const calculate = async () => {
@@ -258,70 +229,22 @@ function WaterCalculator() {
 
   const findMyCoordinates = async () => { //TODO: move to apiRequests
     try {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(async (position) => {
-          const userLatitude = position.coords.latitude;
-          const userLongitude = position.coords.longitude;
-
-          const response = await fetch('/calculator/coordinates', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ latitude: userLatitude, longitude: userLongitude }),
-          });
-
-          if (response.ok) {
-            const data = await response.json();
-            // console.log('Received data:', data);
-
-            // Extract closest area and city from the response
-            const { closestArea, closestCity } = data;
-
-            // Update the state with the closest area and city
-            if (closestArea) {
-              setSelectedArea({ value: closestArea.name, label: closestArea.name });
-            }
-            if (closestCity) {
-              setSelectedCity({ label: closestCity });
-            }
-          } else {
-            console.error('Error fetching geolocation data:', response.statusText);
-          }
-        }, handleError);
-      } else {
-        console.log("Geolocation is not supported by this browser.");
-      }
+      const fetchedCity = await getMyCoordinates();
+      handleAreaChange(fetchedCity.selectedArea)
+      handleCityChange(fetchedCity.closestCity)
     } catch (error) {
       console.error('Error:', error);
-    }
-  };
-
-
-
-  const handleError = (error) => {
-    switch (error.code) {
-      case error.PERMISSION_DENIED:
-        console.log("User denied the request for Geolocation.");
-        // setLocationAllowed(false);
-        break;
-      case error.POSITION_UNAVAILABLE:
-        console.log("Location information is unavailable.");
-        break;
-      case error.TIMEOUT:
-        console.log("The request to get user location timed out.");
-        break;
-      case error.UNKNOWN_ERROR:
-        console.log("An unknown error occurred.");
-        break;
-      default:
-        break;
     }
   };
 
   const saveCalcDesign = {
     disabled: !userId || !selectedCity || !selectedArea || !selectedDate || !selectedAreaSize, 
     disabledTooltip: !userId ? "Log in in order to save a calculation" : "Make sure to fill all of the fields"
+  };
+
+  const calculateDesign = {
+    disabled: !selectedCity || !selectedArea || !selectedDate || !selectedAreaSize, 
+    disabledTooltip: "Make sure to fill all of the fields"
   };
 
   return (
@@ -338,7 +261,7 @@ function WaterCalculator() {
               />
               <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => (x <= 100000 && x >= 10)} error={dict.errorsAreaSizeRange} />
 
-              <CustomButton onClick={calculate} label={dict.calculate} type="button" />
+              <CustomButton onClick={calculate} label={dict.calculate} type="button" disabled={saveCalcDesign.disabled} disabledTooltip={saveCalcDesign.disabledTooltip}/>
               <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" secondary disabled={saveCalcDesign.disabled} disabledTooltip={saveCalcDesign.disabledTooltip} />
               <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" secondary disabled={!userId} disabledTooltip={"Log in in order to show saved calculations"} />
             </ContainerBox>

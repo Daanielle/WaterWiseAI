@@ -13,7 +13,7 @@ const CustomTooltip = styled(({ className, ...props }) => (
 
 const Button = ({ onClick, label, type, style, secondary, to, disabled, disabledTooltip }) => {
   const buttonClass = disabled
-    ? (secondary ? classes['disabled-secondary-button'] : classes['disabled-secondary-button'])
+    ? (secondary ? classes['disabled-secondary-button'] : classes['disabled-button'])
     : (secondary ? classes['secondary-button'] : classes.button);
 
   const handleButtonClick = () => {

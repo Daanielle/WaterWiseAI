@@ -213,21 +213,21 @@ export const getAllUsers = async (userId) => {
 export const patchUserDetails = async (editedUser) => {
   try {
     console.log(editedUser)
-      const response = await fetch("/users/" + editedUser._id, {
-          method: "PATCH",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify(editedUser),
-      });
-      if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Update failed!');
-      }
-      const data = await response.json(); // Parse the JSON response
-      //updateUserDetails(editedUser);
+    const response = await fetch("/users/" + editedUser._id, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editedUser),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Update failed!');
+    }
+    const data = await response.json(); // Parse the JSON response
+    //updateUserDetails(editedUser);
   } catch (error) {
-      console.error("Error:", error);
+    console.error("Error:", error);
   }
 };
 
@@ -309,3 +309,47 @@ export const getAllCommentsForMsg = async (msgId) => {
     console.error("Error:", error);
   }
 }
+
+export const getMyCoordinates = async () => {
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const userLatitude = position.coords.latitude;
+        const userLongitude = position.coords.longitude;
+
+        try {
+          const response = await fetch('/calculator/coordinates', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ latitude: userLatitude, longitude: userLongitude }),
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            const { closestArea, closestCity } = data;
+
+            if (closestArea && closestCity) {
+              let res = {
+                selectedArea: { value: closestArea.name, label: closestArea.name },
+                closestCity: { label: closestCity }
+              };
+              resolve(res);
+            } else {
+              reject('No closest area or city found.');
+            }
+          } else {
+            reject('Error fetching geolocation data: ' + response.statusText);
+          }
+        } catch (error) {
+          reject('Error fetching geolocation data: ' + error.message);
+        }
+      }, (error) => {
+        reject('Error fetching geolocation: ' + error.message);
+      });
+    } else {
+      reject("Geolocation is not supported by this browser.");
+    }
+  });
+};
