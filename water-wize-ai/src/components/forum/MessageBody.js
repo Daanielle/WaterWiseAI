@@ -24,7 +24,7 @@ const modalStyle = {
     textAlign: 'center',
 };
 
-export default function MessageBody({ msgId, msgBody, recId, setLoading }) {
+export default function MessageBody({ msgId, msgBody, recId }) {
 
     const [comments, setComments] = useState(null);
     const [rec, setRec] = useState(null);
@@ -37,11 +37,11 @@ export default function MessageBody({ msgId, msgBody, recId, setLoading }) {
                 const fetchedRec = await getRecommendationsById(recId);
                 let res = [fetchedRec]
                 setRec(res);
-                setLoading(false);
+                // setLoading(false);
             } catch (err) {
                 // setError(err);
                 console.error(err)
-                setLoading(false);
+                // setLoading(false);
             }
         };
 
@@ -49,17 +49,17 @@ export default function MessageBody({ msgId, msgBody, recId, setLoading }) {
             try {
                 const fetchedComments = await getAllCommentsForMsg(msgId);
                 setComments(fetchedComments)
-                setLoading(false);
+                // setLoading(false);
             } catch (err) {
                 // setError(err);
                 console.error(err)
-                setLoading(false);
+                // setLoading(false);
             }
         };
 
         recId && fetchRec();
         fetchComments();
-    }, [openNewCommentModal, msgId, recId, setLoading]);
+    }, [openNewCommentModal, msgId, recId]);
 
     function formatDate(dateString) {
         const date = new Date(dateString);
