@@ -1,5 +1,6 @@
-// import { AuthContext } from "./AuthContext";
+// import { AuthContext, updateUserDetails } from "./AuthContext";
 // import { useContext } from "react";
+// import updateUserDetails from "./AuthContext"
 
 export const getCalculate = async (selectedArea, areaSize, date, kc) => {
   try {
@@ -208,6 +209,27 @@ export const getAllUsers = async (userId) => {
     throw error;
   }
 }
+
+export const patchUserDetails = async (editedUser) => {
+  try {
+    console.log(editedUser)
+      const response = await fetch("/users/" + editedUser._id, {
+          method: "PATCH",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editedUser),
+      });
+      if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Update failed!');
+      }
+      const data = await response.json(); // Parse the JSON response
+      //updateUserDetails(editedUser);
+  } catch (error) {
+      console.error("Error:", error);
+  }
+};
 
 
 export const addNewForumMessage = async (message) => {
