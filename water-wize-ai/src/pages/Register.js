@@ -57,7 +57,6 @@ function Register() {
   }
 
   async function handleImageUpload(event) {
-    console.log('hi')
     const file = event.target.files[0];;
 
     if (!file) {
@@ -162,7 +161,7 @@ function Register() {
           <InputField label={dict.password} value={password} onValueChange={setPassword} checkIfValid={() => true} error="" type="password" />
           <InputField label={dict.image} onValueChange={handleImageUpload} checkIfValid={() => true} error="" type="file" accept="image/*" name="image" id="imageInput" />
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '10%' }}>
-            <CustomButton type="submit" label={dict.Register} style={{ width: '35%' }} />
+            <CustomButton type="submit" label={dict.Register} style={{ width: '35%' }} to="/Login"/>
             <CustomButton type="button" label={dict.alreadyhaveanaccount} to="/LogIn" style={{ width: '35%' }} secondary />
           </div>
         </ContainerBox>

@@ -13,8 +13,8 @@ import Modal from '@mui/material/Modal';
 import { Box } from "@mui/material";
 import { saveRecommendation, getLoggedInUserId, getCalculate } from "../apiRequests";
 import CalculatorTabs from "../components/water-calculator/CalculatorTabs";
-
 import RecommendationDetails from "../components/water-calculator/RecommendationDetails";
+import CustomSnackbar from "../components/CustomSnackbar";
 
 const bycodejson = require('../resources/bycode2022Updated.json');
 
@@ -155,11 +155,11 @@ function WaterCalculator() {
   const dict = useDictionary();
 
   const [openRecsModal, setOpenRecsModal] = React.useState(false);
+  const [saveRecSB, setSaveRecSB] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
-  // const [locationAllowed, setLocationAllowed] = useState(false);
   const [selectedKc, setSelectedKc] = useState(null);
   const [userId, setUserId] = useState(null)
   const [detailedData, setDetailedData] = useState({
@@ -184,7 +184,7 @@ function WaterCalculator() {
       const id = await getLoggedInUserId();
       setUserId(id);
     };
-  
+
     fetchData();
   }, []);
 
@@ -219,24 +219,36 @@ function WaterCalculator() {
   const handleOpenRecsModal = () => setOpenRecsModal(true);
   const handleCloseRecsModal = () => setOpenRecsModal(false);
 
+  const handleOpenSnackbar = () => {
+    setSaveRecSB(true);
+  };
+
+  const handleCloseSnackbar = () => {
+    setSaveRecSB(false);
+  };
+
   const saveRec = async () => {
     const station = selectedArea.value;
     // const userId = await getLoggedInUserId();
-    let saveStatus = saveRecommendation({
+    let saveStatus = await saveRecommendation({
       userId,
       ...detailedData,
       station
     })
 
-    console.log(saveStatus) //TODO: handle error if needed
+    if (saveStatus) {
+      handleOpenSnackbar()
+    }
+
+    //console.log(saveStatus) //TODO: handle error if needed
   }
 
-  const calculate = async () => { 
+  const calculate = async () => {
     try {
       if (selectedArea && selectedAreaSize && selectedDate) {
         let area = lopsidedlocations[selectedArea.value] ? lopsidedlocations[selectedArea.value] : selectedArea.value
         let date = selectedDate.add(1, 'day')
-        const recommendationData = await getCalculate(area, selectedAreaSize,  date, selectedKc);
+        const recommendationData = await getCalculate(area, selectedAreaSize, date, selectedKc);
         setDetailedData(recommendationData);
       }
     } catch (error) {
@@ -273,8 +285,6 @@ function WaterCalculator() {
             if (closestCity) {
               setSelectedCity({ label: closestCity });
             }
-            // console.log('Selected Area:', closestArea);
-            // console.log('Selected City:', closestCity);
           } else {
             console.error('Error fetching geolocation data:', response.statusText);
           }
@@ -309,9 +319,10 @@ function WaterCalculator() {
     }
   };
 
-  // const showPosition = (position) => {
-  //   setLocationAllowed(true); // User allowed location access
-  // };
+  const saveCalcDesign = {
+    disabled: !userId || !selectedCity || !selectedArea || !selectedDate || !selectedAreaSize, 
+    disabledTooltip: !userId ? "Log in in order to save a calculation" : "Make sure to fill all of the fields"
+  };
 
   return (
     <div className={classes.WaterCalculator}>
@@ -328,23 +339,27 @@ function WaterCalculator() {
               <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => (x <= 100000 && x >= 10)} error={dict.errorsAreaSizeRange} />
 
               <CustomButton onClick={calculate} label={dict.calculate} type="button" />
-              <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" secondary disabled={!userId} disabledTooltip={"Log in in order to save a calculation"}/>
-              <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" secondary disabled={!userId} disabledTooltip={"Log in in order to show saved calculations"}/>
-              {/* <CustomButton onClick={findMyCoordinates} label={dict.findMyCoordinates} type="button" />
-              <CustomButton onClick={predict} label={dict.predict} type="button" /> */}
-              {/* {!locationAllowed && (
-                <p>
-                  You can use the "Find My Coordinates" button if you change your mind and want to find your location later.
-                </p>
-              )} */}
+              <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" secondary disabled={saveCalcDesign.disabled} disabledTooltip={saveCalcDesign.disabledTooltip} />
+              <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" secondary disabled={!userId} disabledTooltip={"Log in in order to show saved calculations"} />
             </ContainerBox>
-              <RecommendationDetails detailedData={detailedData}/>
+            <RecommendationDetails detailedData={detailedData} />
           </div>
           <div className={classes.rightCol}>
             <DetailsPanel detailedData={detailedData} />
           </div>
 
         </div>
+        <div><CalculatorTabs
+          formulaValues={
+            <Box>
+              <Box sx={{ marginLeft: "18%", fontWeight: "bold", fontSize: "30px", marginBottom: "40px" }}>
+                {dict.NewKc}
+              </Box>
+              <Box sx={{ marginLeft: "39%", width: "500px", height: "450px" }}>
+                <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />
+              </Box>
+            </Box>}
+        /></div>
 
         <Modal
           open={openRecsModal}
@@ -353,20 +368,10 @@ function WaterCalculator() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={modalStyle}>
-            <AllUserRecommendations onRowClick={()=>{}}/>
+            <AllUserRecommendations onRowClick={() => { }} />
           </Box>
         </Modal>
-        <div><CalculatorTabs
-          formulaValues={
-            <Box>
-              <Box sx={{ marginLeft: "18%", fontWeight: "bold", fontSize: "30px", marginBottom: "40px" }}>
-              {dict.NewKc}
-              </Box>
-              <Box sx={{ marginLeft: "39%", width: "500px", height:"450px"}}>
-                <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />
-              </Box>
-            </Box>}
-        /></div>
+        <CustomSnackbar openSnackbar={saveRecSB} handleClose={handleCloseSnackbar} msg={"Reccomendation saved succesfully"} />
       </PageContainer >
 
 
