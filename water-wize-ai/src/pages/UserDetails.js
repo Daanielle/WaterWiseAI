@@ -5,7 +5,9 @@ import CustomButton from "../components/CustomButton";
 import ContainerBox from "../components/ContainerBox";
 import InputField from "../components/inputs/InputField";
 import useDictionary from "../resources/Dictionary/Dictionary";
-import {patchUserDetails} from "../apiRequests"
+import { patchUserDetails } from "../apiRequests";
+import TitleButton from "../components/TitleButton";
+import palm from "../resources/images/palmColorful.png";
 
 
 function UserDetails() {
@@ -34,6 +36,7 @@ function UserDetails() {
             email: value
         }));
     };
+
     const handleImageUpload = async (event) => {
         const file = event.target.files[0];
 
@@ -116,45 +119,73 @@ function UserDetails() {
         });
     }
 
+    const img = {
+        position: 'absolute',
+        bottom: '-1px', // Adjust as needed
+        right: '10px', // Adjust as needed
+        zIndex: -1, // Ensures the div is in the back
+        width: '600px', // Explicit width
+        height: '420px', // Explicit height
+            backgroundImage: `url(${palm})`,
+        backgroundSize: 'cover', // Cover the entire div
+        backgroundPosition: 'center', // Center the image
+    };
+
     return (
         <PageContainer>
-            <ContainerBox sx={{ width: "700px", border: "2px solid var(--medium-green)" }}>
-                <img src={user && user.image} style={{ maxWidth: '60%', objectFit: 'contain', borderRadius: '3%' }} alt="User" />
-                <form onSubmit={handleUserDetailsChange}>
+            <div >
+                <ContainerBox style={{ display: 'inline-block', width: 'calc(50% - 5px)', marginRight: '10px', verticalAlign: 'top' }}>
+                    <img src={user && user.image} style={{ maxWidth: '60%', objectFit: 'contain', borderRadius: '3%' }} alt="User" />
+                    <TitleButton>Edit Details</TitleButton>
+                    <form onSubmit={handleUserDetailsChange}>
+                        <InputField
+                            label={dict.firstName}
+                            value={editedUser.firstName} // Use editedUser state for controlled input
+                            onValueChange={handleFirstNameChange} // Handle first name change
+                            checkIfValid={() => true}
+                            error=""
+                        />
+                        <InputField
+                            label={dict.lastName}
+                            value={editedUser.lastName} // Use editedUser state for controlled input
+                            onValueChange={handleLastNameChange} // Handle last name change
+                            checkIfValid={() => true}
+                            error=""
+                        />
+                        <InputField
+                            label={dict.email}
+                            value={editedUser.email} // Use editedUser state for controlled input
+                            onValueChange={handleEmailChange} // Handle email change
+                            checkIfValid={() => true}
+                            error=""
+                        />
+                        <InputField
+                            label={dict.image}
+                            onValueChange={handleImageUpload} // Handle image upload
+                            checkIfValid={() => true}
+                            error=""
+                            type="file"
+                            accept="image/*"
+                            name="image"
+                            id="imageInput"
+                        />
+                        <CustomButton type="submit" label={dict.save} style={{ width: '35%' }} />
+                    </form>
+                </ContainerBox>
+                <ContainerBox style={{ display: 'inline-block', width: 'calc(50% - 5px)', verticalAlign: 'top', backgroundColor: 'var(--light-accent-gray)' }}>
+                    <TitleButton>Edit Password</TitleButton>
                     <InputField
-                        label={dict.firstName}
-                        value={editedUser.firstName} // Use editedUser state for controlled input
-                        onValueChange={handleFirstNameChange} // Handle first name change
+                        label={dict.password}
+                        value="************" 
+                        onValueChange={handleLastNameChange} 
                         checkIfValid={() => true}
                         error=""
-                    />
-                    <InputField
-                        label={dict.lastName}
-                        value={editedUser.lastName} // Use editedUser state for controlled input
-                        onValueChange={handleLastNameChange} // Handle last name change
-                        checkIfValid={() => true}
-                        error=""
-                    />
-                    <InputField
-                        label={dict.email}
-                        value={editedUser.email} // Use editedUser state for controlled input
-                        onValueChange={handleEmailChange} // Handle email change
-                        checkIfValid={() => true}
-                        error=""
-                    />
-                    <InputField
-                        label={dict.image}
-                        onValueChange={handleImageUpload} // Handle image upload
-                        checkIfValid={() => true}
-                        error=""
-                        type="file"
-                        accept="image/*"
-                        name="image"
-                        id="imageInput"
                     />
                     <CustomButton type="submit" label={dict.save} style={{ width: '35%' }} />
-                </form>
-            </ContainerBox>
+                </ContainerBox>
+            </div>
+            <div style={img} />
+
         </PageContainer>
     );
 }
