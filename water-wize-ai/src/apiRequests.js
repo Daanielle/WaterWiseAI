@@ -1,6 +1,5 @@
-import { AuthContext } from "./AuthContext";
-import { useContext } from "react";
-
+// import { AuthContext } from "./AuthContext";
+// import { useContext } from "react";
 
 export const getCalculate = async (selectedArea, areaSize, date, kc) => {
   try {
@@ -23,6 +22,7 @@ export const getCalculate = async (selectedArea, areaSize, date, kc) => {
     console.error("Error:", error);
   }
 };
+
 
 export const saveRecommendation = async (recommendation) => {
   try {
@@ -66,6 +66,7 @@ export const getRecommendationsForUser = async (userId) => {
   }
 };
 
+
 export const getRecommendationsById = async (recId) => {
   try {
     const url = `/calculator/recommendations/${recId}`;
@@ -88,7 +89,6 @@ export const getRecommendationsById = async (recId) => {
     throw error;
   }
 };
-
 
 
 export const getLoggedInUserId = async () => {
@@ -114,6 +114,7 @@ export const getLoggedInUserId = async () => {
 
 };
 
+
 export const getLoggedInUserImage = async () => {
   const user = JSON.parse(localStorage.getItem('user'));
   try {
@@ -136,13 +137,6 @@ export const getLoggedInUserImage = async () => {
   }
 
 };
-
-
-
-
-
-
-
 
 
 export const getLoggedInUserEmail = async () => {
@@ -169,13 +163,6 @@ export const getLoggedInUserEmail = async () => {
 };
 
 
-
-
-
-
-
-
-
 export const getUserById = async (userId) => {
   try {
     const url = `/users/${userId}`;
@@ -197,6 +184,7 @@ export const getUserById = async (userId) => {
     throw error;
   }
 }
+
 
 export const getAllUsers = async (userId) => {
   try {
@@ -281,6 +269,7 @@ export const addNewForumComment = async (comment) => {
     console.error("Error:", error);
   }
 }
+
 
 export const getAllCommentsForMsg = async (msgId) => {
   try {

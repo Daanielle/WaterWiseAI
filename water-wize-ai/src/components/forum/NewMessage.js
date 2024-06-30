@@ -35,9 +35,10 @@ const NewMessage = ({ onCloseNewMsg  }) => {
     const handleRowClick = (row) => {
         setSelectedRow(row);
         // let recArr = [row._id, ...recommendation]
-        let recArr = [row._id];
+        
+        //let recArr = [row._id];
 
-        setRecommendation(row._id)
+        setRecommendation(selectedRow._id)
         setOpenRecsModal(false); // Close modal on row click
     };
 
@@ -49,7 +50,7 @@ const NewMessage = ({ onCloseNewMsg  }) => {
                 userId: userId, title:title, body:body, recommendations:recArr
             };
             let status = await addNewForumMessage(message);
-            //console.log("Message saved successfully:", status);
+            console.log("Message saved successfully:", status);
             onCloseNewMsg();
         } catch (error) {
             console.error("Error saving message:", error);

@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../styles/Guide.css"; // Import the CSS file for styling
-import { Container, Typography, Grid, Paper, Box, Accordion, AccordionSummary, AccordionDetails, Card, CardContent, CardMedia, Button } from '@mui/material';
+import { Container, Typography, Grid, Paper, Box, Accordion, AccordionSummary, AccordionDetails, Button } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PageContainer from '../components/PageContainer'
-import CustomButton from "../components/CustomButton";
-import TitleButton from "../components/TitleButton"
 import useDictionary from "../resources/Dictionary/Dictionary";
 
 // Import image files
@@ -15,13 +13,6 @@ import govmapIMG from "../resources/images/govmapIMG.jpeg";
 import SouthernIMG from "../resources/images/SouthernArava.png";
 import MappingIMG from "../resources/images/MappingSite.png"
 import CustomCard from '../components/CustomCard';
-
-
-
-
-
-
-
 
 
 const Guide = () => {

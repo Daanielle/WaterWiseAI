@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import useDictionary from "../resources/Dictionary/Dictionary";
+// import useDictionary from "../resources/Dictionary/Dictionary";
 import { AuthContext } from "../AuthContext";
 import { getRecommendationsForUser, getLoggedInUserId } from "../apiRequests";
 import Recommendation from "./recommendation/Recomendation"; 
 
 const AllUserRecommendations = ({ onRowClick }) => {
-    const dict = useDictionary();
+    //const dict = useDictionary(); //TODO: add to dictionary
     const { user } = useContext(AuthContext);
     const [recommendations, setRecommendations] = useState([]);
 

@@ -28,8 +28,38 @@ export default function MessageBody({ msgId, msgBody, recId, setLoading }) {
 
     const [comments, setComments] = useState(null);
     const [rec, setRec] = useState(null);
-    const [error, setError] = useState(null);
+    // const [error, setError] = useState(null);
     const [openNewCommentModal, setOpenNewCommentModal] = useState(false);
+
+    useEffect(() => {
+        const fetchRec = async () => {
+            try {
+                const fetchedRec = await getRecommendationsById(recId);
+                let res = [fetchedRec]
+                setRec(res);
+                setLoading(false);
+            } catch (err) {
+                // setError(err);
+                console.error(err)
+                setLoading(false);
+            }
+        };
+
+        const fetchComments = async () => {
+            try {
+                const fetchedComments = await getAllCommentsForMsg(msgId);
+                setComments(fetchedComments)
+                setLoading(false);
+            } catch (err) {
+                // setError(err);
+                console.error(err)
+                setLoading(false);
+            }
+        };
+
+        recId && fetchRec();
+        fetchComments();
+    }, [openNewCommentModal, msgId, recId, setLoading]);
 
     function formatDate(dateString) {
         const date = new Date(dateString);
@@ -43,35 +73,6 @@ export default function MessageBody({ msgId, msgBody, recId, setLoading }) {
         return date.toLocaleTimeString('en-US', options);
       }
     
-    useEffect(() => {
-        const fetchRec = async () => {
-            try {
-                const fetchedRec = await getRecommendationsById(recId);
-                let res = [fetchedRec]
-                setRec(res);
-                setLoading(false);
-            } catch (err) {
-                setError(err);
-                setLoading(false);
-            }
-        };
-
-        const fetchComments = async () => {
-            try {
-                const fetchedComments = await getAllCommentsForMsg(msgId);
-                setComments(fetchedComments)
-                setLoading(false);
-            } catch (err) {
-                setError(err);
-                setLoading(false);
-            }
-        };
-
-        recId && fetchRec();
-        fetchComments();
-        //window.location.reload()
-    }, [openNewCommentModal, setLoading]);
-
     const handleOpenNewCommentModal = () => setOpenNewCommentModal(true);
     const handleCloseNewCommentModal = () => setOpenNewCommentModal(false);
 

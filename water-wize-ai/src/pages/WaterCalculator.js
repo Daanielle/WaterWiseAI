@@ -5,7 +5,6 @@ import DatePickerComponent from "../components/water-calculator/DatePickerCompon
 import CustomButton from "../components/CustomButton";
 import DetailsPanel from "../components/water-calculator/DetailsPanel";
 import useDictionary from "../resources/Dictionary/Dictionary";
-import TitleButton from "../components/TitleButton";
 import ContainerBox from "../components/ContainerBox";
 import InputField from "../components/inputs/InputField";
 import InputPicker from "../components/inputs/PickInput";
@@ -14,8 +13,6 @@ import Modal from '@mui/material/Modal';
 import { Box } from "@mui/material";
 import { saveRecommendation, getLoggedInUserId, getCalculate } from "../apiRequests";
 import CalculatorTabs from "../components/water-calculator/CalculatorTabs";
-import EditIcon from '@mui/icons-material/Edit';
-import Fab from '@mui/material/Fab';
 
 import RecommendationDetails from "../components/water-calculator/RecommendationDetails";
 
@@ -49,32 +46,32 @@ const modalStyle = {
 };
 
 
-const areaCoordinates = {
-  381: { name: 'Ashalim', latitude: 30.983, longitude: 34.708 },
-  29: { name: 'Arad', latitude: 31.25, longitude: 35.1855 },
-  208: { name: 'Ashkelon', latitude: 31.6394, longitude: 34.5215 },
-  271: { name: 'Avdat', latitude: 30.7877, longitude: 34.7712 },
-  60: { name: 'Beer Sheva University', latitude: 31.2642, longitude: 34.8045 },
-  58: { name: 'Besor Farm', latitude: 31.2716, longitude: 34.38941 },
-  79: { name: 'Dorot', latitude: 31.5036, longitude: 34.648 },
-  64: { name: 'Eilat', latitude: 29.5526, longitude: 34.952 },
-  211: { name: 'Ein Gedi', latitude: 30.4667, longitude: 35.3833 },
-  338: { name: 'Ezuz', latitude: 30.7911, longitude: 34.4715 },
-  236: { name: 'Gat', latitude: 31.6303, longitude: 34.7913 },
-  33: { name: 'Hatzeva', latitude: 30.7787, longitude: 35.2389 },
-  350: { name: 'Lahav', latitude: 31.3812, longitude: 34.8729 },
-  210: { name: 'Metzoke Dragot', latitude: 31.5881, longitude: 35.3916 },
-  379: { name: 'Mitzpe Ramon', latitude: 30.6101, longitude: 34.8046 },
-  82: { name: 'Negba', latitude: 31.6585, longitude: 34.6798 },
-  232: { name: 'Neot Smadar', latitude: 30.048, longitude: 35.0233 },
-  349: { name: 'Nevatim', latitude: 31.205, longitude: 34.9227 },
-  207: { name: 'Paran', latitude: 30.3655, longitude: 35.1479 },
-  98: { name: 'Sde Boker', latitude: 30.8702, longitude: 34.795 },
-  65: { name: 'Sodom', latitude: 31.0306, longitude: 35.3919 },
-  28: { name: 'Shani', latitude: 31.3568, longitude: 35.0662 },
-  36: { name: 'Yotvata', latitude: 29.8851, longitude: 35.0771 },
-  112: { name: 'Zomet HaNegev', latitude: 31.0708, longitude: 34.8513 },
-};
+// const areaCoordinates = {
+//   381: { name: 'Ashalim', latitude: 30.983, longitude: 34.708 },
+//   29: { name: 'Arad', latitude: 31.25, longitude: 35.1855 },
+//   208: { name: 'Ashkelon', latitude: 31.6394, longitude: 34.5215 },
+//   271: { name: 'Avdat', latitude: 30.7877, longitude: 34.7712 },
+//   60: { name: 'Beer Sheva University', latitude: 31.2642, longitude: 34.8045 },
+//   58: { name: 'Besor Farm', latitude: 31.2716, longitude: 34.38941 },
+//   79: { name: 'Dorot', latitude: 31.5036, longitude: 34.648 },
+//   64: { name: 'Eilat', latitude: 29.5526, longitude: 34.952 },
+//   211: { name: 'Ein Gedi', latitude: 30.4667, longitude: 35.3833 },
+//   338: { name: 'Ezuz', latitude: 30.7911, longitude: 34.4715 },
+//   236: { name: 'Gat', latitude: 31.6303, longitude: 34.7913 },
+//   33: { name: 'Hatzeva', latitude: 30.7787, longitude: 35.2389 },
+//   350: { name: 'Lahav', latitude: 31.3812, longitude: 34.8729 },
+//   210: { name: 'Metzoke Dragot', latitude: 31.5881, longitude: 35.3916 },
+//   379: { name: 'Mitzpe Ramon', latitude: 30.6101, longitude: 34.8046 },
+//   82: { name: 'Negba', latitude: 31.6585, longitude: 34.6798 },
+//   232: { name: 'Neot Smadar', latitude: 30.048, longitude: 35.0233 },
+//   349: { name: 'Nevatim', latitude: 31.205, longitude: 34.9227 },
+//   207: { name: 'Paran', latitude: 30.3655, longitude: 35.1479 },
+//   98: { name: 'Sde Boker', latitude: 30.8702, longitude: 34.795 },
+//   65: { name: 'Sodom', latitude: 31.0306, longitude: 35.3919 },
+//   28: { name: 'Shani', latitude: 31.3568, longitude: 35.0662 },
+//   36: { name: 'Yotvata', latitude: 29.8851, longitude: 35.0771 },
+//   112: { name: 'Zomet HaNegev', latitude: 31.0708, longitude: 34.8513 },
+// };
 
 const locations = {
   381: 'Ashalim',
@@ -162,7 +159,7 @@ function WaterCalculator() {
   const [selectedArea, setSelectedArea] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
-  const [locationAllowed, setLocationAllowed] = useState(false);
+  // const [locationAllowed, setLocationAllowed] = useState(false);
   const [selectedKc, setSelectedKc] = useState(null);
   const [userId, setUserId] = useState(null)
   const [detailedData, setDetailedData] = useState({
@@ -214,7 +211,7 @@ function WaterCalculator() {
     const cityData = cityCoordinates[newCity.label];
     if (cityData) {
       const closestAreaName = cityData.closestArea;
-      const closestAreaId = lopsidedlocations[closestAreaName];
+      // const closestAreaId = lopsidedlocations[closestAreaName];
       setSelectedArea({ value: closestAreaName, label: closestAreaName });
     }
   };
@@ -231,7 +228,7 @@ function WaterCalculator() {
       station
     })
 
-    //console.log(saveStatus) //TODO: handle error if needed
+    console.log(saveStatus) //TODO: handle error if needed
   }
 
   const calculate = async () => { 
@@ -296,7 +293,7 @@ function WaterCalculator() {
     switch (error.code) {
       case error.PERMISSION_DENIED:
         console.log("User denied the request for Geolocation.");
-        setLocationAllowed(false);
+        // setLocationAllowed(false);
         break;
       case error.POSITION_UNAVAILABLE:
         console.log("Location information is unavailable.");
@@ -312,9 +309,9 @@ function WaterCalculator() {
     }
   };
 
-  const showPosition = (position) => {
-    setLocationAllowed(true); // User allowed location access
-  };
+  // const showPosition = (position) => {
+  //   setLocationAllowed(true); // User allowed location access
+  // };
 
   return (
     <div className={classes.WaterCalculator}>

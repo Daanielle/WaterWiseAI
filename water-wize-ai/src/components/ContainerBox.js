@@ -15,7 +15,6 @@ const ContainerBox = ({ children, sx, width, ...props }) => {
                 // maxWidth: '100%', // responsive max width
                 display: 'flex', // Make it a flex container
                 flexDirection: 'column', // Stack children vertically
-                backgroundColor:"white",
                 border: "2px solid var(--primary-color)",
                 ...sx,
             }}

@@ -1,5 +1,4 @@
 import React from "react";
-import DetailCard from "./DetailCard";
 import classes from "../../styles/DetailsPanel.module.css";
 import CustomCard from "../CustomCard";
 import WaterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
@@ -12,7 +11,6 @@ import Modal from "@mui/material/Modal";
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import CalculatorsFormula from "./CalculatorsFormula";
 import { Icon } from '@mui/material';
 
 
@@ -68,7 +66,7 @@ function DetailsPanel ({ detailedData }){
     <div className={classes.detailsPanel}>
           <div className={classes.cardContainer}>
               <div>
-                <CustomCard sx={{width: 250, height: 100,border: "2px solid darkgreen",marginLeft:"40px",backgroundColor:'var(--medium-green)',color:"var(--black)",width:400, height:200 , icon:{color:"var(  --light-gray)"}}}
+                <CustomCard sx={{width: 250, height: 100,border: "2px solid darkgreen",marginLeft:"40px",backgroundColor:'var(--medium-green)',color:"var(--black)" , icon:{color:"var(  --light-gray)"}}}
                   topIcon={variablesMapping["recommendation"].icon} 
                   title={variablesMapping["recommendation"]?.title}
                   description={ detailedData.recommendation !== "--" ? detailedData.recommendation + " " + variablesMapping["recommendation"]?.units : detailedData.recommendation}

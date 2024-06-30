@@ -31,6 +31,7 @@ const NewComment = ({ onCloseNewComment, message  }) => {
                 userId, title, body, message
             };
             let status = await addNewForumComment(comment);
+            console.log("Comment saved successfully:", status);
             onCloseNewComment();
         } catch (error) {
             console.error("Error saving message:", error);

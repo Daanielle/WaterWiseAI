@@ -1,5 +1,4 @@
 import React from "react";
-import DetailCard from "./DetailCard";
 import classes from "../../styles/DetailsPanel.module.css";
 import CustomCard from "../CustomCard";
 import WaterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";

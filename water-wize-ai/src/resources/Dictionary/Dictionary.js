@@ -347,7 +347,7 @@ textAlign: "left"
 
 const useDictionary = () => {
   const { lang } = useLanguage();
-  return lang == "heb" ? hebDict : engDict;
+  return lang === "heb" ? hebDict : engDict;
 };
 
 export default useDictionary;

@@ -7,7 +7,7 @@ import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
 export default function MessageHeader({ userId, title, time, numOfComments, isRec, setLoading }) {
     const [user, setUser] = useState(null);
-    const [error, setError] = useState(null);
+    // const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -16,13 +16,14 @@ export default function MessageHeader({ userId, title, time, numOfComments, isRe
             const fetchedUser = await getUserById(userId);
             setUser(fetchedUser);
           } catch (err) {
-            setError(err);
+            console.error(err)
+            // setError(err);
           } finally {
             //setLoading(false);
           }
         };
         fetchUser();
-      }, []); // Only include necessary dependencies
+      }, [userId, setLoading]); 
 
     // if (loading) return <div>Loading...</div>;
     // if (error) return <div>Error loading user</div>;
@@ -38,7 +39,7 @@ export default function MessageHeader({ userId, title, time, numOfComments, isRe
                         <CalculateOutlinedIcon />
                     </IconButton>}
                     <IconButton>
-                        {numOfComments != -1 && <Badge badgeContent={numOfComments} sx={{ '& .MuiBadge-badge': { backgroundColor: '#d86018', color: 'white' } }}>
+                        {numOfComments !== -1 && <Badge badgeContent={numOfComments} sx={{ '& .MuiBadge-badge': { backgroundColor: '#d86018', color: 'white' } }}>
                             <ChatBubbleOutlineRoundedIcon />
                         </Badge>}
                     </IconButton>

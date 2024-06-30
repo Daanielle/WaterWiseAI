@@ -6,7 +6,7 @@ import { TabPanel as BaseTabPanel } from '@mui/base/TabPanel';
 import { buttonClasses } from '@mui/base/Button';
 import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
 import CalculatorsFormula from './CalculatorsFormula';
-import FarmulaExplanation from "./FermulaExplanations"
+// import FarmulaExplanation from "./FermulaExplanations"
 import useDictionary from "./../../resources/Dictionary/Dictionary";
 
 export default function CalculatorTabs({formulaValues}) {
