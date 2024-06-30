@@ -23,7 +23,7 @@ const InputField = ({ label, value, onValueChange, checkIfValid, error, inputPro
         if (checkIfValid) {
             if (checkIfValid(newValue)) {
                 setIsError(false);
-                if (type == "file") {
+                if (type === "file") {
                     handleFileChange(event)
                 } else {
                     handleChange(newValue);
@@ -34,7 +34,7 @@ const InputField = ({ label, value, onValueChange, checkIfValid, error, inputPro
         }
         else {
             setIsError(false);
-                if (type == "file") {
+                if (type === "file") {
                     handleFileChange(event)
                 } else {
                     handleChange(newValue);

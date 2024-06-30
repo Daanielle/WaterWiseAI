@@ -1,6 +1,5 @@
 import PageContainer from "../components/PageContainer";
 import CustomButton from "../components/CustomButton";
-import SendIcon from "@mui/icons-material/Send";
 
 function Demo() {
   const handleClick = () => {

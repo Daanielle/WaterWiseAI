@@ -70,105 +70,108 @@ const hebDict = {
   password: "סיסמה",
   forgetpassword: " ?שכחת סיסמה",
   Login: "התחברות",
-  Donthaveanaccount: " ?איך לך חשבון" ,
-  alreadyhaveanaccount:"  ?יש לך כבר חשבון",
+  Donthaveanaccount: " ?איך לך חשבון",
+  alreadyhaveanaccount: "  ?יש לך כבר חשבון",
   loginhere: "התחבר כאן",
-  nameR:"שם",
-  firstName:"שם פרטי",
-  lastName:"שם משפחה",
-  email:"אימייל",
-  image:"תמונה",
+  nameR: "שם",
+  firstName: "שם פרטי",
+  lastName: "שם משפחה",
+  email: "אימייל",
+  image: "תמונה",
 
   //contactUs page content
-  name:":שם",
+  name: ":שם",
   position: ":תפקיד",
   message: ":הודעה",
   sendMessage: "שלח הודעה",
 
   //WaterCalculator page content
-  station:"תחנה",
-  city:"עיר",
+  station: "תחנה",
+  city: "עיר",
   date: "תאריך",
   areaSize: "גודל שטח",
   KcValue: "Kc",
   calculate: "חשב",
   WindSpeed1mmTitle: "מהירות רוח מקסימלית בדקה אחרונה",
   grad: ".מייצג את האיזון בין קרינה נכנסת ויוצאת על פני השטח ",
-  windSpeed1mm:" .מהירות הרוח הגבוהה ביותר שנצפתה על פני תקופה של דקה אחת",
-  maxWindSpeed:".מהירות הרוח המרבית הנצפית בתוך מרווח זמן מסוים",
-  temperature:".טמפרטורה - טמפרטורת האוויר הסביבתי בתחנה המטאורולוגית",
-  relativeHumidity:".לחות יחסית - כמות אדי המים הקיימים באוויר ביחס לכמות המקסימלית שהאוויר יכול להחזיק בטמפרטורה נתונה",
-  deltaY:".שינוי בלחץ אדי המים בהתאם לטמפרטורה",
-  e0:`.לחץ אדים רווי`,
-  ea:`לחץ אדים בפועל.`,
-  Ea:`.(ea) ללחץ אדים בפועל ,(e0) אידוי אווירודינמי, מכמת את ההבדל בין לחץ אדי רוויה`,
-  E:`.קצב אידוי 
+  windSpeed1mm: " .מהירות הרוח הגבוהה ביותר שנצפתה על פני תקופה של דקה אחת",
+  maxWindSpeed: ".מהירות הרוח המרבית הנצפית בתוך מרווח זמן מסוים",
+  temperature: ".טמפרטורה - טמפרטורת האוויר הסביבתי בתחנה המטאורולוגית",
+  relativeHumidity: ".לחות יחסית - כמות אדי המים הקיימים באוויר ביחס לכמות המקסימלית שהאוויר יכול להחזיק בטמפרטורה נתונה",
+  deltaY: ".שינוי בלחץ אדי המים בהתאם לטמפרטורה",
+  e0: `.לחץ אדים רווי`,
+  ea: `לחץ אדים בפועל.`,
+  Ea: `.(ea) ללחץ אדים בפועל ,(e0) אידוי אווירודינמי, מכמת את ההבדל בין לחץ אדי רוויה`,
+  E: `.קצב אידוי 
 `,
-Kc:`.מקדם יבול לחודש הנוכחי מבוסס על מחקר חקלאי`,
-recommendation:`.המלצת השקיה על פי חישובים`,
-saveCalculate:"שמור חישוב",
-showAllCalcts:"הצגת החישובים שלי",
-findMyCoordinates:"מציאת הקורדינטות שלי",
-predict: "בצע חיזוי",
+  Kc: `.מקדם יבול לחודש הנוכחי מבוסס על מחקר חקלאי`,
+  recommendation: `.המלצת השקיה על פי חישובים`,
+  saveCalculate: "שמור חישוב",
+  showAllCalcts: "הצגת החישובים שלי",
+  findMyCoordinates: "מציאת הקורדינטות שלי",
+  predict: "בצע חיזוי",
 
 
-// Calculator Parameters
-gradParameter: "קרינה גלובלית",
-windSpeed1mmParameter: "מהירות רוח מקסימלית בדקה האחרונה",
-maxWindSpeedParameter:"מהירות רוח מקסימלית",
-temperatureParameter:"טמפרטורה",
-relativeHumidityParameter:"לחות יחסית",
-deltaYParameter:"שינוי בלחץ אדי המים",
-e0Parameter:`לחץ אדים רווי`,
-eaParameter:`לחץ אדים בפועל`,
-EaParameter:`התאדות אירודינמית`,
-EParameter: "אידוי",
-KcParameter: "קבוע השקיה",
-RecParmeter: "המלצה",
+  // Calculator Parameters
+  gradParameter: "קרינה גלובלית",
+  windSpeed1mmParameter: "מהירות רוח מקסימלית בדקה האחרונה",
+  maxWindSpeedParameter: "מהירות רוח מקסימלית",
+  temperatureParameter: "טמפרטורה",
+  relativeHumidityParameter: "לחות יחסית",
+  deltaYParameter: "שינוי בלחץ אדי המים",
+  e0Parameter: `לחץ אדים רווי`,
+  eaParameter: `לחץ אדים בפועל`,
+  EaParameter: `התאדות אירודינמית`,
+  EParameter: "אידוי",
+  KcParameter: "קבוע השקיה",
+  RecParmeter: "המלצה",
 
-CalculatorFormulaParam: "נוסחת המחשבון",
-EditFormulaParm: "ערכו נוסחה",
-HowGetResult: "...איך הגענו לתוצאה? השתמשנו בכמה נוסחאות המפורטות כאן",
-NewKc:"...Kc אתה יכול לערוך את הערך של המשתנה אם תרצה אנא הזן את הערך החדש של" ,
+  CalculatorFormulaParam: "נוסחת המחשבון",
+  EditFormulaParm: "ערכו נוסחה",
+  HowGetResult: "...איך הגענו לתוצאה? השתמשנו בכמה נוסחאות המפורטות כאן",
+  NewKc: "...Kc אתה יכול לערוך את הערך של המשתנה אם תרצה אנא הזן את הערך החדש של",
 
   //Explenations Fermulas
-  Explenationse0:" •	נוסחה זו משמשת לחישוב לחץ האדים רווי המציין את הלחץ המופעל על ידי מולקולות אדים באטמוספירה כשהאוויר מכיל את כמות האדים המקסימלית שהוא יכול להחזיק בהתאם לטמפרטורה את החישוב מתבסס על טמפרטורת הקירוב ",
-  Explenationsea:"•	נוסחה זו משמשת לחישוב הלחץ האדים בפועל באטמוספירה, המייצג את הלחץ החלקי של אדי המים באוויר ביחס למקסימום שהאוויר יכול להחזיק בהתאם ללחות היחסית. את החישוב נעשה בהתבסס על הלחות היחסית שזה היחס בין כמות האדים הנוכחית באוויר לכמות האדים המקסימלית שהוא יכול להחזיק באותה טמפרטורה, מסופר באחוזים ועל הלחץ האדים.",
-  ExplenationsEa:"נוסחה זו משמשת לחישוב ערך התאדות אירודינמית, המייצג את ההבדל בין לחץ אדים הרווי לבין לחץ אדים בפועל ומתחשבת גם במהירות הרוח בגובה 2 מטרים מעל פני הקרקע.",
-  ExplenationsE:"הנוסחה משמשת לחיזוי התאיידות המים מפני השטח של כדור הארץ, בהתבסס על מרכיבים כמו קרינה על המשטח, חילופי חום, התאיידות אירודינאמית, לחץ אדי המים, וחום כמוס. הנוסחה מחלקת את כל זה על ידי, ומצטפה ב ואחד.",
-  ExplenationsI:"הנוסחה מתייחסת לכמות המים הנדרשת ליבול התמרים בהתבסס על השקיה ואידוי המים הפוטנציאלי. היא משתמשת במקדם הכיסוי, שמייצג את הצורך הנוכחי של התמרים במים ביחס לאידוי המים, ובשטח הכללי של החלקה לחישוב כמות המים הכוללת הנדרשת להשקיה.",
+  Explenationse0: " •	נוסחה זו משמשת לחישוב לחץ האדים רווי המציין את הלחץ המופעל על ידי מולקולות אדים באטמוספירה כשהאוויר מכיל את כמות האדים המקסימלית שהוא יכול להחזיק בהתאם לטמפרטורה את החישוב מתבסס על טמפרטורת הקירוב ",
+  Explenationsea: "•	נוסחה זו משמשת לחישוב הלחץ האדים בפועל באטמוספירה, המייצג את הלחץ החלקי של אדי המים באוויר ביחס למקסימום שהאוויר יכול להחזיק בהתאם ללחות היחסית. את החישוב נעשה בהתבסס על הלחות היחסית שזה היחס בין כמות האדים הנוכחית באוויר לכמות האדים המקסימלית שהוא יכול להחזיק באותה טמפרטורה, מסופר באחוזים ועל הלחץ האדים.",
+  ExplenationsEa: "נוסחה זו משמשת לחישוב ערך התאדות אירודינמית, המייצג את ההבדל בין לחץ אדים הרווי לבין לחץ אדים בפועל ומתחשבת גם במהירות הרוח בגובה 2 מטרים מעל פני הקרקע.",
+  ExplenationsE: "הנוסחה משמשת לחיזוי התאיידות המים מפני השטח של כדור הארץ, בהתבסס על מרכיבים כמו קרינה על המשטח, חילופי חום, התאיידות אירודינאמית, לחץ אדי המים, וחום כמוס. הנוסחה מחלקת את כל זה על ידי, ומצטפה ב ואחד.",
+  ExplenationsI: "הנוסחה מתייחסת לכמות המים הנדרשת ליבול התמרים בהתבסס על השקיה ואידוי המים הפוטנציאלי. היא משתמשת במקדם הכיסוי, שמייצג את הצורך הנוכחי של התמרים במים ביחס לאידוי המים, ובשטח הכללי של החלקה לחישוב כמות המים הכוללת הנדרשת להשקיה.",
 
 
-//Support page
-Explanation1:"הסבר למסך 1",
-Explanation2:"הסבר למסך 2",
-Explanation3:"הסבר למסך 3",
-Explanation4:"הסבר למסך 4",
-Explanation5:"הסבר למסך 5",
-Explanation6:"הסבר למסך 6",
+  //Support page
+  Explanation1: "הסבר למסך 1",
+  Explanation2: "הסבר למסך 2",
+  Explanation3: "הסבר למסך 3",
+  Explanation4: "הסבר למסך 4",
+  Explanation5: "הסבר למסך 5",
+  Explanation6: "הסבר למסך 6",
 
-//AboutUs page
-MeetTeam:"...הכירו את הצוות שלנו",
-aboutMe:".אני סטודנט שנה ד' להנדסת תוכנה ומערכות מידע באוניברסיטת בן גוריון בנגב",
-Danielle_Name:"דניאל אספיר",
-Hadar_Name:"הדר סבתאי מור",
-Lana_Name:"לנא אבוריא",
-Shachar_Name:"שחר אדם",
-WhoWeAre: ".אנחנו צוות של ארבעה סטודנטים בשנה הרביעית בהנדסת תוכנה ומערכות מידע. הצוות שלנו מוקדש למינוף טכנולוגיה כדי לפתור בעיות בעולם האמיתי בחקלאות. עם בסיס חזק בפיתוח תוכנה, ניתוח נתונים והנדסת מערכות, אנו ערוכים היטב על מנת להביא פתרונות לקהילת החקלאים",
+  //AboutUs page
+  MeetTeam: "...הכירו את הצוות שלנו",
+  aboutMe: ".אני סטודנט שנה ד' להנדסת תוכנה ומערכות מידע באוניברסיטת בן גוריון בנגב",
+  Danielle_Name: "דניאל אספיר",
+  Hadar_Name: "הדר סבתאי מור",
+  Lana_Name: "לנא אבוריא",
+  Shachar_Name: "שחר אדם",
+  WhoWeAre: ".אנחנו צוות של ארבעה סטודנטים בשנה הרביעית בהנדסת תוכנה ומערכות מידע. הצוות שלנו מוקדש למינוף טכנולוגיה כדי לפתור בעיות בעולם האמיתי בחקלאות. עם בסיס חזק בפיתוח תוכנה, ניתוח נתונים והנדסת מערכות, אנו ערוכים היטב על מנת להביא פתרונות לקהילת החקלאים",
 
-//style
-stylePage:"right",
-whostyle:"rightwho",
-westyle:"rightwe",
-arestyle:"rightare",
+  //style
+  stylePage: "right",
+  whostyle: "rightwho",
+  westyle: "rightwe",
+  arestyle: "rightare",
 
-//errors
-errorsAreaSizeRange: "הזינו מספר תקין, בין 10 ל-100000", 
-errorsKcRange: "הזינו מספר תקין, בין 0 ל-2", 
+  //errors
+  errorsAreaSizeRange: "הזינו מספר תקין, בין 10 ל-100000",
+  errorsKcRange: "הזינו מספר תקין, בין 0 ל-2",
 
-//Modal
-CloseModal: "סגירה",
-textAlign: "right"
+  //Modal
+  CloseModal: "סגירה",
+  textAlign: "right",
+
+    //editUser
+    save: "שמירה"
 };
 
 const engDict = {
@@ -240,109 +243,105 @@ const engDict = {
   forgetpassword: "Forgot Pssword?",
   Login: "Log in",
   Donthaveanaccount: "Dont have an account? Register",
-  alreadyhaveanaccount:"Already have an account?",
+  alreadyhaveanaccount: "Already have an account?",
   loginhere: "Login here",
-  nameR:"Name",
-  firstName:"first name",
-  lastName:"last name",
-  email:"Email",
-  image:"Image",
+  nameR: "Name",
+  firstName: "first name",
+  lastName: "last name",
+  email: "Email",
+  image: "Image",
 
   //contactUs page content
-  name:"Name:",
+  name: "Name:",
   position: "Position:",
   message: "Message:",
   sendMessage: "Send Message",
 
   //WaterCalculator page content
-  station:"Station",
-  city:"City",
+  station: "Station",
+  city: "City",
   date: "Date",
   areaSize: "Area Size",
   KcValue: "Kc",
   calculate: "Calculate",
   WindSpeed1mmTitle: "Max Wind Speed Last Min",
   grad: "Represents the balance between incoming and outgoing radiation at the surface.",
-  windSpeed1mm:"Highest wind speed observed over a period of one minute.",
-  maxWindSpeed:"Maximum wind speed observed within a certain time interval. ",
-  temperature:"Temperature - the ambient air temperature at the meteorological station.",
-  relativeHumidity:"Relative humidity - the amount of water vapor present in the air relative to the maximum amount the air can hold at a given temperature. ",
-  deltaY:"Change in water vapor pressure based on temperature.",
-  e0:`Saturated vapor pressure.`,
-  ea:`Actual vapor pressure.`,
-  Ea:`Aerodynamic evaporation, quantifying the difference between
+  windSpeed1mm: "Highest wind speed observed over a period of one minute.",
+  maxWindSpeed: "Maximum wind speed observed within a certain time interval. ",
+  temperature: "Temperature - the ambient air temperature at the meteorological station.",
+  relativeHumidity: "Relative humidity - the amount of water vapor present in the air relative to the maximum amount the air can hold at a given temperature. ",
+  deltaY: "Change in water vapor pressure based on temperature.",
+  e0: `Saturated vapor pressure.`,
+  ea: `Actual vapor pressure.`,
+  Ea: `Aerodynamic evaporation, quantifying the difference between
 saturation vapor pressure (e0) and actual vapor pressure (ea).`,
-E:`Evapotranspiration rate.`,
-Kc:`Crop coefficient for the current month
+  E: `Evapotranspiration rate.`,
+  Kc: `Crop coefficient for the current month
 based on agricultural research.`,
-recommendation:`Irrigation recommendation based on calculations.`,
-saveCalculate:"Save Calculate",
-showAllCalcts:"Show all calcs",
-findMyCoordinates:"Find my coordinates",
-predict: "predict",
+  recommendation: `Irrigation recommendation based on calculations.`,
+  saveCalculate: "Save Calculate",
+  showAllCalcts: "Show all calcs",
+  findMyCoordinates: "Find my coordinates",
+  predict: "predict",
 
-// Calculator Parameters
-gradParameter: "Global Radiation",
-windSpeed1mmParameter: "Max Wind Speed Last Min",
-maxWindSpeedParameter:"Max Wind Speed",
-temperatureParameter:"Temperature",
-relativeHumidityParameter:"Relative humidity",
-deltaYParameter:"Change in water vapor pressure",
-e0Parameter:`Saturated vapor pressure.`,
-eaParameter:`Actual vapor pressure.`,
-EaParameter:`Aerodynamic evaporation`,
-EParameter: "Evapotranspiration rate",
-KcParameter: "Irrigation Constant",
-RecParmeter: "Recommendation",
+  // Calculator Parameters
+  gradParameter: "Global Radiation",
+  windSpeed1mmParameter: "Max Wind Speed Last Min",
+  maxWindSpeedParameter: "Max Wind Speed",
+  temperatureParameter: "Temperature",
+  relativeHumidityParameter: "Relative humidity",
+  deltaYParameter: "Change in water vapor pressure",
+  e0Parameter: `Saturated vapor pressure.`,
+  eaParameter: `Actual vapor pressure.`,
+  EaParameter: `Aerodynamic evaporation`,
+  EParameter: "Evapotranspiration rate",
+  KcParameter: "Irrigation Constant",
+  RecParmeter: "Recommendation",
 
-CalculatorFormulaParam: "Calculator Formula",
-EditFormulaParm: "Editing Formula",
-HowGetResult: "How did we get the result? We used several formulas listed here..",
-NewKc:"You can edit the value of the variable Kc, if you want please enter your new value...",
+  CalculatorFormulaParam: "Calculator Formula",
+  EditFormulaParm: "Editing Formula",
+  HowGetResult: "How did we get the result? We used several formulas listed here..",
+  NewKc: "You can edit the value of the variable Kc, if you want please enter your new value...",
 
   //Explenations Fermulas
-  Explenationse0:"This formula is used to calculate the saturated vapor pressure indicating the pressure exerted by vapor molecules in the atmosphere when the air contains the maximum amount of vapor it can hold depending on the temperature, the calculation is based on the approximate temperature",
-  Explenationsea:"This formula is used to calculate the actual vapor pressure in the atmosphere, which represents the partial pressure of the water vapor in the air in relation to the maximum that the air can hold according to the relative humidity. The calculation is made based on the relative humidity, which is the ratio between the current amount of vapor in the air and the maximum amount of vapor it can hold at the same temperature, expressed in percentages and the vapor pressure.",
-  ExplenationsEa:"This formula is used to calculate the aerodynamic evaporation value, which represents the difference between the saturated vapor pressure and the actual vapor pressure and also takes into account the wind speed at a height of 2 meters above the ground.",
-  ExplenationsE:"The formula is used to predict water evaporation from the Earth's surface, based on components such as surface radiation, heat exchange, aerodynamic evaporation, water vapor pressure, and capsule heat. The formula divides all of this by, and adds up to and one.",
-  ExplenationsI:"The formula refers to the amount of water required for the date crop based on irrigation and potential water evaporation. It uses the coverage factor, which represents the date palm's current need for water in relation to water evaporation, and the general area of ​​the plot to calculate the total amount of water required for irrigation.",
+  Explenationse0: "This formula is used to calculate the saturated vapor pressure indicating the pressure exerted by vapor molecules in the atmosphere when the air contains the maximum amount of vapor it can hold depending on the temperature, the calculation is based on the approximate temperature",
+  Explenationsea: "This formula is used to calculate the actual vapor pressure in the atmosphere, which represents the partial pressure of the water vapor in the air in relation to the maximum that the air can hold according to the relative humidity. The calculation is made based on the relative humidity, which is the ratio between the current amount of vapor in the air and the maximum amount of vapor it can hold at the same temperature, expressed in percentages and the vapor pressure.",
+  ExplenationsEa: "This formula is used to calculate the aerodynamic evaporation value, which represents the difference between the saturated vapor pressure and the actual vapor pressure and also takes into account the wind speed at a height of 2 meters above the ground.",
+  ExplenationsE: "The formula is used to predict water evaporation from the Earth's surface, based on components such as surface radiation, heat exchange, aerodynamic evaporation, water vapor pressure, and capsule heat. The formula divides all of this by, and adds up to and one.",
+  ExplenationsI: "The formula refers to the amount of water required for the date crop based on irrigation and potential water evaporation. It uses the coverage factor, which represents the date palm's current need for water in relation to water evaporation, and the general area of ​​the plot to calculate the total amount of water required for irrigation.",
 
+  //Support page
+  Explanation1: "Explanation for Screen 1",
+  Explanation2: "Explanation for Screen 2",
+  Explanation3: "Explanation for Screen 3",
+  Explanation4: "Explanation for Screen 4",
+  Explanation5: "Explanation for Screen 5",
+  Explanation6: "Explanation for Screen 6",
 
+  //AboutUs page
+  MeetTeam: "Meet Our Team...",
+  aboutMe: "I am a fourth year software and information systems engineering student at Ben Gurion University of the Negev.",
+  Danielle_Name: "Danielle Aspir",
+  Hadar_Name: "Hadar Sabati Mor",
+  Lana_Name: "Lana AbuRaya",
+  Shachar_Name: "Shachar Adam",
+  WhoWeAre: "We are a team of four passionate students in our fourth year of Software and Information Systems Engineering. Our team is dedicated to leveraging technology to solve real-world problems in agriculture. With a strong foundation in software development, data analysis, and systems engineering, we are well-equipped to bring solutions to the farming community.",
+  //style
+  stylePage: "left",
+  whostyle: "leftwho",
+  westyle: "leftwe",
+  arestyle: "leftare",
 
+  //errors
+  errorsAreaSizeRange: "please enter a valid number - between 10 to 100000",
+  errorsKcRange: "please enter a valid number - between 0 to 2",
 
+  //Modal
+  CloseModal: "Close",
+  textAlign: "left",
 
-
-
-
-//Support page
-Explanation1:"Explanation for Screen 1",
-Explanation2:"Explanation for Screen 2",
-Explanation3:"Explanation for Screen 3",
-Explanation4:"Explanation for Screen 4",
-Explanation5:"Explanation for Screen 5",
-Explanation6:"Explanation for Screen 6",
-
-//AboutUs page
-MeetTeam:"Meet Our Team...",
-aboutMe:"I am a fourth year software and information systems engineering student at Ben Gurion University of the Negev.",
-Danielle_Name:"Danielle Aspir",
-Hadar_Name:"Hadar Sabati Mor",
-Lana_Name:"Lana AbuRaya",
-Shachar_Name:"Shachar Adam",
-WhoWeAre: "We are a team of four passionate students in our fourth year of Software and Information Systems Engineering. Our team is dedicated to leveraging technology to solve real-world problems in agriculture. With a strong foundation in software development, data analysis, and systems engineering, we are well-equipped to bring solutions to the farming community.",
-//style
-stylePage:"left",
-whostyle:"leftwho",
-westyle:"leftwe",
-arestyle:"leftare",
-
-//errors
-errorsAreaSizeRange: "please enter a valid number - between 10 to 100000", 
-errorsKcRange: "please enter a valid number - between 0 to 2",
-
-//Modal
-CloseModal: "Close",
-textAlign: "left"
+  //editUser
+  save: "Save"
 };
 
 const useDictionary = () => {

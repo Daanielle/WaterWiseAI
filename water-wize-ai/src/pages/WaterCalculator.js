@@ -107,11 +107,11 @@ const optionsCities = Object.keys(cities).map(key => ({
   label: cities[key]
 }));
 
-const labels = [];
+// const labels = [];
 
-for (const key in optionsCities) {
-  labels.push(optionsCities[key].label);
-}
+// for (const key in optionsCities) {
+//   labels.push(optionsCities[key].label);
+// }
 
 
 const modalStyle = {
@@ -261,7 +261,7 @@ function WaterCalculator() {
               />
               <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => (x <= 100000 && x >= 10)} error={dict.errorsAreaSizeRange} />
 
-              <CustomButton onClick={calculate} label={dict.calculate} type="button" disabled={saveCalcDesign.disabled} disabledTooltip={saveCalcDesign.disabledTooltip}/>
+              <CustomButton onClick={calculate} label={dict.calculate} type="button" disabled={calculateDesign.disabled} disabledTooltip={calculateDesign.disabledTooltip}/>
               <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" secondary disabled={saveCalcDesign.disabled} disabledTooltip={saveCalcDesign.disabledTooltip} />
               <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" secondary disabled={!userId} disabledTooltip={"Log in in order to show saved calculations"} />
             </ContainerBox>

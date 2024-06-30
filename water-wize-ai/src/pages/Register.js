@@ -128,6 +128,9 @@ function Register() {
   }
 
   const registerUser = async (firstName, lastName, email, password, image) => {
+    if(error){
+      console.log(error) //TODO: snackbar
+    }
     try {
       const registerResponse = await fetch("/users/register", {
         method: "POST",
@@ -144,8 +147,8 @@ function Register() {
       });
 
       console.log(registerResponse)
-    } catch (error) {
-      console.error("Error:", error);
+    } catch (e) {
+      console.error("Error:", e);
     }
     console.log('Registering user:', firstName, lastName, email, password);
   }

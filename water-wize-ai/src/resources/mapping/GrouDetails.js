@@ -1,4 +1,3 @@
-import React from "react";
 import lanasImage from "../images/lana.png";
 import hadarsImage from "../images/hadar.png";
 import shacharsImage from "../images/shachar.png";

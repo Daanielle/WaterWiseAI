@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from '../AuthContext';
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import InputField from "../components/inputs/InputField";
 import PageContainer from "../components/PageContainer";

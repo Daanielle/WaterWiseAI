@@ -224,7 +224,7 @@ export const patchUserDetails = async (editedUser) => {
       const errorData = await response.json();
       throw new Error(errorData.message || 'Update failed!');
     }
-    const data = await response.json(); // Parse the JSON response
+    await response.json(); // Parse the JSON response
     //updateUserDetails(editedUser);
   } catch (error) {
     console.error("Error:", error);

@@ -56,7 +56,7 @@ function UserDetails() {
         try {
             const response = await patchUserDetails(editedUser)
             updateUserDetails(editedUser)
-            // console.log(response)
+            console.log(response) //TODO: change to snackbar
         } catch (error) {
             console.error("Error:", error);
         }
@@ -152,7 +152,7 @@ function UserDetails() {
                         name="image"
                         id="imageInput"
                     />
-                    <CustomButton type="submit" label={dict.Register} style={{ width: '35%' }} />
+                    <CustomButton type="submit" label={dict.save} style={{ width: '35%' }} />
                 </form>
             </ContainerBox>
         </PageContainer>
