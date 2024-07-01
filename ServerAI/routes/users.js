@@ -60,6 +60,27 @@ router.post('/register', async (req, res) => {
     }
 });
 
+// Check if an email exists in the database
+router.post('/check-email', async (req, res) => {
+    const { email } = req.body;
+
+    // Simple email format validation
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+        return res.status(400).json({ message: "Invalid email format" });
+    }
+
+    try {
+        const user = await User.findOne({ email: email });
+        if (user) {
+            res.status(200).json({ exists: true });
+        } else {
+            res.status(200).json({ exists: false });
+        }
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 // Update a user
 router.patch('/:id', getUser, async (req, res) => {
     if (req.body.email != null) {
