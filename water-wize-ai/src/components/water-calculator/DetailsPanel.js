@@ -15,6 +15,7 @@ import { Icon } from "@mui/material";
 import { Paper, Grid } from "@mui/material";
 
 function DetailsPanel({ detailedData }) {
+  console.log(detailedData)
   const [openModal, setOpenModal] = React.useState(false);
   const [currentTitle, setCurrentTitle] = React.useState("");
   const [currentIcon, setCurrentIcon] = React.useState();
@@ -137,7 +138,7 @@ function DetailsPanel({ detailedData }) {
                       title={variablesMapping[key]?.title}
                       description={
                         detailedData[key] !== "--"
-                          ? detailedData[key] +
+                          ? (typeof detailedData[key] === 'number' ? parseFloat(detailedData[key].toFixed(3)) : detailedData[key]) +
                             " " +
                             variablesMapping[key]?.units
                           : detailedData[key]
@@ -165,7 +166,7 @@ function DetailsPanel({ detailedData }) {
                       title={variablesMapping[key]?.title}
                       description={
                         detailedData[key] !== "--"
-                          ? detailedData[key] +
+                          ? (typeof detailedData[key] === 'number' ? parseFloat(detailedData[key].toFixed(3)) : detailedData[key]) +
                             " " +
                             variablesMapping[key]?.units
                           : detailedData[key]
@@ -193,7 +194,7 @@ function DetailsPanel({ detailedData }) {
                       title={variablesMapping[key]?.title}
                       description={
                         detailedData[key] !== "--"
-                          ? detailedData[key] +
+                          ? (typeof detailedData[key] === 'number' ? parseFloat(detailedData[key].toFixed(3)) : detailedData[key]) +
                             " " +
                             variablesMapping[key]?.units
                           : detailedData[key]
