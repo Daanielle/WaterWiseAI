@@ -78,6 +78,7 @@ const hebDict = {
   lastName: "שם משפחה",
   email: "אימייל",
   image: "תמונה",
+  successRegister: "משתמש נשמר בהצלחה",
 
   //contactUs page content
   name: ":שם",
@@ -151,7 +152,7 @@ const hebDict = {
   MeetTeam: "...הכירו את הצוות שלנו",
   aboutMe: ".אני סטודנט שנה ד' להנדסת תוכנה ומערכות מידע באוניברסיטת בן גוריון בנגב",
   Danielle_Name: "דניאל אספיר",
-  Hadar_Name: "הדר סבתאי מור",
+  Hadar_Name: "הדר סבתי מור",
   Lana_Name: "לנא אבוריא",
   Shachar_Name: "שחר אדם",
   WhoWeAre: ".אנחנו צוות של ארבעה סטודנטים בשנה הרביעית בהנדסת תוכנה ומערכות מידע. הצוות שלנו מוקדש למינוף טכנולוגיה כדי לפתור בעיות בעולם האמיתי בחקלאות. עם בסיס חזק בפיתוח תוכנה, ניתוח נתונים והנדסת מערכות, אנו ערוכים היטב על מנת להביא פתרונות לקהילת החקלאים",
@@ -175,6 +176,7 @@ const hebDict = {
   errorEmailExists: "אימייל קיים במערכת",
   errorEmail: "הזינו כתובת אימייל תקינה, לדוגמה example@example.com",
   errorPass: "הזינו סיסמה תקינה - לפחות 8 תווים, אות גדולה ואות קטנה",
+  errorFields: "אנא מלאו את כל השדות",
 
   //Modal
   CloseModal: "סגירה",
@@ -259,6 +261,7 @@ const engDict = {
   lastName: "last name",
   email: "Email",
   image: "Image",
+  successRegister: "User saved successfully",
 
   //contactUs page content
   name: "Name:",
@@ -354,6 +357,7 @@ based on agricultural research.`,
   errorEmailExists: "Email already exists",
   errorEmail: "please enter a valid email - e.g. example@example.com",
   errorPass: "please enter a valid password - 8 characters, at least one uppercase letter, one lowercase letter and one number",
+  errorFields: "please fill all the fields",
 
   //Modal
   CloseModal: "Close",

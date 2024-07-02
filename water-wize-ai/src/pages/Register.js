@@ -5,6 +5,10 @@ import InputField from "../components/inputs/InputField";
 import React, { useState } from "react";
 import TitleButton from "../components/TitleButton";
 import useDictionary from "../resources/Dictionary/Dictionary";
+import { isValidEmail, isValidPassword } from "../resources/validations";
+import { registerUser, checkEmailExists } from "../apiRequests";
+import CustomSnackbar from "../components/CustomSnackbar";
+
 
 const titleButton = {
   fontStyle: "italic",
@@ -19,42 +23,26 @@ function Register() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
   const [image, setImage] = useState('');
+  const [snackbar, setSnackBar] = useState(false);
+  const [msg, setMsg] = useState("")
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError('Invalid email format');
-      return;
-    }
-
-    // Check if email already exists (you need to implement th is logic)
-    const emailExists = await checkEmailExists(email); //TODO: add real call from BE
-    if (emailExists) {
-      setError('Email already exists');
-      return;
-    }
-
-    // Validate password format
-    const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-    if (!passRegex.test(password)) {
-      setError('Password must contain at least 8 characters including upper and lower case letters and numbers');
-      return;
-    }
-
-    // Register the user (you need to implement this logic)
-    await registerUser(firstName, lastName, email, password, image);
-    setError('Registration successful');
+    await register(firstName, lastName, email, password, image);
   }
 
-  // Mock function to simulate checking if email exists
-  const checkEmailExists = async (email) => {
-    return false; // Replace this with your actual logic
-  }
+  const handleOpenSnackbar = () => {
+    setSnackBar(true);
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackBar(false);
+  };
+
 
   async function handleImageUpload(event) {
     const file = event.target.files[0];;
@@ -127,31 +115,41 @@ function Register() {
     });
   }
 
-  const registerUser = async (firstName, lastName, email, password, image) => {
-    if(error){
-      console.log(error) //TODO: snackbar
+  const register = async (firstName, lastName, email, password, image) => {
+    if (!(email && firstName && lastName && password)) {
+      setMsg(dict.errorFields)
+      handleOpenSnackbar()
+      return
     }
-    try {
-      const registerResponse = await fetch("/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "firstName": firstName,
-          "lastName": lastName,
-          "email": email,
-          "password": password,
-          "image": image,
-        }),
-      });
+    if (!isEmailValid) {
+      setMsg(dict.errorEmail)
+      handleOpenSnackbar()
+      return
+    }
+    if (!isPasswordValid) {
+      setMsg(dict.errorPass)
+      handleOpenSnackbar()
+      return
+    }
+    const emailExists = await checkEmailExists(email);
+    if (emailExists) {
+      setMsg(dict.errorEmailExists)
+      handleOpenSnackbar()
+      return
+    }
 
-      console.log(registerResponse)
-    } catch (e) {
-      console.error("Error:", e);
+    try {
+      const response = await registerUser(firstName, lastName, email, password, image)
+      if (response) {
+        setMsg(dict.successSaveUser)
+        handleOpenSnackbar()
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
-    console.log('Registering user:', firstName, lastName, email, password);
   }
+
+  //TODO: to="/Login" from register
 
   return (
     <PageContainer>
@@ -160,15 +158,17 @@ function Register() {
           <TitleButton style={titleButton}>{dict.Register}</TitleButton>
           <InputField label={dict.firstName} value={firstName} onValueChange={setFirstName} checkIfValid={() => true} error="" />
           <InputField label={dict.lastName} value={lastName} onValueChange={setLastName} checkIfValid={() => true} error="" />
-          <InputField label={dict.email} value={email} onValueChange={setEmail} checkIfValid={() => true} error="" />
-          <InputField label={dict.password} value={password} onValueChange={setPassword} checkIfValid={() => true} error="" type="password" />
+          <InputField label={dict.email} value={email} onValueChange={setEmail} checkIfValid={isValidEmail} error={dict.errorEmail} onValidChange={setIsEmailValid} />
+          <InputField label={dict.password} value={password} onValueChange={setPassword} checkIfValid={isValidPassword} error={dict.errorPass} type="password" onValidChange={setIsPasswordValid} />
           <InputField label={dict.image} onValueChange={handleImageUpload} checkIfValid={() => true} error="" type="file" accept="image/*" name="image" id="imageInput" />
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '10%' }}>
-            <CustomButton type="submit" label={dict.Register} style={{ width: '35%' }} to="/Login"/>
+            <CustomButton type="submit" label={dict.Register} style={{ width: '35%' }} />
             <CustomButton type="button" label={dict.alreadyhaveanaccount} to="/LogIn" style={{ width: '35%' }} secondary />
           </div>
         </ContainerBox>
       </form>
+      <CustomSnackbar openSnackbar={snackbar} handleClose={handleCloseSnackbar} msg={msg} />
+
     </PageContainer>
   );
 }

@@ -1,56 +1,46 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import useDictionary from "../../resources/Dictionary/Dictionary";
 
-const InputField = ({ name, label, value, onValueChange, checkIfValid, error, inputProps, type, multiline, rows }) => {
+const InputField = ({
+    name,
+    label,
+    value,
+    onValueChange,
+    checkIfValid,
+    error,
+    inputProps,
+    type,
+    multiline,
+    rows,
+    onValidChange
+}) => {
     const dict = useDictionary();
     const [isError, setIsError] = useState(false);
+    const [isInitiallyValid, setIsInitiallyValid] = useState(true);
 
-    const handleChange = (newValue) => {
-        // Call the parent's onValueChange callback with the new value
-        onValueChange(newValue);
-    };
-
-    const handleFileChange = (event) => {
-        onValueChange(event);
-    }
+    useEffect(() => {
+        // Check initial validity only if there's an initial value
+        if (value && checkIfValid) {
+            const isValid = checkIfValid(value);
+            setIsError(!isValid);
+            setIsInitiallyValid(isValid);
+            onValidChange && onValidChange(isValid);
+        }
+    }, [value, checkIfValid, onValidChange]);
 
     const handleInputChange = (event) => {
         const newValue = event.target.value;
+        onValueChange(newValue);
 
-        if (checkIfValid) {
-            if (checkIfValid(newValue)) {
-                setIsError(false);
-                if (type === "file") {
-                    handleFileChange(event)
-                } else {
-                    handleChange(newValue);
-                }
-            } else {
-                setIsError(true);
-                if (type === "file") {
-                    handleFileChange(event)
-                } else {
-                    handleChange(newValue);
-                }
-            }
+        // Validate only after user interaction starts
+        if (!isInitiallyValid && checkIfValid) {
+            const isValid = checkIfValid(newValue);
+            setIsError(!isValid);
+            onValidChange && onValidChange(isValid);
         }
-        else {
-            setIsError(false);
-                if (type === "file") {
-                    handleFileChange(event)
-                } else {
-                    handleChange(newValue);
-                }
-        }
-        // if (!isNaN(newSize)) { // Check if the input is a valid number
-        //   setError(false);
-        //   handleChange(newValue);
-        // } else {
-        //   setError(true);
-        // }
     };
 
     return (
@@ -58,41 +48,34 @@ const InputField = ({ name, label, value, onValueChange, checkIfValid, error, in
             component="form"
             sx={{
                 "& > :not(style)": {
-                    mt: 1, width: "80%",
+                    mt: 1,
+                    width: "80%",
                 },
                 "& .MuiInputLabel-root": {
                     width: "127%",
                     color: "var(--medium-green)",
                     textAlign: dict.stylePage
                 },
-
                 "& .MuiInputLabel-shrink": {
                     width: "127%",
                     color: "var(--medium-green) !important",
                     textAlign: dict.stylePage,
-                    // transformOrigin: 'center',
                 },
-
                 "& .MuiOutlinedInput-root": {
-                    // Change input color and border color
                     color: "var(--medium-green)",
                     "& fieldset": {
                         borderColor: "var(--medium-green)",
                         textAlign: dict.stylePage
                     },
                     "&:hover fieldset": {
-                        // Change border color on hover
                         borderColor: "var(--medium-green)",
                     },
                     "&.Mui-focused fieldset": {
-                        // Change border color when focused
                         borderColor: "var(--medium-green)",
                         textAlign: dict.stylePage,
                     },
                     "&.Mui-focused .MuiInputLabel-root": {
-                        // Change label color when focused
                         color: "var(--medium-green)",
-                        // textAlign: "right",
                         textAlign: dict.stylePage
                     },
                 },

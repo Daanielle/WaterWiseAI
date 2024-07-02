@@ -19,6 +19,8 @@ function UserDetails() {
     const [snackbar, setSnackBar] = useState(false);
     const [msg, setMsg] = useState("")
     const dict = useDictionary();
+    const [isEmailValid, setIsEmailValid] = useState(true);
+    const [isPasswordValid, setIsPasswordValid] = useState(true);
 
     // Handle state updates for first name, last name, email, and image
     const handleFirstNameChange = (value) => {
@@ -65,26 +67,37 @@ function UserDetails() {
 
     const handleUserDetailsChange = async (e) => {
         e.preventDefault();
+        if (!isEmailValid) {
+            setMsg(dict.errorEmail)
+            handleOpenSnackbar()
+            return
+        }
         const emailExists = await checkEmailExists(editedUser.email);
         if (emailExists) {
-            setMsg(dict.emailExists)
+            setMsg(dict.errorEmailExists)
             handleOpenSnackbar()
-        } else {
-            try {
-                const response = await patchUserDetails(editedUser)
-                updateUserDetails(editedUser)
-                if (response) {
-                    setMsg(dict.successSaveUser)
-                    handleOpenSnackbar()
-                }
-            } catch (error) {
-                console.error("Error:", error);
+            return
+        }
+
+        try {
+            const response = await patchUserDetails(editedUser)
+            updateUserDetails(editedUser)
+            if (response) {
+                setMsg(dict.successSaveUser)
+                handleOpenSnackbar()
             }
+        } catch (error) {
+            console.error("Error:", error);
         }
     };
 
     const handlePasswordSubmit = async (e) => {
         e.preventDefault();
+        if (!isPasswordValid) {
+            setMsg(dict.errorPass)
+            handleOpenSnackbar()
+            return
+        }
         try {
             const response = await updatePassword(editedUser, newPass)
             if (response) {
@@ -180,24 +193,25 @@ function UserDetails() {
                     <form onSubmit={handleUserDetailsChange}>
                         <InputField
                             label={dict.firstName}
-                            value={editedUser.firstName} 
-                            onValueChange={handleFirstNameChange} 
+                            value={editedUser.firstName}
+                            onValueChange={handleFirstNameChange}
                             checkIfValid={() => true}
                             error=""
                         />
                         <InputField
                             label={dict.lastName}
                             value={editedUser.lastName}
-                            onValueChange={handleLastNameChange} 
+                            onValueChange={handleLastNameChange}
                             checkIfValid={() => true}
                             error=""
                         />
                         <InputField
                             label={dict.email}
-                            value={editedUser.email} 
-                            onValueChange={handleEmailChange} 
+                            value={editedUser.email}
+                            onValueChange={handleEmailChange}
                             checkIfValid={isValidEmail}
                             error={dict.errorEmail}
+                            onValidChange={setIsEmailValid}
                         />
                         <InputField
                             label={dict.image}
@@ -222,6 +236,7 @@ function UserDetails() {
                             checkIfValid={isValidPassword}
                             error={dict.errorPass}
                             type="password"
+                            onValidChange={setIsPasswordValid}
                         />
                         <CustomButton type="submit" label={dict.save} style={{ width: '35%' }} />
                     </form>

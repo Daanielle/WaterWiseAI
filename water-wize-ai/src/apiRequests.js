@@ -92,6 +92,29 @@ export const getRecommendationsById = async (recId) => {
 };
 
 
+export const registerUser = async (firstName, lastName, email, password, image) => {
+  try {
+    const response = await fetch(`/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "firstName": firstName,
+        "lastName": lastName,
+        "email": email,
+        "password": password,
+        "image": image,
+      }),
+    });
+    const status = await response.json();
+    return status
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+
 export const getLoggedInUserId = async () => {
   const user = JSON.parse(localStorage.getItem('user'));
   try {
