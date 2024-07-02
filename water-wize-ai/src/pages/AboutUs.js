@@ -10,7 +10,7 @@ import {Grid} from '@mui/material';
 
 
 const stylebutton={ 
-  marginTop: '-150px',  // Adjust vertical positioning as needed
+  marginTop: '-225px',  // Adjust vertical positioning as needed
   marginLeft: '60px',
 }
 
@@ -41,7 +41,7 @@ function AboutUs() {
           {keys.slice().map((key, index) => (
           <div  key={index}>
             {key && teamDetails[key] && (
-                <CustomCard sx={{width: 260,height: 280,marginLeft:"20px",image:{height: "45%", width:"50%", marginLeft:"20%" }}}
+                <CustomCard sx={{width: 260,height: 240,marginLeft:"20px",image:{ width: 150,height: 140, borderRadius: '2%', marginLeft:"20%", marginTop:"2%" }}}
                   title={teamDetails[key].my_Name}
                   // description={ teamDetails[key].about_me}
                   image={teamDetails[key].image_link}

@@ -6,10 +6,10 @@ import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import NumbersIcon from "@mui/icons-material/Numbers";
 import RecommendIcon from "@mui/icons-material/Recommend";
-import useDictionary from "../Dictionary/Dictionary";
+//import useDictionary from "../Dictionary/Dictionary";
 
 function WaterCalculatorVariablesDetails() {
-  const dict = useDictionary();
+  //const dict = useDictionary();
 
   const details = {
     grad: {

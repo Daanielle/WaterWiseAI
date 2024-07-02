@@ -4,7 +4,7 @@ import { Container, Typography, Grid, Paper, Box, Accordion, AccordionSummary, A
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PageContainer from '../components/PageContainer'
 import useDictionary from "../resources/Dictionary/Dictionary";
-
+import ContainerBox from "../components/ContainerBox"
 // Import image files
 import MOPCenterImg from '../resources/images/MOPCenter.png';
 import KarkaIMG from '../resources/images/Karka.jpg';
@@ -92,18 +92,18 @@ style={stylebutton}
   ];  
   return (
     <PageContainer>
-      <Container sx={{ backgroundColor: ' var(--extra-white)', padding: '2rem' }}>
+      <ContainerBox sx={{ backgroundColor: "white", width: "90%", padding: '2rem', border: "2px solid var(--medium-green)" }}>
         <Typography variant="h3" gutterBottom align="center" color="var(--medium-green)">{dict.support}</Typography>
 
         {/* FAQ Section */}
         <Box mb={4}>
-          <Typography variant="h4" gutterBottom>{dict.GuideFAQ}</Typography>
+          <Typography sx={{fontWeight:"bold", color:"var(--medium-green)" }} variant="h4" gutterBottom>{dict.GuideFAQ}</Typography>
           {faqData.map((faq, index) => (
-            <Accordion key={index}>
+            <Accordion sx={{ minHeight: 20, border: "2px solid var(--medium-green)",marginTop:"12px" }} key={index}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>{faq.question}</Typography>
+                <Typography sx={{ fontSize:"26px" }}>{faq.question}</Typography>
               </AccordionSummary>
-              <AccordionDetails>
+              <AccordionDetails sx={{ fontSize:"20px", color:"var(--medium-green)" }}>
                 <Typography>{faq.answer}</Typography>
               </AccordionDetails>
             </Accordion>
@@ -113,7 +113,7 @@ style={stylebutton}
          {/* Resources & Tools Section */}
 
          <Box mb={4}>
-          <Typography variant="h4"  gutterBottom>{dict.GuideResourcesAndTools}</Typography>
+          <Typography sx={{fontWeight:"bold", color:"var(--medium-green)" }} variant="h4"  gutterBottom>{dict.GuideResourcesAndTools}</Typography>
           <Grid container spacing={2}>
             {resources.map((resource, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
@@ -131,7 +131,7 @@ style={stylebutton}
 
         {/* Screen Explanations Section */}
         <Box mb={4}>
-          <Typography variant="h4" gutterBottom>{dict.GuideScreenExplanations}</Typography>
+          <Typography sx={{fontWeight:"bold", color:"var(--medium-green)" }} variant="h4" gutterBottom>{dict.GuideScreenExplanations}</Typography>
           <Grid container spacing={2}>
             {screenExplanations.map((screen, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
@@ -148,14 +148,14 @@ style={stylebutton}
 
         {/* Video Section */}
         <Box mb={4}>
-          <Typography variant="h4" gutterBottom>{dict.GuideDemonstration}</Typography>
+          <Typography sx={{fontWeight:"bold", color:"var(--medium-green)" }}variant="h4" gutterBottom>{dict.GuideDemonstration}</Typography>
           <Paper>
-            <Box p={2}>
-              <iframe width="100%" height="400" src="https://www.youtube.com/embed/your-video-id" title="Water Calculator Demonstration" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            <Box sx={{border: "2px solid var(--medium-green)"}} p={2}>
+              <iframe  width="100%" height="400" src="https://www.youtube.com/embed/your-video-id" title="Water Calculator Demonstration" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             </Box>
           </Paper>
         </Box>
-      </Container>
+      </ContainerBox>
     </PageContainer>
   );
 };

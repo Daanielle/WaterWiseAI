@@ -121,6 +121,58 @@
 
 /**
  * @swagger
+ * /users/check-email:
+ *   post:
+ *     summary: Check if an email is already in use
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: johndoe@gmail.com
+ *                 description: Email address to check
+ *     responses:
+ *       200:
+ *         description: Email check successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 exists:
+ *                   type: boolean
+ *                   example: true
+ *                   description: Whether the email is already in use
+ *       400:
+ *         description: Invalid email format
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Invalid email format
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Internal server error
+ */
+
+
+/**
+ * @swagger
  * /users/{id}:
  *   patch:
  *     summary: Update a user
