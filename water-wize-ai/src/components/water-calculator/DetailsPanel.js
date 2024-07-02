@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { Icon } from "@mui/material";
-import { Paper, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 
 function DetailsPanel({ detailedData }) {
   console.log(detailedData)
