@@ -43,7 +43,8 @@ function LogIn() {
     } catch (error) {
       console.error("Error:", error);
     }
-  }
+  } 
+  //TODO: add a route to home if login success
 
   return (
     <PageContainer>
@@ -52,7 +53,7 @@ function LogIn() {
           <TitleButton style={titleButton}>{dict.LogIn}</TitleButton>
           <InputField label={dict.email} value={email} onValueChange={setEmail} checkIfValid={() => true} error="" />
           <InputField label={dict.password} value={password} type="password" onValueChange={setPassword} checkIfValid={() => true} error="" />
-          <CustomButton type="Submit" label={dict.Login} to="/Home"/>
+          <CustomButton type="Submit" label={dict.Login} />
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '10%' }}>
             <CustomButton type="button" label={dict.forgetpassword} style={{ width: '35%' }} secondary />
             <CustomButton type="button" label={dict.Register} to="/Register" style={{ width: '35%' }} secondary />

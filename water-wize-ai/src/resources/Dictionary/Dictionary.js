@@ -162,16 +162,25 @@ const hebDict = {
   westyle: "rightwe",
   arestyle: "rightare",
 
+  //editUser
+  save: "שמירה",
+  editDetails: "עריכת פרטים",
+  editPassword: "עריכת סיסמה",
+  successSaveUser: "פרטי משתמש נשמרו בהצלחה",
+  successSavePass: "סיסמה נשמרה בהצלחה",
+
   //errors
   errorsAreaSizeRange: "הזינו מספר תקין, בין 10 ל-100000",
   errorsKcRange: "הזינו מספר תקין, בין 0 ל-2",
+  errorEmailExists: "אימייל קיים במערכת",
+  errorEmail: "הזינו כתובת אימייל תקינה, לדוגמה example@example.com",
+  errorPass: "הזינו סיסמה תקינה - לפחות 8 תווים, אות גדולה ואות קטנה",
 
   //Modal
   CloseModal: "סגירה",
+
   textAlign: "right",
 
-    //editUser
-    save: "שמירה"
 };
 
 const engDict = {
@@ -332,16 +341,24 @@ based on agricultural research.`,
   westyle: "leftwe",
   arestyle: "leftare",
 
+  //editUser
+  save: "save",
+  editDetails: "Edit Details",
+  editPassword: "Edit Password",
+  successSaveUser: "User details saved successfully",
+  successSavePass: "Password saved successfully",
+
   //errors
   errorsAreaSizeRange: "please enter a valid number - between 10 to 100000",
   errorsKcRange: "please enter a valid number - between 0 to 2",
+  errorEmailExists: "Email already exists",
+  errorEmail: "please enter a valid email - e.g. example@example.com",
+  errorPass: "please enter a valid password - 8 characters, at least one uppercase letter, one lowercase letter and one number",
 
   //Modal
   CloseModal: "Close",
   textAlign: "left",
 
-  //editUser
-  save: "Save"
 };
 
 const useDictionary = () => {

@@ -30,6 +30,11 @@ const InputField = ({ name, label, value, onValueChange, checkIfValid, error, in
                 }
             } else {
                 setIsError(true);
+                if (type === "file") {
+                    handleFileChange(event)
+                } else {
+                    handleChange(newValue);
+                }
             }
         }
         else {

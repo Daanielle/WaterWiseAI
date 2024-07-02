@@ -5,14 +5,19 @@ import CustomButton from "../components/CustomButton";
 import ContainerBox from "../components/ContainerBox";
 import InputField from "../components/inputs/InputField";
 import useDictionary from "../resources/Dictionary/Dictionary";
-import { patchUserDetails } from "../apiRequests";
+import { patchUserDetails, updatePassword, checkEmailExists } from "../apiRequests";
 import TitleButton from "../components/TitleButton";
 import palm from "../resources/images/palmColorful.png";
+import CustomSnackbar from "../components/CustomSnackbar";
+import { isValidEmail, isValidPassword } from "../resources/validations";
 
 
 function UserDetails() {
     const { user, updateUserDetails } = useContext(AuthContext);
     const [editedUser, setEditedUser] = useState(user);
+    const [newPass, setNewPass] = useState("")
+    const [snackbar, setSnackBar] = useState(false);
+    const [msg, setMsg] = useState("")
     const dict = useDictionary();
 
     // Handle state updates for first name, last name, email, and image
@@ -37,6 +42,10 @@ function UserDetails() {
         }));
     };
 
+    const handlePasswordChange = (value) => {
+        setNewPass(value);
+    };
+
     const handleImageUpload = async (event) => {
         const file = event.target.files[0];
 
@@ -56,13 +65,44 @@ function UserDetails() {
 
     const handleUserDetailsChange = async (e) => {
         e.preventDefault();
+        const emailExists = await checkEmailExists(editedUser.email);
+        if (emailExists) {
+            setMsg(dict.emailExists)
+            handleOpenSnackbar()
+        } else {
+            try {
+                const response = await patchUserDetails(editedUser)
+                updateUserDetails(editedUser)
+                if (response) {
+                    setMsg(dict.successSaveUser)
+                    handleOpenSnackbar()
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+    };
+
+    const handlePasswordSubmit = async (e) => {
+        e.preventDefault();
         try {
-            const response = await patchUserDetails(editedUser)
-            updateUserDetails(editedUser)
-            console.log(response) //TODO: change to snackbar
+            const response = await updatePassword(editedUser, newPass)
+            if (response) {
+                setMsg(dict.successSavePass)
+                handleOpenSnackbar()
+                setNewPass("")
+            }
         } catch (error) {
             console.error("Error:", error);
         }
+    };
+
+    const handleOpenSnackbar = () => {
+        setSnackBar(true);
+    };
+
+    const handleCloseSnackbar = () => {
+        setSnackBar(false);
     };
 
     function compressImage(file) {
@@ -126,7 +166,7 @@ function UserDetails() {
         zIndex: -1, // Ensures the div is in the back
         width: '600px', // Explicit width
         height: '420px', // Explicit height
-            backgroundImage: `url(${palm})`,
+        backgroundImage: `url(${palm})`,
         backgroundSize: 'cover', // Cover the entire div
         backgroundPosition: 'center', // Center the image
     };
@@ -136,28 +176,28 @@ function UserDetails() {
             <div >
                 <ContainerBox style={{ display: 'inline-block', width: 'calc(50% - 5px)', marginRight: '10px', verticalAlign: 'top' }}>
                     <img src={user && user.image} style={{ maxWidth: '60%', objectFit: 'contain', borderRadius: '3%' }} alt="User" />
-                    <TitleButton>Edit Details</TitleButton>
+                    <TitleButton>{dict.editDetails}</TitleButton>
                     <form onSubmit={handleUserDetailsChange}>
                         <InputField
                             label={dict.firstName}
-                            value={editedUser.firstName} // Use editedUser state for controlled input
-                            onValueChange={handleFirstNameChange} // Handle first name change
+                            value={editedUser.firstName} 
+                            onValueChange={handleFirstNameChange} 
                             checkIfValid={() => true}
                             error=""
                         />
                         <InputField
                             label={dict.lastName}
-                            value={editedUser.lastName} // Use editedUser state for controlled input
-                            onValueChange={handleLastNameChange} // Handle last name change
+                            value={editedUser.lastName}
+                            onValueChange={handleLastNameChange} 
                             checkIfValid={() => true}
                             error=""
                         />
                         <InputField
                             label={dict.email}
-                            value={editedUser.email} // Use editedUser state for controlled input
-                            onValueChange={handleEmailChange} // Handle email change
-                            checkIfValid={() => true}
-                            error=""
+                            value={editedUser.email} 
+                            onValueChange={handleEmailChange} 
+                            checkIfValid={isValidEmail}
+                            error={dict.errorEmail}
                         />
                         <InputField
                             label={dict.image}
@@ -173,18 +213,22 @@ function UserDetails() {
                     </form>
                 </ContainerBox>
                 <ContainerBox style={{ display: 'inline-block', width: 'calc(50% - 5px)', verticalAlign: 'top', backgroundColor: 'var(--light-accent-gray)' }}>
-                    <TitleButton>Edit Password</TitleButton>
-                    <InputField
-                        label={dict.password}
-                        value="************" 
-                        onValueChange={handleLastNameChange} 
-                        checkIfValid={() => true}
-                        error=""
-                    />
-                    <CustomButton type="submit" label={dict.save} style={{ width: '35%' }} />
+                    <form onSubmit={handlePasswordSubmit}>
+                        <TitleButton>{dict.editPassword}</TitleButton>
+                        <InputField
+                            label={dict.password}
+                            value={newPass}
+                            onValueChange={handlePasswordChange}
+                            checkIfValid={isValidPassword}
+                            error={dict.errorPass}
+                            type="password"
+                        />
+                        <CustomButton type="submit" label={dict.save} style={{ width: '35%' }} />
+                    </form>
                 </ContainerBox>
             </div>
             <div style={img} />
+            <CustomSnackbar openSnackbar={snackbar} handleClose={handleCloseSnackbar} msg={msg} />
 
         </PageContainer>
     );

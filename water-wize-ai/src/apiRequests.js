@@ -212,7 +212,6 @@ export const getAllUsers = async (userId) => {
 
 export const patchUserDetails = async (editedUser) => {
   try {
-    console.log(editedUser)
     const response = await fetch("/users/" + editedUser._id, {
       method: "PATCH",
       headers: {
@@ -224,13 +223,52 @@ export const patchUserDetails = async (editedUser) => {
       const errorData = await response.json();
       throw new Error(errorData.message || 'Update failed!');
     }
-    await response.json(); // Parse the JSON response
-    //updateUserDetails(editedUser);
+    const status = await response.json();
+    return status
   } catch (error) {
     console.error("Error:", error);
   }
 };
 
+export const updatePassword = async (user, newPass) => {
+  try {
+    const response = await fetch("/users/" + user._id + "/password", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({password: newPass}),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Update failed!');
+    }
+    const status = await response.json();
+    return status
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+export const checkEmailExists = async (email) => {
+  try {
+    const response = await fetch("/users/check-email" , {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({email: email}),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Update failed!');
+    }
+    const res = await response.json();
+    return res
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
 export const addNewForumMessage = async (message) => {
   try {
