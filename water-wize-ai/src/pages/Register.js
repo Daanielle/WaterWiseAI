@@ -132,7 +132,7 @@ function Register() {
       return
     }
     const emailExists = await checkEmailExists(email);
-    if (emailExists) {
+    if (emailExists.exists) {
       setMsg(dict.errorEmailExists)
       handleOpenSnackbar()
       return

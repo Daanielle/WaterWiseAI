@@ -73,7 +73,7 @@ function UserDetails() {
             return
         }
         const emailExists = await checkEmailExists(editedUser.email);
-        if (emailExists) {
+        if (emailExists.exists) {
             setMsg(dict.errorEmailExists)
             handleOpenSnackbar()
             return

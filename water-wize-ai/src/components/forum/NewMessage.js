@@ -85,7 +85,7 @@ const NewMessage = ({ onCloseNewMsg  }) => {
                 alignItems: 'center',
                 textAlign: 'center',
             }}>Add a new message</TitleButton>
-            <CustomButton label="attach a recommendation" onClick={handleOpenRecsModal} secondary />
+            <CustomButton label="attach a recommendation" onClick={handleOpenRecsModal} secondary to="/Forum"/>
             <InputField
                 label="Title"
                 value={title}

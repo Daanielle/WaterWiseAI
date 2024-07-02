@@ -25,76 +25,78 @@ const Recommendation = ({ recommendationDataRows, onRowClick }) => {
     ];
 
     return (
-        <TableContainer component={Paper}>
-            <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        {tableHeaders.map((header, index) => (
-                            <TableCell
-                                key={index}
-                                align="center"
-                                sx={{ fontWeight: 'bold', backgroundColor: 'var(--light-gray)' }}
-                            >
-                                <Tooltip title={
-                                    <React.Fragment>
-                                        <Typography color="inherit">{header.description}</Typography>
-                                    </React.Fragment>
-                                }>
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        {header.icon && (
-                                            <Icon component={header.icon} sx={{ color: "var(--medium-green)", fontSize: '1rem', marginRight: '0.5rem' }} />
-                                        )}
-                                        <div style={{ fontSize: '1rem' }}>{header.title}</div>
-                                    </div>
-                                </Tooltip>
-                            </TableCell>
-                        ))}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {recommendationDataRows.length > 0 ? (
-                        recommendationDataRows.map((row, rowIndex) => (
-                            <TableRow
-                                key={rowIndex}
-                                onClick={() => onRowClick(row)}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
-                            >
-                                <TableCell align="right">
-                                    {new Date(row.createdAt).toLocaleDateString(undefined, {
-                                        year: 'numeric',
-                                        month: '2-digit',
-                                        day: '2-digit'
-                                    })}
-                                </TableCell>
-                                <TableCell align="right">{row.station}</TableCell>
-                                {Object.keys(varData).map((key, cellIndex, arr) => {
-                                    const value = row[key];
-                                    const isLastCell = cellIndex === arr.length - 1;
-                                    return (
-                                        <TableCell
-                                            key={cellIndex}
-                                            align="right"
-                                            sx={isLastCell ? {
-                                                backgroundColor: 'var(--accent-orange)',
-                                                fontWeight: 'bold',
-                                            } : {}}
-                                        >
-                                            {typeof value === 'number' ? value.toFixed(3) : value}
-                                        </TableCell>
-                                    );
-                                })}
-                            </TableRow>
-                        ))
-                    ) : (
+        <div style={{ width: '70vw', overflowX: 'auto', margin: '0 auto' }}>
+            <TableContainer component={Paper}>
+                <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
                         <TableRow>
-                            <TableCell colSpan={tableHeaders.length} align="center">
-                                There are no saved recommendations  for this user yet
-                            </TableCell>
+                            {tableHeaders.map((header, index) => (
+                                <TableCell
+                                    key={index}
+                                    align="center"
+                                    sx={{ fontWeight: 'bold', backgroundColor: 'var(--light-gray)' }}
+                                >
+                                    <Tooltip title={
+                                        <React.Fragment>
+                                            <Typography color="inherit">{header.description}</Typography>
+                                        </React.Fragment>
+                                    }>
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            {header.icon && (
+                                                <Icon component={header.icon} sx={{ color: "var(--medium-green)", fontSize: '1rem', marginRight: '0.5rem' }} />
+                                            )}
+                                            <div style={{ fontSize: '1rem' }}>{header.title}</div>
+                                        </div>
+                                    </Tooltip>
+                                </TableCell>
+                            ))}
                         </TableRow>
-                    )}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {recommendationDataRows.length > 0 ? (
+                            recommendationDataRows.map((row, rowIndex) => (
+                                <TableRow
+                                    key={rowIndex}
+                                    onClick={() => onRowClick(row)}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
+                                >
+                                    <TableCell align="right">
+                                        {new Date(row.createdAt).toLocaleDateString(undefined, {
+                                            year: 'numeric',
+                                            month: '2-digit',
+                                            day: '2-digit'
+                                        })}
+                                    </TableCell>
+                                    <TableCell align="right">{row.station}</TableCell>
+                                    {Object.keys(varData).map((key, cellIndex, arr) => {
+                                        const value = row[key];
+                                        const isLastCell = cellIndex === arr.length - 1;
+                                        return (
+                                            <TableCell
+                                                key={cellIndex}
+                                                align="right"
+                                                sx={isLastCell ? {
+                                                    backgroundColor: 'var(--accent-orange)',
+                                                    fontWeight: 'bold',
+                                                } : {}}
+                                            >
+                                                {typeof value === 'number' ? value.toFixed(3) : value}
+                                            </TableCell>
+                                        );
+                                    })}
+                                </TableRow>
+                            ))
+                        ) : (
+                            <TableRow>
+                                <TableCell colSpan={tableHeaders.length} align="center">
+                                    There are no saved recommendations for this user yet
+                                </TableCell>
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
     );
 }
 
