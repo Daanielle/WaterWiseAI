@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import useDictionary from "../../resources/Dictionary/Dictionary";
 
-const InputField = ({ label, value, onValueChange, checkIfValid, error, inputProps, type, multiline, rows }) => {
+const InputField = ({ name, label, value, onValueChange, checkIfValid, error, inputProps, type, multiline, rows }) => {
     const dict = useDictionary();
     const [isError, setIsError] = useState(false);
 
@@ -97,6 +97,7 @@ const InputField = ({ label, value, onValueChange, checkIfValid, error, inputPro
         >
             <TextField
                 id="outlined-basic"
+                name={name}
                 label={label}
                 variant="outlined"
                 value={value}

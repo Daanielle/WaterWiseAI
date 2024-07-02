@@ -1,7 +1,7 @@
 
 .formControl {
   display: flex;
-  gap: 2rem; 
+  gap: 5rem; 
 }
 
 .leftCol {
@@ -17,8 +17,6 @@
   display: flex;
   justify-content: center; 
   align-items: flex-start; 
-  margin-left: 0%;
-  margin-right: 50px;
   /* flexWrap: 'wrap'; */
 }
 
