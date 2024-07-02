@@ -3,17 +3,19 @@ import CustomButton from "../components/CustomButton";
 import React from "react";
 import { Box, Grid } from "@mui/material";
 import ContainerBox from "../components/ContainerBox";
-import leafpalm from "../resources/images/LeafPalmRight.jpg"
-import leafpalmLeft from "../resources/images/LeafPalmLeft.jpg";
+import leafpalm from "../resources/images/LeafPalmRight.png"
+import leafpalmLeft from "../resources/images/LeafPalmLeft.png";
+// import leafpalm from "../resources/images/LeafPalmRight.jpg"
+// import leafpalmLeft from "../resources/images/LeafPalmLeft.jpg";
 import useDictionary from "../resources/Dictionary/Dictionary";
 
 const containerStyle = {
   position: 'absolute',
-  top: '60px', // Adjust as needed
+  top: '100px', // Adjust as needed
   right: '10px', // Adjust as needed
   zIndex: 10, // Ensures the div is in the front
-  width: '500px', // Adjust as needed
-  height: '500px', // Adjust as needed
+  width: '600px', // Adjust as needed
+  height: '420px', // Adjust as needed
   backgroundImage: `url(${leafpalm})`,
   backgroundSize: 'cover', // Cover the entire div
   backgroundPosition: 'center', // Center the image
