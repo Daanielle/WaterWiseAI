@@ -14,9 +14,9 @@ function TeamInfo({ linkedinUrl, emailUrl, facebookUrl, style }) {
                 <IconButton onClick={() => window.open(linkedinUrl, '_blank')}>
                     <LinkedInIcon />
                 </IconButton>
-                <IconButton onClick={() => window.open(facebookUrl, '_blank')}>
+                {/* <IconButton onClick={() => window.open(facebookUrl, '_blank')}>
                     <FacebookIcon />
-                </IconButton>
+                </IconButton> */}
             </div>
     );
 }

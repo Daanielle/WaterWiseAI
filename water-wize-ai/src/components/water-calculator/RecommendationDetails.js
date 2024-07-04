@@ -37,7 +37,7 @@ function DetailsPanel ({ detailedData }){
   });
   
 
-  const bottomIcons =(title, description,icon)=>( <Box sx={{ position: 'sticky','& > :not(style)': { m: 1,marginLeft: '360%',marginTop: '-130%'} }}>
+  const bottomIcons =(title, description,icon)=>( <Box sx={{ position: 'sticky','& > :not(style)': { m: 1,marginLeft: '200%',marginTop: '-310%'} }}>
     <Fab size="small" aria-label="add">
       <IconButton aria-label="more info" onClick={(e) => handleOpenModal(e,title, description,icon)}>
         <QuestionMarkIcon sx={{ color: "var(--dark-green)" }} aria-label="more info" />
@@ -66,7 +66,7 @@ function DetailsPanel ({ detailedData }){
     <div className={classes.detailsPanel}>
           <div className={classes.cardContainer}>
               <div>
-                <CustomCard sx={{width: 250, height: 100,border: "2px solid darkgreen",marginLeft:"40px",backgroundColor:'var(--medium-green)',color:"var(--black)" , icon:{color:"var(  --light-gray)"}}}
+                <CustomCard sx={{width: 250, height: 150,border: "2px solid darkgreen",marginLeft:"40px",backgroundColor:'var(--medium-green)',color:"var(--black)" , icon:{color:"var(  --light-gray)"}}}
                   topIcon={variablesMapping["recommendation"].icon} 
                   title={variablesMapping["recommendation"]?.title}
                   description={ detailedData.recommendation !== "--" ? detailedData.recommendation + " " + variablesMapping["recommendation"]?.units : detailedData.recommendation}
