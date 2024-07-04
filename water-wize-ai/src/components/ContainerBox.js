@@ -7,7 +7,7 @@ const ContainerBox = ({ children, sx, width, ...props }) => {
         <Box
             sx={{
                 p: 2,
-                backgroundColor: 'var(--background-color)',
+                // backgroundColor: 'var(--background-color)',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                 borderRadius: '20px',
                 width: width || { xs: '90%', sm: '70%', md: '50%', lg: '30%' },
@@ -15,7 +15,8 @@ const ContainerBox = ({ children, sx, width, ...props }) => {
                 // maxWidth: '100%', // responsive max width
                 display: 'flex', // Make it a flex container
                 flexDirection: 'column', // Stack children vertically
-                border: "2px solid var(--primary-color)",
+                // border: "2px solid var(--primary-color)",
+                border: "2px solid var(--medium-green)",
                 ...sx,
             }}
             {...props}

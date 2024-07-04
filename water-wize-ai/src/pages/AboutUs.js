@@ -11,14 +11,15 @@ import {Grid} from '@mui/material';
 
 const stylebutton={ 
   marginTop: '-225px',  // Adjust vertical positioning as needed
-  marginLeft: '60px',
+  marginLeft: '85px',
 }
 
-const BottomIcons=(linkedIn,email,facebook, style)=>(
+// const BottomIcons=(linkedIn,email,facebook, style)=>(
+  const BottomIcons=(linkedIn,email, style)=>(
 <TeamInfo 
             linkedinUrl={linkedIn} 
             emailUrl={email}  
-            facebookUrl={facebook} 
+            // facebookUrl={facebook} 
             style={style}
         />
       );
@@ -45,7 +46,7 @@ function AboutUs() {
                   title={teamDetails[key].my_Name}
                   // description={ teamDetails[key].about_me}
                   image={teamDetails[key].image_link}
-                  bottomIcons={BottomIcons(teamDetails[key].linkedinUrl,teamDetails[key].emailUrl,teamDetails[key].facebookUrl,stylebutton)}
+                  bottomIcons={BottomIcons(teamDetails[key].linkedinUrl,teamDetails[key].emailUrl,stylebutton)}
                 />
             )}
           </div>

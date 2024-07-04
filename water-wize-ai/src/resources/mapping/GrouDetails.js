@@ -6,7 +6,7 @@ import useDictionary from "../Dictionary/Dictionary";
 
 function GrouDetails () {
 const dict = useDictionary();
-const facebookUrl = "https://www.facebook.com/yourfacebookprofile"; // Change this to your Facebook profile URL
+// const facebookUrl = "https://www.facebook.com/yourfacebookprofile"; // Change this to your Facebook profile URL
 
 const TeamDetails={
   Danielle: {
@@ -15,7 +15,7 @@ const TeamDetails={
     about_me:dict.aboutMe,
     linkedinUrl:"https://www.linkedin.com/in/shachar-adam-836a94277",
     emailUrl:"mailto:adamsha@bgu.post.ac.il",
-    facebookUrl:facebookUrl ,
+    // facebookUrl:facebookUrl ,
 
 
   },
@@ -25,16 +25,16 @@ const TeamDetails={
     about_me:dict.aboutMe,
     linkedinUrl:"https://www.linkedin.com/in/shachar-adam-836a94277",
     emailUrl:"mailto:adamsha@bgu.post.ac.il",
-    facebookUrl:facebookUrl, 
+    // facebookUrl:facebookUrl, 
   },
 
   Lana: {
     my_Name:dict.Lana_Name,
     image_link:lanasImage,
     about_me:dict.aboutMe,
-    linkedinUrl:"https://www.linkedin.com/in/shachar-adam-836a94277",
-    emailUrl:"mailto:adamsha@bgu.post.ac.il",
-    facebookUrl:facebookUrl, 
+    linkedinUrl:"https://www.linkedin.com/in/lana-aburaya-a78446224",
+    emailUrl:"mailto:lana.aburya@gmail.com",
+    // facebookUrl:facebookUrl, 
   },
 
   Shachar: {
@@ -43,7 +43,7 @@ const TeamDetails={
     about_me:dict.aboutMe,
     linkedinUrl:"https://www.linkedin.com/in/shachar-adam-836a94277",
     emailUrl:"mailto:adamsha@bgu.post.ac.il",
-    facebookUrl:facebookUrl, 
+    // facebookUrl:facebookUrl, 
 },
 
 };
