@@ -147,7 +147,6 @@ router.post('/calculate', async (req, res) => {
     dateToCheck.setUTCHours(0, 0, 0, 0);
     currentDate.setUTCHours(0, 0, 0, 0);
 
-    console.log(dateToCheck <= currentDate)
     
     if (dateToCheck <= currentDate) {
       lastBatch = await fetchDataFromStation(selectedArea, date);

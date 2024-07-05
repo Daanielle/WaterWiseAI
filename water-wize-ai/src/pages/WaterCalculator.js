@@ -141,6 +141,7 @@ function WaterCalculator() {
   const [userId, setUserId] = useState(null)
   const [myCoordinates, setMyCoordinates] = useState(null)
   const [allowGeo, setAllowGeo] = useState(true)
+  const [isPrediction, setIsPrediction] = useState(false)
   const [detailedData, setDetailedData] = useState({
     grad: "--",
     windSpeed1mm: "--",
@@ -184,16 +185,14 @@ function WaterCalculator() {
   useEffect(() => {
     const fetchData = async () => {
       await getValues();
-      console.log(selectedArea);
     };
 
     fetchData();
-  }, [selectedArea]);
+  }, [selectedArea, selectedDate]);
 
 
-  const handleAreaChange = async (newArea) => {
+  const handleAreaChange = (newArea) => {
     setSelectedArea(newArea);
-    // await getValues(newArea);
   };
 
   const handleKcChange = (newKc) => {
@@ -251,6 +250,13 @@ function WaterCalculator() {
         let date = selectedDate.add(1, 'day')
         const recommendationData = await getCalculate(area, selectedAreaSize, date, selectedKc);
         setDetailedData(recommendationData);
+
+        const dateToCheck = new Date(date);
+        const currentDate = new Date();
+        dateToCheck.setUTCHours(0, 0, 0, 0);
+        currentDate.setUTCHours(0, 0, 0, 0);
+        setIsPrediction(dateToCheck > currentDate)
+
       }
     } catch (error) {
       console.error("Error:", error);
@@ -259,13 +265,16 @@ function WaterCalculator() {
 
   const getValues = async () => {
     try {
-      console.log("hi")
-      console.log(selectedArea)
       if (selectedArea && selectedDate) {
         //let area = lopsidedlocations[area.value] ? lopsidedlocations[selectedArea.value] : selectedArea.value
         let date = selectedDate.add(1, 'day')
-        const recommendationData = await getCalculate(selectedArea.value, 100, date, selectedKc);
-        setDetailedData(recommendationData);
+        let recommendationData = await getCalculate(selectedArea.value, 100, date, selectedKc);
+        let recommendationNew = {
+          ...recommendationData,
+          recommendation: "--",
+        }
+        console.log(recommendationNew)
+        setDetailedData(recommendationNew);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -317,9 +326,6 @@ function WaterCalculator() {
 
   let title = selectedArea && selectedDate ? `Values for ${selectedArea.label} station for the date of: ${formatted}` : "Select date and time to show values"
 
-
-
-  //<DetailsPanel detailedData={detailedData} />
   return (
     <div className={classes.WaterCalculator}>
       <PageContainer>
@@ -364,20 +370,12 @@ function WaterCalculator() {
           <Grid item xs={6}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Typography variant="h6" sx={{
-                  color: 'var(--dark-green)',
-                  textAlign: 'center',
-                  mb: 2, // Adjust margin bottom as needed
-                }}>
-                  {title}
-                </Typography>
+                <RecommendationDetails detailedData={detailedData} isPrediction={isPrediction} date={formatted} station={selectedArea}/>
               </Grid>
-              <Grid item xs={9}>
+              <Grid item xs={12}>
                 <DetailsPanel detailedData={detailedData} selectedStation={selectedArea} selectedDate={selectedDate} />
               </Grid>
-              <Grid item xs={2}>
-                <RecommendationDetails detailedData={detailedData} />
-              </Grid>
+
             </Grid>
           </Grid>
         </Grid>

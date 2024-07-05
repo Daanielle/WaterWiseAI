@@ -104,27 +104,21 @@ function DetailsPanel({ detailedData, selectedStation, selectedDate }) {
 
   return (
     <div >
-      <Grid container spacing={1}>
-        {keys.slice(0, 3).map((key) => (
-          <Grid item md={4} key={key}>
+      <Grid container spacing={2}>
+        {keys.slice(0, 4).map((key) => (
+          <Grid item md={3} key={key}>
             {varCard(key)}
           </Grid>
         ))}
 
-        {keys.slice(3, 6).map((key) => (
-          <Grid item md={4} key={key}>
+        {keys.slice(4, 8).map((key) => (
+          <Grid item md={3} key={key}>
             {varCard(key)}
           </Grid>
         ))}
 
-        {keys.slice(6, 9).map((key) => (
+        {keys.slice(8, 11).map((key) => (
           <Grid item md={4} key={key}>
-            {varCard(key)}
-          </Grid>
-        ))}
-
-        {keys.slice(9, 11).map((key) => (
-          <Grid item md={6} key={key}>
             {varCard(key)}
           </Grid>
         ))}
