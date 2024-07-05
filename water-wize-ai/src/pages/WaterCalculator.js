@@ -273,7 +273,6 @@ function WaterCalculator() {
           ...recommendationData,
           recommendation: "--",
         }
-        console.log(recommendationNew)
         setDetailedData(recommendationNew);
       }
     } catch (error) {

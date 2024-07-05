@@ -10,8 +10,9 @@ function RecommendationDetails({ detailedData, isPrediction, station, date }) {
 
   const dict = useDictionary();
   const variablesMapping = WaterCalculatorVariablesDetails()
+
   return (
-    <ContainerBox height="100%" width="100%" backgroundColor='var(--light-accent-gray)' borderColor='var(--light-accent-gray)'>
+    <ContainerBox sx={{ height:"100%", width:"100%", backgroundColor:'var(--light-accent-gray)', borderColor:'var(--light-gray)'}}>
       <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
         <div>
           <Typography sx={{ fontWeight: "bold" }}>

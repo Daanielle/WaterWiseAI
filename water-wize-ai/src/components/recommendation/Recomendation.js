@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import WaterCalculatorVariablesDetails from '../../resources/mapping/waterCalculatorVariablesDetails';
 import Tooltip from '@mui/material/Tooltip';
 import { Typography, Icon } from '@mui/material';
+import stations from '../../resources/mapping/imsStations.json'; 
 
 const Recommendation = ({ recommendationDataRows, onRowClick }) => {
     const varData = WaterCalculatorVariablesDetails();
@@ -23,6 +24,8 @@ const Recommendation = ({ recommendationDataRows, onRowClick }) => {
             icon: varData[key].icon,
         }))
     ];
+
+    console.log(stations.find((item) => item.id==="33").name)
 
     return (
         <div style={{ width: '70vw', overflowX: 'auto', margin: '0 auto' }}>
@@ -67,7 +70,7 @@ const Recommendation = ({ recommendationDataRows, onRowClick }) => {
                                             day: '2-digit'
                                         })}
                                     </TableCell>
-                                    <TableCell align="right">{row.station}</TableCell>
+                                    <TableCell align="right">{stations.find(item => item.id === row.station).name}</TableCell>
                                     {Object.keys(varData).map((key, cellIndex, arr) => {
                                         const value = row[key];
                                         const isLastCell = cellIndex === arr.length - 1;
