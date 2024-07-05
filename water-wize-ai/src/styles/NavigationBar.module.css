@@ -40,8 +40,10 @@ body {
   /* border-bottom-right-radius: 20px; */
 
   z-index: 1000;
-  background-color: var(--primary-white);
-  border: 2px solid var(--medium-green);
+  background-color: var(--extra-white-transparent);
+
+  /* background-color: var(--primary-white);
+  border: 2px solid var(--medium-green); */
 
 }
 
@@ -53,8 +55,10 @@ body {
   right: 0;
   /* border-bottom-left-radius: 20px; */
   z-index: 900;
-  background-color: var(--primary-white);
-  border: 2px solid var(--medium-green);
+  background-color: var(--extra-white-transparent);
+
+  /* background-color: var(--primary-white);
+  border: 2px solid var(--medium-green); */
 }
 
 /* .navbar img {

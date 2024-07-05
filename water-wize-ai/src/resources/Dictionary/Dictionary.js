@@ -171,11 +171,14 @@ const hebDict = {
   successSavePass: "סיסמה נשמרה בהצלחה",
 
   //errors
+  errorTryAgain: "הפעולה נכשלה, נסו שוב",
   errorsAreaSizeRange: "הזינו מספר תקין, בין 10 ל-100000",
   errorsKcRange: "הזינו מספר תקין, בין 0 ל-2",
   errorEmailExists: "אימייל קיים במערכת",
+  errorEmailNotExists: "אימייל לא קיים במערכת",
   errorEmail: "הזינו כתובת אימייל תקינה, לדוגמה example@example.com",
   errorPass: "הזינו סיסמה תקינה - לפחות 8 תווים, אות גדולה ואות קטנה",
+  errorWrongPass: "סיסמה שגויה",
   errorFields: "אנא מלאו את כל השדות",
 
   //Modal
@@ -304,7 +307,7 @@ based on agricultural research.`,
   relativeHumidityParameter: "Relative humidity",
   deltaYParameter: "Change in water vapor pressure",
   e0Parameter: `Saturated vapor pressure.`,
-  eaParameter: `Actual vapor pressure.`,
+  eaParameter: `Actual vapor pressure`,
   EaParameter: `Aerodynamic evaporation`,
   EParameter: "Evapotranspiration rate",
   KcParameter: "Irrigation Constant",
@@ -312,8 +315,8 @@ based on agricultural research.`,
 
   CalculatorFormulaParam: "Calculator Formula",
   EditFormulaParm: "Editing Formula",
-  HowGetResult: "How did we get the result? We used several formulas listed here..",
-  NewKc: "You can edit the value of the variable Kc, if you want please enter your new value...",
+  HowGetResult: "How did we get the result? We used several formulas listed here:",
+  NewKc: "You can edit the value of the variable Kc, if you want please enter your new value:",
 
   //Explenations Fermulas
   Explenationse0: "This formula is used to calculate the saturated vapor pressure indicating the pressure exerted by vapor molecules in the atmosphere when the air contains the maximum amount of vapor it can hold depending on the temperature, the calculation is based on the approximate temperature",
@@ -352,12 +355,15 @@ based on agricultural research.`,
   successSavePass: "Password saved successfully",
 
   //errors
-  errorsAreaSizeRange: "please enter a valid number - between 10 to 100000",
-  errorsKcRange: "please enter a valid number - between 0 to 2",
+  errorTryAgain: "Action failed, please try again",
+  errorsAreaSizeRange: "Please enter a valid number - between 10 to 100000",
+  errorsKcRange: "Please enter a valid number - between 0 to 2",
   errorEmailExists: "Email already exists",
-  errorEmail: "please enter a valid email - e.g. example@example.com",
-  errorPass: "please enter a valid password - 8 characters, at least one uppercase letter, one lowercase letter and one number",
-  errorFields: "please fill all the fields",
+  errorEmailNotExists: "Email does not exist",
+  errorEmail: "Please enter a valid email - e.g. example@example.com",
+  errorPass: "Please enter a valid password - 8 characters, at least one uppercase letter, one lowercase letter and one number",
+  errorWrongPass: "Password is wrong",
+  errorFields: "Please fill all the fields",
 
   //Modal
   CloseModal: "Close",
