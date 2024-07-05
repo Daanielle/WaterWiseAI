@@ -10,12 +10,15 @@ import InputField from "../components/inputs/InputField";
 import InputPicker from "../components/inputs/PickInput";
 import AllUserRecommendations from "../components/AllUserRecommendations";
 import Modal from '@mui/material/Modal';
-import { Box } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { saveRecommendation, getLoggedInUserId, getCalculate } from "../apiRequests";
 import CalculatorTabs from "../components/water-calculator/CalculatorTabs";
 import RecommendationDetails from "../components/water-calculator/RecommendationDetails";
 import CustomSnackbar from "../components/CustomSnackbar";
 import { getMyCoordinates } from "../apiRequests";
+import MapComponent from "../components/water-calculator/MapComponent";
+import dayjs from "dayjs";
+
 
 const bycodejson = require('../resources/bycode2022Updated.json');
 
@@ -63,30 +66,30 @@ const locations = {
 };
 
 const lopsidedlocations = {
-  'Ashalim': 381,
-  'Arad': 29,
-  'Ashkelon': 208,
-  'Avdat': 271,
-  'Beer Sheva University': 60,
-  'Besor Farm': 58,
-  'Dorot': 79,
-  'Eilat': 64,
-  'Ein Gedi': 211,
-  'Ezuz': 338,
-  'Gat': 236,
-  'Hatzeva': 33,
-  'Lahav': 350,
-  'Metzoke Dragot': 210,
-  'Mitzpe Ramon': 379,
-  'Negba': 82,
-  'Neot Smadar': 232,
-  'Nevatim': 349,
-  'Paran': 207,
-  'Sde Boker': 98,
-  'Sodom': 65,
-  'Shani': 28,
-  'Yotvata': 36,
-  'Zomet HaNegev': 112
+  'Ashalim': '381',
+  'Arad': '29',
+  'Ashkelon': '208',
+  'Avdat': '271',
+  'Beer Sheva University': '60',
+  'Besor Farm': '58',
+  'Dorot': '79',
+  'Eilat': '64',
+  'Ein Gedi': '211',
+  'Ezuz': '338',
+  'Gat': '236',
+  'Hatzeva': '33',
+  'Lahav': '350',
+  'Metzoke Dragot': '210',
+  'Mitzpe Ramon': '379',
+  'Negba': '82',
+  'Neot Smadar': '232',
+  'Nevatim': '349',
+  'Paran': '207',
+  'Sde Boker': '98',
+  'Sodom': '65',
+  'Shani': '28',
+  'Yotvata': '36',
+  'Zomet HaNegev': '112'
 }
 
 const optionsAreas = Object.keys(locations).map(key => ({
@@ -132,10 +135,12 @@ function WaterCalculator() {
   const [saveRecSB, setSaveRecSB] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(dayjs().add(1, 'day'));
   const [selectedAreaSize, setSelectedAreaSize] = useState(null);
-  const [selectedKc, setSelectedKc] = useState(null);
+  const [selectedKc, setSelectedKc] = useState(1.3);
   const [userId, setUserId] = useState(null)
+  const [myCoordinates, setMyCoordinates] = useState(null)
+  const [allowGeo, setAllowGeo] = useState(true)
   const [detailedData, setDetailedData] = useState({
     grad: "--",
     windSpeed1mm: "--",
@@ -154,17 +159,41 @@ function WaterCalculator() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await findMyCoordinates();
-      const id = await getLoggedInUserId();
-      setUserId(id);
+      try {
+        await findMyCoordinates();
+        const id = await getLoggedInUserId();
+        setUserId(id);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    const fillValues = async () => {
+      try {
+        await getValues();
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData().then(
+      fillValues()
+    )
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getValues();
+      console.log(selectedArea);
     };
 
     fetchData();
-  }, []);
+  }, [selectedArea]);
 
 
-  const handleAreaChange = (newArea) => {
+  const handleAreaChange = async (newArea) => {
     setSelectedArea(newArea);
+    // await getValues(newArea);
   };
 
   const handleKcChange = (newKc) => {
@@ -185,8 +214,9 @@ function WaterCalculator() {
     const cityData = cityCoordinates[newCity.label];
     if (cityData) {
       const closestAreaName = cityData.closestArea;
-      // const closestAreaId = lopsidedlocations[closestAreaName];
-      setSelectedArea({ value: closestAreaName, label: closestAreaName });
+      const closestAreaId = lopsidedlocations[closestAreaName];
+      setSelectedArea({ label: closestAreaName, value: closestAreaId });
+      setMyCoordinates({ userLongitude: cityData.longitude, userLatitude: cityData.latitude })
     }
   };
 
@@ -227,62 +257,142 @@ function WaterCalculator() {
     }
   };
 
-  const findMyCoordinates = async () => { //TODO: move to apiRequests
+  const getValues = async () => {
     try {
-      const fetchedCity = await getMyCoordinates();
-      handleAreaChange(fetchedCity.selectedArea)
-      handleCityChange(fetchedCity.closestCity)
+      console.log("hi")
+      console.log(selectedArea)
+      if (selectedArea && selectedDate) {
+        //let area = lopsidedlocations[area.value] ? lopsidedlocations[selectedArea.value] : selectedArea.value
+        let date = selectedDate.add(1, 'day')
+        const recommendationData = await getCalculate(selectedArea.value, 100, date, selectedKc);
+        setDetailedData(recommendationData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const findMyCoordinates = async () => {
+    try {
+      navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
+        if (result.state == 'granted') {
+          setAllowGeo(true)
+        } else if (result.state == 'prompt') {
+          setAllowGeo(true)
+        } else if (result.state == 'denied') {
+          setAllowGeo(false)
+        }
+      });
+
+      if (allowGeo) {
+        const fetchedData = await getMyCoordinates();
+        handleAreaChange(fetchedData.selectedArea)
+        handleCityChange(fetchedData.closestCity)
+        setMyCoordinates(fetchedData.myCoordinates)
+      }
+
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
   const saveCalcDesign = {
-    disabled: !userId || !selectedCity || !selectedArea || !selectedDate || !selectedAreaSize, 
+    disabled: !userId || !selectedCity || !selectedArea || !selectedDate || !selectedAreaSize,
     disabledTooltip: !userId ? "Log in in order to save a calculation" : "Make sure to fill all of the fields"
   };
 
   const calculateDesign = {
-    disabled: !selectedCity || !selectedArea || !selectedDate || !selectedAreaSize, 
+    disabled: !selectedCity || !selectedArea || !selectedDate || !selectedAreaSize,
     disabledTooltip: "Make sure to fill all of the fields"
   };
 
+  let formatted = ""
+  if (selectedDate) {
+    let dateObject = selectedDate.$d;
+    let day = dateObject.getDate().toString().padStart(2, '0');
+    let month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+    let year = dateObject.getFullYear();
+    formatted = `${day}/${month}/${year}`;
+  }
+
+  let title = selectedArea && selectedDate ? `Values for ${selectedArea.label} station for the date of: ${formatted}` : "Select date and time to show values"
+
+
+
+  //<DetailsPanel detailedData={detailedData} />
   return (
     <div className={classes.WaterCalculator}>
       <PageContainer>
-        <div className={classes.formControl}>
-          <div className={classes.leftCol}>
-            <ContainerBox width="500px">
-              <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities} />
-              <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas} />
-              <DatePickerComponent
-                onDateChange={handleDateChange}
-                date={selectedDate}
-              />
-              <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => (x <= 100000 && x >= 10)} error={dict.errorsAreaSizeRange} />
-
-              <CustomButton onClick={calculate} label={dict.calculate} type="button" disabled={calculateDesign.disabled} disabledTooltip={calculateDesign.disabledTooltip}/>
-              <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" secondary disabled={saveCalcDesign.disabled} disabledTooltip={saveCalcDesign.disabledTooltip} />
-              <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" secondary disabled={!userId} disabledTooltip={"Log in in order to show saved calculations"} />
+        <Grid container spacing={2}>
+          <Grid item xs={3}>
+            <ContainerBox width="100%" height="100%" style={{ backgroundColor: 'var(--extra-white)', }}>
+              <div style={{ height: "100%" }}>
+                <MapComponent
+                  myCoordinates={myCoordinates}
+                  myCity={selectedCity}
+                  selectedStation={selectedArea}
+                />
+              </div>
+              <div style={{ marginTop: '250px' }}>
+                <CustomButton
+                  onClick={findMyCoordinates}
+                  label={dict.findMyCoordinates}
+                  type="button"
+                  disabled={!allowGeo}
+                  disabledTooltip="Geolocation sharing is disabled in your browser. Allow permissions in browser settings in order to find your coordinates."
+                />
+              </div>
             </ContainerBox>
-            <RecommendationDetails detailedData={detailedData} />
-          </div>
-          <div className={classes.rightCol}>
-            <DetailsPanel detailedData={detailedData} />
-          </div>
+          </Grid>
+          <Grid item xs={3}>
+            <div className={classes.formControl}>
+              <ContainerBox width="500px" minHeight="710px">
+                <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities} />
+                <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas} />
+                <DatePickerComponent
+                  onDateChange={handleDateChange}
+                  date={selectedDate}
+                />
+                <InputField label={dict.areaSize} value={selectedAreaSize} type="number" onValueChange={handleAreaSizeChange} checkIfValid={(x) => (x <= 100000 && x >= 10)} error={dict.errorsAreaSizeRange} />
 
-        </div>
-        <div><CalculatorTabs
-          formulaValues={
-            <Box>
-              <Box sx={{ marginLeft: "18%", fontWeight: "bold", fontSize: "30px", marginBottom: "40px" }}>
-                {dict.NewKc}
-              </Box>
-              <Box sx={{ marginLeft: "39%", width: "500px", height: "450px" }}>
-                <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />
-              </Box>
-            </Box>}
-        /></div>
+                <CustomButton onClick={calculate} label={dict.calculate} type="button" disabled={calculateDesign.disabled} disabledTooltip={calculateDesign.disabledTooltip} style={{ marginTop: '125px' }} />
+                <CustomButton onClick={saveRec} label={dict.saveCalculate} type="button" secondary disabled={saveCalcDesign.disabled} disabledTooltip={saveCalcDesign.disabledTooltip} />
+                <CustomButton onClick={handleOpenRecsModal} label={dict.showAllCalcts} type="button" secondary disabled={!userId} disabledTooltip={"Log in in order to show saved calculations"} />
+              </ContainerBox>
+            </div>
+          </Grid>
+          <Grid item xs={6}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography variant="h6" sx={{
+                  color: 'var(--dark-green)',
+                  textAlign: 'center',
+                  mb: 2, // Adjust margin bottom as needed
+                }}>
+                  {title}
+                </Typography>
+              </Grid>
+              <Grid item xs={9}>
+                <DetailsPanel detailedData={detailedData} selectedStation={selectedArea} selectedDate={selectedDate} />
+              </Grid>
+              <Grid item xs={2}>
+                <RecommendationDetails detailedData={detailedData} />
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <div>
+          <CalculatorTabs
+            formulaValues={
+              <Box>
+                <Box sx={{ marginLeft: "18%", fontWeight: "bold", fontSize: "30px", marginBottom: "40px" }}>
+                  {dict.NewKc}
+                </Box>
+                <Box sx={{ marginLeft: "39%", width: "500px", height: "450px" }}>
+                  <InputField label={dict.KcValue} value={selectedKc} type="number" onValueChange={handleKcChange} checkIfValid={(x) => x === '' || (x <= 2 && x >= 0)} error={dict.errorsKcRange} />
+                </Box>
+              </Box>}
+          /></div>
 
         <Modal
           open={openRecsModal}

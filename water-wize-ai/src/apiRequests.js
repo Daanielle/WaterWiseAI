@@ -17,8 +17,11 @@ export const getCalculate = async (selectedArea, areaSize, date, kc) => {
         userKc: kc
       }),
     });
+
     const recommendationData = await calculationResponse.json();
     return recommendationData;
+
+
   } catch (error) {
     console.error("Error:", error);
   }
@@ -371,6 +374,7 @@ export const getAllCommentsForMsg = async (msgId) => {
   }
 }
 
+
 export const getMyCoordinates = async () => {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
@@ -393,8 +397,9 @@ export const getMyCoordinates = async () => {
 
             if (closestArea && closestCity) {
               let res = {
-                selectedArea: { value: closestArea.name, label: closestArea.name },
-                closestCity: { label: closestCity }
+                selectedArea: {label: closestArea.name,  value: closestArea.id,  },
+                closestCity: { label: closestCity },
+                myCoordinates: {userLongitude, userLatitude}
               };
               resolve(res);
             } else {
@@ -410,7 +415,7 @@ export const getMyCoordinates = async () => {
         reject('Error fetching geolocation: ' + error.message);
       });
     } else {
-      reject("Geolocation is not supported by this browser.");
+      resolve("Geolocation is not supported by this browser.");
     }
   });
 };

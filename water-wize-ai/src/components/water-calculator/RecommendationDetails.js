@@ -12,9 +12,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { Icon } from '@mui/material';
+import ContainerBox from "../ContainerBox";
 
 
-function DetailsPanel ({ detailedData }){
+function RecommendationDetails({ detailedData }) {
   const [openModal, setOpenModal] = React.useState(false);
   const [currentTitle, setCurrentTitle] = React.useState("");
   const [currentIcon, setCurrentIcon] = React.useState();
@@ -27,7 +28,7 @@ function DetailsPanel ({ detailedData }){
     setOpenModal(true);
     setCurrentTitle(title);
     setCurrentIcon(icon);
-    setClickPosition({ top: event.clientY , left: event.clientX - window.scrollX });
+    setClickPosition({ top: event.clientY, left: event.clientX - window.scrollX });
 
   };
 
@@ -35,11 +36,11 @@ function DetailsPanel ({ detailedData }){
   const CustomBackdrop = styled('div')({
     backgroundColor: 'rgba(0, 0, 0, 0)', // Semi-transparent black, adjust as needed
   });
-  
 
-  const bottomIcons =(title, description,icon)=>( <Box sx={{ position: 'sticky','& > :not(style)': { m: 1,marginLeft: '200%',marginTop: '-310%'} }}>
+
+  const bottomIcons = (title, description, icon) => (<Box sx={{ position: 'sticky', '& > :not(style)': { m: 1, marginLeft: '200%', marginTop: '-310%' } }}>
     <Fab size="small" aria-label="add">
-      <IconButton aria-label="more info" onClick={(e) => handleOpenModal(e,title, description,icon)}>
+      <IconButton aria-label="more info" onClick={(e) => handleOpenModal(e, title, description, icon)}>
         <QuestionMarkIcon sx={{ color: "var(--dark-green)" }} aria-label="more info" />
       </IconButton>
     </Fab>
@@ -57,50 +58,51 @@ function DetailsPanel ({ detailedData }){
     boxShadow: 24,
     p: 4,
   };
-  
 
-   
 
   return (
-    <div>
-    <div className={classes.detailsPanel}>
-          <div className={classes.cardContainer}>
-              <div>
-                <CustomCard sx={{width: 250, height: 150,border: "2px solid darkgreen",marginLeft:"40px",backgroundColor:'var(--medium-green)',color:"var(--black)" , icon:{color:"var(  --light-gray)"}}}
-                  topIcon={variablesMapping["recommendation"].icon} 
-                  title={variablesMapping["recommendation"]?.title}
-                  description={ detailedData.recommendation !== "--" ? detailedData.recommendation + " " + variablesMapping["recommendation"]?.units : detailedData.recommendation}
-                  // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
-                  bottomIcons={bottomIcons("recommendation", detailedData.recommendation,variablesMapping['recommendation'].icon)}
-                />
-              </div>
-          </div>
-
-      {openModal&&  <Modal
-                    open={openModal}
-                    onClose={handleCloseModal}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                    BackdropComponent={CustomBackdrop} // 
-                >
-                    <Box sx={modalStyle}>
-                    {currentIcon && <Icon component={currentIcon} sx={{ color: "var(--medium-green)",marginLeft:"45%"}} />}
-                            <Typography sx={{marginLeft:"30%"}} id="modal-modal-title" variant="h6" component="h2">
-                                {currentTitle}
-                            </Typography>
-                        <Typography sx={{textAlign: dict.textAlign,marginLeft: "auto", mt: 2}} id="modal-modal-description" >
-                        {dict[currentTitle]}
-                        </Typography>
-                      <Button sx={{marginLeft:"30%"}} onClick={handleCloseModal}>{dict.CloseModal}</Button>
-
-                    </Box>
-                </Modal>
-                } 
-
-    </div>
-    
-    </div>
+    <ContainerBox height="100%">
+      <Icon component={variablesMapping["recommendation"]?.icon} sx={{ color: "var(--medium-green)"}} />
+      {variablesMapping["recommendation"]?.title}
+      {detailedData.recommendation !== "--" ? detailedData.recommendation + " " + variablesMapping["recommendation"]?.units : detailedData.recommendation}
+      <Typography sx={{ textAlign: dict.textAlign, marginLeft: "auto", mt: 2 }} id="modal-modal-description" >
+        {dict["recommendation"]}
+      </Typography>
+    </ContainerBox>
   );
 };
 
-export default DetailsPanel;
+export default RecommendationDetails;
+
+
+// <ContainerBox height="500px">
+// <CustomCard sx={{ width: '100%', height: '100%', border: "2px solid darkgreen", marginLeft: "20px",backgroundColor: 'var(--medium-green)', color: "var(--black)", icon: { color: "var(  --light-gray)" } }}
+//   topIcon={variablesMapping["recommendation"].icon}
+//   title={variablesMapping["recommendation"]?.title}
+//   description={detailedData.recommendation !== "--" ? detailedData.recommendation + " " + variablesMapping["recommendation"]?.units : detailedData.recommendation}
+//   // description={typeof detailedData[key] === "number" ? detailedData.toFixed(3) : detailedData} // todo: make 3 digits after the dot
+//   bottomIcons={bottomIcons("recommendation", detailedData.recommendation, variablesMapping['recommendation'].icon)}
+// />
+
+// {openModal && <Modal
+//   open={openModal}
+//   onClose={handleCloseModal}
+//   aria-labelledby="modal-modal-title"
+//   aria-describedby="modal-modal-description"
+//   BackdropComponent={CustomBackdrop} //
+// >
+//   <Box sx={modalStyle}>
+//     {currentIcon && <Icon component={currentIcon} sx={{ color: "var(--medium-green)", marginLeft: "45%" }} />}
+//     <Typography sx={{ marginLeft: "30%" }} id="modal-modal-title" variant="h6" component="h2">
+//       {currentTitle}
+//     </Typography>
+//     <Typography sx={{ textAlign: dict.textAlign, marginLeft: "auto", mt: 2 }} id="modal-modal-description" >
+//       {dict[currentTitle]}
+//     </Typography>
+//     <Button sx={{ marginLeft: "30%" }} onClick={handleCloseModal}>{dict.CloseModal}</Button>
+
+//   </Box>
+// </Modal>
+// }
+
+// </ContainerBox>

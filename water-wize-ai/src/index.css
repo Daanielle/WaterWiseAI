@@ -33,12 +33,14 @@
   --light-accent-gray: #f8dcb8f6; /* Brighter burnt orange */
   --accent-orange: #c98736; /* Brighter burnt orange */
   --dark-orange: #a74e00; /* Darker burnt orange */
+  --red-orange: #cf4d25;
+  --light-yellow-green: #cae851;
 
   --text-color: #333; /* Main text color */
   --subtle-text-color: #666; /* Subtle text color */
   --black-color : #000; 
   
-  --light-gray : #c3c4c0;
+  --light-gray : #a5a79f;
   --primary-white : white;
 
 }

@@ -9,7 +9,7 @@ const ContainerBox = ({ children, sx, width, ...props }) => {
                 p: 2,
                 // backgroundColor: 'var(--background-color)',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                borderRadius: '20px',
+                borderRadius: '15px',
                 width: width || { xs: '90%', sm: '70%', md: '50%', lg: '30%' },
                 minWidth: '300px',
                 // maxWidth: '100%', // responsive max width

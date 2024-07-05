@@ -89,6 +89,8 @@ async function fetchDataFromStation(stationId, date) {
    formattedDate = date.slice(0, 10).replace(/-/g, "/"); // change date format to YYYY/MM/DD
   }
   // console.log("date: " + formattedDate)
+
+  console.log(formattedDate)
   const imsUrl = `https://api.ims.gov.il/v1/envista/stations/${stationId}/data/daily/${formattedDate}`;
   const response = await axios.get(imsUrl, {
     headers: {
@@ -144,6 +146,8 @@ router.post('/calculate', async (req, res) => {
 
     dateToCheck.setUTCHours(0, 0, 0, 0);
     currentDate.setUTCHours(0, 0, 0, 0);
+
+    console.log(dateToCheck <= currentDate)
     
     if (dateToCheck <= currentDate) {
       lastBatch = await fetchDataFromStation(selectedArea, date);

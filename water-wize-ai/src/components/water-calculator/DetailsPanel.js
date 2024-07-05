@@ -1,10 +1,8 @@
 import React from "react";
-import classes from "../../styles/DetailsPanel.module.css";
 import CustomCard from "../CustomCard";
 import WaterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
-import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import InfoIcon from '@mui/icons-material/Info';
 import { IconButton } from "@mui/material";
 import useDictionary from "../../resources/Dictionary/Dictionary";
 import Modal from "@mui/material/Modal";
@@ -14,8 +12,7 @@ import { styled } from "@mui/material/styles";
 import { Icon } from "@mui/material";
 import { Grid } from "@mui/material";
 
-function DetailsPanel({ detailedData }) {
-  console.log(detailedData)
+function DetailsPanel({ detailedData, selectedStation, selectedDate }) {
   const [openModal, setOpenModal] = React.useState(false);
   const [currentTitle, setCurrentTitle] = React.useState("");
   const [currentIcon, setCurrentIcon] = React.useState();
@@ -40,24 +37,15 @@ function DetailsPanel({ detailedData }) {
   const keys = Object.keys(detailedData);
 
   const bottomIcons = (title, description, icon) => (
-    <Box
-      sx={{
-        position: "sticky",
-        "& > :not(style)": { m: 1, marginLeft: "120%", marginTop: "-240%" },
-      }}
+    <IconButton
+      aria-label="more info"
+      onClick={(e) => handleOpenModal(e, title, description, icon)}
     >
-      <Fab size="small" aria-label="add">
-        <IconButton
-          aria-label="more info"
-          onClick={(e) => handleOpenModal(e, title, description, icon)}
-        >
-          <QuestionMarkIcon
-            sx={{ color: "var(--dark-green)" }}
-            aria-label="more info"
-          />
-        </IconButton>
-      </Fab>
-    </Box>
+      <InfoIcon
+        sx={{ color: "var(--light-gray)" }}
+        aria-label="more info"
+      />
+    </IconButton>
   );
 
   const modalStyle = {
@@ -77,139 +65,69 @@ function DetailsPanel({ detailedData }) {
     backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent black, adjust as needed
   });
 
+
+
+  const varCard = (key) =>
+  (
+    <CustomCard
+      topIcon={variablesMapping[key].icon}
+      title={variablesMapping[key]?.title}
+      description={
+        detailedData[key] !== "--" ?
+
+          (typeof detailedData[key] === 'number' ?
+            parseFloat(detailedData[key].toFixed(3))
+            :
+            detailedData[key]) +
+          " " +
+          variablesMapping[key]?.units
+
+          :
+
+          detailedData[key]
+      }
+      sx={{
+        width: '100%',
+        height: '160px',
+        backgroundColor: 'var(--extra-white-transparent)',
+        borderColor: 'var(--extra-white-transparent)',
+      }}
+      bottomIcons={
+        bottomIcons(
+          variablesMapping[key].title,
+          variablesMapping[key].description,
+          variablesMapping[key].icon
+        )}
+    />
+  )
+
+
   return (
-    <div className={classes.detailsPanel}>
-      {/* <div className={classes.row}>
-        {keys.slice(0, 4).map((key, index) => (
-          <div className={classes.cardContainer} key={index}>
-            {key && detailedData[key] !== undefined && detailedData[key] !== null && (
-              <CustomCard
-                topIcon={variablesMapping[key].icon}
-                title={variablesMapping[key]?.title}
-                description={detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
-                bottomIcons={bottomIcons(variablesMapping[key].title, variablesMapping[key].description, variablesMapping[key].icon)}
-              />
-            )}
-          </div>
-        ))}
-      </div>
-
-      <div className={classes.row2}>
-        {keys.slice(4, 7).map((key, index) => (
-          <div className={classes.cardContainer} key={index}>
-            {key && detailedData[key] !== undefined && detailedData[key] !== null && (
-              <CustomCard
-                topIcon={variablesMapping[key]?.icon}
-                title={variablesMapping[key]?.title}
-                description={detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
-                bottomIcons={bottomIcons(variablesMapping[key].title, variablesMapping[key].description, variablesMapping[key].icon)}
-              />
-            )}
-          </div>
-        ))}
-      </div>
-
-      <div className={classes.row}>
-        {keys.slice(7, 11).map((key, index) => (
-          <div className={classes.cardContainer} key={index}>
-            {key && detailedData[key] !== undefined && detailedData[key] !== null && (
-              <CustomCard
-                topIcon={variablesMapping[key]?.icon}
-                title={variablesMapping[key]?.title}
-                description={detailedData[key] !== "--" ? detailedData[key] + " " + variablesMapping[key]?.units : detailedData[key]}
-                bottomIcons={bottomIcons(variablesMapping[key].title, variablesMapping[key].description, variablesMapping[key].icon)}
-              />
-            )}
-          </div>
-        ))}
-      </div> */}
-
-      <Grid sx={{ flexGrow: 1 }} container spacing={0.5}>
-        <Grid item xs={12}>
-          {/* First Row */}
-          <Grid container justifyContent="center" spacing={0.5}>
-            {keys.slice(0, 4).map((key, index) => (
-              <Grid key={index} item>
-                {key &&
-                  detailedData[key] !== undefined &&
-                  detailedData[key] !== null && (
-                    <CustomCard
-                      topIcon={variablesMapping[key].icon}
-                      title={variablesMapping[key]?.title}
-                      description={
-                        detailedData[key] !== "--"
-                          ? (typeof detailedData[key] === 'number' ? parseFloat(detailedData[key].toFixed(3)) : detailedData[key]) +
-                            " " +
-                            variablesMapping[key]?.units
-                          : detailedData[key]
-                      }
-                      bottomIcons={bottomIcons(
-                        variablesMapping[key].title,
-                        variablesMapping[key].description,
-                        variablesMapping[key].icon
-                      )}
-                    />
-                  )}{" "}
-              </Grid>
-            ))}
+    <div >
+      <Grid container spacing={1}>
+        {keys.slice(0, 3).map((key) => (
+          <Grid item md={4} key={key}>
+            {varCard(key)}
           </Grid>
-            {/* Second Row */}
-          <Grid container justifyContent="center" spacing={2}>
-            {keys.slice(4, 7).map((key, index) => (
-              <Grid key={index} item>
-                {key &&
-                  detailedData[key] !== undefined &&
-                  detailedData[key] !== null && (
-                    <CustomCard
-                      sx={{ marginTop: 2 }}
-                      topIcon={variablesMapping[key].icon}
-                      title={variablesMapping[key]?.title}
-                      description={
-                        detailedData[key] !== "--"
-                          ? (typeof detailedData[key] === 'number' ? parseFloat(detailedData[key].toFixed(3)) : detailedData[key]) +
-                            " " +
-                            variablesMapping[key]?.units
-                          : detailedData[key]
-                      }
-                      bottomIcons={bottomIcons(
-                        variablesMapping[key].title,
-                        variablesMapping[key].description,
-                        variablesMapping[key].icon
-                      )}
-                    />
-                  )}{" "}
-              </Grid>
-            ))}
+        ))}
+
+        {keys.slice(3, 6).map((key) => (
+          <Grid item md={4} key={key}>
+            {varCard(key)}
           </Grid>
-            {/* Third Row */}
-          <Grid container justifyContent="center" spacing={0.5}>
-            {keys.slice(7, 11).map((key, index) => (
-              <Grid key={index} item>
-                {key &&
-                  detailedData[key] !== undefined &&
-                  detailedData[key] !== null && (
-                    <CustomCard
-                      sx={{ marginTop: 2 }}
-                      topIcon={variablesMapping[key].icon}
-                      title={variablesMapping[key]?.title}
-                      description={
-                        detailedData[key] !== "--"
-                          ? (typeof detailedData[key] === 'number' ? parseFloat(detailedData[key].toFixed(3)) : detailedData[key]) +
-                            " " +
-                            variablesMapping[key]?.units
-                          : detailedData[key]
-                      }
-                      bottomIcons={bottomIcons(
-                        variablesMapping[key].title,
-                        variablesMapping[key].description,
-                        variablesMapping[key].icon
-                      )}
-                    />
-                  )}{" "}
-              </Grid>
-            ))}
+        ))}
+
+        {keys.slice(6, 9).map((key) => (
+          <Grid item md={4} key={key}>
+            {varCard(key)}
           </Grid>
-        </Grid>
+        ))}
+
+        {keys.slice(9, 11).map((key) => (
+          <Grid item md={6} key={key}>
+            {varCard(key)}
+          </Grid>
+        ))}
       </Grid>
 
       {openModal && (

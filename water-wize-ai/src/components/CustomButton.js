@@ -47,7 +47,7 @@ const Button = ({ onClick, label, type, style, secondary, to, disabled, disabled
 
   return (
     disabled ? (
-      <CustomTooltip title={disabledTooltip || "Button is disabled"}>
+      <CustomTooltip title={disabledTooltip || "Action is disabled"}>
         <span>{buttonElement}</span>
       </CustomTooltip>
     ) : buttonElement

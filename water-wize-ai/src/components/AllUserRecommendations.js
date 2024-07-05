@@ -4,6 +4,9 @@ import { AuthContext } from "../AuthContext";
 import { getRecommendationsForUser, getLoggedInUserId } from "../apiRequests";
 import Recommendation from "./recommendation/Recomendation"; 
 
+
+//TODO: move to /reccomendations 
+
 const AllUserRecommendations = ({ onRowClick }) => {
     //const dict = useDictionary(); //TODO: add to dictionary
     const { user } = useContext(AuthContext);
