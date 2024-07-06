@@ -169,6 +169,8 @@ const hebDict = {
   editPassword: "עריכת סיסמה",
   successSaveUser: "פרטי משתמש נשמרו בהצלחה",
   successSavePass: "סיסמה נשמרה בהצלחה",
+  successSentMessage:"!הודעה נשלחה בהצלחה",
+
 
   //errors
   errorTryAgain: "הפעולה נכשלה, נסו שוב",
@@ -353,6 +355,7 @@ based on agricultural research.`,
   editPassword: "Edit Password",
   successSaveUser: "User details saved successfully",
   successSavePass: "Password saved successfully",
+  successSentMessage:"Messege sent successfully!",
 
   //errors
   errorTryAgain: "Action failed, please try again",
@@ -364,6 +367,7 @@ based on agricultural research.`,
   errorPass: "Please enter a valid password - 8 characters, at least one uppercase letter, one lowercase letter and one number",
   errorWrongPass: "Password is wrong",
   errorFields: "Please fill all the fields",
+  errorMessage: "Please fill message field",
 
   //Modal
   CloseModal: "Close",
