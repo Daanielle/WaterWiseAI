@@ -330,7 +330,7 @@ router.post('/calculate', async (req, res) => {
       // console.log("last batch is here");
       // console.log(lastBatch)
       const today = new Date();
-      today.setDate(currentDate.getDate() - 1);
+      today.setDate(currentDate.getDate());
     
       lastBatch = await fetchDataFromStation(selectedArea, today);
 
