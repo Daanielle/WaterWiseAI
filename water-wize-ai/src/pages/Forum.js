@@ -8,6 +8,13 @@ import MesssagesAcordion from "../components/forum/MessagesAcordion";
 import NewMessage from "../components/forum/NewMessage";
 import useDictionary from "../resources/Dictionary/Dictionary";
 import { getAllForumMessages, getLoggedInUserId } from "../apiRequests";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import MessageHeader from '../components/forum/MessageHeader';
+import MessageBody from '../components/forum/MessageBody';
+
 
 
 const modalStyle = {
@@ -29,8 +36,10 @@ const modalStyle = {
 
 function Forum() {
   const [openNewMessageModal, setOpenNewMessageModal] = useState(false);
+  const [addNewComment, setAddNewComment] = useState(false);
   const [allMessages, setAllMessages] = useState([]);
-  const [userId, setUserId] = useState(null)
+  const [userId, setUserId] = useState(null);
+
   // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,9 +49,8 @@ function Forum() {
         setAllMessages(messages);
         const id = await getLoggedInUserId();
         setUserId(id);
+        setAddNewComment(false)
         // setLoading(false);
-
-
         // console.log(messages)
       } catch (err) {
         console.error(err);
@@ -51,7 +59,7 @@ function Forum() {
       }
     };
     fetchAllMessages();
-  }, [openNewMessageModal]);
+  }, [openNewMessageModal, addNewComment]);
 
   const dict = useDictionary();
 
@@ -59,12 +67,28 @@ function Forum() {
   const handleOpenNewMessageModal = () => setOpenNewMessageModal(true);
   const handleCloseNewMessageModal = () => setOpenNewMessageModal(false);
 
-//   {loading ? <Box sx={{ pt: 0.5 }}>
-//   <Skeleton />
-//   <Skeleton width="60%" />
-// </Box> :
-//   <MesssagesAcordion messages={allMessages} setLoading={setLoading} />
-// }
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+    return date.toLocaleTimeString('en-US', options);
+  }
+
+  const handleAddComment = () => {
+    setAddNewComment(true)
+  }
+
+  //   {loading ? <Box sx={{ pt: 0.5 }}>
+  //   <Skeleton />
+  //   <Skeleton width="60%" />
+  // </Box> :
+  //   <MesssagesAcordion messages={allMessages} setLoading={setLoading} />
+  // }
 
   return (
     <PageContainer>
@@ -75,7 +99,35 @@ function Forum() {
         </div>
       </div>
 
-      <MesssagesAcordion messages={allMessages}/>
+      <div>
+        {allMessages.map((message, index) => (
+          <Accordion key={index} style={{ backgroundColor: '#dde6da' }}>
+            <AccordionSummary
+              expandIcon={<ArrowDropDownIcon />}
+            >
+              <MessageHeader
+                //setLoading={setLoading}
+                title={message.title}
+                userId={message.userId}
+                time={formatDate(message.createdAt)}
+                isRec={message.recommendations[0]}
+                numOfComments={message.numOfComments}
+                //additionalComments={numOfAdditionalComments}
+              />
+            </AccordionSummary>
+            <AccordionDetails>
+              <MessageBody
+                //setLoading={setLoading}
+                msgBody={message.body}
+                recId={message.recommendations[0]}
+                msgId={message._id}
+                addCommentHandler={handleAddComment}
+              />
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </div>
+
 
       <Modal
         open={openNewMessageModal}

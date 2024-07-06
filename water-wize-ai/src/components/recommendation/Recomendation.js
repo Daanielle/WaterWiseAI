@@ -25,8 +25,6 @@ const Recommendation = ({ recommendationDataRows, onRowClick }) => {
         }))
     ];
 
-    console.log(stations.find((item) => item.id==="33").name)
-
     return (
         <div style={{ width: '70vw', overflowX: 'auto', margin: '0 auto' }}>
             <TableContainer component={Paper}>

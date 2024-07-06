@@ -7,6 +7,8 @@ import MessageHeader from './MessageHeader';
 import MessageBody from './MessageBody';
 
 export default function AccordionExpandIcon({ messages, setLoading }) {
+  const [numOfAdditionalComments, setNumOfAdditionalComments] = React.useState(0)
+
   function formatDate(dateString) {
     const date = new Date(dateString);
     const options = {
@@ -19,6 +21,10 @@ export default function AccordionExpandIcon({ messages, setLoading }) {
     return date.toLocaleTimeString('en-US', options);
   }
 
+  const handleAddComment = () => {
+    console.log("hi")
+    setNumOfAdditionalComments(numOfAdditionalComments + 1)
+  }
 
 
   return (
@@ -35,6 +41,7 @@ export default function AccordionExpandIcon({ messages, setLoading }) {
               time={formatDate(message.createdAt)}
               isRec={message.recommendations[0]}
               numOfComments={message.numOfComments}
+              additionalComments={numOfAdditionalComments}
             />
           </AccordionSummary>
           <AccordionDetails>
@@ -42,7 +49,9 @@ export default function AccordionExpandIcon({ messages, setLoading }) {
               setLoading={setLoading}
               msgBody={message.body}
               recId={message.recommendations[0]}
-              msgId={message._id} />
+              msgId={message._id}
+              addCommentHandler={handleAddComment}
+            />
           </AccordionDetails>
         </Accordion>
       ))}

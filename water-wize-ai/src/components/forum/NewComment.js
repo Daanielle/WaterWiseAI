@@ -4,7 +4,7 @@ import InputField from "../inputs/InputField";
 import CustomButton from "../CustomButton";
 import TitleButton from "../TitleButton";
 
-const NewComment = ({ onCloseNewComment, message  }) => {
+const NewComment = ({ onCloseNewComment, message, addCommentHandler }) => {
     const [userId, setUserId] = useState('000000000000000000000000');
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
@@ -31,7 +31,8 @@ const NewComment = ({ onCloseNewComment, message  }) => {
                 userId, title, body, message
             };
             let status = await addNewForumComment(comment);
-            console.log("Comment saved successfully:", status);
+            // console.log("Comment saved successfully:", status);
+            addCommentHandler();
             onCloseNewComment();
         } catch (error) {
             console.error("Error saving message:", error);

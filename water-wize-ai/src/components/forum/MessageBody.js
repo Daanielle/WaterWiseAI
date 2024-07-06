@@ -24,7 +24,7 @@ const modalStyle = {
     textAlign: 'center',
 };
 
-export default function MessageBody({ msgId, msgBody, recId }) {
+export default function MessageBody({ msgId, msgBody, recId, addCommentHandler }) {
 
     const [comments, setComments] = useState(null);
     const [rec, setRec] = useState(null);
@@ -123,7 +123,7 @@ export default function MessageBody({ msgId, msgBody, recId }) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={modalStyle}>
-                    <NewComment onCloseNewComment={handleCloseNewCommentModal} message={msgId} />
+                    <NewComment onCloseNewComment={handleCloseNewCommentModal} message={msgId} addCommentHandler={addCommentHandler}/>
                 </Box>
             </Modal>
         </div>

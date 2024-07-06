@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { getUserById } from '../../apiRequests';
 import { Avatar, Typography, IconButton, Badge } from '@mui/material';
-// import { PersonOutline as PersonOutlineIcon, AccessTime as AccessTimeIcon } from '@mui/icons-material';
 import ChatBubbleOutlineRoundedIcon from '@mui/icons-material/ChatBubbleOutlineRounded';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 
-export default function MessageHeader({ userId, title, time, numOfComments, isRec, setLoading }) {
+export default function MessageHeader({ userId, title, time, numOfComments, isRec, setLoading, numOfAdditionalComments }) {
     const [user, setUser] = useState(null);
     // const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchUser = async () => {
-          //setLoading(true);
-          try {
-            const fetchedUser = await getUserById(userId);
-            setUser(fetchedUser);
-          } catch (err) {
-            console.error(err)
-            // setError(err);
-          } finally {
-            //setLoading(false);
-          }
+            //setLoading(true);
+            try {
+                const fetchedUser = await getUserById(userId);
+                setUser(fetchedUser);
+            } catch (err) {
+                console.error(err)
+                // setError(err);
+            } finally {
+                //setLoading(false);
+            }
         };
         fetchUser();
-      }, [userId, setLoading]); 
+    }, [userId, setLoading]);
 
     // if (loading) return <div>Loading...</div>;
     // if (error) return <div>Error loading user</div>;
 
+    const updatedNumOfComments = numOfAdditionalComments ? numOfComments + numOfAdditionalComments : numOfComments
 
     return (
         <div style={{ width: '100%', padding: '10px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -39,7 +39,7 @@ export default function MessageHeader({ userId, title, time, numOfComments, isRe
                         <CalculateOutlinedIcon />
                     </IconButton>}
                     <IconButton>
-                        {numOfComments !== -1 && <Badge badgeContent={numOfComments} sx={{ '& .MuiBadge-badge': { backgroundColor: '#d86018', color: 'white' } }}>
+                        {numOfComments !== -1 && <Badge badgeContent={updatedNumOfComments} sx={{ '& .MuiBadge-badge': { backgroundColor: '#d86018', color: 'white' } }}>
                             <ChatBubbleOutlineRoundedIcon />
                         </Badge>}
                     </IconButton>
