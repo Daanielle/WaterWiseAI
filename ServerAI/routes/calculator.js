@@ -88,20 +88,16 @@ async function fetchDataFromStation(stationId, date) {
   } else {
    formattedDate = date.slice(0, 10).replace(/-/g, "/"); // change date format to YYYY/MM/DD
   }
-  // console.log("date: " + formattedDate)
 
-  console.log(formattedDate)
   const imsUrl = `https://api.ims.gov.il/v1/envista/stations/${stationId}/data/daily/${formattedDate}`;
   const response = await axios.get(imsUrl, {
     headers: {
       Authorization: 'ApiToken f058958a-d8bd-47cc-95d7-7ecf98610e47'
     }
   });
-  console.log(response.status)
   if (response.status >= 200 && response.status < 300) {
     if(response.status != 204){
       const data = response.data;
-      //console.log(data)
       const lastBatch = data.data[data.data.length - 1];
       return lastBatch;
     }
@@ -125,7 +121,6 @@ const modelPaths = {
 };
 
 async function loadModel(modelPath) {
-  // console.log(`Loading model from: ${modelPath}`);
   return await ort.InferenceSession.create(modelPath);
 }
 
@@ -141,20 +136,31 @@ router.post('/calculate', async (req, res) => {
     let { selectedArea, areaSize, date, userKc } = req.body;
     let lastBatch;
     // if date if future >> /predict 
+
+    let formattedDate;
+    if (date instanceof Date){
+      const year = date.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      
+      formattedDate = `${year}/${month}/${day}`;  
+    } else {
+     formattedDate = date.slice(0, 10).replace(/-/g, "/"); // change date format to YYYY/MM/DD
+    }
+
+    console.log(formattedDate)
+
+  
     const dateToCheck = new Date(date);
     const currentDate = new Date();
-
     dateToCheck.setUTCHours(0, 0, 0, 0);
     currentDate.setUTCHours(0, 0, 0, 0);
 
-    
+
     if (dateToCheck <= currentDate) {
       lastBatch = await fetchDataFromStation(selectedArea, date);
       console.log("The date is not later than today.");
-
       selectedArea = String(selectedArea)
-      // console.log("last batch is here");
-      // console.log(lastBatch)
       let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
       // Ashalim, Arad, Besor Farm, Dorot, Hazeva, Negba, Neot smadar, Shani, Yotvata
       if (['381', '29', '58', '79', '33', '82', '28', '36', '64', '65', '211', '349'].includes(selectedArea)) {
@@ -214,13 +220,6 @@ router.post('/calculate', async (req, res) => {
 
       if (!gradValue || !ws1mmValue || !wsMaxValue || !temperature || !relativeHumidity) {
         let nearbyStationId = null;
-
-        // console.log("gradValue: " + gradValue)
-        // console.log("ws1mmValue: " + ws1mmValue)
-        // console.log("wsMaxValue: " + wsMaxValue)
-        // console.log("temperature: " + temperature)
-        // console.log("relativeHumidity: " + relativeHumidity)
-
         if (selectedArea == '208') { // Ashqelon Port
           nearbyStationId = '82'; // Negba
         } else if (['271', '98', '112', '338', '379'].includes(selectedArea)) { // Avdat, Sede Boqer, Zomet Hanegev, Ezuz, Mizpe Ramon
@@ -327,8 +326,6 @@ router.post('/calculate', async (req, res) => {
     } else { //date is later then today
       console.log("The date is later than today.");
       selectedArea = String(selectedArea)
-      // console.log("last batch is here");
-      // console.log(lastBatch)
       const today = new Date();
       today.setDate(currentDate.getDate());
     
@@ -393,12 +390,6 @@ router.post('/calculate', async (req, res) => {
 
       if (!gradValue || !ws1mmValue || !wsMaxValue || !temperature || !relativeHumidity) {
         let nearbyStationId = null;
-
-        // console.log("gradValue: " + gradValue)
-        // console.log("ws1mmValue: " + ws1mmValue)
-        // console.log("wsMaxValue: " + wsMaxValue)
-        // console.log("temperature: " + temperature)
-        // console.log("relativeHumidity: " + relativeHumidity)
 
         if (selectedArea == '208') { // Ashqelon Port
           nearbyStationId = '82'; // Negba
@@ -481,7 +472,6 @@ router.post('/calculate', async (req, res) => {
 
 
       const input = [gradValue, relativeHumidity, temperature, ws1mmValue, wsMaxValue];
-      // console.log('Model input values:', input);
       const tensorInput = new ort.Tensor('float32', Float32Array.from(input), [1, input.length]);
 
       const predictions = {};
@@ -493,7 +483,6 @@ router.post('/calculate', async (req, res) => {
         if (output && output.variable && output.variable.cpuData) {
           const predictionValues = Array.from(output.variable.cpuData);
           predictions[key] = predictionValues;
-          // console.log(`Predictions for ${key}:`, predictionValues);
         } else {
           console.error(`No valid output received for model ${key}`);
           predictions[key] = null; // Handle case where prediction is not available
@@ -669,16 +658,16 @@ function checkRelativeDate(inputDateString) {
 
   // Calculate target dates
   const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() + 2);
+  tomorrow.setDate(today.getDate() + 1);
 
   const dayAfterTomorrow = new Date(today);
-  dayAfterTomorrow.setDate(today.getDate() + 3);
+  dayAfterTomorrow.setDate(today.getDate() + 2);
 
   const threeDaysAfter = new Date(today);
-  threeDaysAfter.setDate(today.getDate() + 4);
+  threeDaysAfter.setDate(today.getDate() + 3);
 
   const fourDaysAfter = new Date(today);
-  fourDaysAfter.setDate(today.getDate() + 5);
+  fourDaysAfter.setDate(today.getDate() + 4);
 
   // Compare inputDate with each target date
   if (isSameDate(inputDate, tomorrow)) {
@@ -844,14 +833,9 @@ const locations = {
 // Route handler for /calculator/geolocation
 router.post('/coordinates', async (req, res) => {
   try {
-    // console.log("Request body:", req.body);
-    // console.log("Request body:", req.body);
-
     const userLatitude = req.body.latitude;
     const userLongitude = req.body.longitude;
-    // console.log("Received coordinates:", userLatitude, userLongitude);
 
-    // Logic to determine closest area based on user's geolocation
     let closestArea = null;
     let minDistanceArea = Infinity;
 

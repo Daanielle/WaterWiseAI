@@ -135,8 +135,9 @@ function WaterCalculator() {
   const [saveRecSB, setSaveRecSB] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(dayjs().add(1, 'day'));
-  const [selectedAreaSize, setSelectedAreaSize] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(dayjs());
+  // const [selectedDate, setSelectedDate] = useState(dayjs().add(1, 'day'));
+  const [selectedAreaSize, setSelectedAreaSize] = useState('');
   const [selectedKc, setSelectedKc] = useState(1.3);
   const [userId, setUserId] = useState(null)
   const [myCoordinates, setMyCoordinates] = useState(null)
@@ -247,7 +248,7 @@ function WaterCalculator() {
     try {
       if (selectedArea && selectedAreaSize && selectedDate) {
         let area = lopsidedlocations[selectedArea.value] ? lopsidedlocations[selectedArea.value] : selectedArea.value
-        let date = selectedDate.add(1, 'day')
+        let date = selectedDate
         const recommendationData = await getCalculate(area, selectedAreaSize, date, selectedKc);
         setDetailedData(recommendationData);
 
@@ -267,7 +268,7 @@ function WaterCalculator() {
     try {
       if (selectedArea && selectedDate) {
         //let area = lopsidedlocations[area.value] ? lopsidedlocations[selectedArea.value] : selectedArea.value
-        let date = selectedDate.add(1, 'day')
+        let date = selectedDate
         let recommendationData = await getCalculate(selectedArea.value, 100, date, selectedKc);
         let recommendationNew = {
           ...recommendationData,

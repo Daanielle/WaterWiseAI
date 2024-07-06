@@ -12,24 +12,24 @@ function RecommendationDetails({ detailedData, isPrediction, station, date }) {
   const variablesMapping = WaterCalculatorVariablesDetails()
 
   return (
-    <ContainerBox sx={{ height:"100%", width:"100%", backgroundColor:'var(--light-accent-gray)', borderColor:'var(--light-gray)'}}>
+    <ContainerBox sx={{ height: "100%", width: "100%", backgroundColor: 'var(--light-accent-gray)', borderColor: 'var(--light-gray)' }}>
       <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
         <div>
           <Typography sx={{ fontWeight: "bold" }}>
             {variablesMapping["recommendation"]?.title}
           </Typography>
-          <Typography sx={{ marginLeft: "auto", mt: 2 }}>
-          {station && station.label && (
-            <Box>
-              {"Station: " + station.label}
-            </Box>
-          )}
-          {date && (
-            <Box>
-              {"Date: " + date}
-            </Box>
-          )}
-        </Typography>
+          <div>
+            {station && station.label && (
+              <Box sx={{ marginLeft: "auto", mt: 2 }}>
+                {"Station: " + station.label}
+              </Box>
+            )}
+            {date && (
+              <Box>
+                {"Date: " + date}
+              </Box>
+            )}
+          </div>
 
           <Typography sx={{ marginLeft: "auto", mt: 2 }} >
             {dict["recommendation"]}
