@@ -101,7 +101,13 @@ function Forum() {
 
       <div>
         {allMessages.map((message, index) => (
-          <Accordion key={index} style={{ backgroundColor: '#dde6da' }}>
+          <Accordion key={index} style={{ backgroundColor: '#dde6da' }} sx={{
+            minWidth: {
+              xs: '100%', // 100% width on extra-small screens
+              sm: '600px', // 600px width on small screens
+              md: '800px', // 800px width on medium screens and up
+            },
+          }}>
             <AccordionSummary
               expandIcon={<ArrowDropDownIcon />}
             >
@@ -112,7 +118,7 @@ function Forum() {
                 time={formatDate(message.createdAt)}
                 isRec={message.recommendations[0]}
                 numOfComments={message.numOfComments}
-                //additionalComments={numOfAdditionalComments}
+              //additionalComments={numOfAdditionalComments}
               />
             </AccordionSummary>
             <AccordionDetails>

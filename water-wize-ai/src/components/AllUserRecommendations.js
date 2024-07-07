@@ -37,7 +37,6 @@ const AllUserRecommendations = ({ onRowClick }) => {
 
     return (
         <div>
-            <h4>All saved recommendations for {user.firstName}</h4>
             <Recommendation recommendationDataRows={recommendations} onRowClick={onRowClick} />
         </div>
     );

@@ -22,7 +22,6 @@ export default function AccordionExpandIcon({ messages, setLoading }) {
   }
 
   const handleAddComment = () => {
-    console.log("hi")
     setNumOfAdditionalComments(numOfAdditionalComments + 1)
   }
 
@@ -30,7 +29,13 @@ export default function AccordionExpandIcon({ messages, setLoading }) {
   return (
     <div>
       {messages.map((message, index) => (
-        <Accordion key={index} style={{ backgroundColor: '#dde6da' }}>
+        <Accordion key={index} style={{ backgroundColor: '#dde6da' }} sx={{
+          width: {
+            xs: '100%', // 100% width on extra-small screens
+            sm: '1600px', // 600px width on small screens
+            md: '10000px', // 800px width on medium screens and up
+          },
+        }}>
           <AccordionSummary
             expandIcon={<ArrowDropDownIcon />}
           >
