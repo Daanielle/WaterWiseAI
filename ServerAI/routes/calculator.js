@@ -5,6 +5,7 @@ const axios = require('axios');
 const Recommendation = require('../models/recommendation');
 const authenticateToken = require('../middleware/auth'); // Assuming you have this middleware
 const mongoose = require('mongoose');
+const dataService = require('./utils/fetchDataUtils'); // Adjust path as per your project structure
 
 const {computeDeltaY, getKc, computeE0, computesmallea, computeBigEa, computeE, computeI } = require('./utils/calculatorUtils');
 
@@ -908,6 +909,26 @@ router.get('/recommendations/:recommendationId', async (req, res) => {
   } catch (err) {
       console.error(err);
       res.status(500).json({ error: err.message });
+  }
+});
+
+// Example route handler to save or update data
+router.post('/saveOrUpdateData', async (req, res) => {
+  const { stationName, gradient, windSpeed1, maxWind, temp, relHumidity } = req.body;
+
+  try {
+    await dataService.saveOrUpdateData({
+      stationName,
+      gradient,
+      windSpeed1,
+      maxWind,
+      temp,
+      relHumidity
+    });
+
+    res.status(200).json({ message: 'Data saved/updated successfully.' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
