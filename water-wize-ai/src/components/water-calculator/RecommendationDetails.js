@@ -1,5 +1,5 @@
 import React from "react";
-import WaterCalculatorVariablesDetails from "../../resources/mapping/WaterCalculatorVariablesDetails";
+import WaterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
 import { Typography, Box } from "@mui/material";
 import useDictionary from "../../resources/Dictionary/Dictionary";
 import { Icon } from '@mui/material';

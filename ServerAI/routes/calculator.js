@@ -5,74 +5,9 @@ const axios = require('axios');
 const Recommendation = require('../models/recommendation');
 const authenticateToken = require('../middleware/auth'); // Assuming you have this middleware
 const mongoose = require('mongoose');
+const dataService = require('./utils/fetchDataUtils'); // Adjust path as per your project structure
 
-function computeDeltaY(temperature) {
-  const deltaYTable = [
-    { temp: 0, deltaY: 1.456 },
-    { temp: 5, deltaY: 1.067 },
-    { temp: 10, deltaY: 0.7934 },
-    { temp: 15, deltaY: 0.5967 },
-    { temp: 20, deltaY: 0.4549 },
-    { temp: 25, deltaY: 0.3505 },
-    { temp: 30, deltaY: 0.2731 },
-    { temp: 35, deltaY: 0.2149 },
-    { temp: 40, deltaY: 0.1707 }
-  ];
-
-  const closest = deltaYTable.reduce((prev, curr) => {
-    return Math.abs(curr.temp - temperature) < Math.abs(prev.temp - temperature) ? curr : prev;
-  });
-
-  return closest.deltaY;
-}
-
-function getKc() {
-  const kcTable = {
-    January: 0.62,
-    February: 0.61,
-    March: 0.63,
-    April: 1.2,
-    May: 1.25,
-    June: 1.3,
-    July: 1.3,
-    August: 0.35,
-    September: 0.35,
-    October: 0.67,
-    November: 0.65,
-    December: 0.65
-  };
-
-  const currentMonth = new Date().toLocaleString('default', { month: 'long' });
-  return kcTable[currentMonth];
-}
-
-function computeE0(temperature) {
-  const T = temperature;
-  const e0 = 6.2 * Math.exp((17.26 * T) / (T - 35.8 + 273.16));
-  return e0;
-}
-
-function computesmallea(relativeHumidity, e0) {
-  const ea = (relativeHumidity / 100) * e0;
-  return ea;
-}
-
-function computeBigEa(e0, ea, WS) {
-  const C = 1 / (3);
-  const Ea = 0.35 * (e0 - ea) * (0.5 + 0.54 * WS) * C;
-  return Ea;
-}
-
-function computeE(deltaY, Grad, WSmax, Ea) {
-  const L = 2.45 * Math.pow(10, 9);
-  const E = ((deltaY * (Grad - WSmax) + Ea * L) / (deltaY + 1)) / L;
-  return E;
-}
-
-function computeI(E, Kc, totalArea) {
-  const I = E * Kc * totalArea;
-  return I;
-}
+const {computeDeltaY, getKc, computeE0, computesmallea, computeBigEa, computeE, computeI } = require('./utils/calculatorUtils');
 
 async function fetchDataFromStation(stationId, date) {
   // const currentDate = new Date();
@@ -130,7 +65,6 @@ for (const [key, path] of Object.entries(modelPaths)) {
 }
 
 
-// before kc change.
 router.post('/calculate', async (req, res) => {
   try {
     let { selectedArea, areaSize, date, userKc } = req.body;
@@ -308,6 +242,21 @@ router.post('/calculate', async (req, res) => {
       const E = computeE(deltaY, gradValue, wsMaxValue, Ea).toFixed(3);
       const I = computeI(E, Kc, areaSize).toFixed(3);
 
+      // Save or update data if the date is today
+      if (dateToCheck.getTime() === currentDate.getTime()) {
+        await dataService.saveOrUpdateData({
+          stationName: selectedArea,
+          gradient: gradValue,
+          windSpeed1: ws1mmValue,
+          maxWind: wsMaxValue,
+          temp: temperature,
+          relHumidity: relativeHumidity
+        });
+        console.log('Data saved/updated successfully.');
+      } else {
+        console.log("The date is not today, Data unsaved");
+      }
+
       res.json({
         grad: gradValue,
         windSpeed1mm: ws1mmValue,
@@ -436,40 +385,10 @@ router.post('/calculate', async (req, res) => {
             }
           } catch (error) {
             console.error('Error fetching data from nearby station:', error);
-            // const gradValue = (Math.random() * (0.2 - 0.05) + 0.05).toFixed(3); // Plausible range for Grad
-            // const ws1mmValue = (Math.random() * (5 - 1) + 1).toFixed(3); // Plausible range for WS1mm
-            // const wsMaxValue = (Math.random() * (10 - 2) + 2).toFixed(3); // Plausible range for WSmax
-            // const temperature = (Math.random() * (40 - 25) + 25).toFixed(3); // Plausible range for Temperature
-            // const relativeHumidity = (Math.random() * (80 - 20) + 20).toFixed(3); // Plausible range for RH
-            // const deltaY = computeDeltaY(temperature).toFixed(3);
-            // const Kc = 1.3;
-            // const e0 = computeE0(temperature.toFixed(3));
-            // const ea = computesmallea(relativeHumidity, e0).toFixed(3);
-            // const Ea = computeBigEa(e0, ea, wsMaxValue).toFixed(3);
-            // const E = computeE(deltaY, gradValue, wsMaxValue, Ea).toFixed(3);
-            // const I = computeI(E, Kc, req.body.areaSize).toFixed(3);
-      
-            // res.json({
-            //   grad: gradValue,
-            //   windSpeed1mm: ws1mmValue,
-            //   maxWindSpeed: wsMaxValue,
-            //   temperature: temperature,
-            //   relativeHumidity: relativeHumidity,
-            //   deltaY: deltaY,
-            //   e0: e0,
-            //   ea: ea,
-            //   Ea: Ea,
-            //   E: E,
-            //   Kc: Kc,
-            //   recommendation: I
-            // });
-            // //res.status(500).json({ error: 'An error occurred while fetching data from a nearby station.' });
-            // return;
-          }
 
+          }
         }
       }
-
 
       const input = [gradValue, relativeHumidity, temperature, ws1mmValue, wsMaxValue];
       const tensorInput = new ort.Tensor('float32', Float32Array.from(input), [1, input.length]);
@@ -547,10 +466,7 @@ router.post('/calculate', async (req, res) => {
       const E_D = computeE(deltaY_D, GradD, GsD, Ea_D).toFixed(3);
       const I_D = computeI(E_D, Kc_D, areaSize).toFixed(3);
 
-
-
       let dayIdx = checkRelativeDate(date);
-
 
       // Prepare response object
       const responses = [
@@ -617,36 +533,9 @@ router.post('/calculate', async (req, res) => {
     }
   } catch (error) {
     console.error('Error during calculation:', error);
-    // const gradValue = (Math.random() * (0.2 - 0.05) + 0.05).toFixed(3); // Plausible range for Grad
-    // const ws1mmValue = (Math.random() * (5 - 1) + 1).toFixed(3); // Plausible range for WS1mm
-    // const wsMaxValue = (Math.random() * (10 - 2) + 2).toFixed(3); // Plausible range for WSmax
-    // const temperature = (Math.random() * (40 - 25) + 25).toFixed(3); // Plausible range for Temperature
-    // const relativeHumidity = (Math.random() * (80 - 20) + 20).toFixed(3); // Plausible range for RH
-    // const deltaY = computeDeltaY(temperature).toFixed(3);
-    // const Kc = 1.3;
-    // const e0 = computeE0(temperature).toFixed(3);
-    // const ea = computesmallea(relativeHumidity, e0).toFixed(3);
-    // const Ea = computeBigEa(e0, ea, wsMaxValue).toFixed(3);
-    // const E = computeE(deltaY, gradValue, wsMaxValue, Ea).toFixed(3);
-    // const I = computeI(E, Kc, req.body.areaSize).toFixed(3);
-
-    // res.json({
-    //   grad: gradValue,
-    //   windSpeed1mm: ws1mmValue,
-    //   maxWindSpeed: wsMaxValue,
-    //   temperature: temperature,
-    //   relativeHumidity: relativeHumidity,
-    //   deltaY: deltaY,
-    //   e0: e0,
-    //   ea: ea,
-    //   Ea: Ea,
-    //   E: E,
-    //   Kc: Kc,
-    //   recommendation: I
-    // });
-    // //res.status(500).json({ error: 'An error occurred while processing the request.' });
   }
 });
+
 
 function checkRelativeDate(inputDateString) {
   // Parse the input date string into a Date object
@@ -975,6 +864,26 @@ router.get('/recommendations/:recommendationId', async (req, res) => {
   } catch (err) {
       console.error(err);
       res.status(500).json({ error: err.message });
+  }
+});
+
+// Example route handler to save or update data
+router.post('/saveOrUpdateData', async (req, res) => {
+  const { stationName, gradient, windSpeed1, maxWind, temp, relHumidity } = req.body;
+
+  try {
+    await dataService.saveOrUpdateData({
+      stationName,
+      gradient,
+      windSpeed1,
+      maxWind,
+      temp,
+      relHumidity
+    });
+
+    res.status(200).json({ message: 'Data saved/updated successfully.' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
