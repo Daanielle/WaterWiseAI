@@ -74,39 +74,7 @@ function computeDeltaY(temperature) {
     return I;
   }
   
-  async function fetchDataFromStation(stationId, date) {
-    // const currentDate = new Date();
-    // currentDate.setDate(currentDate.getDate() - 1);
-    // date.setDate(date.getDate() + 1)
-    let formattedDate;
-    if (date instanceof Date){
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-      const day = String(date.getDate()).padStart(2, '0');
-      
-      formattedDate = `${year}/${month}/${day}`;  
-    } else {
-     formattedDate = date.slice(0, 10).replace(/-/g, "/"); // change date format to YYYY/MM/DD
-    }
-  
-    const imsUrl = `https://api.ims.gov.il/v1/envista/stations/${stationId}/data/daily/${formattedDate}`;
-    const response = await axios.get(imsUrl, {
-      headers: {
-        Authorization: 'ApiToken f058958a-d8bd-47cc-95d7-7ecf98610e47'
-      }
-    });
-    if (response.status >= 200 && response.status < 300) {
-      if(response.status != 204){
-        const data = response.data;
-        const lastBatch = data.data[data.data.length - 1];
-        return lastBatch;
-      }
-    } 
-    else {
-      throw new Error(`Error fetching data from station ${stationId}`);
-    }
-  }
-  
+
 
 
 module.exports = {
