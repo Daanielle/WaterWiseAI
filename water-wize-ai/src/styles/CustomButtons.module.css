@@ -10,6 +10,8 @@
   transition: background-color 0.3s, transform 0.3s;
   margin-top: 10px;
   background-color: var(--light-green);
+  /* background-color: #6E9277; */
+
   cursor: pointer;
 }
 

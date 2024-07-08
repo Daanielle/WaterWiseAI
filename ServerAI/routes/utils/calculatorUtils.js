@@ -70,7 +70,8 @@ function computeDeltaY(temperature) {
   }
   
   function computeI(E, Kc, totalArea) {
-    const I = E * Kc * totalArea;
+    // const I = E * Kc * totalArea;
+    const I = E * Kc * totalArea /1000;//from liters to cups
     return I;
   }
   

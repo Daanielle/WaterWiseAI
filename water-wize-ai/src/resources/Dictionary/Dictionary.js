@@ -90,7 +90,7 @@ const hebDict = {
   station: "תחנה",
   city: "עיר",
   date: "תאריך",
-  areaSize: "גודל שטח [דונם]",
+  areaSize: "גודל שטח [הקטאר]",
   KcValue: "Kc",
   calculate: "חשב",
   recommendationButton: "לחץ 'חשב' כדי לגלות את ההמלצה",
@@ -150,15 +150,22 @@ const hebDict = {
   Explanation6: "הסבר למסך 6",
 
   //AboutUs page
-  MeetTeam: "...הכירו את הצוות שלנו",
-  aboutMe: ".אני סטודנט שנה ד' להנדסת תוכנה ומערכות מידע באוניברסיטת בן גוריון בנגב",
+  AboutUsTitle: "...הכירו את הצוות שלנו",
+  OurTeam:"הצוות שלנו",
+  OurSolution:"הפתרון שלנו",
+  JoinUs:"הצטרף אלינו",
+  OurMission:"המשימה שלנו",
+
+  // OurTeamExp: ".אני סטודנט שנה ד' להנדסת תוכנה ומערכות מידע באוניברסיטת בן גוריון בנגב",
   Danielle_Name: "דניאל אספיר",
   Hadar_Name: "הדר סבתי מור",
   Lana_Name: "לנא אבוריא",
   Shachar_Name: "שחר אדם",
-  WhoWeAre: ".אנחנו צוות של ארבעה סטודנטים בשנה הרביעית בהנדסת תוכנה ומערכות מידע. הצוות שלנו מוקדש למינוף טכנולוגיה כדי לפתור בעיות בעולם האמיתי בחקלאות. עם בסיס חזק בפיתוח תוכנה, ניתוח נתונים והנדסת מערכות, אנו ערוכים היטב על מנת להביא פתרונות לקהילת החקלאים",
-
-  //style
+  OurTeamExp: ".אנחנו צוות של ארבעה סטודנטים בשנה הרביעית בהנדסת תוכנה ומערכות מידע. הצוות שלנו מוקדש למינוף טכנולוגיה כדי לפתור בעיות בעולם האמיתי בחקלאות. עם בסיס חזק בפיתוח תוכנה, ניתוח נתונים והנדסת מערכות, אנו ערוכים היטב על מנת להביא פתרונות לקהילת החקלאים",
+  OurMessionExp:"המשימה שלנו היא לספק לחקלאי התמרים המלצות מדויקות ומהימנות להשקיה, לעזור להם לחסוך במים ולמקסם את התפוקה. על ידי מינוף אלגוריתמים מתקדמים ונתונים בזמן אמת, האתר שואף לתמוך בחקלאים בקבלת החלטות מושכלות המועילות הן עם היבול והן עם הסביבה.", 
+OurSolutionExp:"האתר משתמש בטכנולוגיה חדשנית כדי לנתח נתונים מטאורולוגיים, רמות לחות בקרקע וגורמים קריטיים אחרים כדי לספק המלצות השקיה מותאמות אישית. הפלטפורמה שלנו נועדה להיות ידידותית ונגישה למשתמש, ומאפשרת לחקלאים להזין את העיר שלהם ולקבל מידע מדויק על תחנת מזג האוויר הקרובה ונוהלי השקיה אופטימליים.",
+JoinUsExp:"אנו מזמינים אותך לחקור את האתר שלנו ולראות כיצד אתר זה יכול לשנות את שיטות ההשקיה שלך. בין אם אתה חקלאי שמחפש פתרונות טובים יותר לניהול מים או מישהו שמתעניין בחקלאות בת קיימא, אתר זה כאן כדי לעזור.",  
+//style
   stylePage: "right",
   whostyle: "rightwho",
   westyle: "rightwe",
@@ -175,8 +182,8 @@ const hebDict = {
 
   //errors
   errorTryAgain: "הפעולה נכשלה, נסו שוב",
-  errorsAreaSizeRange: "הזינו מספר תקין, בין 10 ל-100000",
-  errorsKcRange: "הזינו מספר תקין, בין 0 ל-2",
+  errorsAreaSizeRange: "הזינו מספר תקין, בין 1 ל-10000",
+  errorsKcRange: "הזינו מספר תקין, בין 0.3 ל-2",
   errorEmailExists: "אימייל קיים במערכת",
   errorEmailNotExists: "אימייל לא קיים במערכת",
   errorEmail: "הזינו כתובת אימייל תקינה, לדוגמה example@example.com",
@@ -279,7 +286,7 @@ const engDict = {
   station: "Station",
   city: "City",
   date: "Date",
-  areaSize: "Area Size [acre]",
+  areaSize: "Area Size [ha]",
   KcValue: "Kc",
   calculate: "Calculate",
   recommendationButton:"Click 'Calculate' to find out the recommendation",
@@ -338,14 +345,26 @@ based on agricultural research.`,
   Explanation6: "Explanation for Screen 6",
 
   //AboutUs page
-  MeetTeam: "Meet Our Team...",
-  aboutMe: "I am a fourth year software and information systems engineering student at Ben Gurion University of the Negev.",
+  // MeetTeam: "Meet Our Team...",
+  AboutUsTitle:"About Us",
+  OurMission:"Our Mission",
+  OurTeam:"Our Team",
+  OurSolution:"Our Solution",
+  JoinUs:"Join Us",
+
+
+  // OurTeamExp: "I am a fourth year software and information systems engineering student at Ben Gurion University of the Negev.",
   Danielle_Name: "Danielle Aspir",
   Hadar_Name: "Hadar Sabati Mor",
   Lana_Name: "Lana AbuRaya",
   Shachar_Name: "Shachar Adam",
-  WhoWeAre: "We are a team of four passionate students in our fourth year of Software and Information Systems Engineering. Our team is dedicated to leveraging technology to solve real-world problems in agriculture. With a strong foundation in software development, data analysis, and systems engineering, we are well-equipped to bring solutions to the farming community.",
-  //style
+  // WhoWeAre: "We are a team of four passionate students in our fourth year of Software and Information Systems Engineering. Our team is dedicated to leveraging technology to solve real-world problems in agriculture. With a strong foundation in software development, data analysis, and systems engineering, we are well-equipped to bring solutions to the farming community.",
+  OurTeamExp:"Welcome to WaterWizeAI, where technology meets agriculture to ensure optimal irrigation for date palm cultivation. We are a team of four dedicated Information Systems Engineering students passionate about harnessing the power of data and technology to solve real-world problems.",
+ OurMessionExp:"Our mission is to provide date palm farmers with precise and reliable recommendations for irrigation, helping them conserve water and maximize yields. By leveraging advanced algorithms and real-time data, WaterWizeAI aims to support farmers in making informed decisions that benefit both their crops and the environment.", 
+ OurSolutionExp:"WaterWizeAI utilizes cutting-edge technology to analyze meteorological data, soil moisture levels, and other critical factors to provide customized irrigation recommendations. Our platform is designed to be user-friendly and accessible, allowing farmers to input their city and receive precise information about the nearest weather station and optimal irrigation practices.",
+JoinUsExp:"We invite you to explore our website and see how WaterWizeAI can transform your irrigation practices. Whether you're a farmer looking for better water management solutions or someone interested in sustainable agriculture, WaterWizeAI is here to help.",  
+
+ //style
   stylePage: "left",
   whostyle: "leftwho",
   westyle: "leftwe",
@@ -361,8 +380,8 @@ based on agricultural research.`,
 
   //errors
   errorTryAgain: "Action failed, please try again",
-  errorsAreaSizeRange: "Please enter a valid number - between 10 to 100000",
-  errorsKcRange: "Please enter a valid number - between 0 to 2",
+  errorsAreaSizeRange: "Please enter a valid number - between 1 to 10000",
+  errorsKcRange: "Please enter a valid number - between 0.3 to 2",
   errorEmailExists: "Email already exists",
   errorEmailNotExists: "Email does not exist",
   errorEmail: "Please enter a valid email - e.g. example@example.com",
