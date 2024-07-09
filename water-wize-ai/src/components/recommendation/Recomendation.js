@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Tooltip, Typography, Icon, Button } from '@mui/material';
-import WaterCalculatorVariablesDetails from '../../resources/mapping/waterCalculatorVariablesDetails';
+import WaterCalculatorVariablesDetails from '../../resources/mapping/WaterCalculatorVariablesDetails';
 import stations from '../../resources/mapping/imsStations.json';
 import { CSVLink } from 'react-csv';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
