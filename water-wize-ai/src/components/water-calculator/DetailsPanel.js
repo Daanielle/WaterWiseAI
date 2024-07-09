@@ -1,6 +1,6 @@
 import React from "react";
 import CustomCard from "../CustomCard";
-import WaterCalculatorVariablesDetails from "../../resources/mapping/WaterCalculatorVariablesDetails";
+import WaterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
 import Box from "@mui/material/Box";
 import InfoIcon from '@mui/icons-material/Info';
 import { IconButton } from "@mui/material";
