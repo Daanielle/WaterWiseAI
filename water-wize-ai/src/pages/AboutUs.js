@@ -7,6 +7,7 @@ import CustomCard from "../components/CustomCard";
 import GrouDetails from "../resources/mapping/GrouDetails";
 import TeamInfo from "../components/TeamInfo";
 import { Grid } from "@mui/material";
+import ContainerBox from "../components/ContainerBox"
 
 const stylebutton = {
   marginTop: "-10px", // Adjust vertical positioning as needed
@@ -34,6 +35,8 @@ function AboutUs() {
 
         
         <div>
+        <ContainerBox sx={{ marginLeft:"5%", backgroundColor: "white", width: "90%", padding: '2rem', border: "2px solid var(--medium-green)" }}>
+
           <p className={classes.Title}>{dict.OurTeam}</p>
           <p className={classes.DescriptionEng}>{dict.OurTeamExp}</p>
 
@@ -75,6 +78,7 @@ function AboutUs() {
           <p className={classes.DescriptionEng}>{dict.OurSolutionExp}</p>
           <p className={classes.Title}>{dict.JoinUs}</p>
           <p className={classes.DescriptionEng}>{dict.JoinUsExp}</p>
+        </ContainerBox>
         </div>
         ):(
                   

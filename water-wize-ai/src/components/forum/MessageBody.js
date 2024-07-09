@@ -7,6 +7,7 @@ import MessageHeader from './MessageHeader';
 import { getRecommendationsById, getAllCommentsForMsg } from '../../apiRequests';
 import CustomButton from './../CustomButton'
 import NewComment from './NewComment';
+import useDictionary from "../../resources/Dictionary/Dictionary";
 
 const modalStyle = {
     position: 'absolute',
@@ -30,6 +31,7 @@ export default function MessageBody({ msgId, msgBody, recId, addCommentHandler }
     const [rec, setRec] = useState(null);
     // const [error, setError] = useState(null);
     const [openNewCommentModal, setOpenNewCommentModal] = useState(false);
+    const dict = useDictionary();
 
     useEffect(() => {
         const fetchRec = async () => {
@@ -80,17 +82,17 @@ export default function MessageBody({ msgId, msgBody, recId, addCommentHandler }
     return (
         <div>
             {rec && <Recommendation recommendationDataRows={rec} />}
-            <Typography sx={{ padding: '10px 0', lineHeight: '1.5', border: '1px solid #ccc' }}>
+            <Typography sx={{ padding: '10px 0', lineHeight: '1.5', border: '1px solid var(--medium-green)' }}>
                 {msgBody}
             </Typography>
 
             <div style={{ paddingTop: '30px' }}>
-                <div style={{ backgroundColor: '#ccc', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
+                <div style={{ backgroundColor: 'var(--medium-green)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
                     <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem', textAlign: 'left', flex: '1' }}>
-                        Comments for this message
+                        {dict.CommentsMessage}
                     </Typography>
                     <div style={{ width: '200px' }}>
-                        <CustomButton onClick={handleOpenNewCommentModal} label="New Comment" secondary />
+                        <CustomButton onClick={handleOpenNewCommentModal} label={dict.NewComment} secondary />
                     </div>
                 </div>
                 <div>
@@ -111,7 +113,7 @@ export default function MessageBody({ msgId, msgBody, recId, addCommentHandler }
                             </Accordion>
                         ))
                         :
-                        <div>no comments yet!</div>
+                        <div>{dict.NoCommentsYet}</div>
                     }
                 </div>
             </div>

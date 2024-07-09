@@ -3,6 +3,8 @@
     max-width: 400px;
     margin: 2rem auto;
     text-align: center;
+    background-image: url('./resources/images/ComputerImage.png');
+
   }
   
 
@@ -24,4 +26,13 @@
   
   .contact-form textarea {
     resize: vertical; /* Allow vertical resizing */
+  }
+
+  .form-mage{
+    /* background-image: url('./resources/images/EmailImage.png'); */
+
+    /* background-size: 'cover';
+    background-position: 'left'; */
+    /* margin-top:20%; */
+
   }

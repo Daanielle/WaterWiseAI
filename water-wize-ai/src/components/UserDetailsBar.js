@@ -25,7 +25,7 @@ function UserDetailsBar() {
   };
 
   const LoggedInBtns = (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex",marginBottom:"5px" }}>
       <Link to="/">
         <CustomButton label={dict.logOut} type="button" onClick={logout} style={buttonsStyleLeft} />
       </Link>
@@ -36,7 +36,7 @@ function UserDetailsBar() {
   )
 
   const GuestBtns = (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex" ,marginBottom:"5px"}}>
       <Link to="/LogIn">
         <CustomButton label={dict.Login} type="button" style={buttonsStyleLeft} />
       </Link>

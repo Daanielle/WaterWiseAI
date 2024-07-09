@@ -6,6 +6,7 @@ import TitleButton from "../TitleButton";
 import { Modal, Box } from "@mui/material";
 import AllUserRecommendations from "../AllUserRecommendations";
 //import mongoose from "mongoose";
+import useDictionary from "../../resources/Dictionary/Dictionary";
 
 
 const NewMessage = ({ onCloseNewMsg  }) => {
@@ -15,6 +16,7 @@ const NewMessage = ({ onCloseNewMsg  }) => {
     const [recommendation, setRecommendation] = useState(null);
     const [openRecsModal, setOpenRecsModal] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
+    const dict = useDictionary();
 
     useEffect(() => {
         const fetchUserDetails = async () => {
@@ -84,22 +86,22 @@ const NewMessage = ({ onCloseNewMsg  }) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 textAlign: 'center',
-            }}>Add a new message</TitleButton>
-            <CustomButton label="attach a recommendation" onClick={handleOpenRecsModal} secondary to="/Forum"/>
+            }}>{dict.AddNewMessage}</TitleButton>
+            <CustomButton label={dict.AttachRecommendation} onClick={handleOpenRecsModal} secondary to="/Forum"/>
             <InputField
-                label="Title"
+                label={dict.Title}
                 value={title}
                 onValueChange={handleTitleChange}
                 style={{ paddingBottom: '5px' }}
             />
             <InputField
-                label="Body"
+                label={dict.Body}
                 value={body}
                 onValueChange={handlBodyChange}
                 multiline={true}
                 rows={4}
             />
-            <CustomButton label="Save Message" onClick={saveMessage} style={{ width: '50%', marginTop: '20px' }} />
+            <CustomButton label={dict.SaveMessage} onClick={saveMessage} style={{ width: '50%', marginTop: '20px' }} />
             {/* {selectedRow && (
                 <div>
                     <h2>Selected Recommendation Details</h2>

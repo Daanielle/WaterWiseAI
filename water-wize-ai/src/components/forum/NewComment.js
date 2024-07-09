@@ -3,12 +3,15 @@ import { addNewForumComment, getLoggedInUserId } from '../../apiRequests';
 import InputField from "../inputs/InputField";
 import CustomButton from "../CustomButton";
 import TitleButton from "../TitleButton";
+import useDictionary from "../../resources/Dictionary/Dictionary";
 
 const NewComment = ({ onCloseNewComment, message, addCommentHandler }) => {
     const [userId, setUserId] = useState('000000000000000000000000');
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
+    const dict = useDictionary();
 
+    
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
@@ -54,21 +57,21 @@ const NewComment = ({ onCloseNewComment, message, addCommentHandler }) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 textAlign: 'center',
-            }}>Add a new comment</TitleButton>
+            }}>{dict.AddNewComment}</TitleButton>
             <InputField
-                label="Title"
+                label={dict.Title}
                 value={title}
                 onValueChange={handleTitleChange}
                 style={{ paddingBottom: '5px' }}
             />
             <InputField
-                label="Body"
+                label={dict.Body}
                 value={body}
                 onValueChange={handlBodyChange}
                 multiline={true}
                 rows={4}
             />
-            <CustomButton label="Save Comment" onClick={saveComment} style={{ width: '50%', marginTop: '20px' }} />
+            <CustomButton label={dict.SaveComment} onClick={saveComment} style={{ width: '50%', marginTop: '20px' }} />
         </div>
     );
 }

@@ -9,7 +9,7 @@ import { Box } from "@mui/material";
 import useDictionary from "../resources/Dictionary/Dictionary";
 import InputField from "../components/inputs/InputField";
 import CustomSnackbar from "../components/CustomSnackbar";
-
+import EmailImage from "../resources/images/EmailImage.png";
 const ContactUs = () => {
   const dict = useDictionary();
   const form = useRef();
@@ -24,6 +24,19 @@ const ContactUs = () => {
     message: false,
   });
 
+  const containerStyleLeft = {
+    position: 'absolute',
+    bottom: '-200px', // Adjust as needed
+    left: '-100px', // Adjust as needed
+    zIndex: 10, // Ensures the div is in the front
+    width: '700px', // Adjust as needed
+    height: '700px', // Adjust as needed
+    backgroundImage: `url(${EmailImage})`,
+    backgroundSize: 'cover', // Cover the entire div
+    backgroundPosition: 'center', // Center the image
+  };
+
+  
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -73,14 +86,18 @@ const ContactUs = () => {
   };
 
   return (
-    <PageContainer>
+    <div  className="form-mage">
+    <PageContainer className="form-mage">
       <Box
         sx={{
           width: "100%",
           display: "flex",
           justifyContent: "center",
+          // backgroundImage: "url(../resources/images/ComputerImage.png)",
+
         }}
       >
+        <div style={containerStyleLeft} />
         <ContainerBox sx={{ border: "2px solid var(--primary-color)" }}>
           <TitleButton>{dict.contuctUs}</TitleButton>
             <form ref={form} onSubmit={sendEmail}>
@@ -125,6 +142,7 @@ const ContactUs = () => {
       <CustomSnackbar openSnackbar={snackbar} handleClose={handleCloseSnackbar} msg={msg} />
 
     </PageContainer>
+    </div>
   );
 };
 

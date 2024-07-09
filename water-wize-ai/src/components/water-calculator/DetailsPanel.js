@@ -2,7 +2,7 @@ import React from "react";
 import CustomCard from "../CustomCard";
 import WaterCalculatorVariablesDetails from "../../resources/mapping/WaterCalculatorVariablesDetails";
 import Box from "@mui/material/Box";
-import InfoIcon from '@mui/icons-material/Info';
+import InfoIcon from "@mui/icons-material/Info";
 import { IconButton } from "@mui/material";
 import useDictionary from "../../resources/Dictionary/Dictionary";
 import Modal from "@mui/material/Modal";
@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { Icon } from "@mui/material";
 import { Grid } from "@mui/material";
-import FacebookIcon from '@mui/icons-material/Facebook';
+import FacebookIcon from "@mui/icons-material/Facebook";
 
 function DetailsPanel({ detailedData, selectedStation, selectedDate }) {
   const [openModal, setOpenModal] = React.useState(false);
@@ -46,10 +46,7 @@ function DetailsPanel({ detailedData, selectedStation, selectedDate }) {
       aria-label="more info"
       onClick={(e) => handleOpenModal(e, title, description, icon)}
     >
-      <InfoIcon
-        sx={{ color: "var(--light-gray)" }}
-        aria-label="more info"
-      />
+      <InfoIcon sx={{ color: "var(--light-gray)" }} aria-label="more info" />
     </IconButton>
   );
 
@@ -70,51 +67,39 @@ function DetailsPanel({ detailedData, selectedStation, selectedDate }) {
     backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent black, adjust as needed
   });
 
-
-
-  const varCard = (key) =>
-  (
+  const varCard = (key) => (
     <CustomCard
       topIcon={variablesMapping[key].icon}
       title={variablesMapping[key]?.title}
-      // VerticaleIcon={variablesMapping[key].icon}
-      // min={0}
-      //   max={10}
-      //   value={sliderValue}
+      // Min={200}
+      // Max={500}
+      // Value={450}
 
-      //   onChange={handleSliderChange}
       description={
-        detailedData[key] !== "--" ?
-
-          (typeof detailedData[key] === 'number' ?
-            parseFloat(detailedData[key].toFixed(3))
-            :
-            detailedData[key]) +
-          " " +
-          variablesMapping[key]?.units
-
-          :
-
-          detailedData[key]
+        detailedData[key] !== "--"
+          ? (typeof detailedData[key] === "number"
+              ? parseFloat(detailedData[key].toFixed(3))
+              : detailedData[key]) +
+            " " +
+            variablesMapping[key]?.units
+          : detailedData[key]
       }
       sx={{
-        width: '100%',
-        height: '160px',
-        backgroundColor: 'var(--extra-white-transparent)',
-        borderColor: 'var(--extra-white-transparent)',
+        width: "100%",
+        height: "160px",
+        backgroundColor: "var(--extra-white-transparent)",
+        borderColor: "var(--extra-white-transparent)",
       }}
-      bottomIcons={
-        bottomIcons(
-          variablesMapping[key].title,
-          variablesMapping[key].description,
-          variablesMapping[key].icon
-        )}
+      bottomIcons={bottomIcons(
+        variablesMapping[key].title,
+        variablesMapping[key].description,
+        variablesMapping[key].icon
+      )}
     />
-  )
-
+  );
 
   return (
-    <div >
+    <div>
       <Grid container spacing={2}>
         {keys.slice(0, 4).map((key) => (
           <Grid item md={3} key={key}>

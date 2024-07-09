@@ -3,10 +3,12 @@ import { getUserById } from '../../apiRequests';
 import { Avatar, Typography, IconButton, Badge } from '@mui/material';
 import ChatBubbleOutlineRoundedIcon from '@mui/icons-material/ChatBubbleOutlineRounded';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
+import useDictionary from "../../resources/Dictionary/Dictionary";
 
 export default function MessageHeader({ userId, title, time, numOfComments, isRec, setLoading, numOfAdditionalComments }) {
     const [user, setUser] = useState(null);
     // const [error, setError] = useState(null);
+    const dict = useDictionary();
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -46,7 +48,7 @@ export default function MessageHeader({ userId, title, time, numOfComments, isRe
                 </div>
                 <div style={{ marginRight: '10px', marginLeft: '20px' }}>
                     <Typography color="text.secondary" style={{ marginBottom: '5px' }}>
-                        {user ? user.firstName + " " + user.lastName : 'Guest'}
+                        {user ? user.firstName + " " + user.lastName : dict["Guest"]}
                     </Typography>
                     <Typography color="text.secondary">
                         {time}

@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Icon } from "@mui/material";
-import VirtecalSlider from "./water-calculator/VirtecalSlider";
+import NewSlider from "./water-calculator/NewSlider";
 
 const CustomCard = ({
   title,
@@ -13,11 +13,9 @@ const CustomCard = ({
   image,
   topIcon,
   bottomIcons,
-  VerticaleIcon,
   Min,
   Max,
   Value,
-  Onchange,
 
   sx,
 }) => {
@@ -35,14 +33,14 @@ const CustomCard = ({
         ...sx,
       }}
     >
-        {VerticaleIcon && (
-            <VirtecalSlider
-            iconuser={VerticaleIcon}
-            min={Min}
-            max={Max}
-            value={Value}
-            onChange={Onchange} />
-         )}
+        {Value && Min && Max &&(
+      <NewSlider
+      value={Value}
+      minValue={Min}
+      maxValue={Max}
+    
+    />
+       )}
       
       <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
         {image && (

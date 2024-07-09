@@ -95,13 +95,13 @@ function Forum() {
       <TitleButton >{dict.forum}</TitleButton>
       <div style={{ display: 'flex', justifyContent: 'flex-end', width: '80%', paddingBottom: '20px' }}>
         <div style={{ width: '300px' }}>
-          <CustomButton onClick={handleOpenNewMessageModal} label="New Message" disabled={!userId} disabledTooltip={"Log in in order to add a new message"} />
+          <CustomButton onClick={handleOpenNewMessageModal} label={dict.NewMessage} disabled={!userId} disabledTooltip={dict.LogInMessage} />
         </div>
       </div>
 
       <div>
         {allMessages.map((message, index) => (
-          <Accordion key={index} style={{ backgroundColor: '#dde6da' }}>
+          <Accordion key={index} style={{ border: "2px solid var(--medium-green)",borderRadius: '15px',boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',width:"1400%", marginLeft:"-400px", marginRight:"-20px" }}>
             <AccordionSummary
               expandIcon={<ArrowDropDownIcon />}
             >

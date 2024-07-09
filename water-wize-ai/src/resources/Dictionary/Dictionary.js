@@ -156,6 +156,22 @@ const hebDict = {
   JoinUs:"הצטרף אלינו",
   OurMission:"המשימה שלנו",
 
+  //Forum Page
+  NewMessage:"הודעה חדשה",
+  LogInMessage:"התחבר כדי להוסיף הודעה חדשה",
+  AddNewComment:"הוסף תגובה חדשה",
+  Title:"כותרת",
+  Body:"טקסט",
+  SaveComment:"שמור תגובה",
+  AddNewMessage:"הוסף הודעה חדשה",
+  SaveMessage:"שמור הודעה",
+  AttachRecommendation:"צרף המלצה",
+  Guest:"אורח",
+  CommentsMessage:"תגובות להודעה זו",
+  NoCommentsYet:"!עדיין אין תגובות",
+  NewComment:"תגובה חדשה",
+
+
   // OurTeamExp: ".אני סטודנט שנה ד' להנדסת תוכנה ומערכות מידע באוניברסיטת בן גוריון בנגב",
   Danielle_Name: "דניאל אספיר",
   Hadar_Name: "הדר סבתי מור",
@@ -351,6 +367,25 @@ based on agricultural research.`,
   OurTeam:"Our Team",
   OurSolution:"Our Solution",
   JoinUs:"Join Us",
+
+  //Forum Page
+  NewMessage:"New Message",
+LogInMessage:"Log in in order to add a new message",
+AddNewComment:"Add a new comment",
+Title:"Title",
+Body:"Body",
+SaveComment:"Save Comment",
+AddNewMessage:"Add a new message",
+SaveMessage:"Save Message",
+AttachRecommendation:"attach a recommendation",
+Guest:"Guest",
+CommentsMessage:"Comments for this message",
+NoCommentsYet:"no comments yet!",
+NewComment:"New Comment",
+
+
+
+
 
 
   // OurTeamExp: "I am a fourth year software and information systems engineering student at Ben Gurion University of the Negev.",
