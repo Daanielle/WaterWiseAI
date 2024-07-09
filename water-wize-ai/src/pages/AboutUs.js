@@ -83,6 +83,8 @@ function AboutUs() {
         ):(
                   
         <div>
+                  <ContainerBox sx={{ marginLeft:"5%", backgroundColor: "white", width: "90%", padding: '2rem', border: "2px solid var(--medium-green)" }}>
+
         <p className={classes.Title}>{dict.OurTeam}</p>
         <p className={classes.DescriptionHeb}>{dict.OurTeamExp}</p>
 
@@ -124,6 +126,7 @@ function AboutUs() {
         <p className={classes.DescriptionHeb}>{dict.OurSolutionExp}</p>
         <p className={classes.Title}>{dict.JoinUs}</p>
         <p className={classes.DescriptionHeb}>{dict.JoinUsExp}</p>
+        </ContainerBox>
       </div>
         )}
       </PageContainer>
