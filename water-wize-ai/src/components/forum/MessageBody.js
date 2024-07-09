@@ -24,7 +24,7 @@ const modalStyle = {
     textAlign: 'center',
 };
 
-export default function MessageBody({ msgId, msgBody, recId, addCommentHandler }) {
+export default function MessageBody({ msgId, msgBody, recId, addCommentHandler, userId }) {
 
     const [comments, setComments] = useState(null);
     const [rec, setRec] = useState(null);
@@ -90,7 +90,7 @@ export default function MessageBody({ msgId, msgBody, recId, addCommentHandler }
                         Comments for this message
                     </Typography>
                     <div style={{ width: '200px' }}>
-                        <CustomButton onClick={handleOpenNewCommentModal} label="New Comment" secondary />
+                        <CustomButton onClick={handleOpenNewCommentModal} label="New Comment" secondary disabled={!userId} disabledTooltip={"Log in in order to add a new message"} />
                     </div>
                 </div>
                 <div>

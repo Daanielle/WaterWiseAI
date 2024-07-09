@@ -127,6 +127,7 @@ function Forum() {
                 msgBody={message.body}
                 recId={message.recommendations[0]}
                 msgId={message._id}
+                userId={userId}
                 addCommentHandler={handleAddComment}
               />
             </AccordionDetails>
