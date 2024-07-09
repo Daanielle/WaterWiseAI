@@ -83,7 +83,8 @@ function WaterCalculatorVariablesDetails() {
       icon: RecommendIcon,
       title: dict.RecParmeter,
       description: dict.recommendation,
-      units: "[liters/day for the given area]",
+      // units: "[liters/day for the given area]",
+      units: "[cub/day for the given area]",
     },
   };
 

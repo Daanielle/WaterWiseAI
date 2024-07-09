@@ -100,8 +100,8 @@ style={stylebutton}
           <Typography sx={{fontWeight:"bold", color:"var(--medium-green)" }} variant="h4" gutterBottom>{dict.GuideFAQ}</Typography>
           {faqData.map((faq, index) => (
             <Accordion sx={{ minHeight: 20, border: "2px solid var(--medium-green)",marginTop:"12px" }} key={index}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography sx={{ fontSize:"26px" }}>{faq.question}</Typography>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Typography sx={{ flex: 1,textAlign:  dict.textAlign,    fontSize:"26px" }}>{faq.question}</Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ fontSize:"20px", color:"var(--medium-green)" }}>
                 <Typography>{faq.answer}</Typography>

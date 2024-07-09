@@ -1,6 +1,6 @@
 import React from "react";
 import CustomCard from "../CustomCard";
-import WaterCalculatorVariablesDetails from "../../resources/mapping/WaterCalculatorVariablesDetails";
+import WaterCalculatorVariablesDetails from "../../resources/mapping/waterCalculatorVariablesDetails";
 import Box from "@mui/material/Box";
 import InfoIcon from '@mui/icons-material/Info';
 import { IconButton } from "@mui/material";
@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { Icon } from "@mui/material";
 import { Grid } from "@mui/material";
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 function DetailsPanel({ detailedData, selectedStation, selectedDate }) {
   const [openModal, setOpenModal] = React.useState(false);
@@ -18,7 +19,11 @@ function DetailsPanel({ detailedData, selectedStation, selectedDate }) {
   const [currentIcon, setCurrentIcon] = React.useState();
   const [currentDescription, setCurrentDescription] = React.useState("");
   const [clickPosition, setClickPosition] = React.useState({ top: 0, left: 0 });
+  const [sliderValue, setSliderValue] = React.useState(30);
 
+  const handleSliderChange = (event, newValue) => {
+    setSliderValue(newValue);
+  };
   const dict = useDictionary();
   const variablesMapping = WaterCalculatorVariablesDetails();
 
@@ -72,6 +77,12 @@ function DetailsPanel({ detailedData, selectedStation, selectedDate }) {
     <CustomCard
       topIcon={variablesMapping[key].icon}
       title={variablesMapping[key]?.title}
+      // VerticaleIcon={variablesMapping[key].icon}
+      // min={0}
+      //   max={10}
+      //   value={sliderValue}
+
+      //   onChange={handleSliderChange}
       description={
         detailedData[key] !== "--" ?
 
