@@ -101,7 +101,13 @@ function Forum() {
 
       <div>
         {allMessages.map((message, index) => (
-          <Accordion key={index} style={{ border: "2px solid var(--medium-green)",borderRadius: '15px',boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',width:"1400%", marginLeft:"-400px", marginRight:"-20px" }}>
+          <Accordion key={index} style={{ border: "2px solid var(--medium-green)",borderRadius: '15px',boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',width:"1400%", marginLeft:"-400px", marginRight:"-20px" }}sx={{
+            minWidth: {
+              xs: '100%', // 100% width on extra-small screens
+              sm: '600px', // 600px width on small screens
+              md: '800px', // 800px width on medium screens and up
+            },
+          }}>
             <AccordionSummary
               expandIcon={<ArrowDropDownIcon />}
             >
@@ -112,7 +118,7 @@ function Forum() {
                 time={formatDate(message.createdAt)}
                 isRec={message.recommendations[0]}
                 numOfComments={message.numOfComments}
-                //additionalComments={numOfAdditionalComments}
+              //additionalComments={numOfAdditionalComments}
               />
             </AccordionSummary>
             <AccordionDetails>
@@ -121,6 +127,7 @@ function Forum() {
                 msgBody={message.body}
                 recId={message.recommendations[0]}
                 msgId={message._id}
+                userId={userId}
                 addCommentHandler={handleAddComment}
               />
             </AccordionDetails>

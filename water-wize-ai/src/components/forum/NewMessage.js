@@ -8,8 +8,7 @@ import AllUserRecommendations from "../AllUserRecommendations";
 //import mongoose from "mongoose";
 import useDictionary from "../../resources/Dictionary/Dictionary";
 
-
-const NewMessage = ({ onCloseNewMsg  }) => {
+const NewMessage = ({ onCloseNewMsg }) => {
     const [userId, setUserId] = useState('');
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
@@ -29,27 +28,24 @@ const NewMessage = ({ onCloseNewMsg  }) => {
         };
         fetchUserDetails();
     }, []);
-    //const { ObjectId } = mongoose.Types;
 
     const handleOpenRecsModal = () => setOpenRecsModal(true);
     const handleCloseRecsModal = () => setOpenRecsModal(false);
 
     const handleRowClick = (row) => {
         setSelectedRow(row);
-        // let recArr = [row._id, ...recommendation]
-        
-        //let recArr = [row._id];
-
-        setRecommendation(selectedRow._id)
+        setRecommendation(row._id);
         setOpenRecsModal(false); // Close modal on row click
     };
 
     const saveMessage = async () => {
         try {
-            console.log("&&&&&&&&&&&" + recommendation)
-            let recArr = [recommendation]
+            let recArr = [recommendation];
             let message = {
-                userId: userId, title:title, body:body, recommendations:recArr
+                userId: userId,
+                title: title,
+                body: body,
+                recommendations: recArr
             };
             let status = await addNewForumMessage(message);
             console.log("Message saved successfully:", status);
@@ -63,7 +59,7 @@ const NewMessage = ({ onCloseNewMsg  }) => {
         setTitle(newTitle);
     };
 
-    const handlBodyChange = (newBody) => {
+    const handleBodyChange = (newBody) => {
         setBody(newBody);
     };
 
@@ -74,7 +70,7 @@ const NewMessage = ({ onCloseNewMsg  }) => {
         transform: 'translate(-50%, -50%)',
         width: '85%',
         bgcolor: 'background.paper',
-        border: '2px solid var(--black-color)',
+        border: '2px solid #000',
         boxShadow: 24,
         p: 4,
     };
@@ -97,7 +93,7 @@ const NewMessage = ({ onCloseNewMsg  }) => {
             <InputField
                 label={dict.Body}
                 value={body}
-                onValueChange={handlBodyChange}
+                onValueChange={handleBodyChange}
                 multiline={true}
                 rows={4}
             />

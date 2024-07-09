@@ -72,12 +72,12 @@ function UserDetails() {
             handleOpenSnackbar()
             return
         }
-        const emailExists = await checkEmailExists(editedUser.email);
-        if (emailExists.exists) {
-            setMsg(dict.errorEmailExists)
-            handleOpenSnackbar()
-            return
-        }
+        // const emailExists = await checkEmailExists(editedUser.email);
+        // if (emailExists.exists) {
+        //     setMsg(dict.errorEmailExists)
+        //     handleOpenSnackbar()
+        //     return
+        // }
 
         try {
             const response = await patchUserDetails(editedUser)
@@ -188,7 +188,7 @@ function UserDetails() {
         <PageContainer>
             <div >
                 <ContainerBox style={{ display: 'inline-block', width: 'calc(50% - 5px)', marginRight: '10px', verticalAlign: 'top' }}>
-                    <img src={user && user.image} style={{ maxWidth: '60%', objectFit: 'contain', borderRadius: '3%' }} alt="User" />
+                {user && user.image &&<img src={user && user.image} style={{ maxWidth: '60%', objectFit: 'contain', borderRadius: '3%' }} alt="User" />}
                     <TitleButton>{dict.editDetails}</TitleButton>
                     <form onSubmit={handleUserDetailsChange}>
                         <InputField

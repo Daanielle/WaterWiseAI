@@ -184,34 +184,65 @@ router.get('/login/check', authenticateToken, (req, res) => {
     }
 });
 
-router.patch('/:id/password2/', getUser, async (req, res) => {
-    const { oldPassword, newPassword } = req.body;
 
-    if (!oldPassword || !newPassword) {
-        return res.status(400).json({ message: 'Old password and new password are required' });
+// Check if an email exists in the database
+router.post('/check-email-token', async (req, res) => {
+    const { email } = req.body;
+
+    // Simple email format validation
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+        return res.status(400).json({ message: "Invalid email format" });
     }
 
     try {
-        // Check if the old password matches
-        const isMatch = await bcrypt.compare(oldPassword, res.user.password);
-        if (!isMatch) {
-            return res.status(400).json({ message: 'Old password is incorrect' });
+        const user = await User.findOne({ email: email });
+        if (user) {
+            // Generate a shorter-lived token for email confirmation
+            const emailToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '10m' });
+
+            // Return the token and indication that email exists
+            res.status(200).json({ exists: true, emailToken });
+        } else {
+            res.status(200).json({ exists: false });
+        }
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// @route    PATCH /users/password-reset/:token
+// @desc     Update user password using token
+// @access   Public
+router.patch('/password-reset/:token', async (req, res) => {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    if (!password) {
+        return res.status(400).json({ message: 'Password is required' });
+    }
+
+    try {
+        // Verify the token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(decoded.userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
         }
 
-        // Generate a salt and hash the new password
+        // Generate a salt
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(newPassword, salt);
-        console.log('Password hashed:', hashedPassword); // Add this line for debugging
-
+        // Hash the new password
+        const hashedPassword = await bcrypt.hash(password, salt);
+        
         // Update the user's password
-        res.user.password = hashedPassword;
+        user.password = hashedPassword;
+        await user.save();
 
-        // Save the updated user with the new hashed password
-        const updatedUser = await res.user.save();
-        console.log('User updated:', updatedUser); // Add this line for debugging
-        res.json(updatedUser);
+        res.json({ message: 'Password updated successfully' });
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        console.error('Error during password reset:', err);
+        res.status(400).json({ message: 'Invalid or expired token' });
     }
 });
 

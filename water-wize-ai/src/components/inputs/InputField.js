@@ -22,7 +22,6 @@ const InputField = ({
     const [isInitiallyValid, setIsInitiallyValid] = useState(true);
 
     useEffect(() => {
-        // Check initial validity only if there's an initial value
         if (value && checkIfValid) {
             const isValid = checkIfValid(value);
             setIsError(!isValid);
@@ -33,9 +32,14 @@ const InputField = ({
 
     const handleInputChange = (event) => {
         const newValue = event.target.value;
-        onValueChange(newValue);
+        if(type === "file"){
+            onValueChange(event); // Pass the whole event for file inputs
+        }
+        else {
+            onValueChange(newValue)
+        }
 
-        // Validate only after user interaction starts
+
         if (!isInitiallyValid && checkIfValid) {
             const isValid = checkIfValid(newValue);
             setIsError(!isValid);
