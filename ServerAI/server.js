@@ -14,7 +14,7 @@ const app = express();
 const port = process.env.PORT || 443;
 
 // Serve static files from the React app
-app.use(express.static("C:\\Users\\user\\Desktop\\WaterWiseAI\\water-wize-ai\\build"));
+// app.use(express.static("C:\\Users\\user\\WaterWiseAI\\water-wize-ai\\build"));
 
 // MongoDB connection
 mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -56,9 +56,10 @@ const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Handle React routing, return all requests to React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join("C:\\Users\\user\\Desktop\\WaterWiseAI\\water-wize-ai\\build", 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join("C:\\Users\\user\\WaterWiseAI\\water-wize-ai\\build", 'index.html'));
+//   // res.sendFile(path.resolve(_dirname, "../../WaterWizeAI-5/water-wize-ai/build", 'index.html'));
+// });
 
 // Start the server
 app.listen(port, () => {

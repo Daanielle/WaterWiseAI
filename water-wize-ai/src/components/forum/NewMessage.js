@@ -83,7 +83,7 @@ const NewMessage = ({ onCloseNewMsg }) => {
                 alignItems: 'center',
                 textAlign: 'center',
             }}>{dict.AddNewMessage}</TitleButton>
-            <CustomButton label={dict.AttachRecommendation} onClick={handleOpenRecsModal} secondary to="/Forum"/>
+            <CustomButton label={dict.AttachRecommendation} onClick={handleOpenRecsModal} secondary/>
             <InputField
                 label={dict.Title}
                 value={title}
