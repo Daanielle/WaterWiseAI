@@ -46,6 +46,7 @@ function Forum() {
     const fetchAllMessages = async () => {
       try {
         const messages = await getAllForumMessages();
+        //console.log(messages)
         setAllMessages(messages);
         const id = await getLoggedInUserId();
         setUserId(id);
@@ -100,8 +101,8 @@ function Forum() {
       </div>
 
       <div>
-        {allMessages.map((message, index) => (
-          <Accordion key={index} style={{ border: "2px solid var(--medium-green)",borderRadius: '15px',boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',width:"300%", marginLeft:"-400px", marginRight:"-20px" }}sx={{
+        {allMessages && allMessages.map((message, index) => (
+          <Accordion key={index} style={{ border: "2px solid var(--medium-green)",borderRadius: '15px',boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}sx={{
             minWidth: {
               xs: '100%', // 100% width on extra-small screens
               sm: '600px', // 600px width on small screens

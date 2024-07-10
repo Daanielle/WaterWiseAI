@@ -1,6 +1,6 @@
 // locationsData.js
 
-const bycodejson = require('C:\\Users\\user\\Desktop\\WaterWiseAI\\water-wize-ai\\src\\resources\\bycode2022Updated.json');
+const bycodejson = require('C:\\Users\\user\\WaterWiseAI\\water-wize-ai\\src\\resources\\bycode2022Updated.json');
 
 const CitiesCities = [];
 for (let i = 0; i < bycodejson["קובץ יישובים 2022"].length; i++) {
