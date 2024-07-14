@@ -216,6 +216,7 @@ import WaterCalculatorVariablesDetails from '../../resources/mapping/waterCalcul
 import Tooltip from '@mui/material/Tooltip';
 import { Typography, Icon } from '@mui/material';
 import stations from '../../resources/mapping/imsStations.json'; 
+import PredictionFlag from '../water-calculator/PredictionFlag';
 
 const Recommendation = ({ recommendationDataRows, onRowClick }) => {
     const varData = WaterCalculatorVariablesDetails();
@@ -268,7 +269,8 @@ const Recommendation = ({ recommendationDataRows, onRowClick }) => {
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
                                 >
                                     <TableCell align="right">
-                                        {new Date(row.createdAt).toLocaleDateString(undefined, {
+                                        {row.isPrediction && <PredictionFlag/>}
+                                        {new Date(row.date).toLocaleDateString(undefined, {
                                             year: 'numeric',
                                             month: '2-digit',
                                             day: '2-digit'

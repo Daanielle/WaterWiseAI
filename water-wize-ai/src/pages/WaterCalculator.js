@@ -243,11 +243,13 @@ function WaterCalculator() {
 
   const saveRec = async () => {
     const station = selectedArea.value;
+    // const isPrediction = isPrediction;
     let saveStatus = await saveRecommendation({
       userId,
       ...detailedData,
       station,
-    });
+      isPrediction,
+    }, selectedDate);
 
     if (saveStatus) {
       handleOpenSnackbar();
@@ -333,6 +335,7 @@ function WaterCalculator() {
       !selectedCity ||
       !selectedArea ||
       !selectedDate ||
+      detailedData.recommendation === "--" ||
       !selectedAreaSize,
     disabledTooltip: !userId
       ? "Log in in order to save a calculation"
@@ -519,7 +522,7 @@ function WaterCalculator() {
         <CustomSnackbar
           openSnackbar={saveRecSB}
           handleClose={handleCloseSnackbar}
-          msg={"Reccomendation saved succesfully"}
+          msg={"Recomendation saved succesfully"}
         />
       </PageContainer>
     </div>

@@ -28,7 +28,7 @@ export const getCalculate = async (selectedArea, areaSize, date, kc) => {
 };
 
 
-export const saveRecommendation = async (recommendation) => {
+export const saveRecommendation = async (recommendation, selectedDate) => {
   try {
     const calculationResponse = await fetch('/calculator/recommendations', {
       method: "POST",
@@ -37,6 +37,7 @@ export const saveRecommendation = async (recommendation) => {
       },
       body: JSON.stringify({
         recommendation,
+        selectedDate
       }),
     });
     const status = await calculationResponse.json();

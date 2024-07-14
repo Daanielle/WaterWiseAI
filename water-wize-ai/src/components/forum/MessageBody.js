@@ -81,7 +81,7 @@ export default function MessageBody({ msgId, msgBody, recId, addCommentHandler, 
 
     return (
         <div>
-            {rec && <Recommendation recommendationDataRows={rec} />}
+            {rec && <Recommendation recommendationDataRows={rec} onRowClick={() => {}}/>}
             <Typography sx={{ padding: '40px 0', lineHeight: '1.5', border: '1px solid var(--medium-green)', fontSize: 20}}>
                 {msgBody}
             </Typography>

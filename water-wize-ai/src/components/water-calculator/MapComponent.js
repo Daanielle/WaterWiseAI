@@ -23,7 +23,11 @@ const MapComponent = ({ myCoordinates, selectedStation }) => {
                 {({ geographies }) => (
                     <>
                         {geographies.map(geo => (
-                            <Geography key={geo.rsmKey} geography={geo} />
+                            <Geography key={geo.rsmKey} geography={geo} style={{
+                                default: {
+                                  fillOpacity: 0
+                                },
+                              }}/>
                         ))}
                     </>
                 )}
