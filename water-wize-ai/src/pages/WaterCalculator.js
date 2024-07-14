@@ -10,7 +10,7 @@ import InputField from "../components/inputs/InputField";
 import InputPicker from "../components/inputs/PickInput";
 import AllUserRecommendations from "../components/AllUserRecommendations";
 import Modal from "@mui/material/Modal";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid} from "@mui/material";
 import {
   saveRecommendation,
   getLoggedInUserId,
@@ -23,8 +23,7 @@ import { getMyCoordinates } from "../apiRequests";
 import MapComponent from "../components/water-calculator/MapComponent";
 import dayjs from "dayjs";
 import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
-import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+import Tooltip from "@mui/material/Tooltip";
 
 const bycodejson = require("../resources/bycode2022Updated.json");
 
@@ -308,11 +307,11 @@ function WaterCalculator() {
       navigator.permissions
         .query({ name: "geolocation" })
         .then(function (result) {
-          if (result.state == "granted") {
+          if (result.state === "granted") {
             setAllowGeo(true);
-          } else if (result.state == "prompt") {
+          } else if (result.state === "prompt") {
             setAllowGeo(true);
-          } else if (result.state == "denied") {
+          } else if (result.state === "denied") {
             setAllowGeo(false);
           }
         });
@@ -355,10 +354,10 @@ function WaterCalculator() {
     formatted = `${day}/${month}/${year}`;
   }
 
-  let title =
-    selectedArea && selectedDate
-      ? `Values for ${selectedArea.label} station for the date of: ${formatted}`
-      : "Select date and time to show values";
+  // let title =
+  //   selectedArea && selectedDate
+  //     ? `Values for ${selectedArea.label} station for the date of: ${formatted}`
+  //     : "Select date and time to show values";
 
   return (
     <div className={classes.WaterCalculator}>

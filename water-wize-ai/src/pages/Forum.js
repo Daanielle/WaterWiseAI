@@ -4,7 +4,6 @@ import { Modal, Box } from "@mui/material";
 import PageContainer from "../components/PageContainer";
 import TitleButton from "../components/TitleButton";
 import CustomButton from "../components/CustomButton";
-import MesssagesAcordion from "../components/forum/MessagesAcordion";
 import NewMessage from "../components/forum/NewMessage";
 import useDictionary from "../resources/Dictionary/Dictionary";
 import { getAllForumMessages, getLoggedInUserId } from "../apiRequests";
