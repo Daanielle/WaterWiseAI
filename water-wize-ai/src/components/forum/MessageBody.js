@@ -82,7 +82,7 @@ export default function MessageBody({ msgId, msgBody, recId, addCommentHandler, 
     return (
         <div>
             {rec && <Recommendation recommendationDataRows={rec} />}
-            <Typography sx={{ padding: '10px 0', lineHeight: '1.5', border: '1px solid var(--medium-green)' }}>
+            <Typography sx={{ padding: '40px 0', lineHeight: '1.5', border: '1px solid var(--medium-green)', fontSize: 20}}>
                 {msgBody}
             </Typography>
 
@@ -106,7 +106,7 @@ export default function MessageBody({ msgId, msgBody, recId, addCommentHandler, 
                                     <MessageHeader title={comment.title} userId={comment.userId} time={formatDate(comment.createdAt)} isRec={false} numOfComments={-1} />
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    <Typography>
+                                    <Typography  sx={{ padding: '40px 0', lineHeight: '1.5', border: '1px solid var(--medium-green)', fontSize: 20}}>
                                         {comment.body}
                                     </Typography>
                                 </AccordionDetails>
