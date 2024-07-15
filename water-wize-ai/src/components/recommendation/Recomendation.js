@@ -226,7 +226,7 @@ const Recommendation = ({ recommendationDataRows, onRowClick }) => {
         { title: 'Date', description: 'Date of the recommendation', icon: null },
         { title: 'Station', description: 'Station associated with the recommendation', icon: null },
         ...Object.keys(varData).map(key => ({
-            title: varData[key].title,
+            title: varData[key].title + " " + varData[key].units,
             description: varData[key].description,
             icon: varData[key].icon,
         }))

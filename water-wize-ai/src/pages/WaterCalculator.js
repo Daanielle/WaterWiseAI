@@ -403,7 +403,7 @@ function WaterCalculator() {
                       options={optionsCities}
                     />
                   </span>
-                </CustomWidthTooltip>
+                </CustomWidthTooltip> 
 
                 <CustomWidthTooltip >
                   <span>
