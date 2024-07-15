@@ -10,6 +10,8 @@ import WaterCalculator from "./pages/WaterCalculator";
 import Demo from "./pages/Demo";
 import TasksList from "./pages/TasksList";
 import LogIn from "./pages/LogIn";
+import ForgetPass from "./pages/ForgetPass";
+import PasswordReset from "./pages/PasswordReset";
 import Register from "./pages/Register";
 import UserDetails from "./pages/UserDetails"
 import { LanguageProvider } from "./LanguageContext";
@@ -38,6 +40,8 @@ const router = createBrowserRouter([
       { path: "/WaterCalculator", element: <WaterCalculator /> },
       { path: "/TasksList", element: <TasksList /> },
       { path: "/LogIn", element: <LogIn /> },
+      { path: "/ForgetPass", element: <ForgetPass /> },
+      { path: "/password-reset/:token", element: <PasswordReset /> },
       { path: "/Register", element: <Register /> },
       { path: "/UserDetails", element: <UserDetails /> },
       { path: "/Demo", element: <Demo /> },

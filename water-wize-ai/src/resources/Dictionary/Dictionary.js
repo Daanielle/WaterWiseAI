@@ -23,6 +23,7 @@ const hebDict = {
   waterCalculatorTitle: "מחשבון מים",
   LogIn: "התחברות",
   Register: "הרשמה",
+  ResetPass:"שחזר סיסמה ",
 
   //Guide
   GuideScreenExplanations: "הסברים על המסכים",
@@ -237,7 +238,7 @@ const engDict = {
   waterCalculatorTitle: "Water Calculator",
   LogIn: "Log In",
   Register: "Register",
-
+  ResetPass:"Reset Password",
   //Guide
   GuideScreenExplanations: "Screen Explanations",
   GuideHomeTitle: "Home",

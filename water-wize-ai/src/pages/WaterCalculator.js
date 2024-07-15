@@ -391,7 +391,7 @@ function WaterCalculator() {
           <Grid item xs={3}>
             <div className={classes.formControl}>
               <ContainerBox width="500px" minHeight="710px">
-                <CustomWidthTooltip title="dddd">
+                {/* <CustomWidthTooltip title="dddd"> */}
                   <span>
                     {" "}
                     <InputPicker
@@ -401,9 +401,9 @@ function WaterCalculator() {
                       options={optionsCities}
                     />
                   </span>
-                </CustomWidthTooltip>
+                {/* </CustomWidthTooltip> */}
 
-                <CustomWidthTooltip title="dddd">
+                {/* <CustomWidthTooltip title="dddd"> */}
                   <span>
                     {" "}
                     <InputPicker
@@ -413,7 +413,7 @@ function WaterCalculator() {
                       options={optionsAreas}
                     />
                   </span>
-                </CustomWidthTooltip>
+                {/* </CustomWidthTooltip> */}
                 {/* <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities} />
                 <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas} /> */}
                 <DatePickerComponent

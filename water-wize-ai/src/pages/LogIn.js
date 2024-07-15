@@ -69,7 +69,8 @@ function LogIn() {
           <CustomButton type="Submit" label={dict.Login} />
           {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '10%' }}>
-            <CustomButton type="button" label={dict.forgetpassword} to="/Register" style={{ width: '35%' }} secondary />
+            {/* <CustomButton type="button" label={dict.forgetpassword} to="/Register" style={{ width: '35%' }} secondary /> */}
+            <CustomButton type="button" label={dict.forgetpassword} to="/ForgetPass" style={{ width: '35%' }} secondary />
             <CustomButton type="button" label={dict.Register} to="/Register" style={{ width: '35%' }} secondary />
           </div>
         </ContainerBox>
