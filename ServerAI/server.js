@@ -15,8 +15,8 @@ const port = process.env.PORT || 443;
 
 // Serve static files from the React app
 // app.use(express.static("../../WaterWiseAI/water-wize-ai/build"));
-const buildPath = path.resolve(__dirname, '../../WaterWiseAI-5/water-wize-ai/build');
-app.use(express.static(buildPath));
+// const buildPath = path.resolve(__dirname, '../../WaterWiseAI-5/water-wize-ai/build');
+// app.use(express.static(buildPath));
 
 // MongoDB connection
 mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -62,9 +62,10 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 //   res.sendFile(path.join("../../WaterWiseAI/water-wize-ai/build", 'index.html'));
 // });
 // Handle React routing, return all requests to React app
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../../WaterWiseAI-5/water-wize-ai/build", 'index.html'));
-});// C:\Users\user\Documents\WaterWiseAI-5\water-wize-ai\build
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "../../WaterWiseAI-5/water-wize-ai/build", 'index.html'));
+// });
+// C:\Users\user\Documents\WaterWiseAI-5\water-wize-ai\build
 // Handle React routing, return all requests to React app
 // app.get('*', (req, res) => {
 //   const indexPath = path.resolve(buildPath, 'index.html');

@@ -23,7 +23,7 @@ const hebDict = {
   waterCalculatorTitle: "מחשבון מים",
   LogIn: "התחברות",
   Register: "הרשמה",
-  ResetPass:"שחזר סיסמה ",
+  ResetPass:"שמור סיסמה ",
 
   //Guide
   GuideScreenExplanations: "הסברים על המסכים",
@@ -195,7 +195,7 @@ JoinUsExp:"אנו מזמינים אותך לחקור את האתר שלנו ול
   successSaveUser: "פרטי משתמש נשמרו בהצלחה",
   successSavePass: "סיסמה נשמרה בהצלחה",
   successSentMessage:"!הודעה נשלחה בהצלחה",
-
+  successSentEmailChangePass:".לבדוק את הדואר האלקטרוני שלך. שלחנו לך קישור לשינוי הסיסמה",
 
   //errors
   errorTryAgain: "הפעולה נכשלה, נסו שוב",
@@ -212,6 +212,10 @@ JoinUsExp:"אנו מזמינים אותך לחקור את האתר שלנו ול
   CloseModal: "סגירה",
 
   textAlign: "right",
+
+  CheckEmail:"בדוק אימייל",
+newPass:"סיסמה חדשה",
+confirmPass:"אשר סיסמה",
 
 };
 
@@ -413,6 +417,7 @@ JoinUsExp:"We invite you to explore our website and see how WaterWizeAI can tran
   successSaveUser: "User details saved successfully",
   successSavePass: "Password saved successfully",
   successSentMessage:"Messege sent successfully!",
+  successSentEmailChangePass:"Check your email. We've sent you a link to change your password.",
 
   //errors
   errorTryAgain: "Action failed, please try again",
@@ -429,6 +434,10 @@ JoinUsExp:"We invite you to explore our website and see how WaterWizeAI can tran
   //Modal
   CloseModal: "Close",
   textAlign: "left",
+
+  CheckEmail:"Check Email",
+  newPass:"new password",
+confirmPass:"confirm password",
 
 };
 

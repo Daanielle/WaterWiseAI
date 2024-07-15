@@ -403,7 +403,7 @@ function WaterCalculator() {
                       options={optionsCities}
                     />
                   </span>
-                {/* </CustomWidthTooltip> */}
+                </CustomWidthTooltip>
 
                 <CustomWidthTooltip >
                   <span>
@@ -415,7 +415,7 @@ function WaterCalculator() {
                       options={optionsAreas}
                     />
                   </span>
-                {/* </CustomWidthTooltip> */}
+                </CustomWidthTooltip>
                 {/* <InputPicker label={dict.city} value={selectedCity} onValueChange={handleCityChange} options={optionsCities} />
                 <InputPicker label={dict.station} value={selectedArea} onValueChange={handleAreaChange} options={optionsAreas} /> */}
                 <DatePickerComponent

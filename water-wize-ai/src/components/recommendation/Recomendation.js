@@ -276,7 +276,7 @@ const Recommendation = ({ recommendationDataRows, onRowClick }) => {
                                             day: '2-digit'
                                         })}
                                     </TableCell>
-                                    <TableCell align="right">{stations.find(item => item.id === row.station).name}</TableCell>
+                                    <TableCell align="right">{stations.find(item => item.id === row.station)?.name}</TableCell>
                                     {Object.keys(varData).map((key, cellIndex, arr) => {
                                         const value = row[key];
                                         const isLastCell = cellIndex === arr.length - 1;
