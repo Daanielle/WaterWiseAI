@@ -39,7 +39,7 @@ function WaterCalculatorVariablesDetails() {
     },
     relativeHumidity: {
       icon: AirIcon,
-      title: dict.temperatureParameter,
+      title: dict.relativeHumidityParameter,
       description: dict.relativeHumidity,
       units: "[%]",
     },
