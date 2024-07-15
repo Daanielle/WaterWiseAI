@@ -59,7 +59,7 @@ function WaterCalculatorVariablesDetails() {
       icon: WaterDropIcon,
       title: dict.eaParameter,
       description: dict.ea,
-      units: "",
+      units: "[kPa]",
     },
     Ea: {
       icon: TrendingUpIcon,
