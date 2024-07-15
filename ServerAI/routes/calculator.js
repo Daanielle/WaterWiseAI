@@ -785,8 +785,11 @@ router.post('/recommendations', async (req, res) => {
             E,
             Kc,
             recommendation,
-            station
+            station,
+            isPrediction,
         } = req.body.recommendation;
+
+        const date = req.body.selectedDate
 
         // Create a new recommendation document
         const newRecommendation = new Recommendation({
@@ -803,7 +806,9 @@ router.post('/recommendations', async (req, res) => {
             E: E,
             Kc: Kc,
             recommendation: recommendation,
-            station: station
+            station: station,
+            isPrediction: isPrediction,
+            date: date
         });
 
         // Save the document to the database

@@ -14,7 +14,9 @@ const recommendationSchema = new mongoose.Schema({
     E: Number,
     Kc: Number,
     recommendation: Number,
-    station: String
+    station: String,
+    isPrediction: Boolean,
+    date: String,
 }, { timestamps: true });
 
 module.exports = mongoose.model('Recommendation', recommendationSchema);

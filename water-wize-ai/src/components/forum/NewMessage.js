@@ -14,7 +14,7 @@ const NewMessage = ({ onCloseNewMsg }) => {
     const [body, setBody] = useState('');
     const [recommendation, setRecommendation] = useState(null);
     const [openRecsModal, setOpenRecsModal] = useState(false);
-    const [selectedRow, setSelectedRow] = useState(null);
+    // const [selectedRow, setSelectedRow] = useState(null);
     const dict = useDictionary();
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const NewMessage = ({ onCloseNewMsg }) => {
     const handleCloseRecsModal = () => setOpenRecsModal(false);
 
     const handleRowClick = (row) => {
-        setSelectedRow(row);
+        // setSelectedRow(row);
         setRecommendation(row._id);
         setOpenRecsModal(false); // Close modal on row click
     };
