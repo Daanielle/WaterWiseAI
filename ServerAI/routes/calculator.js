@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-// const Recommendation = require('../models/Recommendation'); // Import the Recommendation model
 const Recommendation = require('../models/recommendation');
-const authenticateToken = require('../middleware/auth'); // Assuming you have this middleware
+// const authenticateToken = require('../middleware/auth'); // Assuming you have this middleware
 const mongoose = require('mongoose');
 const dataService = require('./utils/fetchDataUtils'); // Adjust path as per your project structure
-
 const {computeDeltaY, getKc, computeE0, computesmallea, computeBigEa, computeE, computeI } = require('./utils/calculatorUtils');
 
 async function fetchDataFromStation(stationId, date) {
@@ -33,8 +31,18 @@ async function fetchDataFromStation(stationId, date) {
   if (response.status >= 200 && response.status < 300) {
     if(response.status != 204){
       const data = response.data;
-      const lastBatch = data.data[data.data.length - 1];
-      return lastBatch;
+      if (data && data.data && data.data.length > 1) {
+        const lastBatch = data.data[data.data.length - 1];
+        return lastBatch;
+    } else if (data && data.data && data.data.length === 1) {
+        const lastBatch = data.data[0];
+        return lastBatch;
+    } else {
+        console.error("Data is not defined or data array is empty.");
+        return null;
+    }
+      // const lastBatch = data.data[data.data.length - 1];
+      // return lastBatch;
     }
   } 
   else {
@@ -93,9 +101,33 @@ router.post('/calculate', async (req, res) => {
 
     if (dateToCheck <= currentDate) {
       lastBatch = await fetchDataFromStation(selectedArea, date);
+      let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
+
+      // Check if lastBatch is null and call fetchDataFromDb if necessary
+      if (!lastBatch) {
+        console.error("Data from the station is not available. Fetching from MongoDB.");
+        const mongoData = await dataService.fetchDataFromDb(selectedArea);
+        console.log(selectedArea);
+        if (mongoData) {
+          console.log(`Temperature: ${mongoData.maxWind}`);
+
+            lastBatch = {
+                channels: [
+                    { name: 'Grad', value: mongoData.gradient },
+                    { name: 'WS1mm', value: mongoData.windSpeed1 },
+                    { name: 'wsMax', value: mongoData.maxWind },
+                    { name: 'TD', value: mongoData.temp },
+                    { name: 'RH', value: mongoData.relHumidity },
+                ]
+            };
+        } else {
+            console.error("No data found in MongoDB for the selected area.");
+            return null;
+        }
+    }
       console.log("The date is not later than today.");
       selectedArea = String(selectedArea)
-      let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
+      // let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
       // Ashalim, Arad, Besor Farm, Dorot, Hazeva, Negba, Neot smadar, Shani, Yotvata
       if (['381', '29', '58', '79', '33', '82', '28', '36', '64', '65', '211', '349'].includes(selectedArea)) {
         const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');

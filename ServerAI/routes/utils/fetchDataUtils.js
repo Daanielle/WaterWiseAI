@@ -182,7 +182,21 @@ cron.schedule('0 14,16 * * *', async () => {
         console.error('Error occurred:', error);
     }
 });
+
+// Function to fetch data from MongoDB
+async function fetchDataFromDb(stationName) {
+    try {
+        const result = await FetchData.findOne({ stationName }).exec();
+        console.log("Data retrieved from MongoDB:", result);
+        return result;
+        // return await FetchData.findOne({ stationName: stationName }).exec();
+    } catch (error) {
+        console.error("Error fetching data from MongoDB:", error);
+        return null;
+    }
+}
   module.exports = {
-    saveOrUpdateData
+    saveOrUpdateData,
+    fetchDataFromDb
     // cron // Export cron instance for testing or other modules
   };
