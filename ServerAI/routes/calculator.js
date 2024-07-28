@@ -125,28 +125,6 @@ router.post('/calculate', async (req, res) => {
 
     if (dateToCheck <= currentDate) {
       lastBatch = await fetchDataFromStation(selectedArea, date);
-      // Check if lastBatch is null and call fetchDataFromDb if necessary
-      if (!lastBatch) {
-        console.error("Data from the station is not available. Fetching from MongoDB.");
-        const mongoData = await dataService.fetchDataFromDb(selectedArea);
-        console.log(selectedArea);
-        if (mongoData) {
-                  console.log(`Temperature: ${mongoData.temp}`);
-
-            lastBatch = {
-                channels: [
-                    { name: 'Grad', value: mongoData.gradient },
-                    { name: 'ws1mm', value: mongoData.windSpeed1 },
-                    { name: 'wsMax', value: mongoData.maxWind },
-                    { name: 'TD', value: mongoData.temp },
-                    { name: 'RH', value: mongoData.relHumidity },
-                ]
-            };
-        } else {
-            console.error("No data found in MongoDB for the selected area.");
-            return null;
-        }
-    }
       console.log("The date is not later than today.");
       selectedArea = String(selectedArea)
       let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
