@@ -28,9 +28,14 @@ async function fetchDataFromStation(stationId, date) {
       Authorization: 'ApiToken f058958a-d8bd-47cc-95d7-7ecf98610e47'
     }
   });
+  let lastBatch = null
+  // Check if the date is defined, if not, create the current date
   if (response.status >= 200 && response.status < 300) {
     if(response.status != 204){
       const data = response.data;
+      if (!data.date) {
+        data.date = new Date().toISOString();
+      }
       if (data && data.data && data.data.length > 1) {
         const lastBatch = data.data[data.data.length - 1];
         return lastBatch;
@@ -38,11 +43,30 @@ async function fetchDataFromStation(stationId, date) {
         const lastBatch = data.data[0];
         return lastBatch;
     } else {
-        console.error("Data is not defined or data array is empty.");
-        return null;
+      if (!lastBatch) {
+        console.error("Data from the station is not available. Fetching from MongoDB.");
+        const mongoData = await dataService.fetchDataFromDb(stationId);
+        console.log(stationId);
+        if (mongoData) {
+                  console.log(`Temperature: ${mongoData.temp}`);
+
+            lastBatch = {
+                channels: [
+                    { name: 'Grad', value: mongoData.gradient },
+                    { name: 'ws1mm', value: mongoData.windSpeed1 },
+                    { name: 'wsMax', value: mongoData.maxWind },
+                    { name: 'TD', value: mongoData.temp },
+                    { name: 'RH', value: mongoData.relHumidity },
+                ]
+            };
+        } else {
+            console.error("No data found in MongoDB for the selected area.");
+            return null;
+        }
+    }
     }
       // const lastBatch = data.data[data.data.length - 1];
-      // return lastBatch;
+      return lastBatch;
     }
   } 
   else {
@@ -101,20 +125,18 @@ router.post('/calculate', async (req, res) => {
 
     if (dateToCheck <= currentDate) {
       lastBatch = await fetchDataFromStation(selectedArea, date);
-      let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
-
       // Check if lastBatch is null and call fetchDataFromDb if necessary
       if (!lastBatch) {
         console.error("Data from the station is not available. Fetching from MongoDB.");
         const mongoData = await dataService.fetchDataFromDb(selectedArea);
         console.log(selectedArea);
         if (mongoData) {
-          console.log(`Temperature: ${mongoData.maxWind}`);
+                  console.log(`Temperature: ${mongoData.temp}`);
 
             lastBatch = {
                 channels: [
                     { name: 'Grad', value: mongoData.gradient },
-                    { name: 'WS1mm', value: mongoData.windSpeed1 },
+                    { name: 'ws1mm', value: mongoData.windSpeed1 },
                     { name: 'wsMax', value: mongoData.maxWind },
                     { name: 'TD', value: mongoData.temp },
                     { name: 'RH', value: mongoData.relHumidity },
@@ -127,7 +149,7 @@ router.post('/calculate', async (req, res) => {
     }
       console.log("The date is not later than today.");
       selectedArea = String(selectedArea)
-      // let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
+      let gradValue = null, ws1mmValue = null, wsMaxValue = null, temperature = null, relativeHumidity = null;
       // Ashalim, Arad, Besor Farm, Dorot, Hazeva, Negba, Neot smadar, Shani, Yotvata
       if (['381', '29', '58', '79', '33', '82', '28', '36', '64', '65', '211', '349'].includes(selectedArea)) {
         const gradChannel = lastBatch.channels.find(channel => channel.name === 'Grad');
