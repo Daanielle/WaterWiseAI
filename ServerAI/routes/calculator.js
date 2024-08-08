@@ -61,7 +61,19 @@ async function fetchDataFromStation(stationId, date) {
             };
         } else {
             console.error("No data found in MongoDB for the selected area.");
-            return null;
+            const existingStation = await dataService.fetchExistingStationId();
+            if (existingStation) {
+              lastBatch = {
+                  channels: [
+                      { name: 'Grad', value: mongoData.gradient },
+                      { name: 'ws1mm', value: mongoData.windSpeed1 },
+                      { name: 'wsMax', value: mongoData.maxWind },
+                      { name: 'TD', value: mongoData.temp },
+                      { name: 'RH', value: mongoData.relHumidity },
+                  ]
+              };
+          }
+            // return null;
         }
     }
     }

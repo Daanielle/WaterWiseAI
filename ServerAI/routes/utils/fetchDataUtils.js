@@ -195,8 +195,20 @@ async function fetchDataFromDb(stationName) {
         return null;
     }
 }
+
+async function fetchExistingStationId() {
+    try {
+      const existingStation = await FetchData.findOne().exec();
+      return existingStation ? existingStation.stationName : null;
+    } catch (error) {
+      console.error("Error fetching existing station ID from MongoDB:", error);
+      return null;
+    }
+  }
+  
   module.exports = {
     saveOrUpdateData,
-    fetchDataFromDb
+    fetchDataFromDb,
+    fetchExistingStationId
     // cron // Export cron instance for testing or other modules
   };

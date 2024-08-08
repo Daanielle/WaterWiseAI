@@ -13,8 +13,8 @@ const TeamDetails={
     my_Name:dict.Danielle_Name,
     image_link:daniellesImage,
     about_me:dict.aboutMe,
-    linkedinUrl:"https://www.linkedin.com/in/shachar-adam-836a94277",
-    emailUrl:"mailto:adamsha@bgu.post.ac.il",
+    linkedinUrl:"https://www.linkedin.com/in/danielle-aspir/",
+    emailUrl:"mailto:aspirda@bgu.post.ac.il",
     // facebookUrl:facebookUrl ,
 
 
@@ -23,8 +23,8 @@ const TeamDetails={
     my_Name:dict.Hadar_Name,
     image_link:hadarsImage,
     about_me:dict.aboutMe,
-    linkedinUrl:"https://www.linkedin.com/in/shachar-adam-836a94277",
-    emailUrl:"mailto:adamsha@bgu.post.ac.il",
+    linkedinUrl:"https://www.linkedin.com/in/hadar-sabati/",
+    emailUrl:"mailto:hasab@bgu.post.ac.il",
     // facebookUrl:facebookUrl, 
   },
 
