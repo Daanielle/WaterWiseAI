@@ -14,7 +14,8 @@ const DatePickerComponent = ({ date = dayjs(), onDateChange }) => {
   };
 
   const disableDates = (date) => {
-    const tomorrow = dayjs().add(5, 'day').startOf('day');
+    // const tomorrow = dayjs().add(5, 'day').startOf('day');
+    const tomorrow = dayjs().add(4, 'day').startOf('day');
     return date.isAfter(tomorrow);
   };
 

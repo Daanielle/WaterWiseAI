@@ -11,7 +11,8 @@ import KarkaIMG from '../resources/images/Karka.jpg';
 import imsLogoImg from '../resources/images/IMS.jpg';
 import govmapIMG from "../resources/images/govmapIMG.jpeg";
 import SouthernIMG from "../resources/images/SouthernArava.png";
-import MappingIMG from "../resources/images/MappingSite.png"
+import MappingIMG from "../resources/images/MappingSite.png";
+import WaterWizeVideo from "../resources/images/WaterWizeAI.mp4";
 import CustomCard from '../components/CustomCard';
 
 
@@ -150,8 +151,14 @@ style={stylebutton}
         <Box mb={4}>
           <Typography sx={{fontWeight:"bold", color:"var(--medium-green)" }}variant="h4" gutterBottom>{dict.GuideDemonstration}</Typography>
           <Paper>
-            <Box sx={{border: "2px solid var(--medium-green)"}} p={2}>
-              <iframe  width="100%" height="400" src="https://www.youtube.com/embed/your-video-id" title="Water Calculator Demonstration" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            <Box sx={{border: "2px solid var(--medium-green)" , position: "relative", paddingBottom: "52.48%",  overflow: "hidden"}} p={2}>
+              <iframe  style={{ 
+          position: "absolute", 
+          top: 0, 
+          left: 0, 
+          width: "100%",
+          height: "100%" 
+        }}  src={WaterWizeVideo} title="Water Calculator Demonstration" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             </Box>
           </Paper>
         </Box>
